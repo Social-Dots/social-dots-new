@@ -155,7 +155,56 @@ FIRST_DAY_OF_WEEK = 1  # Monday
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Configure static files for both development and Vercel environments
+if os.environ.get('VERCEL'):
+    # Vercel deployment - use absolute path for STATIC_ROOT
+    STATIC_ROOT = '/tmp/staticfiles'
+    
+    # Create the directory if it doesn't exist
+    os.makedirs(STATIC_ROOT, exist_ok=True)
+    
+    # Also create a staticfiles directory in the project root for Vercel
+    project_staticfiles = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
+    os.makedirs(project_staticfiles, exist_ok=True)
+    
+    # Log the static root location
+    print(f"Vercel environment detected. STATIC_ROOT set to: {STATIC_ROOT}")
+    print(f"Also created project staticfiles directory at: {project_staticfiles}")
+    
+    # Configure logging for static files
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'verbose': {
+                'format': '{levelname} {asctime} {module} {message}',
+                'style': '{',
+            },
+        },
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+                'formatter': 'verbose',
+            },
+        },
+        'loggers': {
+            'socialdots.middleware': {
+                'handlers': ['console'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
+            'django.request': {
+                'handlers': ['console'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
+        },
+    }
+else:
+    # Local development
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Add admin static files directory to STATICFILES_DIRS
 import django.contrib.admin as admin_module
@@ -171,7 +220,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Using CompressedStaticFilesStorage instead of CompressedManifestStaticFilesStorage
 # to avoid manifest-related errors in serverless environments
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

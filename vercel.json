@@ -13,7 +13,11 @@
   "routes": [
     {
       "src": "/static/admin/(.*)",
-      "dest": "/staticfiles/admin/$1"
+      "dest": "/tmp/staticfiles/admin/$1"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/tmp/staticfiles/$1"
     },
     {
       "src": "/static/(.*)",
@@ -32,6 +36,7 @@
     "DJANGO_SETTINGS_MODULE": "socialdots.settings",
     "VERCEL": "true"
   },
-  "buildCommand": "pip install -r requirements.txt && rm -rf staticfiles && python manage.py collectstatic --noinput && python manage.py collect_admin_static --force --verbosity=2 && mkdir -p media/uploads",
-  "outputDirectory": "staticfiles"
+  "buildCommand": "mkdir -p /tmp/staticfiles && mkdir -p staticfiles && python manage.py collectstatic --noinput --verbosity=2 && python manage.py collect_admin_static --force --verbosity=2 && cp -r /tmp/staticfiles/* staticfiles/ && mkdir -p media/uploads",
+  "outputDirectory": ".",
+  "installCommand": "pip install -r requirements.txt"
 }

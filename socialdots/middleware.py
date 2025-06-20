@@ -76,8 +76,59 @@ class StaticFilesMiddleware:
             if os.path.exists(static_root_path) and os.path.isfile(static_root_path):
                 logger.debug(f'Serving static file from STATIC_ROOT: {static_root_path}')
                 return FileResponse(open(static_root_path, 'rb'))
+            
+            # Special handling for Vercel environment
+            if os.environ.get('VERCEL'):
+                # Try all possible static file locations in Vercel environment
+                possible_paths = [
+                    # /tmp/staticfiles (our configured STATIC_ROOT in Vercel)
+                    os.path.join('/tmp/staticfiles', relative_path),
+                    # /var/task/staticfiles (default location Vercel might look for)
+                    os.path.join('/var/task/staticfiles', relative_path),
+                    # /var/task/static (another possible location)
+                    os.path.join('/var/task/static', relative_path),
+                    # Root level static directory
+                    os.path.join('/var/task', 'static', relative_path),
+                    # Try with 'static' prefix removed if it exists in the path
+                    os.path.join('/var/task', relative_path)
+                ]
                 
-            logger.warning(f'Static file not found: {relative_path}')
+                # Special handling for admin files - try additional paths
+                if relative_path.startswith('admin/'):
+                    admin_relative_path = relative_path[6:]  # Remove 'admin/' prefix
+                    possible_paths.extend([
+                        # Direct admin path in tmp
+                        os.path.join('/tmp/staticfiles/admin', admin_relative_path),
+                        # Direct admin path in var/task
+                        os.path.join('/var/task/staticfiles/admin', admin_relative_path),
+                        # Direct admin path in var/task/static
+                        os.path.join('/var/task/static/admin', admin_relative_path)
+                    ])
+                
+                # Try each path
+                for path in possible_paths:
+                    if os.path.exists(path) and os.path.isfile(path):
+                        logger.info(f'Serving static file from Vercel path: {path}')
+                        return FileResponse(open(path, 'rb'))
+                
+                # Log all possible locations we've checked
+                logger.warning(f'Static file not found in any location: {relative_path}')
+                logger.warning(f'Checked paths: finder, admin_static_path, {static_root_path}, and:')
+                for path in possible_paths:
+                    logger.warning(f'  - {path}')
+                
+                # Try to list directories to help with debugging
+                try:
+                    if os.path.exists('/var/task'):
+                        logger.info(f'/var/task directory exists, contents: {os.listdir("/var/task")}')
+                    if os.path.exists('/var/task/staticfiles'):
+                        logger.info(f'/var/task/staticfiles directory exists, contents: {os.listdir("/var/task/staticfiles")}')
+                    if os.path.exists('/tmp/staticfiles'):
+                        logger.info(f'/tmp/staticfiles directory exists, contents: {os.listdir("/tmp/staticfiles")}')
+                except Exception as e:
+                    logger.error(f'Error listing directories: {str(e)}')
+            else:
+                logger.warning(f'Static file not found: {relative_path}')
         
         # If not a static file or file not found, continue with normal processing
         return self.get_response(request)
