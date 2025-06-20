@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Cancelled - {{ site_config.site_name }}{% endblock %}
+
+{% block content %}
+<!-- Payment Cancelled Section -->
+<section class="py-20 bg-background min-h-screen flex items-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="space-y-8">
+            <!-- Cancelled Icon -->
+            <div class="flex justify-center">
+                <div class="w-24 h-24 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-xl">
+                    <i data-lucide="x" class="w-12 h-12 text-white"></i>
+                </div>
+            </div>
+
+            <!-- Cancelled Message -->
+            <div class="space-y-4">
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+                    <span class="text-foreground">Payment</span> <span class="text-orange-600">Cancelled</span>
+                </h1>
+                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    No worries! Your payment was cancelled and no charges have been made to your account. 
+                    You can try again whenever you're ready.
+                </p>
+            </div>
+
+            <!-- Information Card -->
+            <div class="card-modern p-8 max-w-2xl mx-auto">
+                <div class="space-y-6">
+                    <h2 class="text-2xl font-bold">What Happened?</h2>
+                    
+                    <div class="text-left space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="info" class="w-5 h-5 text-blue-500 mt-1 flex-shrink-0"></i>
+                            <p class="text-muted-foreground">
+                                Your payment session was cancelled before completion. This could happen if you closed the payment window or chose to return to our site.
+                            </p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-green-500 mt-1 flex-shrink-0"></i>
+                            <p class="text-muted-foreground">
+                                <strong>Good news:</strong> No charges were made to your payment method. Your information is secure and protected.
+                            </p>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="refresh-cw" class="w-5 h-5 text-purple-500 mt-1 flex-shrink-0"></i>
+                            <p class="text-muted-foreground">
+                                You can retry your purchase at any time. Your cart and selections are still available.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Reasons -->
+            <div class="bg-muted/20 rounded-xl p-8 max-w-3xl mx-auto">
+                <h2 class="text-2xl font-bold mb-6">Common Reasons for Cancelled Payments</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="clock" class="w-5 h-5 text-blue-500"></i>
+                            <h3 class="font-semibold">Session Timeout</h3>
+                        </div>
+                        <p class="text-muted-foreground text-sm">Payment sessions expire after 24 hours for security reasons</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="arrow-left" class="w-5 h-5 text-blue-500"></i>
+                            <h3 class="font-semibold">Browser Navigation</h3>
+                        </div>
+                        <p class="text-muted-foreground text-sm">Using browser back button or closing the payment window</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="wifi-off" class="w-5 h-5 text-blue-500"></i>
+                            <h3 class="font-semibold">Connection Issues</h3>
+                        </div>
+                        <p class="text-muted-foreground text-sm">Temporary internet connectivity problems during payment</p>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="user-x" class="w-5 h-5 text-blue-500"></i>
+                            <h3 class="font-semibold">Manual Cancellation</h3>
+                        </div>
+                        <p class="text-muted-foreground text-sm">Choosing to cancel and return to consider options</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="space-y-6">
+                <h2 class="text-2xl font-bold">Ready to Try Again?</h2>
+                <p class="text-muted-foreground">
+                    We're here to help make your next attempt smooth and successful. If you experienced any issues, our team is standing by to assist.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="/pricing/" class="btn-primary">
+                        <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
+                        View Pricing & Try Again
+                    </a>
+                    <a href="/contact/" class="btn-secondary">
+                        <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                        Get Help with Payment
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="bg-muted/20 rounded-xl p-6 max-w-2xl mx-auto">
+                <h3 class="text-lg font-semibold mb-4">Need Assistance?</h3>
+                <p class="text-muted-foreground mb-4">
+                    Our Canadian team is here to help with any questions about pricing, services, or payment options.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                    <a href="mailto:{{ site_config.email|default:'hello@socialdots.ca' }}" class="inline-flex items-center px-4 py-2 btn-ghost text-sm">
+                        <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                        {{ site_config.email|default:'hello@socialdots.ca' }}
+                    </a>
+                    <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="inline-flex items-center px-4 py-2 btn-ghost text-sm">
+                        <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                        {{ site_config.phone|default:"416-556-6961" }}
+                    </a>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                <a href="/" class="btn-ghost">
+                    <i data-lucide="home" class="w-5 h-5 mr-2"></i>
+                    Return to Homepage
+                </a>
+                <a href="/services/" class="btn-ghost">
+                    <i data-lucide="settings" class="w-5 h-5 mr-2"></i>
+                    Browse Services
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
+{% endblock %}

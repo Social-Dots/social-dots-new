@@ -1,0 +1,84 @@
+{% extends "emails/base_email.html" %}
+
+{% block content %}
+<h2>Your Order Confirmation - {{ order.order_id }}</h2>
+
+<p>Hi {{ order.customer_name }},</p>
+
+<p>Thank you for choosing Social Dots Inc.! We're excited to work with you and help your business thrive in the digital world.</p>
+
+<p>This email confirms that we've received your order and payment. Here are the details:</p>
+
+<div style="background-color: #F1F5F9; padding: 20px; border-radius: 6px; margin: 20px 0; border-left: 4px solid #2563EB;">
+    <h3 style="color: #1E293B; font-size: 18px; margin-bottom: 15px;">Order Details</h3>
+    
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Order ID:</td>
+            <td style="padding: 8px 0; color: #1E293B;">{{ order.order_id }}</td>
+        </tr>
+        {% if order.service %}
+        <tr>
+            <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Service:</td>
+            <td style="padding: 8px 0; color: #1E293B;">{{ order.service.title }}</td>
+        </tr>
+        {% endif %}
+        {% if order.pricing_plan %}
+        <tr>
+            <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Plan:</td>
+            <td style="padding: 8px 0; color: #1E293B;">{{ order.pricing_plan.name }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Amount:</td>
+            <td style="padding: 8px 0; color: #1E293B; font-weight: 600;">${{ order.amount }} {{ order.currency }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Status:</td>
+            <td style="padding: 8px 0; color: #10B981; font-weight: 600;">{{ order.get_status_display }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px 0; color: #64748B; font-weight: 600;">Order Date:</td>
+            <td style="padding: 8px 0; color: #1E293B;">{{ order.created_at|date:"F j, Y" }}</td>
+        </tr>
+    </table>
+</div>
+
+<p><strong>What happens next?</strong></p>
+
+<ol style="color: #475569; margin-left: 20px; margin-bottom: 20px;">
+    <li><strong>Project Setup:</strong> We'll create your project structure and assign the right team members</li>
+    <li><strong>Welcome Package:</strong> You'll receive detailed information about our process and next steps</li>
+    <li><strong>Kickoff Meeting:</strong> Ali will schedule a kickoff call within 48 hours to discuss your goals</li>
+    <li><strong>Strategic Discovery:</strong> We'll conduct a comprehensive analysis of your current digital landscape</li>
+    <li><strong>Implementation:</strong> Our team will begin executing your customized digital strategy</li>
+</ol>
+
+<a href="https://socialdots.ca/client-portal" class="button">Access Client Portal</a>
+
+<p>Our approach goes beyond isolated tactics - we focus on comprehensive, integrated strategies that connect all your digital touchpoints with your business goals. You can expect:</p>
+
+<ul style="color: #475569; margin-left: 20px; margin-bottom: 20px;">
+    <li>Regular progress updates and transparent communication</li>
+    <li>Strategic guidance that aligns with your values</li>
+    <li>Thoughtful AI integration where it adds clear value</li>
+    <li>Sustainable solutions built for long-term success</li>
+</ul>
+
+<p>We're committed to becoming an extension of your team and helping you achieve sustainable growth. If you have any questions or need immediate assistance, don't hesitate to reach out.</p>
+
+<p>Welcome to the Social Dots family!</p>
+
+<p>Best regards,<br>
+<strong>Ali Shafique</strong><br>
+Founder & CEO, Social Dots Inc.<br>
+<a href="mailto:ali@socialdots.ca" style="color: #2563EB;">ali@socialdots.ca</a><br>
+<a href="tel:+14165566961" style="color: #2563EB;">416-556-6961</a></p>
+
+{% if order.notes %}
+<div style="background-color: #FEF3C7; padding: 20px; border-radius: 6px; margin-top: 30px; border-left: 4px solid #F59E0B;">
+    <h3 style="color: #92400E; font-size: 16px; margin-bottom: 10px;">Special Notes:</h3>
+    <p style="color: #92400E; margin: 0;">{{ order.notes }}</p>
+</div>
+{% endif %}
+{% endblock %}

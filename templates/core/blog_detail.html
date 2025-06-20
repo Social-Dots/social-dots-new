@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} - {{ site_config.site_name }}{% endblock %}
+
+{% block content %}
+<!-- Blog Post Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-b from-muted/30 to-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="space-y-6">
+            <!-- Post Meta -->
+            <div class="flex items-center space-x-4 text-sm text-muted-foreground">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    <span>{{ post.published_at|date:"F d, Y" }}</span>
+                </div>
+                {% if post.author %}
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="user" class="w-4 h-4"></i>
+                    <span>{{ post.author.get_full_name|default:post.author.username }}</span>
+                </div>
+                {% endif %}
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                    <span>5 min read</span>
+                </div>
+            </div>
+
+            <!-- Post Title -->
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                {{ post.title }}
+            </h1>
+
+            <!-- Post Excerpt -->
+            {% if post.excerpt %}
+            <p class="text-xl text-muted-foreground leading-relaxed">
+                {{ post.excerpt }}
+            </p>
+            {% endif %}
+
+            <!-- Post Tags -->
+            {% if post.tags %}
+            <div class="flex flex-wrap gap-2">
+                {% for tag in post.tags %}
+                <span class="px-3 py-1 bg-muted text-muted-foreground text-sm rounded-full">
+                    {{ tag }}
+                </span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Blog Post Content -->
+<article class="py-16 bg-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="prose prose-lg max-w-none">
+            <!-- Featured Image Placeholder -->
+            <div class="mb-12">
+                <div class="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                    <div class="text-white text-center">
+                        <i data-lucide="{% if 'ai' in post.title.lower %}brain-circuit{% elif 'marketing' in post.title.lower %}megaphone{% elif 'strategy' in post.title.lower %}target{% elif 'salesforce' in post.title.lower %}database{% else %}file-text{% endif %}" class="w-24 h-24 mb-4 mx-auto"></i>
+                        <h3 class="text-2xl font-bold">{{ post.title }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="article-content text-foreground">
+                {{ post.content|linebreaks }}
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Related Posts Section -->
+{% if related_posts %}
+<section class="py-16 bg-muted/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-foreground mb-12 text-center">Related Articles</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for related_post in related_posts %}
+            <article class="card-modern overflow-hidden group">
+                <!-- Post Image Placeholder -->
+                <div class="h-48 bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    <div class="relative z-10 text-white text-center">
+                        <i data-lucide="{% if 'ai' in related_post.title.lower %}brain-circuit{% elif 'marketing' in related_post.title.lower %}megaphone{% elif 'strategy' in related_post.title.lower %}target{% elif 'salesforce' in related_post.title.lower %}database{% else %}file-text{% endif %}" class="w-12 h-12 mb-2 mx-auto"></i>
+                    </div>
+                </div>
+
+                <!-- Post Content -->
+                <div class="p-6">
+                    <!-- Post Meta -->
+                    <div class="flex items-center space-x-4 text-sm text-muted-foreground mb-3">
+                        <span>{{ related_post.published_at|date:"M d, Y" }}</span>
+                    </div>
+
+                    <!-- Post Title -->
+                    <h3 class="text-xl font-semibold text-foreground mb-3 group-hover:text-blue-600 transition-colors">
+                        <a href="/blog/{{ related_post.slug }}/">{{ related_post.title }}</a>
+                    </h3>
+
+                    <!-- Post Excerpt -->
+                    <p class="text-muted-foreground mb-4">
+                        {{ related_post.excerpt|default:related_post.content|striptags|truncatewords:20 }}
+                    </p>
+
+                    <!-- Read More Link -->
+                    <a href="/blog/{{ related_post.slug }}/" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                        Read More
+                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA Section -->
+<section class="py-16 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="space-y-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-white">
+                Ready to Apply These Insights?
+            </h2>
+            <p class="text-xl text-blue-100 leading-relaxed">
+                Let's discuss how these strategies can be tailored to your specific business needs and goals.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="/contact/" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl">
+                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                    Schedule Consultation
+                </a>
+                <a href="/services/" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all">
+                    <i data-lucide="arrow-right" class="w-5 h-5 mr-2"></i>
+                    Explore Services
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Initialize Lucide icons for this page
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
+{% endblock %}

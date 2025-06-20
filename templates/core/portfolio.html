@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio - {{ site_config.site_name }} - Our Success Stories and Case Studies{% endblock %}
+
+{% block content %}
+<!-- Portfolio Hero Section -->
+<section class="relative overflow-hidden hero-gradient">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 animated-bg opacity-10"></div>
+    
+    <!-- Floating Geometric Shapes -->
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl float-animation"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div class="text-center space-y-8">
+            <!-- Hero Badge -->
+            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm">
+                <i data-lucide="briefcase" class="w-4 h-4 text-blue-500"></i>
+                <span class="text-muted-foreground">Our Work & Impact</span>
+            </div>
+
+            <!-- Hero Headline -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+                <span class="gradient-text">Success Stories</span><br>
+                <span class="text-foreground">That Drive</span><br>
+                <span class="gradient-text">Real Results</span>
+            </h1>
+
+            <!-- Hero Subheading -->
+            <p class="mx-auto max-w-3xl text-xl text-muted-foreground leading-relaxed">
+                Explore how we've helped Canadian businesses transform their digital presence, streamline operations, 
+                and achieve measurable growth through strategic AI integration and comprehensive digital solutions.
+            </p>
+
+            <!-- Filter Section -->
+            {% if all_technologies %}
+            <div class="flex flex-wrap justify-center gap-4 pt-8">
+                <a href="/portfolio/" class="px-4 py-2 {% if not current_tech %}bg-blue-600 text-white{% else %}bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground{% endif %} rounded-lg transition-colors">
+                    All Projects
+                </a>
+                {% for tech in all_technologies %}
+                <a href="/portfolio/?tech={{ tech }}" class="px-4 py-2 {% if current_tech == tech %}bg-blue-600 text-white{% else %}bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground{% endif %} rounded-lg transition-colors">
+                    {{ tech }}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Grid Section -->
+<section class="py-20 bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if projects %}
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {% for project in projects %}
+            <div class="card-modern overflow-hidden group">
+                <!-- Project Image Placeholder -->
+                <div class="relative h-64 bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center overflow-hidden">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                    <div class="relative z-10 text-white text-center">
+                        <i data-lucide="{% if 'web' in project.title.lower %}globe{% elif 'mobile' in project.title.lower %}smartphone{% elif 'ai' in project.title.lower %}brain-circuit{% elif 'crm' in project.title.lower or 'salesforce' in project.title.lower %}database{% else %}monitor{% endif %}" class="w-16 h-16 mb-4 mx-auto"></i>
+                        <h3 class="text-xl font-semibold">{{ project.title }}</h3>
+                    </div>
+                    
+                    <!-- Hover Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <a href="/portfolio/{{ project.slug }}/" class="btn-primary w-full text-center text-sm">
+                                <i data-lucide="external-link" class="w-4 h-4 mr-2"></i>
+                                View Case Study
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Content -->
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h3 class="text-xl font-semibold text-foreground mb-2">
+                            <a href="/portfolio/{{ project.slug }}/" class="hover:text-blue-600 transition-colors">
+                                {{ project.title }}
+                            </a>
+                        </h3>
+                        <p class="text-muted-foreground text-sm mb-3">
+                            {{ project.description|truncatewords:20 }}
+                        </p>
+                    </div>
+
+                    <!-- Project Meta -->
+                    <div class="space-y-3">
+                        {% if project.client %}
+                        <div class="flex items-center space-x-2 text-sm">
+                            <i data-lucide="building" class="w-4 h-4 text-muted-foreground"></i>
+                            <span class="text-muted-foreground">Client:</span>
+                            <span class="text-foreground font-medium">{{ project.client }}</span>
+                        </div>
+                        {% endif %}
+
+                        {% if project.completion_date %}
+                        <div class="flex items-center space-x-2 text-sm">
+                            <i data-lucide="calendar" class="w-4 h-4 text-muted-foreground"></i>
+                            <span class="text-muted-foreground">Completed:</span>
+                            <span class="text-foreground">{{ project.completion_date|date:"M Y" }}</span>
+                        </div>
+                        {% endif %}
+
+                        {% if project.technologies %}
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            {% for tech in project.technologies|slice:":3" %}
+                            <span class="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-md">
+                                {{ tech }}
+                            </span>
+                            {% endfor %}
+                            {% if project.technologies|length > 3 %}
+                            <span class="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-md">
+                                +{{ project.technologies|length|add:"-3" }} more
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if projects.has_other_pages %}
+        <div class="flex justify-center space-x-2">
+            {% if projects.has_previous %}
+                <a href="?page={{ projects.previous_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-secondary">
+                    <i data-lucide="chevron-left" class="w-4 h-4 mr-2"></i>
+                    Previous
+                </a>
+            {% endif %}
+
+            <span class="px-4 py-2 bg-muted rounded-lg text-muted-foreground">
+                Page {{ projects.number }} of {{ projects.paginator.num_pages }}
+            </span>
+
+            {% if projects.has_next %}
+                <a href="?page={{ projects.next_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-secondary">
+                    Next
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% else %}
+        <!-- Empty State -->
+        <div class="text-center py-20">
+            <div class="w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-8">
+                <i data-lucide="folder-open" class="w-12 h-12 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-foreground mb-4">Portfolio Coming Soon</h2>
+            <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                We're currently working on some amazing projects that will be showcased here soon. 
+                In the meantime, let's discuss how we can help transform your business.
+            </p>
+            
+            <!-- Sample Project Previews -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 mb-16">
+                <div class="card-modern p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="brain-circuit" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-foreground mb-3">AI Integration Project</h3>
+                    <p class="text-muted-foreground">Strategic AI implementation for a Toronto-based manufacturing company, resulting in 40% efficiency improvement.</p>
+                </div>
+
+                <div class="card-modern p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="database" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-foreground mb-3">Salesforce Optimization</h3>
+                    <p class="text-muted-foreground">Complete CRM overhaul for a Canadian retail chain, improving lead conversion by 65%.</p>
+                </div>
+
+                <div class="card-modern p-8 text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="globe" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-foreground mb-3">Digital Transformation</h3>
+                    <p class="text-muted-foreground">End-to-end digital strategy implementation for a Vancouver tech startup, scaling from 0 to $1M ARR.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/contact/" class="btn-primary">
+                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                    Discuss Your Project
+                </a>
+                <a href="/services/" class="btn-secondary">
+                    <i data-lucide="list" class="w-5 h-5 mr-2"></i>
+                    View Our Services
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-20 bg-muted/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center space-y-4 mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
+                <span class="text-foreground">What Our Clients</span>
+                <span class="gradient-text">Say About Us</span>
+            </h2>
+            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Real feedback from Canadian businesses we've helped transform and grow.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Sample Testimonials -->
+            <div class="card-modern p-6">
+                <div class="flex items-center space-x-1 mb-4">
+                    {% for i in "12345" %}
+                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                    {% endfor %}
+                </div>
+                <p class="text-muted-foreground mb-6 italic">
+                    "Social Dots transformed our entire sales process with their Salesforce expertise. Our lead conversion increased by 60% in just 3 months."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">JS</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-foreground">John Smith</h4>
+                        <p class="text-sm text-muted-foreground">CEO, TechCorp Toronto</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-modern p-6">
+                <div class="flex items-center space-x-1 mb-4">
+                    {% for i in "12345" %}
+                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                    {% endfor %}
+                </div>
+                <p class="text-muted-foreground mb-6 italic">
+                    "The AI integration strategy Ali developed for us was game-changing. We're now processing 3x more data with half the manual effort."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">MJ</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-foreground">Marie Johnson</h4>
+                        <p class="text-sm text-muted-foreground">COO, MapleTech Inc.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-modern p-6">
+                <div class="flex items-center space-x-1 mb-4">
+                    {% for i in "12345" %}
+                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                    {% endfor %}
+                </div>
+                <p class="text-muted-foreground mb-6 italic">
+                    "Professional, strategic, and results-driven. Social Dots doesn't just deliver solutions, they deliver business transformation."
+                </p>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">DL</span>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-foreground">David Lee</h4>
+                        <p class="text-sm text-muted-foreground">Founder, VancouverStart</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="space-y-8">
+            <h2 class="text-3xl md:text-5xl font-bold text-white">
+                Ready to Create Your Success Story?
+            </h2>
+            <p class="text-xl text-blue-100 leading-relaxed">
+                Let's discuss your project and explore how we can help you achieve similar results for your Canadian business.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="/contact/" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl">
+                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                    Start Your Project
+                </a>
+                <a href="/services/" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all">
+                    <i data-lucide="arrow-right" class="w-5 h-5 mr-2"></i>
+                    Explore Services
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Initialize Lucide icons for this page
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
+{% endblock %}

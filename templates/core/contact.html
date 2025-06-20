@@ -1,0 +1,347 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - {{ site_config.site_name }} - Get Started with Strategic AI Integration{% endblock %}
+
+{% block content %}
+<!-- Contact Hero Section -->
+<section class="relative overflow-hidden hero-gradient">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 animated-bg opacity-10"></div>
+    
+    <!-- Floating Geometric Shapes -->
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl float-animation"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div class="text-center space-y-8">
+            <!-- Hero Badge -->
+            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm">
+                <i data-lucide="phone" class="w-4 h-4 text-green-500"></i>
+                <span class="text-muted-foreground">Let's Start the Conversation</span>
+            </div>
+
+            <!-- Hero Headline -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+                <span class="gradient-text">Ready to Transform</span><br>
+                <span class="text-foreground">Your Business?</span>
+            </h1>
+
+            <!-- Hero Subheading -->
+            <p class="mx-auto max-w-3xl text-xl text-muted-foreground leading-relaxed">
+                Let's discuss how strategic AI integration and comprehensive digital solutions can help your Canadian business thrive. 
+                <span class="font-semibold text-foreground">Free consultation available.</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="py-20 bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <!-- Contact Form -->
+            <div class="space-y-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-foreground mb-4">Send Us a Message</h2>
+                    <p class="text-lg text-muted-foreground">
+                        Fill out the form below and we'll get back to you within 24 hours. All consultations are confidential.
+                    </p>
+                </div>
+
+                <!-- Display messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="p-4 rounded-lg border {% if message.tags == 'success' %}bg-green-50 border-green-200 text-green-800{% elif message.tags == 'error' %}bg-red-50 border-red-200 text-red-800{% else %}bg-blue-50 border-blue-200 text-blue-800{% endif %}">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}alert-circle{% else %}info{% endif %}" class="w-5 h-5"></i>
+                            <span>{{ message }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-foreground mb-2">
+                                Full Name *
+                            </label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                required
+                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors text-foreground"
+                                placeholder="Enter your full name"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-foreground mb-2">
+                                Email Address *
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required
+                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors text-foreground"
+                                placeholder="your.email@company.com"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-foreground mb-2">
+                                Phone Number
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                name="phone"
+                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors text-foreground"
+                                placeholder="(416) 555-0123"
+                            >
+                        </div>
+                        
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-foreground mb-2">
+                                Company Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="company" 
+                                name="company"
+                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors text-foreground"
+                                placeholder="Your Company Inc."
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="service_interest" class="block text-sm font-medium text-foreground mb-2">
+                            Service Interest
+                        </label>
+                        <select 
+                            id="service_interest" 
+                            name="service_interest"
+                            class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors text-foreground"
+                        >
+                            <option value="">Select a service (optional)</option>
+                            {% for service in services %}
+                            <option value="{{ service.id }}">{{ service.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-foreground mb-2">
+                            Message *
+                        </label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            rows="6" 
+                            required
+                            class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors text-foreground resize-none"
+                            placeholder="Tell us about your business goals, current challenges, and how we can help you succeed..."
+                        ></textarea>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        class="btn-primary w-full py-4 text-lg glow-effect"
+                    >
+                        <i data-lucide="send" class="w-5 h-5 mr-2"></i>
+                        Send Message
+                    </button>
+
+                    <p class="text-sm text-muted-foreground text-center">
+                        By submitting this form, you agree to our privacy policy. We'll never share your information.
+                    </p>
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="space-y-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-foreground mb-4">Get in Touch</h2>
+                    <p class="text-lg text-muted-foreground">
+                        We're here to help your Canadian business thrive. Reach out through any of these channels.
+                    </p>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="phone" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-foreground mb-2">Phone</h3>
+                            <p class="text-muted-foreground mb-2">Call us for immediate assistance</p>
+                            <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="text-blue-600 hover:text-blue-700 font-medium">
+                                {{ site_config.phone|default:"416-556-6961" }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="mail" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-foreground mb-2">Email</h3>
+                            <p class="text-muted-foreground mb-2">Send us a detailed message</p>
+                            <a href="mailto:{{ site_config.email|default:'hello@socialdots.ca' }}" class="text-blue-600 hover:text-blue-700 font-medium">
+                                {{ site_config.email|default:"hello@socialdots.ca" }}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-foreground mb-2">Location</h3>
+                            <p class="text-muted-foreground mb-2">Based in Toronto, serving Canada</p>
+                            <p class="text-foreground font-medium">{{ site_config.address|default:"Toronto, Ontario, Canada" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-600 to-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="clock" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-foreground mb-2">Business Hours</h3>
+                            <p class="text-muted-foreground mb-2">Eastern Time (Toronto)</p>
+                            <div class="space-y-1 text-foreground">
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                <p>Saturday: 10:00 AM - 2:00 PM</p>
+                                <p>Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="card-modern p-6">
+                    <h3 class="text-xl font-semibold text-foreground mb-4">Quick Actions</h3>
+                    <div class="space-y-4">
+                        <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="btn-primary w-full text-center">
+                            <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
+                            Call Now
+                        </a>
+                        <a href="/services/" class="btn-secondary w-full text-center">
+                            <i data-lucide="list" class="w-5 h-5 mr-2"></i>
+                            View Services
+                        </a>
+                        <a href="mailto:{{ site_config.email|default:'hello@socialdots.ca' }}" class="btn-ghost w-full text-center">
+                            <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                            Send Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-20 bg-muted/20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center space-y-4 mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
+                <span class="text-foreground">Frequently Asked</span>
+                <span class="gradient-text">Questions</span>
+            </h2>
+            <p class="text-xl text-muted-foreground">
+                Get answers to common questions about our services and process.
+            </p>
+        </div>
+
+        <div class="space-y-6">
+            <div class="card-modern p-6">
+                <h3 class="text-xl font-semibold text-foreground mb-3">How quickly can we get started?</h3>
+                <p class="text-muted-foreground">
+                    We can typically begin with a discovery call within 24-48 hours of your inquiry. Our full project kickoff usually happens within 1-2 weeks, depending on project scope and your availability.
+                </p>
+            </div>
+
+            <div class="card-modern p-6">
+                <h3 class="text-xl font-semibold text-foreground mb-3">Do you work with businesses outside of Canada?</h3>
+                <p class="text-muted-foreground">
+                    While our expertise is specifically tailored for the Canadian market, we do work with international businesses looking to expand into Canada or those that can benefit from our strategic approach.
+                </p>
+            </div>
+
+            <div class="card-modern p-6">
+                <h3 class="text-xl font-semibold text-foreground mb-3">What's included in a free consultation?</h3>
+                <p class="text-muted-foreground">
+                    Our free consultation includes a comprehensive assessment of your current digital strategy, identification of key opportunities, and a preliminary roadmap with actionable next steps. No obligation required.
+                </p>
+            </div>
+
+            <div class="card-modern p-6">
+                <h3 class="text-xl font-semibold text-foreground mb-3">How do you measure project success?</h3>
+                <p class="text-muted-foreground">
+                    We establish clear KPIs and success metrics at the beginning of each project. These typically include ROI improvements, process efficiency gains, user engagement metrics, and specific business objectives unique to your organization.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="space-y-8">
+            <h2 class="text-3xl md:text-5xl font-bold text-white">
+                Let's Build Something Great Together
+            </h2>
+            <p class="text-xl text-blue-100 leading-relaxed">
+                Your success story starts with a conversation. We're ready when you are.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#contact-form" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl" onclick="document.getElementById('name').focus(); return false;">
+                    <i data-lucide="edit" class="w-5 h-5 mr-2"></i>
+                    Fill Out Form Above
+                </a>
+                <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all">
+                    <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
+                    Call {{ site_config.phone|default:"416-556-6961" }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Initialize Lucide icons for this page
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    // Auto-focus the name field when clicking the CTA
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('service')) {
+            const serviceSelect = document.getElementById('service_interest');
+            if (serviceSelect) {
+                serviceSelect.value = urlParams.get('service');
+            }
+        }
+        if (urlParams.has('plan')) {
+            const messageField = document.getElementById('message');
+            if (messageField) {
+                messageField.value = `Hi, I'm interested in learning more about your pricing plans, specifically plan ID ${urlParams.get('plan')}. Please provide more details.`;
+            }
+        }
+    });
+</script>
+{% endblock %}
