@@ -156,8 +156,14 @@ FIRST_DAY_OF_WEEK = 1  # Monday
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Add admin static files directory to STATICFILES_DIRS
+import django.contrib.admin as admin_module
+ADMIN_STATIC_PATH = os.path.join(os.path.dirname(admin_module.__file__), 'static')
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    ADMIN_STATIC_PATH,
 ]
 
 MEDIA_URL = '/media/'

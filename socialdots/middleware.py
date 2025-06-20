@@ -36,6 +36,14 @@ class StaticFilesMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         logger.info('StaticFilesMiddleware initialized')
+        # Initialize admin static files path
+        self.admin_static_path = None
+        try:
+            import django.contrib.admin as admin_module
+            self.admin_static_path = os.path.join(os.path.dirname(admin_module.__file__), 'static', 'admin')
+            logger.info(f'Admin static files path: {self.admin_static_path}')
+        except Exception as e:
+            logger.error(f'Error initializing admin static path: {str(e)}')
 
     def __call__(self, request):
         # Check if the request is for a static file
@@ -43,12 +51,33 @@ class StaticFilesMiddleware:
             # Extract the relative path from the URL
             relative_path = request.path[len(settings.STATIC_URL):]
             
-            # Try to find the file using Django's finders
+            # Log the requested static file
+            logger.debug(f'Static file requested: {relative_path}')
+            
+            # First try to find the file using Django's finders
             file_path = finders.find(relative_path)
             
             if file_path:
-                logger.debug(f'Serving static file: {file_path}')
+                logger.debug(f'Serving static file from finder: {file_path}')
                 return FileResponse(open(file_path, 'rb'))
+            
+            # Special handling for admin files
+            if relative_path.startswith('admin/') and self.admin_static_path:
+                # Get the path relative to the admin directory
+                admin_relative_path = relative_path[6:]  # Remove 'admin/' prefix
+                admin_file_path = os.path.join(self.admin_static_path, admin_relative_path)
+                
+                if os.path.exists(admin_file_path) and os.path.isfile(admin_file_path):
+                    logger.debug(f'Serving admin static file directly: {admin_file_path}')
+                    return FileResponse(open(admin_file_path, 'rb'))
+            
+            # Check in STATIC_ROOT as a last resort
+            static_root_path = os.path.join(settings.STATIC_ROOT, relative_path)
+            if os.path.exists(static_root_path) and os.path.isfile(static_root_path):
+                logger.debug(f'Serving static file from STATIC_ROOT: {static_root_path}')
+                return FileResponse(open(static_root_path, 'rb'))
+                
+            logger.warning(f'Static file not found: {relative_path}')
         
         # If not a static file or file not found, continue with normal processing
         return self.get_response(request)
