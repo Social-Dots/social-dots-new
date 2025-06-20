@@ -28,6 +28,6 @@
     "DJANGO_SETTINGS_MODULE": "socialdots.settings",
     "VERCEL": "true"
   },
-  "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput && mkdir -p media/uploads",
+  "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput && mkdir -p staticfiles && mkdir -p media/uploads",
   "outputDirectory": "staticfiles"
 }
