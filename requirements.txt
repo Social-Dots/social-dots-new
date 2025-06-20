@@ -37,3 +37,6 @@ django-debug-toolbar==4.2.0
 # Utilities
 python-dateutil==2.8.2
 pytz==2023.3
+
+# ckEditor
+django-ckeditor==6.7.0
