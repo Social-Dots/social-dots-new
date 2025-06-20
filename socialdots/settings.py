@@ -213,21 +213,17 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
-        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
         },
     },
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': ['console'],
         'level': 'INFO',
     },
 }
 
-# Ensure logs directory exists
-os.makedirs(BASE_DIR / 'logs', exist_ok=True)
+# Only create logs directory if not in Vercel environment
+if not os.environ.get('VERCEL', False):
+    os.makedirs(BASE_DIR / 'logs', exist_ok=True)

@@ -25,7 +25,8 @@
     }
   ],
   "env": {
-    "DJANGO_SETTINGS_MODULE": "socialdots.settings"
+    "DJANGO_SETTINGS_MODULE": "socialdots.settings",
+    "VERCEL": "true"
   },
   "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput && mkdir -p media/uploads",
   "outputDirectory": "staticfiles"
