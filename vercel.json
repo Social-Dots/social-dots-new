@@ -1,42 +1,13 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "socialdots/wsgi.py",
-      "use": "@vercel/python",
-      "config": { 
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.9"
-      }
-    }
-  ],
+  "builds": [{
+    "src": "socialdots/wsgi.py",
+    "use": "@vercel/python",
+    "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+  }],
   "routes": [
-    {
-      "src": "/static/admin/(.*)",
-      "dest": "/tmp/staticfiles/admin/$1"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/tmp/staticfiles/$1"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/staticfiles/$1"
-    },
-    {
-      "src": "/media/(.*)",
-      "dest": "/media/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "socialdots/wsgi.py"
     }
-  ],
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "socialdots.settings",
-    "VERCEL": "true"
-  },
-  "buildCommand": "mkdir -p /tmp/staticfiles && mkdir -p staticfiles && python manage.py collectstatic --noinput --verbosity=2 && python manage.py collect_admin_static --force --verbosity=2 && cp -r /tmp/staticfiles/* staticfiles/ && mkdir -p media/uploads",
-  "outputDirectory": ".",
-  "installCommand": "pip install -r requirements.txt"
+  ]
 }
