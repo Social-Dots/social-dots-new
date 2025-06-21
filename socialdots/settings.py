@@ -12,8 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-# DEBUG = True
+# DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+
+DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'core',
+    'whitenoise',
 ]
 
 MIDDLEWARE = [
