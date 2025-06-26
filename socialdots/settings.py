@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-producti
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-DEBUG = False  # Set to True for development, False for production
+DEBUG = False # Set to True for development, False for production
 
 # DEBUG = False
 print("DEBUG:", DEBUG)
@@ -148,7 +148,7 @@ FIRST_DAY_OF_WEEK = 1  # Monday
 # ]
 
 STATIC_URL = '/static/'
-STATIC_DIRS = [BASE_DIR / 'static ']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
