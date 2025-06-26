@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500">
+  <!-- World Map (simplified) -->
+  <path d="M150,250 Q200,200 250,250 T350,250 T450,250 T550,250 T650,250 T750,250 T850,250" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  <path d="M200,150 Q250,100 300,150 T400,150 T500,150 T600,150 T700,150 T800,150" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  <path d="M200,350 Q250,300 300,350 T400,350 T500,350 T600,350 T700,350 T800,350" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  
+  <!-- Simplified Continents -->
+  <path d="M300,200 Q320,180 340,190 T380,200 T420,190 T460,210 T500,200" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  <path d="M550,200 Q570,180 590,190 T630,200 T670,190 T710,210 T750,200" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  <path d="M350,300 Q370,280 390,290 T430,300 T470,290 T510,310 T550,300" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  
+  <!-- North America with Canada highlighted -->
+  <path d="M200,150 Q220,130 240,140 T280,150 T320,140 T360,160 T400,150" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+  
+  <!-- Canada (highlighted) -->
+  <path d="M220,140 Q230,130 240,135 T260,140 T280,135 T300,145 T320,140" fill="rgba(255,255,255,0.4)" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+  
+  <!-- Pin on Canada -->
+  <circle cx="250" cy="135" r="10" fill="#ef4444"/>
+  <path d="M250,135 L250,115 L235,135 Z" fill="#ef4444"/>
+  <circle cx="250" cy="135" r="5" fill="#ffffff"/>
+</svg>

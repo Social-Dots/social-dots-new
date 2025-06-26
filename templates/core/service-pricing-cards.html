@@ -1,0 +1,191 @@
+{% load static %}
+<!-- Service Pricing Cards Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Our Services & Pricing</h2>
+            <p class="text-lg text-muted-foreground max-w-3xl mx-auto">Choose the right service package for your business needs with our transparent pricing model.</p>
+            <div class="w-24 h-1 bg-gold mx-auto mt-6 rounded-full"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Pricing Card 1 -->
+            <div class="pricing-card bg-background rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/20 flex flex-col h-full">
+                <div class="mb-6">
+                    <div class="w-14 h-14 bg-navy/10 rounded-lg flex items-center justify-center mb-4">
+                        <img src="{% static 'images/services/service1.svg' %}" alt="Starter Package" class="w-8 h-8 text-navy" />
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Starter Package</h3>
+                    <p class="text-muted-foreground">Perfect for small businesses looking to establish a digital presence.</p>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex items-baseline mb-1">
+                        <span class="text-3xl font-bold">$1,499</span>
+                        <span class="text-muted-foreground ml-2">/ one-time</span>
+                    </div>
+                    <p class="text-sm text-muted-foreground">+ $99/month maintenance</p>
+                </div>
+                
+                <ul class="space-y-3 mb-8 flex-grow">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Website design & development</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Basic SEO optimization</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Social media integration</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Contact form & basic analytics</span>
+                    </li>
+                </ul>
+                
+                <div class="space-y-3 mt-auto">
+                    <a href="/contact/" class="btn-primary w-full flex items-center justify-center py-3 rounded-lg transition-all duration-300 hover:scale-105">
+                        Buy Now
+                    </a>
+                    <a href="/services/" class="btn-ghost w-full flex items-center justify-center py-3 rounded-lg border border-navy/20 hover:bg-navy/5 transition-all duration-300">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Pricing Card 2 (Featured) -->
+            <div class="pricing-card featured bg-background rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gold/30 flex flex-col h-full relative">
+                <div class="absolute top-4 right-4 bg-gold text-darkNavy text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+                
+                <div class="mb-6">
+                    <div class="w-14 h-14 bg-navy/10 rounded-lg flex items-center justify-center mb-4">
+                        <img src="{% static 'images/services/service2.svg' %}" alt="Growth Package" class="w-8 h-8 text-navy" />
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Growth Package</h3>
+                    <p class="text-muted-foreground">Comprehensive solution for businesses ready to scale their digital operations.</p>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex items-baseline mb-1">
+                        <span class="text-3xl font-bold">$3,999</span>
+                        <span class="text-muted-foreground ml-2">/ one-time</span>
+                    </div>
+                    <p class="text-sm text-muted-foreground">+ $249/month maintenance</p>
+                </div>
+                
+                <ul class="space-y-3 mb-8 flex-grow">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Everything in Starter Package</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Advanced SEO & content strategy</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>E-commerce functionality</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Email marketing automation</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Basic AI chatbot integration</span>
+                    </li>
+                </ul>
+                
+                <div class="space-y-3 mt-auto">
+                    <a href="/contact/" class="btn-primary w-full flex items-center justify-center py-3 rounded-lg transition-all duration-300 hover:scale-105">
+                        Buy Now
+                    </a>
+                    <a href="/services/" class="btn-ghost w-full flex items-center justify-center py-3 rounded-lg border border-navy/20 hover:bg-navy/5 transition-all duration-300">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Pricing Card 3 -->
+            <div class="pricing-card bg-background rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/20 flex flex-col h-full">
+                <div class="mb-6">
+                    <div class="w-14 h-14 bg-navy/10 rounded-lg flex items-center justify-center mb-4">
+                        <img src="{% static 'images/services/service4.svg' %}" alt="Enterprise Package" class="w-8 h-8 text-navy" />
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Enterprise Package</h3>
+                    <p class="text-muted-foreground">Custom-built solutions for large organizations with complex requirements.</p>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="flex items-baseline mb-1">
+                        <span class="text-3xl font-bold">Custom</span>
+                    </div>
+                    <p class="text-sm text-muted-foreground">Tailored to your specific needs</p>
+                </div>
+                
+                <ul class="space-y-3 mb-8 flex-grow">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Everything in Growth Package</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Custom AI solution development</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Advanced data analytics</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>System integration services</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-gold mr-2 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Dedicated support team</span>
+                    </li>
+                </ul>
+                
+                <div class="space-y-3 mt-auto">
+                    <a href="/contact/" class="btn-primary w-full flex items-center justify-center py-3 rounded-lg transition-all duration-300 hover:scale-105">
+                        Contact Us
+                    </a>
+                    <a href="/services/" class="btn-ghost w-full flex items-center justify-center py-3 rounded-lg border border-navy/20 hover:bg-navy/5 transition-all duration-300">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

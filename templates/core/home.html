@@ -3,157 +3,984 @@
 {% block title %}{{ site_config.site_name }} - Strategic AI Integration for Canadian Businesses{% endblock %}
 
 {% block content %}
-<!-- Hero Section with Unsplash Background -->
-<section class="relative overflow-hidden min-h-screen">
-    <!-- Modern Background with Unsplash -->
-    <div class="absolute inset-0">
-        <img 
-            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80" 
-            alt="Modern Office Space" 
-            class="w-full h-full object-cover opacity-60"
-        />
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-50/70 via-white/60 to-purple-50/70"></div>
-    </div>
-    
-    <!-- Enhanced Floating Elements -->
-    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl float-animation"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full blur-3xl float-reverse"></div>
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl float-animation" style="animation-delay: -2s;"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div class="text-center space-y-8">
-            <!-- Hero Badge -->
-            <div class="inline-flex items-center space-x-3 glass-morphism px-6 py-3 text-sm font-medium">
-                <div class="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse shadow-lg"></div>
-                <span class="text-foreground/80">Trusted by 100+ Canadian businesses</span>
-            </div>
+<!-- Hero Section - Inspired by Feedbird.com -->
+{% load static %}
+    <!DOCTYPE html>
+<html lang="en">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                <span class="gradient-text">Empowering Canadian</span><br>
-                <span class="text-foreground">businesses to</span><br>
-                <span class="gradient-text">thrive digitally</span>
-            </h1>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            
+        }
 
-            <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl text-muted-foreground leading-relaxed">
-                Strategic AI integration and comprehensive digital solutions designed for the Canadian market. 
-                <span class="font-semibold text-foreground">15+ years</span> of expertise in Salesforce, marketing automation, and sustainable business growth.
-            </p>
+        .hero-section {
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #F3F3E0 0%, #F3F3E0 50%, #F5F5E5 100%);
+            background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(243, 243, 224, 0.92) 0%, rgba(243, 243, 224, 0.85) 100%);
+            z-index: 1;
+        }
 
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="/contact/" class="btn-primary glow-effect">
-                    <i data-lucide="rocket" class="w-5 h-5 mr-2"></i>
-                    Start Your Transformation
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 500px;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(221, 168, 83, 0.15);
+            color: #183B4E;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(221, 168, 83, 0.3);
+            box-shadow: 0 2px 10px rgba(221, 168, 83, 0.1);
+        }
+
+        .badge::before {
+            content: "★";
+            margin-right: 0.5rem;
+            color: #DDA853;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #183B4E;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(24, 59, 78, 0.05);
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(45deg, #27548A, #183B4E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: #27548A;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        .hero-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .hero-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            color: #333;
+        }
+
+        .hero-features li::before {
+            content: "●";
+            color: #2196f3;
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #DDA853, #DDA853);
+            color: #183B4E;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(221, 168, 83, 0.3);
+            border: 1px solid rgba(221, 168, 83, 0.5);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(221, 168, 83, 0.4);
+            background: linear-gradient(45deg, #DDA853, #e9b968);
+        }
+
+        .cta-button svg {
+            margin-left: 0.5rem;
+        }
+
+        .hero-slider {
+            position: absolute;
+            right: -100px;
+            top: 0;
+            bottom: 0;
+            width: 600px;
+            overflow: visible;
+            pointer-events: none;
+        }
+
+        .slider-track {
+            position: absolute;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(6, 120px);
+            gap: 12px;
+            padding: 12px;
+            height: 1440px;
+            animation: slideUp 15s linear infinite;
+            pointer-events: auto;
+        }
+        
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+        
+        .slide-content {
+            padding: 1.5rem;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .slide-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+        
+        .slide-description {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .slide-item {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .slide-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        /* Different card sizes for grid layout */
+        .slide-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .slide-item.medium {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .slide-item.wide {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .slide-item.tall {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        .slide-item.extra-large {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+        
+        /* Card with image background */
+        .slide-item.with-image {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .slide-item.with-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+            z-index: 1;
+        }
+        
+        .slide-item.with-image .slide-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .action-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .slide-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            border-radius: 16px;
+        }
+
+        .slide-content > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Color variations */
+        .slide-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slide-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .slide-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .slide-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .slide-5 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .slide-6 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .slide-7 {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .slide-8 {
+            background: linear-gradient(135deg, #ff8a80 0%, #ea4335 100%);
+        }
+
+        .slide-9 {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+        }
+
+        .slide-10 {
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+        }
+
+        .slide-11 {
+            background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+        }
+
+        .slide-12 {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-2px);
+        }
+
+        .social-icon.facebook { background-color: #3b5998; }
+        .social-icon.instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
+        .social-icon.linkedin { background-color: #0077b5; }
+        .social-icon.twitter { background-color: #1da1f2; }
+        .social-icon.youtube { background-color: #ff0000; }
+        .social-icon.tiktok { background-color: #000; }
+
+        .trusted-by {
+            color: #666;
+            font-size: 0.875rem;
+            margin-top: 2rem;
+        }
+
+        .trusted-number {
+            color: #2196f3;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-slider {
+                height: 500px;
+            }
+
+            .slider-track {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(8, 100px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="hero-container">
+            <!-- Left Content -->
+            <div class="hero-content">
+                <div class="badge">
+                    TOP 1% OF GLOBAL CREATIVE TALENT
+                </div>
+                
+                <h1 class="hero-title">
+                    Expert social media <br>
+                    <span class="highlight">management</span> from <br>
+                    only $99/mo
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Strategic AI integration and comprehensive digital solutions designed specifically for the Canadian market with 15+ years of expertise.
+                </p>
+                
+                <ul class="hero-features">
+                    <li><strong>Premium</strong> content with your branding</li>
+                    <li><strong>80% cheaper</strong> than alternatives</li>
+                    <li>Made by <strong>real people</strong> - not AI</li>
+                </ul>
+                
+                <a href="#contact" class="cta-button">
+                    Schedule a free demo call
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
                 </a>
-                <a href="/services/" class="btn-secondary">
-                    <i data-lucide="play-circle" class="w-5 h-5 mr-2"></i>
-                    Explore Our Services
-                </a>
+                
+                <div class="trusted-by">
+                    Trusted by <span class="trusted-number">12,000+</span> businesses | Cancel anytime
+                </div>
+                
+                <p style="margin-top: 1rem; color: #888; font-size: 0.875rem;">
+                    Supported social media channels:
+                </p>
+                
+                <div class="social-icons">
+                    <a href="#" class="social-icon facebook">f</a>
+                    <a href="#" class="social-icon instagram">📷</a>
+                    <a href="#" class="social-icon linkedin">in</a>
+                    <a href="#" class="social-icon twitter">🐦</a>
+                    <a href="#" class="social-icon youtube">▶</a>
+                    <a href="#" class="social-icon tiktok">♪</a>
+                </div>
             </div>
-
-            <!-- Hero Visual Element -->
-            <div class="mt-16 relative">
-                <div class="max-w-4xl mx-auto">
-                    <div class="relative">
-                        <img 
-                            src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-                            alt="Modern Digital Workspace" 
-                            class="w-full h-96 object-cover rounded-3xl shadow-2xl"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent rounded-3xl"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-white text-center">
-                                <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i data-lucide="play" class="w-10 h-10 text-white"></i>
-                                </div>
-                                <p class="text-lg font-semibold">Watch Our Story</p>
+            
+            <!-- Right Slider -->
+            <div class="hero-slider">
+                <div class="slider-track">
+                    <!-- Row 1 -->
+                    <div class="slide-item large slide-1" onclick="redirectTo('/services/brand-strategy')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🚀</div>
+                            <div class="slide-title">BRAND STRATEGY</div>
+                            <div class="slide-description">Build your unique identity</div>
+                            <div class="slide-actions">
+                                <div class="action-btn">Create</div>
+                                <div class="action-btn">Brand</div>
                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-2" onclick="redirectTo('/services/content-creation')">
+                        <div class="slide-content">
+                            <div class="slide-icon">✨</div>
+                            <div class="slide-title">CONTENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item tall slide-3" onclick="redirectTo('/services/video-marketing')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🎥</div>
+                            <div class="slide-title">VIDEO MARKETING</div>
+                            <div class="slide-description">Engaging visual content</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="slide-item medium slide-4" onclick="redirectTo('/services/social-media')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📱</div>
+                            <div class="slide-title">SOCIAL POSTS</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="slide-item wide slide-5" onclick="redirectTo('/services/analytics')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📊</div>
+                            <div class="slide-title">ANALYTICS & INSIGHTS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-6" onclick="redirectTo('/services/instagram-stories')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📖</div>
+                            <div class="slide-title">STORIES</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 4 -->
+                    <div class="slide-item medium slide-7" onclick="redirectTo('/services/influencer')">
+                        <div class="slide-content">
+                            <div class="slide-icon">👑</div>
+                            <div class="slide-title">INFLUENCER</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item large slide-8" onclick="redirectTo('/services/advertising')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🎯</div>
+                            <div class="slide-title">PAID ADVERTISING</div>
+                            <div class="slide-description">Targeted campaigns</div>
+                            <div class="slide-actions">
+                                <div class="action-btn">Target</div>
+                                <div class="action-btn">Convert</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-9" onclick="redirectTo('/services/copywriting')">
+                        <div class="slide-content">
+                            <div class="slide-icon">✍️</div>
+                            <div class="slide-title">COPY</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 5 -->
+                    <div class="slide-item wide slide-10" onclick="redirectTo('/services/community')">
+                        <div class="slide-content">
+                            <div class="slide-icon">👥</div>
+                            <div class="slide-title">COMMUNITY MANAGEMENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item tall slide-11" onclick="redirectTo('/services/design')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🎨</div>
+                            <div class="slide-title">GRAPHIC DESIGN</div>
+                            <div class="slide-description">Visual excellence</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 6 -->
+                    <div class="slide-item medium slide-12" onclick="redirectTo('/services/seo')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🔍</div>
+                            <div class="slide-title">SEO</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-1" onclick="redirectTo('/services/email')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📧</div>
+                            <div class="slide-title">EMAIL</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="slide-item large slide-1" onclick="redirectTo('/services/brand-strategy')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🚀</div>
+                            <div class="slide-title">BRAND STRATEGY</div>
+                            <div class="slide-description">Build your unique identity</div>
+                            <div class="slide-actions">
+                                <div class="action-btn">Create</div>
+                                <div class="action-btn">Brand</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-2" onclick="redirectTo('/services/content-creation')">
+                        <div class="slide-content">
+                            <div class="slide-icon">✨</div>
+                            <div class="slide-title">CONTENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item tall slide-3" onclick="redirectTo('/services/video-marketing')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🎥</div>
+                            <div class="slide-title">VIDEO MARKETING</div>
+                            <div class="slide-description">Engaging visual content</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-4" onclick="redirectTo('/services/social-media')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📱</div>
+                            <div class="slide-title">SOCIAL POSTS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item wide slide-5" onclick="redirectTo('/services/analytics')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📊</div>
+                            <div class="slide-title">ANALYTICS & INSIGHTS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-6" onclick="redirectTo('/services/instagram-stories')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📖</div>
+                            <div class="slide-title">STORIES</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-7" onclick="redirectTo('/services/influencer')">
+                        <div class="slide-content">
+                            <div class="slide-icon">👑</div>
+                            <div class="slide-title">INFLUENCER</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item large slide-8" onclick="redirectTo('/services/advertising')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🎯</div>
+                            <div class="slide-title">PAID ADVERTISING</div>
+                            <div class="slide-description">Targeted campaigns</div>
+                            <div class="slide-actions">
+                                <div class="action-btn">Target</div>
+                                <div class="action-btn">Convert</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-9" onclick="redirectTo('/services/copywriting')">
+                        <div class="slide-content">
+                            <div class="slide-icon">✍️</div>
+                            <div class="slide-title">COPY</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item wide slide-10" onclick="redirectTo('/services/community')">
+                        <div class="slide-content">
+                            <div class="slide-icon">👥</div>
+                            <div class="slide-title">COMMUNITY MANAGEMENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item tall slide-11" onclick="redirectTo('/services/design')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🎨</div>
+                            <div class="slide-title">GRAPHIC DESIGN</div>
+                            <div class="slide-description">Visual excellence</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-12" onclick="redirectTo('/services/seo')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🔍</div>
+                            <div class="slide-title">SEO</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-1" onclick="redirectTo('/services/email')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📧</div>
+                            <div class="slide-title">EMAIL</div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Trust Indicators -->
-            <div class="flex flex-wrap justify-center gap-8 pt-8 text-sm text-muted-foreground">
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-green-500"></i>
-                    <span>Canadian Owned</span>
+    <script>
+        function redirectTo(url) {
+            // For demo purposes, we'll just show an alert
+            // In your actual implementation, use: window.location.href = url;
+            alert(`Redirecting to: ${url}`);
+            
+            // Uncomment the line below for actual redirection
+            // window.location.href = url;
+        }
+
+        // Optional: Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                const sliderTrack = document.querySelector('.slider-track');
+                if (e.key === 'ArrowUp') {
+                    sliderTrack.style.animationPlayState = 'paused';
+                } else {
+                    sliderTrack.style.animationPlayState = 'running';
+                }
+            }
+        });
+
+        // Pause animation on mouse enter, resume on mouse leave
+        const slider = document.querySelector('.hero-slider');
+        const sliderTrack = document.querySelector('.slider-track');
+
+        slider.addEventListener('mouseenter', () => {
+            sliderTrack.style.animationPlayState = 'paused';
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            sliderTrack.style.animationPlayState = 'running';
+        });
+    </script>
+
+
+{% include "core/trust-logos-strip.html" %}
+
+<!-- What We Do Section -->
+<section class="py-20 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-darkNavy">What We <span class="text-gold">Do</span></h2>
+            <p class="text-lg text-navy max-w-3xl mx-auto">We help Canadian businesses leverage AI and digital solutions to streamline operations, enhance customer experiences, and drive growth.</p>
+            <div class="w-24 h-1 bg-gold mx-auto mt-6 rounded-full"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service Card 1 -->
+            <div class="bg-darkNavy/5 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-gold hover:bg-darkNavy/10 border border-gold/20">
+                <div class="w-14 h-14 bg-gold/20 rounded-lg flex items-center justify-center mb-6">
+                    <img src="{% static 'images/services/service1.svg' %}" alt="Digital Strategy" class="w-8 h-8 text-navy" />
                 </div>
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="users" class="w-4 h-4 text-blue-500"></i>
-                    <span>Global Talent</span>
+                <h3 class="text-xl font-semibold mb-3 text-darkNavy">Digital Strategy</h3>
+                <p class="text-navy mb-6">Comprehensive digital roadmaps tailored to your business goals and market position.</p>
+                <a href="/services/" class="text-darkNavy font-medium hover:text-gold transition-colors flex items-center">
+                    Learn more
+                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- Service Card 2 -->
+            <div class="bg-darkNavy/5 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-gold hover:bg-darkNavy/10 border border-gold/20">
+                <div class="w-14 h-14 bg-gold/20 rounded-lg flex items-center justify-center mb-6">
+                    <img src="{% static 'images/services/service2.svg' %}" alt="AI Integration" class="w-8 h-8 text-navy" />
                 </div>
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="award" class="w-4 h-4 text-purple-500"></i>
-                    <span>Salesforce Certified</span>
+                <h3 class="text-xl font-semibold mb-3 text-darkNavy">AI Integration</h3>
+                <p class="text-navy mb-6">Custom AI solutions that automate processes, analyze data, and provide actionable insights.</p>
+                <a href="/services/" class="text-darkNavy font-medium hover:text-gold transition-colors flex items-center">
+                    Learn more
+                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- Service Card 3 -->
+            <div class="bg-darkNavy/5 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-gold hover:bg-darkNavy/10 border border-gold/20">
+                <div class="w-14 h-14 bg-gold/20 rounded-lg flex items-center justify-center mb-6">
+                    <img src="{% static 'images/services/service3.svg' %}" alt="Digital Marketing" class="w-8 h-8 text-navy" />
                 </div>
+                <h3 class="text-xl font-semibold mb-3 text-darkNavy">Digital Marketing</h3>
+                <p class="text-navy mb-6">Data-driven marketing strategies that increase visibility, engagement, and conversion rates.</p>
+                <a href="/services/" class="text-darkNavy font-medium hover:text-gold transition-colors flex items-center">
+                    Learn more
+                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Visual Showcase Section -->
-<section class="py-20 bg-gradient-to-b from-gray-50 to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
-            <div class="relative group">
-                <img 
-                    src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                    alt="AI Technology" 
-                    class="w-full h-64 object-cover rounded-3xl shadow-xl group-hover:scale-105 transition-transform duration-300"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-blue-600/60 to-transparent rounded-3xl"></div>
-                <div class="absolute bottom-6 left-6 text-white">
-                    <h3 class="text-2xl font-bold mb-2">AI Integration</h3>
-                    <p class="text-blue-100">Smart solutions for modern business</p>
-                </div>
+<!-- Process Flow Section -->
+<section style="background-color: #F3F3E0; padding-top: 6rem; padding-bottom: 6rem; position: relative; overflow: hidden;">
+    <!-- Background Elements -->
+    <div class="absolute inset-0">
+        <img 
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+            alt="Team Collaboration" 
+            class="w-full h-full object-cover opacity-40"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-cream/80 via-white/70 to-darkNavy/10"></div>
+    </div>
+
+    <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding: 1rem; position: relative; z-index: 10;">
+        <!-- Section Header -->
+        <div style="text-align: center; margin-bottom: 4rem; animation: fadeIn 0.8s ease-out forwards;">
+            <div style="display: inline-flex; align-items: center; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.375rem; padding-bottom: 0.375rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; background-color: rgba(221, 168, 83, 0.1); color: #183B4E; border: 1px solid rgba(221, 168, 83, 0.3); margin-bottom: 1rem;">
+                <svg style="width: 1rem; height: 1rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>Our Process</span>
             </div>
-            
-            <div class="relative group">
-                <img 
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                    alt="Analytics Dashboard" 
-                    class="w-full h-64 object-cover rounded-3xl shadow-xl group-hover:scale-105 transition-transform duration-300"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-purple-600/60 to-transparent rounded-3xl"></div>
-                <div class="absolute bottom-6 left-6 text-white">
-                    <h3 class="text-2xl font-bold mb-2">Data Analytics</h3>
-                    <p class="text-purple-100">Insights that drive decisions</p>
-                </div>
+            <h2 style="font-size: 2.5rem; font-weight: 800; color: #183B4E; margin-bottom: 1rem;">
+                How We <span style="background: linear-gradient(to right, #27548A, #183B4E); -webkit-background-clip: text; background-clip: text; color: transparent;">Transform</span> Your Business
+            </h2>
+            <p style="max-width: 36rem; margin-left: auto; margin-right: auto; color: #183B4E; opacity: 0.8; font-size: 1.125rem;">
+                Our proven methodology ensures a seamless journey from concept to implementation, delivering measurable results at every stage.
+            </p>
+        </div>
+
+        <!-- Process Flow Steps -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <!-- Step 1 -->
+            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.1s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
+                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">1</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Discovery</h3>
+                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+                    We analyze your business needs, market position, and competitive landscape to identify strategic opportunities.
+                </p>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Business Analysis</span>
+                    </li>
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Market Research</span>
+                    </li>
+                    <li style="display: flex; align-items: center; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Goal Setting</span>
+                    </li>
+                </ul>
             </div>
-            
-            <div class="relative group">
-                <img 
-                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                    alt="Team Collaboration" 
-                    class="w-full h-64 object-cover rounded-3xl shadow-xl group-hover:scale-105 transition-transform duration-300"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-green-600/60 to-transparent rounded-3xl"></div>
-                <div class="absolute bottom-6 left-6 text-white">
-                    <h3 class="text-2xl font-bold mb-2">Collaboration</h3>
-                    <p class="text-green-100">Teams working seamlessly</p>
-                </div>
+
+            <!-- Step 2 -->
+            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.2s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
+                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">2</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Strategy</h3>
+                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+                    We develop a comprehensive roadmap tailored to your specific goals, timeline, and budget constraints.
+                </p>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Solution Design</span>
+                    </li>
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Resource Planning</span>
+                    </li>
+                    <li style="display: flex; align-items: center; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Timeline Creation</span>
+                    </li>
+                </ul>
             </div>
+
+            <!-- Step 3 -->
+            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
+                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">3</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Implementation</h3>
+                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+                    Our expert team executes the strategy with precision, ensuring seamless integration with your existing systems.
+                </p>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Agile Development</span>
+                    </li>
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Quality Assurance</span>
+                    </li>
+                    <li style="display: flex; align-items: center; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Deployment</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Step 4 -->
+            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.4s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
+                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">4</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Optimization</h3>
+                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+                    We continuously monitor performance, gather feedback, and refine our approach to maximize your ROI.
+                </p>
+                <ul style="list-style-type: none; padding: 0; margin: 0;">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Performance Analysis</span>
+                    </li>
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Iterative Improvements</span>
+                    </li>
+                    <li style="display: flex; align-items: center; color: #183B4E;">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Scaling Strategies</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div style="text-align: center; margin-top: 4rem; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.5s; opacity: 0;">
+            <a href="{% url 'contact' %}" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 2rem; padding-right: 2rem; padding-top: 0.875rem; padding-bottom: 0.875rem; border-radius: 0.5rem; font-size: 1.125rem; font-weight: 500; color: #F3F3E0; background: linear-gradient(to right, #27548A, #183B4E); box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                <span style="position: relative; z-index: 10;">Start Your Journey Today</span>
+            </a>
         </div>
     </div>
 </section>
 
 <!-- Featured Services -->
-<section class="py-20 bg-background">
+<section class="py-20 bg-background" style="background-color: #183B4E;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center space-y-4 mb-16">
-            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm">
-                <i data-lucide="zap" class="w-4 h-4 text-yellow-500"></i>
-                <span class="text-muted-foreground">Core Services</span>
+            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm" style="background-color: rgba(221, 168, 83, 0.1); border-color: rgba(221, 168, 83, 0.3);">
+                <i data-lucide="zap" class="w-4 h-4 text-yellow-500" style="color: #DDA853;"></i>
+                <span class="text-muted-foreground" style="color: #F3F3E0;">Core Services</span>
             </div>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="gradient-text">Strategic Solutions</span> that Connect<br>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight" style="color: #F3F3E0;">
+                <span class="gradient-text" style="background: linear-gradient(to right, #DDA853, #F3F3E0); -webkit-background-clip: text; background-clip: text; color: transparent;">Strategic Solutions</span> that Connect<br>
                 Business Goals with Smart Execution
             </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p class="text-xl text-muted-foreground max-w-3xl mx-auto" style="color: #F3F3E0; opacity: 0.8;">
                 Beyond isolated tactics—we deliver comprehensive, integrated strategies that align with your values and drive sustainable growth.
             </p>
         </div>
@@ -161,73 +988,99 @@
         <!-- Services Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for service in featured_services %}
-            <div class="card-modern p-8 group">
+            <div class="card-modern p-8 group bg-darkNavy/5 border border-gold hover:border-gold hover:bg-darkNavy/10 transition-all duration-300 rounded-lg shadow-md">
                 <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container group-hover:scale-110 transition-all duration-300">
-                        <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-7 h-7 text-white"></i>
+                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-gold/20 p-3 rounded-lg">
+                        <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-7 h-7 text-darkNavy"></i>
                     </div>
-                    <h3 class="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{{ service.title }}</h3>
+                    <h3 class="text-xl font-semibold text-darkNavy">{{ service.title }}</h3>
                 </div>
                 
-                <p class="text-muted-foreground mb-6 leading-relaxed">
+                <div class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
+                
+                <p class="text-navy mb-6 leading-relaxed text-white ">
                     {{ service.short_description|default:service.description|truncatewords:20 }}
                 </p>
 
                 {% if service.features %}
-                <ul class="space-y-2 mb-6">
+                <ul class="space-y-2 mb-6 ">
                     {% for feature in service.features|slice:":3" %}
-                    <li class="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <li class="flex items-center space-x-2 text-sm text-white ">
                         <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
                         <span>{{ feature }}</span>
                     </li>
                     {% endfor %}
                 </ul>
                 {% endif %}
-
-                <a href="/services/{{ service.slug }}/" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
-                    Learn More
-                    <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-                </a>
+                
+                <div class="flex justify-between items-center mt-4">
+                    <a href="/services/{{ service.slug }}/" class="inline-flex items-center px-4 py-2 text-sm border-2 border-white-400 rounded-md font-medium text-gold hover:text-gold transition-colors">
+                        Learn More
+                        <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    
+                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gold hover:bg-gold transition-colors duration-300 rounded-md">
+                        Buy Now
+                    </a>
+                </div>
             </div>
             {% empty %}
             <!-- Fallback services if none exist -->
-            <div class="card-modern p-8 group">
+            <div class="card-modern p-8 group bg-darkNavy/5 border border-darkNavy/10 hover:border-gold hover:bg-darkNavy/10 transition-all duration-300 rounded-lg shadow-md">
                 <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container">
-                        <i data-lucide="target" class="w-7 h-7 text-white"></i>
+                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-gold/20 p-3 rounded-lg">
+                        <i data-lucide="target" class="w-7 h-7 text-darkNavy"></i>
                     </div>
-                    <h3 class="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Digital Strategy & Consulting</h3>
+                    <h3 class="text-xl font-semibold text-darkNavy">Digital Strategy & Consulting</h3>
                 </div>
-                <p class="text-muted-foreground mb-6">Comprehensive digital strategy development that connects business goals with smart execution.</p>
-                <a href="/services/" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700">
-                    Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                </a>
+                <div class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
+                <p class="text-navy mb-6">Comprehensive digital strategy development that connects business goals with smart execution.</p>
+                <div class="flex justify-between items-center mt-4">
+                    <a href="/services/" class="inline-flex items-center text-sm font-medium text- hover:text-gold transition-colors">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gold hover:bg-darkNavy transition-colors duration-300 rounded-md">
+                        Buy Now
+                    </a>
+                </div>
             </div>
 
-            <div class="card-modern p-8 group">
+            <div class="card-modern p-8 group bg-darkNavy/5 border border-darkNavy/10 hover:border-gold hover:bg-darkNavy/10 transition-all duration-300 rounded-lg shadow-md">
                 <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container">
-                        <i data-lucide="database" class="w-7 h-7 text-white"></i>
+                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-gold/20 p-3 rounded-lg">
+                        <i data-lucide="database" class="w-7 h-7 text-darkNavy"></i>
                     </div>
-                    <h3 class="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Salesforce + CRM Optimization</h3>
+                    <h3 class="text-xl font-semibold text-darkNavy">Salesforce + CRM Optimization</h3>
                 </div>
-                <p class="text-muted-foreground mb-6">Expert Salesforce configuration, customization, and optimization for your business needs.</p>
-                <a href="/services/" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700">
-                    Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                </a>
+                <div class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
+                <p class="text-navy mb-6">Expert Salesforce configuration, customization, and optimization for your business needs.</p>
+                <div class="flex justify-between items-center mt-4">
+                    <a href="/services/" class="inline-flex items-center text-sm font-medium text-white hover:text-gold transition-colors">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gold hover:bg-darkNavy transition-colors duration-300 rounded-md">
+                        Buy Now
+                    </a>
+                </div>
             </div>
 
-            <div class="card-modern p-8 group">
+            <div class="card-modern p-8 group bg-darkNavy/5 border border-darkNavy/10 hover:border-gold hover:bg-darkNavy/10 transition-all duration-300 rounded-lg shadow-md">
                 <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container">
-                        <i data-lucide="brain-circuit" class="w-7 h-7 text-white"></i>
+                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-gold/20 p-3 rounded-lg">
+                        <i data-lucide="brain-circuit" class="w-7 h-7 text-darkNavy"></i>
                     </div>
-                    <h3 class="text-xl font-semibold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">AI-Driven Campaign Optimization</h3>
+                    <h3 class="text-xl font-semibold text-darkNavy">AI-Driven Campaign Optimization</h3>
                 </div>
-                <p class="text-muted-foreground mb-6">Strategic AI integration for campaign optimization and measurable business benefits.</p>
-                <a href="/services/" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700">
-                    Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                </a>
+                <div class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
+                <p class="text-navy mb-6">Strategic AI integration for campaign optimization and measurable business benefits.</p>
+                <div class="flex justify-between items-center mt-4">
+                    <a href="/services/" class="inline-flex items-center text-sm font-medium text-darkNavy hover:text-gold transition-colors">
+                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gold hover:bg-darkNavy transition-colors duration-300 rounded-md">
+                        Buy Now
+                    </a>
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -235,7 +1088,7 @@
 </section>
 
 <!-- Team Section with Background -->
-<section class="py-20 relative overflow-hidden">
+{% comment %} <section class="py-20 relative overflow-hidden">
     <!-- Team Background -->
     <div class="absolute inset-0">
         <img 
@@ -243,123 +1096,174 @@
             alt="Team Collaboration" 
             class="w-full h-full object-cover opacity-40"
         />
-        <div class="absolute inset-0 bg-gradient-to-r from-gray-50/80 via-white/70 to-blue-50/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-cream/80 via-white/70 to-darkNavy/10"></div>
     </div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center space-y-4 mb-16">
             <div class="inline-flex items-center space-x-3 glass-morphism px-6 py-3 text-sm font-medium">
-                <i data-lucide="users" class="w-5 h-5 text-blue-600"></i>
-                <span class="text-foreground/80">Our Team</span>
+                <i data-lucide="users" class="w-5 h-5 text-gold"></i>
+                <span class="text-darkNavy">Our Team</span>
             </div>
             <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">Canadian Expertise</span><br>
-                <span class="gradient-text">Meets Global Talent</span>
+                <span class="text-darkNavy">Canadian Expertise</span><br>
+                <span class="text-gold">Meets Global Talent</span>
             </h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {% for member in team_members %}
-            <div class="card-modern p-8 text-center group">
+            <div class="card-modern p-8 text-center group" style="background-color: rgba(24, 59, 78, 0.05); border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; animation: fadeIn 0.8s ease-out forwards; animation-delay: calc(0.2s * {{ forloop.counter }});">
                 <div class="relative mx-auto mb-6">
                     <img 
                         src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
                         alt="{{ member.name }}" 
                         class="w-24 h-24 rounded-full object-cover mx-auto group-hover:scale-110 transition-all duration-300 shadow-xl"
+                        style="border: 2px solid #DDA853;"
                     />
                     <div class="absolute inset-0 w-24 h-24 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 mx-auto"></div>
                 </div>
-                <h3 class="text-lg font-semibold mb-2">{{ member.name }}</h3>
-                <p class="text-blue-600 font-medium text-sm mb-3">{{ member.position }}</p>
-                <p class="text-muted-foreground text-sm leading-relaxed mb-4">{{ member.bio|truncatewords:15 }}</p>
+                <h3 class="text-lg font-semibold mb-2" style="color: #183B4E;">{{ member.name }}</h3>
+                <p class="text-gold font-medium text-sm mb-3">{{ member.position }}</p>
+                <p class="text-navy text-sm leading-relaxed mb-4">{{ member.bio|truncatewords:15 }}</p>
                 {% if member.linkedin %}
-                <a href="{{ member.linkedin }}" class="inline-flex items-center justify-center w-8 h-8 bg-muted rounded-lg hover:bg-accent transition-colors">
+                <a href="{{ member.linkedin }}" class="inline-flex items-center justify-center w-8 h-8 bg-muted rounded-lg hover:bg-accent transition-colors" style="background-color: rgba(221, 168, 83, 0.2); color: #183B4E;">
                     <i data-lucide="linkedin" class="w-4 h-4"></i>
                 </a>
                 {% endif %}
             </div>
             {% empty %}
-            <div class="card-modern p-8 text-center">
+            <div class="card-modern p-8 text-center" style="background-color: rgba(24, 59, 78, 0.05); border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); animation: fadeIn 0.8s ease-out forwards;">
                 <div class="relative mx-auto mb-6">
                     <img 
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
                         alt="Ali Shafique" 
                         class="w-24 h-24 rounded-full object-cover mx-auto shadow-xl"
+                        style="border: 2px solid #DDA853;"
                     />
                     <div class="absolute inset-0 w-24 h-24 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 mx-auto"></div>
                 </div>
-                <h3 class="text-lg font-semibold mb-2">Ali Shafique</h3>
-                <p class="text-blue-600 font-medium text-sm mb-3">Founder & CEO</p>
-                <p class="text-muted-foreground text-sm">15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise.</p>
+                <h3 class="text-lg font-semibold mb-2" style="color: #183B4E;">Ali Shafique</h3>
+                <p class="text-gold font-medium text-sm mb-3">Founder & CEO</p>
+                <p class="text-navy text-sm">15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise.</p>
             </div>
             {% endfor %}
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
-<!-- Why Choose Us -->
-<section class="py-20 bg-background">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center space-y-4 mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                Why Choose <span class="gradient-text">Social Dots</span>?
-            </h2>
+{% comment %} <!-- Why Choose Us Section -->
+<section style="padding-top: 5rem; padding-bottom: 5rem; background-color: #183B4E;">
+    <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;">
+        <div style="text-align: center; max-width: 48rem; margin-left: auto; margin-right: auto; margin-bottom: 3rem; animation: fadeIn 0.8s ease-out forwards;">
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: #F3F3E0; margin-bottom: 1rem;">Why Choose Us</h2>
+            <p style="color: #F3F3E0; opacity: 0.9; font-size: 1.125rem;">We combine deep industry knowledge with cutting-edge technology to deliver exceptional results.</p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center space-y-4">
-                <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto">
-                    <span class="text-2xl">🇨🇦</span>
+        
+        <!-- Features Grid -->
+        <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2rem;">
+            <!-- Feature 1 -->
+            <div style="background-color: #27548A; border-radius: 0.5rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1); padding: 1.5rem; transition: all 0.3s ease; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.2s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)';">
+                <div style="display: flex; align-items: flex-start;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 0.5rem; background-color: rgba(243, 243, 224, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='rgba(221, 168, 83, 0.2)';" onmouseout="this.style.backgroundColor='rgba(243, 243, 224, 0.1)';">
+                        <svg style="width: 1.5rem; height: 1.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #F3F3E0; margin-bottom: 0.5rem;">Canadian Focus</h3>
+                        <p style="color: #F3F3E0; opacity: 0.8;">We understand the unique challenges and opportunities of the Canadian market, with expertise in local regulations, cultural nuances, and business practices.</p>
+                    </div>
                 </div>
-                <h3 class="text-xl font-semibold">Canadian Focus</h3>
-                <p class="text-muted-foreground">Deep understanding of Canadian business landscape with Toronto-based leadership and local market expertise.</p>
             </div>
-
-            <div class="text-center space-y-4">
-                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto">
-                    <i data-lucide="brain-circuit" class="w-8 h-8 text-white"></i>
+            
+            <!-- Feature 2 -->
+            <div style="background-color: #27548A; border-radius: 0.5rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1); padding: 1.5rem; transition: all 0.3s ease; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.4s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)';">
+                <div style="display: flex; align-items: flex-start;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 0.5rem; background-color: rgba(243, 243, 224, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='rgba(221, 168, 83, 0.2)';" onmouseout="this.style.backgroundColor='rgba(243, 243, 224, 0.1)';">
+                        <svg style="width: 1.5rem; height: 1.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                            <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                            <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                            <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                            <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                            <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #F3F3E0; margin-bottom: 0.5rem;">AI Integration</h3>
+                        <p style="color: #F3F3E0; opacity: 0.8;">We leverage cutting-edge artificial intelligence and machine learning technologies to provide smarter, more efficient solutions for your business challenges.</p>
+                    </div>
                 </div>
-                <h3 class="text-xl font-semibold">Strategic AI Integration</h3>
-                <p class="text-muted-foreground">Thoughtful AI integration that aligns with your values—technology that serves your soul and strategy.</p>
             </div>
-
-            <div class="text-center space-y-4">
-                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto">
-                    <i data-lucide="target" class="w-8 h-8 text-white"></i>
+            
+            <!-- Feature 3 -->
+            <div style="background-color: #27548A; border-radius: 0.5rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1); padding: 1.5rem; transition: all 0.3s ease; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.6s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)';">
+                <div style="display: flex; align-items: flex-start;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 0.5rem; background-color: rgba(243, 243, 224, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='rgba(221, 168, 83, 0.2)';" onmouseout="this.style.backgroundColor='rgba(243, 243, 224, 0.1)';">
+                        <svg style="width: 1.5rem; height: 1.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #F3F3E0; margin-bottom: 0.5rem;">Holistic Approach</h3>
+                        <p style="color: #F3F3E0; opacity: 0.8;">We don't just build websites or apps; we create comprehensive digital ecosystems that address all aspects of your online presence and business operations.</p>
+                    </div>
                 </div>
-                <h3 class="text-xl font-semibold">Holistic Approach</h3>
-                <p class="text-muted-foreground">Beyond isolated tactics—comprehensive, integrated strategies that connect all digital touchpoints.</p>
             </div>
-
-            <div class="text-center space-y-4">
-                <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto">
-                    <i data-lucide="globe" class="w-8 h-8 text-white"></i>
+            
+            <!-- Feature 4 -->
+            <div style="background-color: #27548A; border-radius: 0.5rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1); padding: 1.5rem; transition: all 0.3s ease; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.8s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)';">
+                <div style="display: flex; align-items: flex-start;">
+                    <div style="width: 3rem; height: 3rem; border-radius: 0.5rem; background-color: rgba(243, 243, 224, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 1rem; flex-shrink: 0; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='rgba(221, 168, 83, 0.2)';" onmouseout="this.style.backgroundColor='rgba(243, 243, 224, 0.1)';">
+                        <svg style="width: 1.5rem; height: 1.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #F3F3E0; margin-bottom: 0.5rem;">Global Talent</h3>
+                        <p style="color: #F3F3E0; opacity: 0.8;">While we focus on the Canadian market, our team brings together diverse global expertise and perspectives to deliver innovative solutions that stand out.</p>
+                    </div>
                 </div>
-                <h3 class="text-xl font-semibold">Global Talent</h3>
-                <p class="text-muted-foreground">Canadian strategy combined with international execution for world-class results with agility and value.</p>
             </div>
         </div>
     </div>
-</section>
+</section> {% endcomment %}
 
-<!-- Call to Action -->
-<section class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="space-y-8">
-            <h2 class="text-3xl md:text-5xl font-bold text-white">
-                Ready to Transform Your Digital Strategy?
-            </h2>
-            <p class="text-xl text-blue-100 leading-relaxed">
-                Let's explore how strategic AI integration and comprehensive digital solutions can help your Canadian business thrive in an evolving digital landscape.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="/contact/" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl">
-                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-                    Book Your Strategy Call
+<!-- Testimonials Section -->
+{% include 'core/testimonials.html' %}
+
+<!-- Service Pricing Cards Section -->
+{% comment %} {% include 'core/service-pricing-cards.html' %} {% endcomment %}
+
+<!-- Call to Action Section -->
+<section style="padding-top: 5rem; padding-bottom: 5rem; background: linear-gradient(135deg, #27548A, #183B4E); position: relative; overflow: hidden;">
+    <!-- Background Elements -->
+    <div style="position: absolute; top: -10rem; right: -10rem; width: 30rem; height: 30rem; border-radius: 9999px; background-color: #DDA853; opacity: 0.05; animation: float 20s ease-in-out infinite;"></div>
+    <div style="position: absolute; bottom: -15rem; left: -5rem; width: 25rem; height: 25rem; border-radius: 9999px; background-color: #F3F3E0; opacity: 0.05; animation: floatReverse 25s ease-in-out infinite;"></div>
+    
+    <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; position: relative;">
+        <div style="text-align: center; max-width: 48rem; margin-left: auto; margin-right: auto; animation: fadeIn 0.8s ease-out forwards;">
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: #F3F3E0; margin-bottom: 1rem;">Ready to transform your digital presence?</h2>
+            <p style="color: #F3F3E0; opacity: 0.9; font-size: 1.125rem; margin-bottom: 2rem;">Let's discuss how we can help your business thrive in the digital landscape.</p>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.2s;">
+                <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/yourusername/30min'});return false;" class="btn-gold" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0.75rem; padding-bottom: 0.75rem; background-color: #DDA853; color: #183B4E; font-weight: 500; border-radius: 0.375rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                    <span style="position: relative; z-index: 10;">Book a free strategy call</span>
+                    <span style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, #DDA853, #F3F3E0); opacity: 0; transition: opacity 0.3s ease; z-index: 1;"></span>
                 </a>
-                <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all">
-                    <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
-                    Call {{ site_config.phone|default:"416-556-6961" }}
+                <a href="tel:+1234567890" class="btn-ghost" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0.75rem; padding-bottom: 0.75rem; background-color: transparent; color: #F3F3E0; font-weight: 500; border-radius: 0.375rem; border: 1px solid rgba(243, 243, 224, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                    <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span style="position: relative; z-index: 10;">Call us now</span>
                 </a>
             </div>
         </div>

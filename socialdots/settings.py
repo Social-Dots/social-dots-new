@@ -12,7 +12,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+# DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+DEBUG = False  # Set to True for development, False for production
 
 # DEBUG = False
 print("DEBUG:", DEBUG)

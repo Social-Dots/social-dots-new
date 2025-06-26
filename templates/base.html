@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en-CA" class="light">
 <head>
@@ -47,6 +48,11 @@
                             DEFAULT: "hsl(var(--card))",
                             foreground: "hsl(var(--card-foreground))",
                         },
+                        // Custom color palette
+                        cream: '#F3F3E0',
+                        navy: '#27548A',
+                        darkNavy: '#183B4E',
+                        gold: '#DDA853',
                     },
                     borderRadius: {
                         lg: "var(--radius)",
@@ -61,32 +67,38 @@
     <!-- shadcn/ui CSS Variables and Modern Design System -->
     <style>
         :root {
-            /* Modern Light Theme Variables - VaynerMedia Inspired */
-            --background: 0 0% 100%;
-            --foreground: 0 0% 9%;
+            /* Custom Color Palette */
+            --cream: 60 40% 92%; /* #F3F3E0 */
+            --navy: 210 55% 35%; /* #27548A */
+            --dark-navy: 202 50% 20%; /* #183B4E */
+            --gold: 36 65% 59%; /* #DDA853 */
+            
+            /* Modern Light Theme Variables with New Color Palette */
+            --background: var(--cream);
+            --foreground: var(--dark-navy);
             --card: 0 0% 100%;
-            --card-foreground: 0 0% 9%;
+            --card-foreground: var(--dark-navy);
             --popover: 0 0% 100%;
-            --popover-foreground: 0 0% 9%;
-            --primary: 191 100% 56%;
-            --primary-foreground: 0 0% 100%;
-            --secondary: 0 0% 96%;
-            --secondary-foreground: 0 0% 9%;
-            --muted: 0 0% 96%;
-            --muted-foreground: 0 0% 45%;
-            --accent: 0 0% 96%;
-            --accent-foreground: 0 0% 9%;
+            --popover-foreground: var(--dark-navy);
+            --primary: var(--navy);
+            --primary-foreground: var(--cream);
+            --secondary: var(--gold);
+            --secondary-foreground: var(--dark-navy);
+            --muted: 210 40% 96%;
+            --muted-foreground: 215 25% 40%;
+            --accent: var(--gold);
+            --accent-foreground: var(--dark-navy);
             --destructive: 0 84% 60%;
             --destructive-foreground: 0 0% 98%;
-            --border: 0 0% 90%;
-            --input: 0 0% 96%;
-            --ring: 191 100% 56%;
+            --border: 214 32% 91%;
+            --input: 214 32% 91%;
+            --ring: var(--navy);
             --radius: 0.75rem;
             
             /* Social Dots Brand Colors */
-            --brand-primary: {{ site_config.primary_color|default:"#3B82F6" }};
-            --brand-secondary: {{ site_config.secondary_color|default:"#1E40AF" }};
-            --brand-accent: {{ site_config.accent_color|default:"#60A5FA" }};
+            --brand-primary: {{ site_config.primary_color|default:"#27548A" }};
+            --brand-secondary: {{ site_config.secondary_color|default:"#183B4E" }};
+            --brand-accent: {{ site_config.accent_color|default:"#DDA853" }};
         }
 
         * {
@@ -98,75 +110,332 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* Modern Elegant Components - Rounded & Sophisticated */
+        /* Modern Button Styles */
         .btn-primary {
-            @apply inline-flex items-center justify-center text-sm font-semibold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
-            background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(191 100% 45%) 100%);
-            @apply text-white hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-1 active:translate-y-0;
-            @apply px-8 py-4 shadow-lg;
-            border-radius: 50px;
-            transform: perspective(1px) translateZ(0);
+            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-cream bg-navy hover:bg-darkNavy focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold transition-all duration-300 ease-in-out transform hover:-translate-y-1;
         }
 
         .btn-secondary {
-            @apply inline-flex items-center justify-center text-sm font-semibold ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
-            @apply border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background hover:-translate-y-1 active:translate-y-0;
-            @apply px-8 py-4 hover:shadow-xl hover:shadow-gray-500/25;
-            border-radius: 50px;
-            transform: perspective(1px) translateZ(0);
+            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-navy bg-cream hover:bg-gold/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy transition-all duration-300 ease-in-out transform hover:-translate-y-1;
         }
 
         .btn-ghost {
-            @apply inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
-            @apply hover:bg-muted hover:text-muted-foreground hover:-translate-y-0.5 active:translate-y-0;
-            @apply px-6 py-3;
-            border-radius: 50px;
-            transform: perspective(1px) translateZ(0);
+            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-darkNavy hover:text-navy focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold/50 transition-all duration-300 ease-in-out;
+        }
+        
+        .btn-gold {
+            @apply inline-flex items-center justify-center px-4 py-2 border border-blue rounded-md shadow-sm text-sm font-medium text-darkNavy bg-gold hover:bg-gold/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy transition-all duration-300 ease-in-out transform hover:-translate-y-1;
+        }
+        
+        .btn-ghost::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-ghost:hover::after {
+            background-color: #27548A;
         }
 
+        /* Modern Card Styles */
         .card-modern {
-            border-radius: 24px;
-            @apply border bg-card text-card-foreground shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-[1.02];
-            @apply backdrop-blur-sm bg-opacity-90;
-            background: linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-            border: 1px solid rgba(255,255,255,0.2);
+            @apply bg-cream rounded-xl shadow-md overflow-hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            border: 1px solid rgba(221, 168, 83, 0.1);
+        }
+        
+        .card-modern:hover {
+            @apply shadow-xl;
+            transform: translateY(-8px);
+            border: 1px solid rgba(221, 168, 83, 0.3);
+        }
+
+        /* Modern Text Gradient */
+        .text-gradient {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-navy to-darkNavy;
+        }
+        
+        .text-gradient-gold {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-gold to-amber-500;
+        }
+
+        /* Modern Glassmorphism */
+        .glass-card {
+            @apply bg-cream/70 backdrop-blur-lg rounded-xl shadow-xl;
+            border: 1px solid rgba(221, 168, 83, 0.2);
+            transition: all 0.5s ease;
+        }
+        
+        .glass-card:hover {
+            @apply shadow-2xl;
+            border: 1px solid rgba(221, 168, 83, 0.4);
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        /* Feature Card */
+        .feature-card {
+            @apply p-6 rounded-xl bg-cream;
+            border: 1px solid rgba(221, 168, 83, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            @apply shadow-lg;
+            border: 1px solid rgba(221, 168, 83, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        /* Pricing Card */
+        .pricing-card {
+            @apply p-6 rounded-xl bg-cream;
+            border: 1px solid rgba(39, 84, 138, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .pricing-card.featured {
+            @apply bg-gradient-to-br from-navy/5 to-navy/10;
+            border: 1px solid rgba(39, 84, 138, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #27548A, #DDA853);
+        }
+        
+        .pricing-card:hover {
+            @apply shadow-xl;
+            transform: translateY(-8px) scale(1.02);
         }
 
         .gradient-text {
-            @apply bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent;
+            @apply bg-gradient-to-r from-navy via-darkNavy to-navy bg-clip-text text-transparent;
         }
 
         .glass-morphism {
             backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: rgba(243, 243, 224, 0.8);
+            border: 1px solid rgba(221, 168, 83, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(24, 59, 78, 0.1);
         }
 
         /* Modern Navigation */
         .nav-modern {
             @apply fixed top-0 w-full z-50;
             backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(243, 243, 224, 0.9);
+            border-bottom: 1px solid rgba(221, 168, 83, 0.2);
+            box-shadow: 0 1px 30px rgba(24, 59, 78, 0.1);
+            transition: all 0.3s ease;
         }
+        
+        /* Enhanced Navigation Styles */
+@keyframes navLinkFadeIn {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
 
-        /* Hero Gradient - VaynerMedia Inspired Light Theme */
+@keyframes logoShine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    50% { transform: translateX(100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
+}
+
+.logo-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%) rotate(45deg);
+    animation: logoShine 6s ease-in-out infinite;
+    animation-delay: 2s;
+    pointer-events: none;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 0;
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--navy);
+    transition: all 0.3s ease;
+    animation: navLinkFadeIn 0.5s ease forwards;
+    animation-delay: calc(var(--nav-item-index, 0) * 0.1s);
+    opacity: 0;
+}
+
+.nav-text {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover .nav-text {
+    color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.nav-indicator {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 4px;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    box-shadow: 0 2px 8px rgba(var(--gold-rgb), 0.3);
+}
+
+.nav-link:hover .nav-indicator {
+    width: 100%;
+    opacity: 1;
+}
+
+.nav-link.active .nav-indicator {
+    width: 100%;
+    opacity: 1;
+}
+
+.nav-link.active .nav-text {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(var(--gold-rgb), 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.nav-link:hover::before {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+.nav-link.active::before {
+    opacity: 0.5;
+    transform: scale(1.2);
+}
+
+        @keyframes mobileNavLinkFadeIn {
+    0% { opacity: 0; transform: translateX(-20px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    color: var(--navy);
+    transition: all 0.3s ease;
+    margin-bottom: 0.25rem;
+    position: relative;
+    overflow: hidden;
+    animation: mobileNavLinkFadeIn 0.5s ease forwards;
+    animation-delay: calc(var(--mobile-nav-item-index, 0) * 0.1s);
+    opacity: 0;
+}
+
+.mobile-nav-link:hover {
+    background-color: rgba(var(--navy-rgb), 0.05);
+    transform: translateX(4px);
+    color: var(--gold);
+}
+
+.mobile-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transition: width 0.3s ease;
+}
+
+.mobile-nav-link:hover::after {
+    width: 100%;
+}
+
+.mobile-nav-link i {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.mobile-nav-link:hover i {
+    transform: scale(1.2);
+    color: var(--gold);
+}
+        
+        .nav-modern.scrolled {
+    padding: 0.5rem 0;
+    background: rgba(243, 243, 224, 0.95);
+    box-shadow: 0 4px 20px rgba(24, 59, 78, 0.15);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(221, 168, 83, 0.15);
+    transform: translateY(0);
+}
+
+.nav-modern.scrolled .flex {
+    height: 4rem;
+    transition: height 0.3s ease;
+}
+
+.nav-modern:not(.scrolled) {
+    transform: translateY(0);
+    transition: all 0.4s ease;
+}
+
+        /* Hero Gradient - Custom Theme */
         .hero-gradient {
             background: linear-gradient(135deg, 
-                hsl(var(--background)) 0%, 
-                hsl(210 20% 95%) 25%, 
-                hsl(210 15% 92%) 50%, 
-                hsl(210 10% 88%) 75%, 
-                hsl(210 5% 85%) 100%
+                #F3F3E0 0%, 
+                #F5F5E5 25%, 
+                #F7F7EA 50%, 
+                #F9F9EF 75%, 
+                #FBFBF4 100%
             );
         }
 
-        /* Animated background - Light Theme */
+        /* Animated background - Custom Theme */
         .animated-bg {
-            background: linear-gradient(-45deg, #f8fafc, #f1f5f9, #e2e8f0, #cbd5e1);
+            background: linear-gradient(-45deg, #F3F3E0, #E8E8D5, #DDA853, #27548A);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
         }
@@ -187,6 +456,36 @@
             0%, 100% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(15px) rotate(-2deg); }
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Marquee animation for trust logos */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
 
         .float-animation {
             animation: float 8s ease-in-out infinite;
@@ -195,6 +494,28 @@
         .float-reverse {
             animation: floatReverse 10s ease-in-out infinite;
         }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .scale-in {
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
 
         /* Enhanced Glowing effect */
         .glow-effect {
@@ -253,63 +574,190 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body class="min-h-screen bg-background">
-    <!-- Modern Navigation -->
-    <nav class="nav-modern">
+    <!-- Enhanced Modern Navigation Bar -->    
+    <nav class="nav-modern sticky top-0 z-50 w-full backdrop-blur-xl bg-cream/95 shadow-2xl transition-all duration-300 ease-in-out border-b border-gold/30 animate-fadeIn">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
+            <div class="flex justify-between items-center h-20"> 
+                <!-- Enhanced Logo with Animation -->
                 <div class="flex items-center">
-                    <a href="/" class="flex items-center space-x-2">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-xl">SD</span>
+                    <a href="/" class="flex items-center space-x-4 group"> 
+                        {% comment %} <div class="w-12 h-12 bg-gradient-to-br from-navy via-blue-500 to-darkNavy rounded-2xl flex items-center justify-center transition-all duration-500 ease-in-out transform group-hover:scale-110 group-hover:rotate-6 shadow-lg group-hover:shadow-navy/30 overflow-hidden relative logo-container">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="logo-shine"></div>
+                            <span class="text-white font-bold text-xl relative z-10">SD</span>
+                        </div> {% endcomment %}
+                        <div class="flex flex-col">
+                            <span class="text-2xl font-bold gradient-text">{{ site_config.site_name|default:"Social Dots" }}</span>
+                            <span class="text-xs text-navy/70 font-medium tracking-wider">DIGITAL SOLUTIONS</span>
                         </div>
-                        <span class="text-xl font-bold gradient-text">{{ site_config.site_name|default:"Social Dots" }}</span>
                     </a>
                 </div>
 
-                <!-- Desktop Navigation -->
+                <!-- Enhanced Desktop Navigation -->
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="/" class="btn-ghost">Home</a>
-                        <a href="/services/" class="btn-ghost">Services</a>
-                        <a href="/portfolio/" class="btn-ghost">Portfolio</a>
-                        <a href="/about/" class="btn-ghost">About</a>
-                        <a href="/blog/" class="btn-ghost">Blog</a>
-                        <a href="/contact/" class="btn-primary">Get Started</a>
+                    <div class="ml-10 flex items-baseline space-x-8"> 
+                        <a href="/" class="nav-link group" style="--nav-item-index: 0">
+                            <span class="nav-text font-medium">Home</span>
+                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                        </a>
+                        <a href="/services/" class="nav-link group" style="--nav-item-index: 1">
+                            <span class="nav-text font-medium">Services</span>
+                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                        </a>
+                        <a href="/portfolio/" class="nav-link group" style="--nav-item-index: 2">
+                            <span class="nav-text font-medium">Portfolio</span>
+                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                        </a>
+                        <a href="/about/" class="nav-link group" style="--nav-item-index: 3">
+                            <span class="nav-text font-medium">About</span>
+                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                        </a>
+                        <a href="/blog/" class="nav-link group" style="--nav-item-index: 4">
+                            <span class="nav-text font-medium">Blog</span>
+                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                        </a>
+                        <a href="/pricing/" class="nav-link group" style="--nav-item-index: 5">
+                            <span class="nav-text font-medium">Pricing</span>
+                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                        </a>
+                        <a href="/contact/" class="btn-gold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl px-6 py-3 ml-4 flex items-center space-x-2 group 
+                            border-2 border-blue-500 rounded-full text-blue-500 hover:bg-blue-500 hover:text-white">
+                            <span>Get Started</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Mobile menu button -->
+                <!-- Enhanced Mobile menu button with animation -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-toggle" class="btn-ghost p-2">
-                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    <button id="mobile-menu-toggle" class="p-2 rounded-xl bg-navy/5 hover:bg-navy/10 focus:outline-none focus:ring-2 focus:ring-gold transition-all duration-300 ease-in-out">
+                        <i data-lucide="menu" class="h-6 w-6 text-navy"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="md:hidden hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background/95 backdrop-blur-md border-t border-border">
-                <a href="/" class="block px-3 py-2 text-base font-medium hover:bg-accent rounded-md">Home</a>
-                <a href="/services/" class="block px-3 py-2 text-base font-medium hover:bg-accent rounded-md">Services</a>
-                <a href="/portfolio/" class="block px-3 py-2 text-base font-medium hover:bg-accent rounded-md">Portfolio</a>
-                <a href="/about/" class="block px-3 py-2 text-base font-medium hover:bg-accent rounded-md">About</a>
-                <a href="/blog/" class="block px-3 py-2 text-base font-medium hover:bg-accent rounded-md">Blog</a>
-                <a href="/contact/" class="block px-3 py-2 text-base font-medium bg-blue-600 text-white rounded-md">Get Started</a>
+        <!-- Enhanced Mobile Navigation with smooth animation -->
+        <div id="mobile-menu" class="md:hidden hidden transform transition-all duration-300 ease-in-out">
+            <div class="px-3 pt-3 pb-4 space-y-1 sm:px-4 bg-cream/95 backdrop-blur-xl border-t border-gold/20 shadow-xl rounded-b-2xl mx-2">
+                <a href="/" class="mobile-nav-link" style="--mobile-nav-item-index: 0">
+                    <i data-lucide="home" class="h-5 w-5 mr-3 text-navy/70"></i>
+                    <span>Home</span>
+                </a>
+                <a href="/services/" class="mobile-nav-link" style="--mobile-nav-item-index: 1">
+                    <i data-lucide="briefcase" class="h-5 w-5 mr-3 text-navy/70"></i>
+                    <span>Services</span>
+                </a>
+                <a href="/portfolio/" class="mobile-nav-link" style="--mobile-nav-item-index: 2">
+                    <i data-lucide="image" class="h-5 w-5 mr-3 text-navy/70"></i>
+                    <span>Portfolio</span>
+                </a>
+                <a href="/about/" class="mobile-nav-link" style="--mobile-nav-item-index: 3">
+                    <i data-lucide="users" class="h-5 w-5 mr-3 text-navy/70"></i>
+                    <span>About</span>
+                </a>
+                <a href="/blog/" class="mobile-nav-link" style="--mobile-nav-item-index: 4">
+                    <i data-lucide="file-text" class="h-5 w-5 mr-3 text-navy/70"></i>
+                    <span>Blog</span>
+                </a>
+                <a href="/pricing/" class="mobile-nav-link" style="--mobile-nav-item-index: 5">
+                    <i data-lucide="tag" class="h-5 w-5 mr-3 text-navy/70"></i>
+                    <span>Pricing</span>
+                </a>
+                <a href="/contact/" class="flex items-center justify-center space-x-2 px-4 py-3 mt-3 text-base font-medium bg-gold text-darkNavy hover:bg-gold/80 transition-all duration-300 ease-in-out shadow-md rounded-xl group">
+                    <span>Get Started</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content with proper spacing for fixed nav -->
-    <main class="pt-16">
+    <!-- Main Content -->
+    <main class="pt-0">
         {% block content %}
         {% endblock %}
     </main>
 
     <!-- Modern Footer -->
-    <footer class="bg-muted/30 border-t border-border mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .canada-pin {
+            position: absolute;
+            top: 35%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        
+        .canada-pin-pulse {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.4);
+            animation: pulse 2s infinite;
+        }
+        
+        .canada-pin-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            70% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+        
+        .world-map-bg {
+            background-image: url('{% static "images/world-map-canada.svg" %}');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <!-- Enhanced Footer -->
+    <footer class="relative border-t border-gray-700 overflow-hidden" style="background: linear-gradient(135deg, #374151 0%, #1f2937 40%, #111827 70%, #1e293b 100%);">
+        <!-- World Map Background with Canada Pin -->
+        <div class="absolute inset-0 opacity-30 pointer-events-none">
+            <div class="world-map-bg w-full h-full opacity-60"></div>
+            <!-- Canada Location Pin -->
+            <div class="canada-pin">
+                <div class="canada-pin-pulse"></div>
+                <div class="canada-pin-dot"></div>
+            </div>
+        </div>
+        
+        <!-- Light Overlay for better text readability -->
+        <div class="absolute inset-0 bg-gray-900/30 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Company Info -->
                 <div class="col-span-1 md:col-span-2">
@@ -319,70 +767,174 @@
                         </div>
                         <span class="text-lg font-bold gradient-text">Social Dots Inc.</span>
                     </div>
-                    <p class="text-muted-foreground mb-6 max-w-md">
-                        {{ site_config.tagline|default:"Empowering Canadian businesses to thrive in a constantly evolving digital world through strategic AI integration and comprehensive digital solutions." }}
+                    <p class="text-gray-300 mb-6 max-w-md">
+                        Empowering Canadian businesses to thrive in a constantly evolving digital world through strategic AI integration and comprehensive digital solutions.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="p-2 rounded-lg bg-muted hover:bg-accent transition-colors">
-                            <i data-lucide="linkedin" class="h-5 w-5"></i>
+                        <a href="#" class="p-2 rounded-lg bg-white/50 hover:bg-white/80 transition-colors shadow-sm">
+                            <svg class="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
                         </a>
-                        <a href="#" class="p-2 rounded-lg bg-muted hover:bg-accent transition-colors">
-                            <i data-lucide="twitter" class="h-5 w-5"></i>
+                        <a href="#" class="p-2 rounded-lg bg-white/50 hover:bg-white/80 transition-colors shadow-sm">
+                            <svg class="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                         </a>
-                        <a href="#" class="p-2 rounded-lg bg-muted hover:bg-accent transition-colors">
-                            <i data-lucide="github" class="h-5 w-5"></i>
+                        <a href="#" class="p-2 rounded-lg bg-white/50 hover:bg-white/80 transition-colors shadow-sm">
+                            <svg class="h-5 w-5 text-gray-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                         </a>
                     </div>
                 </div>
 
                 <!-- Services -->
                 <div>
-                    <h3 class="font-semibold mb-4">Services</h3>
-                    <ul class="space-y-2 text-sm text-muted-foreground">
-                        <li><a href="/services/" class="hover:text-foreground transition-colors">Digital Strategy</a></li>
-                        <li><a href="/services/" class="hover:text-foreground transition-colors">AI Integration</a></li>
-                        <li><a href="/services/" class="hover:text-foreground transition-colors">Salesforce CRM</a></li>
-                        <li><a href="/services/" class="hover:text-foreground transition-colors">Marketing Automation</a></li>
+                    <h3 class="font-semibold mb-4 text-gray-200">Services</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="/services/" class="hover:text-white transition-colors">Digital Strategy</a></li>
+                        <li><a href="/services/" class="hover:text-white transition-colors">AI Integration</a></li>
+                        <li><a href="/services/" class="hover:text-white transition-colors">Salesforce CRM</a></li>
+                        <li><a href="/services/" class="hover:text-white transition-colors">Marketing Automation</a></li>
                     </ul>
                 </div>
 
                 <!-- Contact -->
                 <div>
-                    <h3 class="font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2 text-sm text-muted-foreground">
+                    <h3 class="font-semibold mb-4 text-gray-200">Contact</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
                         <li class="flex items-center space-x-2">
-                            <i data-lucide="map-pin" class="h-4 w-4"></i>
-                            <span>{{ site_config.address|default:"Toronto, ON" }}</span>
+                            <svg class="h-4 w-4 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span>Toronto, ON</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <i data-lucide="phone" class="h-4 w-4"></i>
-                            <a href="tel:{{ site_config.phone }}" class="hover:text-foreground transition-colors">{{ site_config.phone|default:"416-556-6961" }}</a>
+                            <svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <a href="tel:416-556-6961" class="hover:text-white transition-colors">416-556-6961</a>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <i data-lucide="mail" class="h-4 w-4"></i>
-                            <a href="mailto:{{ site_config.email }}" class="hover:text-foreground transition-colors">{{ site_config.email|default:"hello@socialdots.ca" }}</a>
+                            <svg class="h-4 w-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <a href="mailto:hello@socialdots.ca" class="hover:text-white transition-colors">hello@socialdots.ca</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-                <p>&copy; 2025 {{ site_config.legal_name|default:"Social Dots Inc." }} All rights reserved. Built with ❤️ in Toronto.</p>
+            <div class="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Social Dots Inc. All rights reserved. Built with ❤️ in Toronto.</p>
             </div>
         </div>
-    </footer>
+</footer>
+
+    <script>
+        // Wait for DOM to load, then initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 
     <!-- Mobile Menu Script -->
     <script>
-        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-
         // Initialize Lucide icons
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+
+        // Enhanced Mobile menu toggle with smooth animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = mobileMenuToggle.querySelector('[data-lucide="menu"]');
+            let isAnimating = false;
+
+            mobileMenuToggle.addEventListener('click', function() {
+                if (isAnimating) return;
+                isAnimating = true;
+                
+                if (mobileMenu.classList.contains('hidden')) {
+                    // Show menu with animation
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.style.opacity = '0';
+                    mobileMenu.style.maxHeight = '0';
+                    mobileMenu.style.overflow = 'hidden';
+                    
+                    // Animate menu opening
+                    setTimeout(() => {
+                        mobileMenu.style.transition = 'opacity 0.3s ease, max-height 0.5s ease';
+                        mobileMenu.style.opacity = '1';
+                        mobileMenu.style.maxHeight = '500px';
+                        
+                        // Change icon to X with rotation
+                        menuIcon.style.transition = 'transform 0.3s ease';
+                        menuIcon.style.transform = 'rotate(90deg)';
+                        setTimeout(() => {
+                            menuIcon.outerHTML = '<i data-lucide="x" class="h-6 w-6 text-navy" style="transform: rotate(0deg);"></i>';
+                            lucide.createIcons();
+                            isAnimating = false;
+                        }, 150);
+                    }, 10);
+                } else {
+                    // Animate menu closing
+                    mobileMenu.style.transition = 'opacity 0.3s ease, max-height 0.5s ease';
+                    mobileMenu.style.opacity = '0';
+                    mobileMenu.style.maxHeight = '0';
+                    
+                    // Rotate X icon before changing back to menu
+                    const xIcon = mobileMenuToggle.querySelector('[data-lucide="x"]');
+                    if (xIcon) {
+                        xIcon.style.transition = 'transform 0.3s ease';
+                        xIcon.style.transform = 'rotate(90deg)';
+                    }
+                    
+                    // After animation completes, hide menu and change icon
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                        if (xIcon) {
+                            xIcon.outerHTML = '<i data-lucide="menu" class="h-6 w-6 text-navy"></i>';
+                            lucide.createIcons();
+                        }
+                        isAnimating = false;
+                    }, 300);
+                }
+            });
+
+            // Add scroll effect to navbar
+            const navbar = document.querySelector('.nav-modern');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Set active state for current page
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            function setActiveNavLink() {
+                // For desktop navigation
+                navLinks.forEach(link => {
+                    const linkPath = link.getAttribute('href');
+                    if (currentPath === linkPath || 
+                        (linkPath !== '/' && currentPath.startsWith(linkPath))) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // For mobile navigation
+                mobileNavLinks.forEach(link => {
+                    const linkPath = link.getAttribute('href');
+                    if (currentPath === linkPath || 
+                        (linkPath !== '/' && currentPath.startsWith(linkPath))) {
+                        link.classList.add('active');
+                        // Add special styling for active mobile link
+                        link.style.backgroundColor = 'rgba(var(--navy-rgb), 0.05)';
+                        link.querySelector('i').style.color = 'var(--gold)';
+                    }
+                });
+            }
+            
+            // Set active links when DOM is loaded
+            setActiveNavLink();
+        });
     </script>
 
     {% block extra_js %}{% endblock %}
