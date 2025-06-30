@@ -3,44 +3,62 @@
 {% block title %}Portfolio - {{ site_config.site_name }} - Our Success Stories and Case Studies{% endblock %}
 
 {% block content %}
-<!-- Portfolio Hero Section -->
-<section class="relative overflow-hidden hero-gradient">
-    <!-- Animated Background Elements -->
-    <div class="absolute inset-0 animated-bg opacity-10"></div>
+<!-- Portfolio Hero Section with Unsplash Background -->
+<section class="relative overflow-hidden min-h-[70vh]" style="background-color: #F3F3E0;">
+    <!-- Modern Background -->
+    <div class="absolute inset-0">
+        <img 
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+            alt="Portfolio Success Stories" 
+            class="w-full h-full object-cover opacity-40"
+        />
+        <div class="absolute inset-0 bg-gradient-to-br from-[#27548A]/20 via-[#F3F3E0]/50 to-[#183B4E]/20"></div>
+    </div>
     
-    <!-- Floating Geometric Shapes -->
-    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl float-animation"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
+    <!-- Enhanced Floating Elements -->
+    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-gradient-to-r from-[#27548A]/15 to-[#183B4E]/15 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-to-r from-[#DDA853]/10 to-[#F3F3E0]/10 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div class="text-center space-y-8">
+        <div class="text-center space-y-8 fade-in" style="--delay: 0.1s;">
             <!-- Hero Badge -->
-            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm">
-                <i data-lucide="briefcase" class="w-4 h-4 text-blue-500"></i>
-                <span class="text-muted-foreground">Our Work & Impact</span>
+            <div class="inline-flex items-center space-x-3 glass-card px-6 py-3 text-sm font-medium fade-in" style="--delay: 0.2s; background-color: rgba(243, 243, 224, 0.7); border: 1px solid rgba(221, 168, 83, 0.3);">
+                <i data-lucide="briefcase" class="w-5 h-5 text-[#DDA853]"></i>
+                <span class="text-[#183B4E]">Our Work & Impact</span>
             </div>
 
             <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                <span class="gradient-text">Success Stories</span><br>
-                <span class="text-foreground">That Drive</span><br>
-                <span class="gradient-text">Real Results</span>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
+                <span class="text-[#183B4E]">Success Stories</span><br>
+                <span class="text-gradient-gold">That Drive Results</span>
             </h1>
 
             <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl text-muted-foreground leading-relaxed">
+            <p class="mx-auto max-w-3xl text-xl text-[#183B4E]/80 leading-relaxed fade-in" style="--delay: 0.4s;">
                 Explore how we've helped Canadian businesses transform their digital presence, streamline operations, 
                 and achieve measurable growth through strategic AI integration and comprehensive digital solutions.
             </p>
-
+            
+            <!-- Hero CTA Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mt-8 fade-in" style="--delay: 0.5s;">
+                <a href="#portfolio-grid" class="btn-primary px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
+                    <i data-lucide="eye" class="w-5 h-5"></i>
+                    <span>View Projects</span>
+                </a>
+                <a href="{% url 'contact' %}" class="btn-gold px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                    <span>Discuss Your Project</span>
+                </a>
+            </div>
+            
             <!-- Filter Section -->
             {% if all_technologies %}
-            <div class="flex flex-wrap justify-center gap-4 pt-8">
-                <a href="/portfolio/" class="px-4 py-2 {% if not current_tech %}bg-blue-600 text-white{% else %}bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground{% endif %} rounded-lg transition-colors">
+            <div class="flex flex-wrap justify-center gap-4 pt-8 fade-in" style="--delay: 0.6s;">
+                <a href="/portfolio/" class="glass-card px-6 py-2 rounded-full {% if not current_tech %}bg-[#DDA853] text-white border-[#DDA853]{% else %}text-[#183B4E] border border-[#DDA853]/30 hover:border-[#DDA853] hover:bg-[#DDA853]/10{% endif %} font-medium transition-all duration-300 hover:shadow-md">
                     All Projects
                 </a>
                 {% for tech in all_technologies %}
-                <a href="/portfolio/?tech={{ tech }}" class="px-4 py-2 {% if current_tech == tech %}bg-blue-600 text-white{% else %}bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground{% endif %} rounded-lg transition-colors">
+                <a href="/portfolio/?tech={{ tech }}" class="glass-card px-6 py-2 rounded-full {% if current_tech == tech %}bg-[#DDA853] text-white border-[#DDA853]{% else %}text-[#183B4E] border border-[#DDA853]/30 hover:border-[#DDA853] hover:bg-[#DDA853]/10{% endif %} font-medium transition-all duration-300 hover:shadow-md">
                     {{ tech }}
                 </a>
                 {% endfor %}
@@ -51,15 +69,20 @@
 </section>
 
 <!-- Portfolio Grid Section -->
-<section class="py-20 bg-background">
+<section id="portfolio-grid" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 fade-in" style="--delay: 0.1s;">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#183B4E] mb-4">Our Featured Projects</h2>
+            <p class="text-[#183B4E]/70 max-w-2xl mx-auto">Explore our portfolio of successful projects that have helped businesses achieve their digital transformation goals</p>
+        </div>
+        
         {% if projects %}
         <!-- Projects Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {% for project in projects %}
-            <div class="card-modern overflow-hidden group">
+            <div class="overflow-hidden group rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in" style="--delay: calc(0.1s * {{ forloop.counter }});">
                 <!-- Project Image Placeholder -->
-                <div class="relative h-64 bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center overflow-hidden">
+                <div class="relative h-64 bg-gradient-to-br from-[#27548A] to-[#183B4E] flex items-center justify-center overflow-hidden">
                     <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                     <div class="relative z-10 text-white text-center">
                         <i data-lucide="{% if 'web' in project.title.lower %}globe{% elif 'mobile' in project.title.lower %}smartphone{% elif 'ai' in project.title.lower %}brain-circuit{% elif 'crm' in project.title.lower or 'salesforce' in project.title.lower %}database{% else %}monitor{% endif %}" class="w-16 h-16 mb-4 mx-auto"></i>
@@ -67,25 +90,25 @@
                     </div>
                     
                     <!-- Hover Overlay -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-4 left-4 right-4">
-                            <a href="/portfolio/{{ project.slug }}/" class="btn-primary w-full text-center text-sm">
-                                <i data-lucide="external-link" class="w-4 h-4 mr-2"></i>
-                                View Case Study
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#183B4E]/90 via-[#27548A]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <a href="/portfolio/{{ project.slug }}/" class="btn-gold w-full text-center py-3 rounded-full flex items-center justify-center gap-2 transition-all duration-300 hover:translate-y-[-2px]">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                                <span>View Case Study</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project Content -->
-                <div class="p-6">
+                <div class="p-6 bg-white border-t border-gray-100">
                     <div class="mb-4">
-                        <h3 class="text-xl font-semibold text-foreground mb-2">
-                            <a href="/portfolio/{{ project.slug }}/" class="hover:text-blue-600 transition-colors">
+                        <h3 class="text-xl font-bold text-[#183B4E] mb-2">
+                            <a href="/portfolio/{{ project.slug }}/" class="hover:text-[#DDA853] transition-colors">
                                 {{ project.title }}
                             </a>
                         </h3>
-                        <p class="text-muted-foreground text-sm mb-3">
+                        <p class="text-[#183B4E]/70 mb-3">
                             {{ project.description|truncatewords:20 }}
                         </p>
                     </div>
@@ -94,29 +117,29 @@
                     <div class="space-y-3">
                         {% if project.client %}
                         <div class="flex items-center space-x-2 text-sm">
-                            <i data-lucide="building" class="w-4 h-4 text-muted-foreground"></i>
-                            <span class="text-muted-foreground">Client:</span>
-                            <span class="text-foreground font-medium">{{ project.client }}</span>
+                            <i data-lucide="building" class="w-4 h-4 text-[#DDA853]"></i>
+                            <span class="text-[#183B4E]/70">Client:</span>
+                            <span class="text-[#183B4E] font-medium">{{ project.client }}</span>
                         </div>
                         {% endif %}
 
                         {% if project.completion_date %}
                         <div class="flex items-center space-x-2 text-sm">
-                            <i data-lucide="calendar" class="w-4 h-4 text-muted-foreground"></i>
-                            <span class="text-muted-foreground">Completed:</span>
-                            <span class="text-foreground">{{ project.completion_date|date:"M Y" }}</span>
+                            <i data-lucide="calendar" class="w-4 h-4 text-[#DDA853]"></i>
+                            <span class="text-[#183B4E]/70">Completed:</span>
+                            <span class="text-[#183B4E]">{{ project.completion_date|date:"M Y" }}</span>
                         </div>
                         {% endif %}
 
                         {% if project.technologies %}
                         <div class="flex flex-wrap gap-2 mt-4">
                             {% for tech in project.technologies|slice:":3" %}
-                            <span class="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-md">
+                            <span class="px-3 py-1 bg-[#27548A]/10 text-[#27548A] text-xs rounded-full font-medium">
                                 {{ tech }}
                             </span>
                             {% endfor %}
                             {% if project.technologies|length > 3 %}
-                            <span class="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-md">
+                            <span class="px-3 py-1 bg-[#DDA853]/10 text-[#DDA853] text-xs rounded-full font-medium">
                                 +{{ project.technologies|length|add:"-3" }} more
                             </span>
                             {% endif %}
@@ -130,22 +153,22 @@
 
         <!-- Pagination -->
         {% if projects.has_other_pages %}
-        <div class="flex justify-center space-x-2">
+        <div class="flex justify-center space-x-4 fade-in" style="--delay: 0.3s;">
             {% if projects.has_previous %}
-                <a href="?page={{ projects.previous_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-secondary">
-                    <i data-lucide="chevron-left" class="w-4 h-4 mr-2"></i>
-                    Previous
+                <a href="?page={{ projects.previous_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-ghost px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#27548A]/20 hover:border-[#27548A]/50">
+                    <i data-lucide="chevron-left" class="w-5 h-5 text-[#27548A]"></i>
+                    <span class="font-medium">Previous</span>
                 </a>
             {% endif %}
 
-            <span class="px-4 py-2 bg-muted rounded-lg text-muted-foreground">
+            <span class="glass-card px-6 py-3 rounded-full text-[#183B4E] font-medium">
                 Page {{ projects.number }} of {{ projects.paginator.num_pages }}
             </span>
 
             {% if projects.has_next %}
-                <a href="?page={{ projects.next_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-secondary">
-                    Next
-                    <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                <a href="?page={{ projects.next_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-ghost px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#27548A]/20 hover:border-[#27548A]/50">
+                    <span class="font-medium">Next</span>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-[#27548A]"></i>
                 </a>
             {% endif %}
         </div>
@@ -153,51 +176,51 @@
 
         {% else %}
         <!-- Empty State -->
-        <div class="text-center py-20">
-            <div class="w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-8">
-                <i data-lucide="folder-open" class="w-12 h-12 text-white"></i>
+        <div class="text-center py-20 fade-in" style="--delay: 0.1s;">
+            <div class="w-28 h-28 bg-gradient-to-r from-[#27548A] to-[#183B4E] rounded-full flex items-center justify-center mx-auto mb-10 shadow-lg fade-in" style="--delay: 0.2s;">
+                <i data-lucide="folder-open" class="w-14 h-14 text-white"></i>
             </div>
-            <h2 class="text-3xl font-bold text-foreground mb-4">Portfolio Coming Soon</h2>
-            <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#183B4E] mb-4 fade-in" style="--delay: 0.3s;">Portfolio Coming Soon</h2>
+            <p class="text-xl text-[#183B4E]/70 mb-10 max-w-2xl mx-auto fade-in" style="--delay: 0.4s;">
                 We're currently working on some amazing projects that will be showcased here soon. 
                 In the meantime, let's discuss how we can help transform your business.
             </p>
             
             <!-- Sample Project Previews -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 mb-16">
-                <div class="card-modern p-8 text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="brain-circuit" class="w-8 h-8 text-white"></i>
+                <div class="glass-card p-8 text-center rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in" style="--delay: 0.5s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-[#27548A] to-[#183B4E] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                        <i data-lucide="brain-circuit" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-foreground mb-3">AI Integration Project</h3>
-                    <p class="text-muted-foreground">Strategic AI implementation for a Toronto-based manufacturing company, resulting in 40% efficiency improvement.</p>
+                    <h3 class="text-xl font-bold text-[#183B4E] mb-3">AI Integration Project</h3>
+                    <p class="text-[#183B4E]/70">Strategic AI implementation for a Toronto-based manufacturing company, resulting in 40% efficiency improvement.</p>
                 </div>
 
-                <div class="card-modern p-8 text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="database" class="w-8 h-8 text-white"></i>
+                <div class="glass-card p-8 text-center rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in" style="--delay: 0.6s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-[#DDA853] to-[#D4973B] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                        <i data-lucide="database" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-foreground mb-3">Salesforce Optimization</h3>
-                    <p class="text-muted-foreground">Complete CRM overhaul for a Canadian retail chain, improving lead conversion by 65%.</p>
+                    <h3 class="text-xl font-bold text-[#183B4E] mb-3">Salesforce Optimization</h3>
+                    <p class="text-[#183B4E]/70">Complete CRM overhaul for a Canadian retail chain, improving lead conversion by 65%.</p>
                 </div>
 
-                <div class="card-modern p-8 text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="globe" class="w-8 h-8 text-white"></i>
+                <div class="glass-card p-8 text-center rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in" style="--delay: 0.7s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-[#27548A] to-[#DDA853] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+                        <i data-lucide="globe" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-foreground mb-3">Digital Transformation</h3>
-                    <p class="text-muted-foreground">End-to-end digital strategy implementation for a Vancouver tech startup, scaling from 0 to $1M ARR.</p>
+                    <h3 class="text-xl font-bold text-[#183B4E] mb-3">Digital Transformation</h3>
+                    <p class="text-[#183B4E]/70">End-to-end digital strategy implementation for a Vancouver tech startup, scaling from 0 to $1M ARR.</p>
                 </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/contact/" class="btn-primary">
-                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-                    Discuss Your Project
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in" style="--delay: 0.8s;">
+                <a href="/contact/" class="btn-primary px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                    <span>Discuss Your Project</span>
                 </a>
-                <a href="/services/" class="btn-secondary">
-                    <i data-lucide="list" class="w-5 h-5 mr-2"></i>
-                    View Our Services
+                <a href="/services/" class="btn-gold px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
+                    <i data-lucide="list" class="w-5 h-5"></i>
+                    <span>View Our Services</span>
                 </a>
             </div>
         </div>
@@ -206,76 +229,76 @@
 </section>
 
 <!-- Testimonials Section -->
-<section class="py-20 bg-muted/20">
+<section class="py-20" style="background-color: #F3F3E0;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center space-y-4 mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">What Our Clients</span>
-                <span class="gradient-text">Say About Us</span>
+        <div class="text-center space-y-4 mb-16 fade-in" style="--delay: 0.1s;">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                <span class="text-[#183B4E]">What Our Clients</span>
+                <span class="text-gradient-gold">Say About Us</span>
             </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p class="text-xl text-[#183B4E]/70 max-w-3xl mx-auto">
                 Real feedback from Canadian businesses we've helped transform and grow.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Sample Testimonials -->
-            <div class="card-modern p-6">
+            <div class="glass-card p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in" style="--delay: 0.2s;">
                 <div class="flex items-center space-x-1 mb-4">
                     {% for i in "12345" %}
-                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-[#DDA853] fill-current"></i>
                     {% endfor %}
                 </div>
-                <p class="text-muted-foreground mb-6 italic">
+                <p class="text-[#183B4E]/80 mb-6 italic text-lg">
                     "Social Dots transformed our entire sales process with their Salesforce expertise. Our lead conversion increased by 60% in just 3 months."
                 </p>
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-[#27548A] to-[#183B4E] rounded-full flex items-center justify-center shadow-md">
                         <span class="text-white font-bold text-sm">JS</span>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-foreground">John Smith</h4>
-                        <p class="text-sm text-muted-foreground">CEO, TechCorp Toronto</p>
+                        <h4 class="font-bold text-[#183B4E] text-lg">John Smith</h4>
+                        <p class="text-[#183B4E]/70">CEO, TechCorp Toronto</p>
                     </div>
                 </div>
             </div>
 
-            <div class="card-modern p-6">
+            <div class="glass-card p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in" style="--delay: 0.3s;">
                 <div class="flex items-center space-x-1 mb-4">
                     {% for i in "12345" %}
-                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-[#DDA853] fill-current"></i>
                     {% endfor %}
                 </div>
-                <p class="text-muted-foreground mb-6 italic">
+                <p class="text-[#183B4E]/80 mb-6 italic text-lg">
                     "The AI integration strategy Ali developed for us was game-changing. We're now processing 3x more data with half the manual effort."
                 </p>
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-[#DDA853] to-[#D4973B] rounded-full flex items-center justify-center shadow-md">
                         <span class="text-white font-bold text-sm">MJ</span>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-foreground">Marie Johnson</h4>
-                        <p class="text-sm text-muted-foreground">COO, MapleTech Inc.</p>
+                        <h4 class="font-bold text-[#183B4E] text-lg">Marie Johnson</h4>
+                        <p class="text-[#183B4E]/70">COO, MapleTech Inc.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="card-modern p-6">
+            <div class="glass-card p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in" style="--delay: 0.4s;">
                 <div class="flex items-center space-x-1 mb-4">
                     {% for i in "12345" %}
-                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 text-[#DDA853] fill-current"></i>
                     {% endfor %}
                 </div>
-                <p class="text-muted-foreground mb-6 italic">
+                <p class="text-[#183B4E]/80 mb-6 italic text-lg">
                     "Professional, strategic, and results-driven. Social Dots doesn't just deliver solutions, they deliver business transformation."
                 </p>
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-[#27548A] to-[#DDA853] rounded-full flex items-center justify-center shadow-md">
                         <span class="text-white font-bold text-sm">DL</span>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-foreground">David Lee</h4>
-                        <p class="text-sm text-muted-foreground">Founder, VancouverStart</p>
+                        <h4 class="font-bold text-[#183B4E] text-lg">David Lee</h4>
+                        <p class="text-[#183B4E]/70">Founder, VancouverStart</p>
                     </div>
                 </div>
             </div>
@@ -284,28 +307,105 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="space-y-8">
+<section class="py-20 relative overflow-hidden">
+    <!-- Background with gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#27548A] via-[#183B4E] to-[#27548A] opacity-95"></div>
+    
+    <!-- Floating elements -->
+    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-[#DDA853]/5 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="space-y-8 fade-in" style="--delay: 0.1s;">
             <h2 class="text-3xl md:text-5xl font-bold text-white">
-                Ready to Create Your Success Story?
+                Ready to Create Your <span class="text-[#DDA853]">Success Story</span>?
             </h2>
-            <p class="text-xl text-blue-100 leading-relaxed">
+            <p class="text-xl text-white/80 leading-relaxed">
                 Let's discuss your project and explore how we can help you achieve similar results for your Canadian business.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="/contact/" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl">
-                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-                    Start Your Project
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center fade-in" style="--delay: 0.3s;">
+                <a href="/contact/" class="btn-gold px-8 py-4 rounded-full flex items-center gap-3 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
+                    <i data-lucide="calendar" class="w-5 h-5"></i>
+                    <span class="font-medium">Start Your Project</span>
                 </a>
-                <a href="/services/" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all">
-                    <i data-lucide="arrow-right" class="w-5 h-5 mr-2"></i>
-                    Explore Services
+                <a href="/services/" class="px-8 py-4 border-2 border-white text-white font-medium rounded-full hover:bg-white/10 transition-all duration-300 flex items-center gap-3">
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    <span>Explore Services</span>
                 </a>
             </div>
         </div>
     </div>
 </section>
+
+<!-- CSS Animations -->
+<style>
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.6s ease-out forwards;
+        animation-delay: var(--delay, 0s);
+    }
+    
+    /* Float animations */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    @keyframes floatReverse {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(20px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    .animate-float {
+        animation: float 15s ease-in-out infinite;
+    }
+    
+    .animate-floatReverse {
+        animation: floatReverse 18s ease-in-out infinite;
+    }
+    
+    /* Text gradient */
+    .text-gradient-gold {
+        background: linear-gradient(to right, #DDA853, #D4973B);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
+    
+    /* Glass card effect */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Button styles */
+    .btn-primary {
+        background: linear-gradient(to right, #27548A, #183B4E);
+        color: white;
+        border: none;
+    }
+    
+    .btn-gold {
+        background: linear-gradient(to right, #DDA853, #D4973B);
+        color: white;
+        border: none;
+    }
+    
+    .btn-ghost {
+        background: transparent;
+        color: #183B4E;
+    }
+</style>
 
 <script>
     // Initialize Lucide icons for this page

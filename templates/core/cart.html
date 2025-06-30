@@ -1,0 +1,323 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart - {{ site_config.site_name }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative py-20 bg-gradient-to-b from-navy to-darkNavy text-white overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-20">
+        <div class="absolute inset-0 bg-pattern-grid opacity-10"></div>
+    </div>
+    
+    <div class="floating-element top-20 left-10 w-24 h-24 bg-gold/20 rounded-full blur-3xl"></div>
+    <div class="floating-element bottom-10 right-10 w-32 h-32 bg-navy/30 rounded-full blur-3xl"></div>
+    
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <div class="inline-block px-3 py-1 rounded-full bg-gold/20 text-gold text-sm font-medium mb-4">
+                Review Your Cart
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Your Shopping Cart</h1>
+            <p class="text-xl text-gray-300 mb-8">Review your selected services before proceeding to checkout.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Cart Section -->
+<section class="py-16 bg-background">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Cart Items -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                    <h2 class="text-2xl font-bold mb-6">Cart Items</h2>
+                    
+                    <!-- Empty Cart Message -->
+                    <div id="empty-cart-message" class="hidden text-center py-8">
+                        <div class="w-20 h-20 mx-auto mb-4 text-gray-300">
+                            <i data-lucide="shopping-cart" class="w-full h-full"></i>
+                        </div>
+                        <p class="text-lg text-gray-500 mb-4">Your cart is empty</p>
+                        <a href="/services/" class="btn-primary inline-block px-6 py-3 rounded-lg">Browse Services</a>
+                    </div>
+                    
+                    <!-- Cart Items List -->
+                    <div id="cart-items-container">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-24">
+                    <h2 class="text-2xl font-bold mb-6">Order Summary</h2>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span id="cart-subtotal" class="font-medium">$0.00</span>
+                        </div>
+                        <div id="maintenance-fee-container" class="flex justify-between">
+                            <span class="text-gray-600">Maintenance Fees</span>
+                            <span id="maintenance-fees" class="font-medium">$0.00</span>
+                        </div>
+                        <div class="border-t pt-4 flex justify-between">
+                            <span class="font-bold">Total</span>
+                            <span id="cart-total" class="font-bold">$0.00</span>
+                        </div>
+                    </div>
+                    
+                    <form id="checkout-form" method="post" action="/checkout/">
+                        {% csrf_token %}
+                        <input type="hidden" name="cart_items" id="cart-items-input">
+                        <div class="space-y-4 mb-4">
+                            <div>
+                                <label for="customer_name" class="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
+                                <input type="text" id="customer_name" name="customer_name" required class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="customer_email" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                                <input type="email" id="customer_email" name="customer_email" required class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="customer_phone" class="block text-sm font-medium text-gray-300 mb-1">Phone Number (Optional)</label>
+                                <input type="tel" id="customer_phone" name="customer_phone" class="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                        <button type="submit" id="checkout-button" class="btn-primary w-full flex items-center justify-center py-3 rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Proceed to Checkout
+                        </button>
+                    </form>
+                    
+                    <div class="mt-6 text-center">
+                        <a href="/services/" class="text-navy hover:text-gold transition-colors duration-300 text-sm flex items-center justify-center">
+                            <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cart Template -->
+<template id="cart-item-template">
+    <div class="cart-item border-b border-gray-200 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-shrink-0 w-16 h-16 bg-navy/10 rounded-lg flex items-center justify-center">
+            <i data-lucide="" class="w-8 h-8 text-navy"></i>
+        </div>
+        
+        <div class="flex-grow">
+            <h3 class="font-medium text-lg"></h3>
+            <div class="text-sm text-gray-500 mb-2">
+                <span class="price-type"></span>
+                <span class="maintenance-info"></span>
+            </div>
+            
+            <div class="flex items-center">
+                <div class="flex items-center border rounded-lg overflow-hidden">
+                    <button class="quantity-decrease px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <i data-lucide="minus" class="w-4 h-4"></i>
+                    </button>
+                    <input type="number" class="quantity-input w-12 text-center border-x py-1" value="1" min="1" max="99">
+                    <button class="quantity-increase px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                
+                <button class="remove-item ml-4 text-red-500 hover:text-red-700 transition-colors">
+                    <i data-lucide="trash-2" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="text-right">
+            <div class="font-medium text-lg item-price"></div>
+        </div>
+    </div>
+</template>
+
+<!-- Cart Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Elements
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const cartItemTemplate = document.getElementById('cart-item-template');
+        const cartSubtotal = document.getElementById('cart-subtotal');
+        const maintenanceFees = document.getElementById('maintenance-fees');
+        const maintenanceFeeContainer = document.getElementById('maintenance-fee-container');
+        const cartTotal = document.getElementById('cart-total');
+        const checkoutButton = document.getElementById('checkout-button');
+        const checkoutForm = document.getElementById('checkout-form');
+        const cartItemsInput = document.getElementById('cart-items-input');
+        
+        // Format currency
+        function formatCurrency(amount) {
+            return '$' + parseFloat(amount).toFixed(2);
+        }
+        
+        // Render cart
+        function renderCart() {
+            // Clear container
+            cartItemsContainer.innerHTML = '';
+            
+            // Get cart items
+            const items = cart.items;
+            
+            // Show empty cart message if no items
+            if (items.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                cartItemsContainer.classList.add('hidden');
+                checkoutButton.disabled = true;
+                maintenanceFeeContainer.classList.add('hidden');
+                return;
+            }
+            
+            // Hide empty cart message and show items
+            emptyCartMessage.classList.add('hidden');
+            cartItemsContainer.classList.remove('hidden');
+            checkoutButton.disabled = false;
+            
+            // Calculate totals
+            let subtotal = 0;
+            let maintenanceTotal = 0;
+            
+            // Render each item
+            items.forEach(item => {
+                const itemElement = cartItemTemplate.content.cloneNode(true);
+                
+                // Set icon based on item name
+                const icon = itemElement.querySelector('[data-lucide]');
+                const iconName = getIconForService(item.name);
+                icon.setAttribute('data-lucide', iconName);
+                
+                // Set item details
+                itemElement.querySelector('h3').textContent = item.name;
+                
+                // Set price type and maintenance info
+                const priceTypeElement = itemElement.querySelector('.price-type');
+                const maintenanceInfoElement = itemElement.querySelector('.maintenance-info');
+                
+                priceTypeElement.textContent = item.priceType.replace('-', ' ');
+                
+                if (item.maintenance > 0) {
+                    maintenanceInfoElement.textContent = ` + $${item.maintenance}/month maintenance`;
+                    maintenanceFeeContainer.classList.remove('hidden');
+                    maintenanceTotal += item.maintenance * item.quantity;
+                } else {
+                    maintenanceInfoElement.textContent = '';
+                }
+                
+                // Set price
+                const itemPrice = item.price * item.quantity;
+                itemElement.querySelector('.item-price').textContent = formatCurrency(itemPrice);
+                subtotal += itemPrice;
+                
+                // Set quantity
+                const quantityInput = itemElement.querySelector('.quantity-input');
+                quantityInput.value = item.quantity;
+                
+                // Add event listeners
+                const decreaseBtn = itemElement.querySelector('.quantity-decrease');
+                const increaseBtn = itemElement.querySelector('.quantity-increase');
+                const removeBtn = itemElement.querySelector('.remove-item');
+                
+                decreaseBtn.addEventListener('click', () => {
+                    if (item.quantity > 1) {
+                        cart.updateQuantity(item.id, item.priceType, item.quantity - 1);
+                        renderCart();
+                    }
+                });
+                
+                increaseBtn.addEventListener('click', () => {
+                    cart.updateQuantity(item.id, item.priceType, item.quantity + 1);
+                    renderCart();
+                });
+                
+                quantityInput.addEventListener('change', () => {
+                    const newQuantity = parseInt(quantityInput.value);
+                    if (newQuantity > 0) {
+                        cart.updateQuantity(item.id, item.priceType, newQuantity);
+                        renderCart();
+                    } else {
+                        quantityInput.value = item.quantity;
+                    }
+                });
+                
+                removeBtn.addEventListener('click', () => {
+                    cart.removeItem(item.id, item.priceType);
+                    cart.showNotification(`${item.name} removed from cart`);
+                    renderCart();
+                });
+                
+                // Append to container
+                cartItemsContainer.appendChild(itemElement);
+            });
+            
+            // Initialize Lucide icons for new elements
+            lucide.createIcons();
+            
+            // Update totals
+            cartSubtotal.textContent = formatCurrency(subtotal);
+            maintenanceFees.textContent = formatCurrency(maintenanceTotal);
+            cartTotal.textContent = formatCurrency(subtotal + maintenanceTotal);
+            
+            // Hide maintenance fees if none
+            if (maintenanceTotal === 0) {
+                maintenanceFeeContainer.classList.add('hidden');
+            }
+        }
+        
+        // Get icon based on service name
+        function getIconForService(name) {
+            const nameLower = name.toLowerCase();
+            
+            if (nameLower.includes('web') || nameLower.includes('website')) {
+                return 'globe';
+            } else if (nameLower.includes('seo')) {
+                return 'search';
+            } else if (nameLower.includes('social') || nameLower.includes('facebook') || nameLower.includes('instagram')) {
+                return 'share-2';
+            } else if (nameLower.includes('email') || nameLower.includes('mail')) {
+                return 'mail';
+            } else if (nameLower.includes('content') || nameLower.includes('blog')) {
+                return 'file-text';
+            } else if (nameLower.includes('analytics') || nameLower.includes('data')) {
+                return 'bar-chart';
+            } else if (nameLower.includes('strategy') || nameLower.includes('consulting')) {
+                return 'lightbulb';
+            } else if (nameLower.includes('design')) {
+                return 'pen-tool';
+            } else if (nameLower.includes('video')) {
+                return 'video';
+            } else if (nameLower.includes('ai') || nameLower.includes('chatbot')) {
+                return 'cpu';
+            } else {
+                return 'package';
+            }
+        }
+        
+        // Initial render
+        renderCart();
+        
+        // Update hidden input with cart items on form submit
+        checkoutForm.addEventListener('submit', function(e) {
+            // Populate the hidden input with cart items
+            cartItemsInput.value = JSON.stringify(cart.items);
+            
+            // If cart is empty, prevent form submission
+            if (cart.items.length === 0) {
+                e.preventDefault();
+                alert('Your cart is empty. Please add items before checkout.');
+            }
+        });
+    });
+</script>
+{% endblock %}

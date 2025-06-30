@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import (
-    SiteConfiguration, TeamMember, Service, PricingPlan, Project, 
+    SiteConfiguration, TeamMember, Service, ServicePricingOption, PricingPlan, Project, 
     BlogPost, Testimonial, Lead, Order, CalendarEvent, AIAgentLog
 )
 
@@ -48,14 +48,20 @@ class TeamMemberAdmin(admin.ModelAdmin):
     ordering = ['order', 'name']
 
 
+class ServicePricingOptionInline(admin.TabularInline):
+    model = ServicePricingOption
+    extra = 1
+    fields = ('name', 'description', 'price', 'period', 'features', 'is_popular', 'order')
+
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['title', 'price', 'price_type', 'is_featured', 'is_active', 'order']
-    list_filter = ['price_type', 'is_featured', 'is_active']
+    list_filter = ['price_type', 'is_featured', 'is_active', 'service_type']
     search_fields = ['title', 'description']
     list_editable = ['order', 'is_featured', 'is_active']
     prepopulated_fields = {'slug': ('title',)}
     ordering = ['order', 'title']
+    inlines = [ServicePricingOptionInline]
 
     fieldsets = (
         ('Basic Information', {
@@ -65,10 +71,24 @@ class ServiceAdmin(admin.ModelAdmin):
             'fields': ('price', 'price_type', 'stripe_price_id')
         }),
         ('Features & Settings', {
-            'fields': ('features', 'is_featured', 'is_active', 'order')
+            'fields': ('features', 'is_featured', 'is_active', 'order', 'service_type')
         }),
     )
+    
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        if obj and obj.price_type == 'tiered':
+            form.base_fields['price'].required = False
+        return form
 
+
+@admin.register(ServicePricingOption)
+class ServicePricingOptionAdmin(admin.ModelAdmin):
+    list_display = ['name', 'service', 'price', 'period', 'is_popular', 'order']
+    list_filter = ['period', 'is_popular', 'service']
+    search_fields = ['name', 'description', 'service__title']
+    list_editable = ['order', 'is_popular']
+    ordering = ['service', 'order', 'price']
 
 @admin.register(PricingPlan)
 class PricingPlanAdmin(admin.ModelAdmin):

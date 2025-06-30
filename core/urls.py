@@ -12,7 +12,7 @@ urlpatterns = [
     path('blog/<slug:slug>/', views.blog_detail, name='blog_detail'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
-    path('pricing/', views.pricing, name='pricing'),
+    path('cart/', views.cart, name='cart'),
     
     # Payment endpoints
     path('checkout/', views.checkout, name='checkout'),
@@ -26,6 +26,7 @@ urlpatterns = [
     # API endpoints
     path('api/services/', views.api_services, name='api_services'),
     path('api/pricing/', views.api_pricing, name='api_pricing'),
+    path('api/pricing-options/<int:option_id>/', views.api_pricing_option, name='api_pricing_option'),
     path('api/lead/', views.api_lead, name='api_lead'),
     
     # Calendar functionality

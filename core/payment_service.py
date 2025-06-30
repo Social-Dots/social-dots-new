@@ -17,7 +17,43 @@ class StripePaymentService:
             
             line_items = []
             
-            if order_data.get('service_id'):
+            # Handle cart items
+            if order_data.get('cart_items'):
+                cart_items = order_data.get('cart_items')
+                
+                for item in cart_items:
+                    # Add the main item
+                    line_items.append({
+                        'price_data': {
+                            'currency': 'cad',
+                            'product_data': {
+                                'name': item.get('name', 'Unknown Item'),
+                                'description': f"{item.get('priceType', 'one-time').replace('-', ' ')} payment",
+                            },
+                            'unit_amount': int(float(item.get('price', 0)) * 100),
+                        },
+                        'quantity': int(item.get('quantity', 1)),
+                    })
+                    
+                    # Add maintenance fee as a separate line item if applicable
+                    if item.get('maintenance') and float(item.get('maintenance', 0)) > 0:
+                        line_items.append({
+                            'price_data': {
+                                'currency': 'cad',
+                                'product_data': {
+                                    'name': f"Maintenance: {item.get('name', 'Unknown Item')}",
+                                    'description': "Monthly maintenance fee",
+                                },
+                                'unit_amount': int(float(item.get('maintenance', 0)) * 100),
+                                'recurring': {
+                                    'interval': 'month'
+                                },
+                            },
+                            'quantity': int(item.get('quantity', 1)),
+                        })
+            
+            # Legacy support for direct service or plan purchase
+            elif order_data.get('service_id'):
                 service = Service.objects.get(id=order_data['service_id'])
                 if service.stripe_price_id:
                     line_items.append({

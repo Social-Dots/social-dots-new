@@ -3,357 +3,653 @@
 {% block title %}About Us - {{ site_config.site_name }} - Strategic AI Integration Experts{% endblock %}
 
 {% block content %}
-<!-- About Hero Section -->
-<section class="relative overflow-hidden hero-gradient">
-    <!-- Animated Background Elements -->
-    <div class="absolute inset-0 animated-bg opacity-10"></div>
-    
-    <!-- Floating Geometric Shapes -->
-    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl float-animation"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div class="text-center space-y-8">
-            <!-- Hero Badge -->
-            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm">
-                <span class="text-2xl">🇨🇦</span>
-                <span class="text-muted-foreground">Canadian Digital Marketing Excellence</span>
-            </div>
+<!DOCTYPE html>
+<html lang="en">
+    <title>About Us - Social Dots Inc. - Strategic AI Integration Experts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <style>
+        :root {
+            --cream: #F3F3E0;
+            --navy-blue: #27548A;
+            --dark-navy: #183B4E;
+            --gold: #DDA853;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-dark: #6c757d;
+        }
 
-            <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                <span class="gradient-text">Empowering Canadian</span><br>
-                <span class="text-foreground">Businesses to</span><br>
-                <span class="gradient-text">Thrive Digitally</span>
-            </h1>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl text-muted-foreground leading-relaxed">
-                Founded in Toronto, Social Dots Inc. brings together strategic thinking, cutting-edge technology, and deep Canadian market expertise to help businesses navigate and excel in the digital landscape.
-            </p>
-        </div>
-    </div>
-</section>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-navy);
+            background-color: var(--white);
+        }
 
-<!-- Company Story Section -->
-<section class="py-20 bg-background">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <!-- Story Content -->
-            <div class="space-y-8">
-                <div>
-                    <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm mb-6">
-                        <i data-lucide="book-open" class="w-4 h-4 text-blue-500"></i>
-                        <span class="text-muted-foreground">Our Story</span>
-                    </div>
-                    <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-                        <span class="text-foreground">Connecting Business Goals</span><br>
-                        <span class="gradient-text">with Smart Execution</span>
-                    </h2>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23DDA853" opacity="0.1"/></svg>') repeat;
+            background-size: 40px 40px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--navy-blue);
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--dark-navy);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero h1 .highlight {
+            color: var(--navy-blue);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--gray-dark);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+            background: var(--cream);
+        }
+
+        .about-section .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-header h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--dark-navy);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about-header p {
+            color: var(--gray-dark);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .learn-more-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--dark-navy);
+            border: 2px solid var(--dark-navy);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .learn-more-btn:hover {
+            background: var(--dark-navy);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .ceo-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(24, 59, 78, 0.15);
+        }
+
+        .ceo-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark-navy);
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(24, 59, 78, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--navy-blue);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: var(--gray-dark);
+            font-weight: 600;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .team-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--dark-navy);
+            margin-bottom: 20px;
+        }
+
+        .team-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(24, 59, 78, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--navy-blue), var(--dark-navy));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--white);
+            position: relative;
+        }
+
+        .team-avatar::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-card:hover .team-avatar::after {
+            opacity: 1;
+        }
+
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-navy);
+            margin-bottom: 8px;
+        }
+
+        .team-role {
+            color: var(--navy-blue);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: var(--gray-dark);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--cream);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--navy-blue);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--dark-navy);
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(221, 168, 83, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--navy-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-section .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h1,
+            .section-header h2,
+            .team-header h2,
+            .cta-section h2,
+            .about-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content,
+        .vision-content,
+        .section-header,
+        .team-header {
+            animation: fadeInUp 0.8s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="section-badge">
+                    <span>🇨🇦</span>
+                    <span>About CEO & Company</span>
                 </div>
+                <h1>
+                    <span class="highlight">Empowering Canadian</span><br>
+                    Businesses to<br>
+                    <span class="highlight">Thrive Digitally</span>
+                </h1>
+                <p>
+                    Founded in Toronto, Social Dots Inc. brings together strategic thinking, cutting-edge technology, and deep Canadian market expertise to help businesses navigate and excel in the digital landscape.
+                </p>
+            </div>
+        </div>
+    </section>
 
-                <div class="space-y-6 text-lg text-muted-foreground leading-relaxed">
-                    <p>
-                        Social Dots Inc. was founded with a simple yet powerful vision: to help Canadian businesses thrive in an increasingly digital world by connecting their core values with cutting-edge technology solutions.
+    <!-- About Us Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-header">
+                <h2>About CEO</h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit nullam nunc justo sagittis suscipit ultrices. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <a href="#" class="learn-more-btn">Ali Shafique</a>
+            </div>
+            <div class="ceo-image">
+                <img src="https://media.istockphoto.com/id/2212478710/vector/faceless-male-avatar-in-hoodie-illustration.jpg?s=612x612&w=0&k=20&c=Wlwpp5BUnzbzXxaCT0a7WqP_JvknA-JtOhBoKDpQMHE=" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10k</div>
+                    <div class="stat-label">Why Us</div>
+                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
+                        Over 10,000 successful implementations across Canada
                     </p>
-                    <p>
-                        We believe in going beyond isolated tactics. Our approach is holistic, integrated, and deeply strategic. We don't just implement technology—we ensure it aligns with your business soul and serves your long-term vision.
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Projects</div>
+                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
+                        Successfully delivered projects with 95% client satisfaction
                     </p>
-                    <p>
-                        Based in Toronto but serving businesses across Canada, we combine local market expertise with global best practices to deliver solutions that are both world-class and perfectly suited to the Canadian business landscape.
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Years</div>
+                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
+                        Decade of experience in Canadian digital market
                     </p>
                 </div>
-
-                <!-- Company Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-blue-600 mb-2">15+</div>
-                        <div class="text-sm text-muted-foreground">Years Experience</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-purple-600 mb-2">100+</div>
-                        <div class="text-sm text-muted-foreground">Projects Delivered</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-green-600 mb-2">50+</div>
-                        <div class="text-sm text-muted-foreground">Happy Clients</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-orange-600 mb-2">95%</div>
-                        <div class="text-sm text-muted-foreground">Client Retention</div>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">30k</div>
+                    <div class="stat-label">Revenue Growth</div>
+                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
+                        Average revenue increase for our clients
+                    </p>
                 </div>
-            </div>
-
-            <!-- Company Image Placeholder -->
-            <div class="relative">
-                <div class="aspect-square bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center text-white relative overflow-hidden">
-                    <!-- Background Pattern -->
-                    <div class="absolute inset-0 opacity-20">
-                        <div class="w-full h-full" style="background-image: radial-gradient(circle at 25% 25%, white 2px, transparent 2px), radial-gradient(circle at 75% 75%, white 2px, transparent 2px); background-size: 40px 40px;"></div>
-                    </div>
-                    
-                    <div class="relative z-10 text-center">
-                        <i data-lucide="target" class="w-24 h-24 mb-6 mx-auto"></i>
-                        <h3 class="text-2xl font-bold mb-2">Strategic Excellence</h3>
-                        <p class="text-blue-100">Connecting vision with execution</p>
-                    </div>
+                <div class="stat-card">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Awards</div>
+                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
+                        Industry recognition and client testimonials
+                    </p>
                 </div>
-                
-                <!-- Floating Elements -->
-                <div class="absolute -top-6 -right-6 w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center float-animation">
-                    <i data-lucide="star" class="w-6 h-6 text-white"></i>
-                </div>
-                <div class="absolute -bottom-6 -left-6 w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center float-animation" style="animation-delay: -2s;">
-                    <i data-lucide="heart" class="w-8 h-8 text-white"></i>
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Specialists</div>
+                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
+                        Expert team members dedicated to your success
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Values Section -->
-<section class="py-20 bg-muted/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center space-y-4 mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">Our Core</span>
-                <span class="gradient-text">Values</span>
-            </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-                The principles that guide every decision, every project, and every client relationship.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="card-modern p-8 text-center group">
-                <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <i data-lucide="compass" class="w-8 h-8 text-white"></i>
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="team-header">
+                <div class="section-badge">
+                    <i data-lucide="users" style="width: 16px; height: 16px;"></i>
+                    <span>Our Amazing Team</span>
                 </div>
-                <h3 class="text-xl font-semibold text-foreground mb-4">Strategic Thinking</h3>
-                <p class="text-muted-foreground">We don't just execute—we think strategically about how every solution fits into your larger business vision and long-term success.</p>
+                <h2>Our Team</h2>
+                <p class="team-subtitle">
+                    Our diverse team combines deep Canadian market knowledge with international expertise and cutting-edge technical skills.
+                </p>
             </div>
-
-            <div class="card-modern p-8 text-center group">
-                <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <i data-lucide="heart" class="w-8 h-8 text-white"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-4">Values-Driven</h3>
-                <p class="text-muted-foreground">Technology should serve your values, not the other way around. We ensure every solution aligns with your company's core principles and culture.</p>
-            </div>
-
-            <div class="card-modern p-8 text-center group">
-                <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <i data-lucide="globe" class="w-8 h-8 text-white"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-4">Canadian Focus</h3>
-                <p class="text-muted-foreground">Deep understanding of the Canadian market, regulations, and business culture combined with global best practices and innovation.</p>
-            </div>
-
-            <div class="card-modern p-8 text-center group">
-                <div class="w-16 h-16 bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <i data-lucide="zap" class="w-8 h-8 text-white"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-4">Innovation</h3>
-                <p class="text-muted-foreground">We stay at the forefront of AI and digital marketing trends, bringing cutting-edge solutions that give you a competitive advantage.</p>
-            </div>
-
-            <div class="card-modern p-8 text-center group">
-                <div class="w-16 h-16 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <i data-lucide="users" class="w-8 h-8 text-white"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-4">Partnership</h3>
-                <p class="text-muted-foreground">We're not just vendors—we're strategic partners invested in your long-term success and growth.</p>
-            </div>
-
-            <div class="card-modern p-8 text-center group">
-                <div class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <i data-lucide="award" class="w-8 h-8 text-white"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-4">Excellence</h3>
-                <p class="text-muted-foreground">We hold ourselves to the highest standards in everything we do, from strategy development to project execution and ongoing support.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Team Section -->
-<section class="py-20 bg-background">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center space-y-4 mb-16">
-            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm">
-                <i data-lucide="users" class="w-4 h-4 text-blue-500"></i>
-                <span class="text-muted-foreground">Meet Our Team</span>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">Canadian Expertise</span><br>
-                <span class="gradient-text">Meets Global Talent</span>
-            </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Our diverse team combines deep Canadian market knowledge with international expertise and cutting-edge technical skills.
-            </p>
-        </div>
-
-        {% if team_members %}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {% for member in team_members %}
-            <div class="card-modern p-6 text-center group">
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <span class="text-white font-bold text-2xl">{{ member.name|first }}{{ member.name|last|first }}</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-2">{{ member.name }}</h3>
-                <p class="text-blue-600 font-medium text-sm mb-4">{{ member.position }}</p>
-                <p class="text-muted-foreground text-sm leading-relaxed mb-6">{{ member.bio|truncatewords:20 }}</p>
-                
-                <div class="flex justify-center space-x-3">
-                    {% if member.linkedin %}
-                    <a href="{{ member.linkedin }}" class="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                        <i data-lucide="linkedin" class="w-4 h-4"></i>
-                    </a>
-                    {% endif %}
-                    {% if member.email %}
-                    <a href="mailto:{{ member.email }}" class="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-colors">
-                        <i data-lucide="mail" class="w-4 h-4"></i>
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <!-- Default team showcase if no team members in database -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            <div class="card-modern p-6 text-center group">
-                <div class="w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <span class="text-white font-bold text-2xl">AS</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-2">Ali Shafique</h3>
-                <p class="text-blue-600 font-medium text-sm mb-4">Founder & CEO</p>
-                <p class="text-muted-foreground text-sm leading-relaxed mb-6">15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach.</p>
-                
-                <div class="flex justify-center space-x-3">
-                    <a href="https://linkedin.com/in/alishafique" class="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                        <i data-lucide="linkedin" class="w-4 h-4"></i>
-                    </a>
-                    <a href="mailto:ali@socialdots.ca" class="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-green-600 hover:text-white transition-colors">
-                        <i data-lucide="mail" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="card-modern p-6 text-center group">
-                <div class="w-24 h-24 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <span class="text-white font-bold text-2xl">HA</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-2">Hooria Amiri</h3>
-                <p class="text-blue-600 font-medium text-sm mb-4">Video Editor & Content Creator</p>
-                <p class="text-muted-foreground text-sm leading-relaxed mb-6">Skilled video editor and content creator specializing in engaging visual content that aligns with brand messaging.</p>
-                
-                <div class="flex justify-center space-x-3">
-                    <a href="#" class="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                        <i data-lucide="linkedin" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="card-modern p-6 text-center group">
-                <div class="w-24 h-24 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <span class="text-white font-bold text-2xl">AH</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-2">Ali Hayyan</h3>
-                <p class="text-blue-600 font-medium text-sm mb-4">Content & SEO Specialist</p>
-                <p class="text-muted-foreground text-sm leading-relaxed mb-6">Expert in content strategy and SEO optimization, focused on creating compelling content that drives organic growth.</p>
-                
-                <div class="flex justify-center space-x-3">
-                    <a href="#" class="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                        <i data-lucide="linkedin" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="card-modern p-6 text-center group">
-                <div class="w-24 h-24 bg-gradient-to-r from-orange-600 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                    <span class="text-white font-bold text-2xl">TG</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground mb-2">The Ghana</h3>
-                <p class="text-blue-600 font-medium text-sm mb-4">Digital Strategist & Social Media Manager</p>
-                <p class="text-muted-foreground text-sm leading-relaxed mb-6">Digital strategist specializing in social media management and comprehensive digital marketing strategies.</p>
-                
-                <div class="flex justify-center space-x-3">
-                    <a href="#" class="w-8 h-8 bg-muted rounded-lg flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors">
-                        <i data-lucide="linkedin" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-{% if testimonials %}
-<section class="py-20 bg-muted/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center space-y-4 mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">What Our Clients</span>
-                <span class="gradient-text">Say About Us</span>
-            </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for testimonial in testimonials %}
-            <div class="card-modern p-6">
-                <div class="flex items-center space-x-1 mb-4">
-                    {% for i in "12345" %}
-                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-current"></i>
-                    {% endfor %}
-                </div>
-                <p class="text-muted-foreground mb-6 italic">"{{ testimonial.content }}"</p>
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">{{ testimonial.client_name|first }}{{ testimonial.client_name|last|first }}</span>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">AS</div>
+                    <h3 class="team-name">Ali Shafique</h3>
+                    <p class="team-role">Founder & CEO</p>
+                    <p class="team-bio">15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach.</p>
+                    <div class="team-social">
+                        <a href="https://linkedin.com/in/alishafique" class="social-link">
+                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
+                        </a>
+                        <a href="mailto:ali@socialdots.ca" class="social-link">
+                            <i data-lucide="mail" style="width: 20px; height: 20px;"></i>
+                        </a>
                     </div>
-                    <div>
-                        <h4 class="font-semibold text-foreground">{{ testimonial.client_name }}</h4>
-                        <p class="text-sm text-muted-foreground">{{ testimonial.client_title }}{% if testimonial.client_company %}, {{ testimonial.client_company }}{% endif %}</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">HA</div>
+                    <h3 class="team-name">Hooria Amiri</h3>
+                    <p class="team-role">Video Editor & Content Creator</p>
+                    <p class="team-bio">Skilled video editor and content creator specializing in engaging visual content that aligns with brand messaging.</p>
+                    <div class="team-social">
+                        <a href="#" class="social-link">
+                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">AH</div>
+                    <h3 class="team-name">Ali Hayyan</h3>
+                    <p class="team-role">Content & SEO Specialist</p>
+                    <p class="team-bio">Expert in content strategy and SEO optimization, focused on creating compelling content that drives organic growth.</p>
+                    <div class="team-social">
+                        <a href="#" class="social-link">
+                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">TG</div>
+                    <h3 class="team-name">The Ghana</h3>
+                    <p class="team-role">Digital Strategist & Social Media Manager</p>
+                    <p class="team-bio">Digital strategist specializing in social media management and comprehensive digital marketing strategies.</p>
+                    <div class="team-social">
+                        <a href="#" class="social-link">
+                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
-{% endif %}
+    </section>
 
-<!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="space-y-8">
-            <h2 class="text-3xl md:text-5xl font-bold text-white">
-                Ready to Work Together?
-            </h2>
-            <p class="text-xl text-blue-100 leading-relaxed">
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Work Together?</h2>
+            <p>
                 Let's discuss how our strategic approach and Canadian expertise can help your business thrive in the digital landscape.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="/contact/" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl">
-                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+            <div class="cta-buttons">
+                <a href="/contact/" class="btn btn-primary">
+                    <i data-lucide="calendar" style="width: 20px; height: 20px;"></i>
                     Schedule a Meeting
                 </a>
-                <a href="/services/" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all">
-                    <i data-lucide="arrow-right" class="w-5 h-5 mr-2"></i>
+                <a href="/services/" class="btn btn-secondary">
+                    <i data-lucide="arrow-right" style="width: 20px; height: 20px;"></i>
                     Explore Our Services
                 </a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<script>
-    // Initialize Lucide icons for this page
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-</script>
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
 {% endblock %}

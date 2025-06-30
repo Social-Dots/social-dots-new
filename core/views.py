@@ -11,9 +11,11 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.utils import timezone
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .models import (
     SiteConfiguration, Service, PricingPlan, Project, BlogPost, 
-    Testimonial, TeamMember, Lead, Order, CalendarEvent
+    Testimonial, TeamMember, Lead, Order, CalendarEvent, ServicePricingOption
 )
 from .payment_service import StripePaymentService
 from .frappe_services import process_order_to_frappe
@@ -59,12 +61,19 @@ def service_detail(request, slug):
     service = get_object_or_404(Service, slug=slug, is_active=True)
     related_services = Service.objects.filter(is_active=True).exclude(id=service.id)[:3]
     
+    # Prefetch pricing options if this is a tiered pricing service
+    if service.price_type == 'tiered':
+        pricing_options = service.pricing_options.all().order_by('order', 'price')
+    else:
+        pricing_options = None
+    
     context = {
         'service': service,
         'related_services': related_services,
+        'pricing_options': pricing_options,
     }
     
-    return render(request, 'core/service_detail.html', context)
+    return render(request, 'core/service_details.html', context)
 
 
 def portfolio(request):
@@ -205,52 +214,48 @@ def contact(request):
     
     return render(request, 'core/contact.html', context)
 
-
-def pricing(request):
-    pricing_plans = PricingPlan.objects.filter(is_active=True)
-    services_list = Service.objects.filter(is_active=True)
-    
-    context = {
-        'pricing_plans': pricing_plans,
-        'services': services_list,
-    }
-    
-    return render(request, 'core/pricing.html', context)
+def cart(request):
+    """View for the shopping cart page"""
+    return render(request, 'core/cart.html')
 
 
 @require_http_methods(["POST"])
 def checkout(request):
     try:
-        service_id = request.POST.get('service_id')
-        pricing_plan_id = request.POST.get('pricing_plan_id')
+        # Get form data
         customer_name = request.POST.get('customer_name')
         customer_email = request.POST.get('customer_email')
         customer_phone = request.POST.get('customer_phone', '')
+        cart_items = request.POST.get('cart_items')
         
         if not customer_name or not customer_email:
             return JsonResponse({'error': 'Name and email are required'}, status=400)
+        
+        if not cart_items:
+            return JsonResponse({'error': 'Cart is empty'}, status=400)
+            
+        import json
+        cart_items = json.loads(cart_items)
+        
+        if not cart_items:
+            return JsonResponse({'error': 'Cart is empty'}, status=400)
+        
+        # Calculate total amount
+        total_amount = 0
+        for item in cart_items:
+            total_amount += float(item.get('price', 0)) * int(item.get('quantity', 1))
+            # Add maintenance fees if applicable
+            if item.get('maintenance'):
+                total_amount += float(item.get('maintenance', 0)) * int(item.get('quantity', 1))
         
         # Create order
         order_data = {
             'customer_name': customer_name,
             'customer_email': customer_email,
-            'customer_phone': customer_phone
+            'customer_phone': customer_phone,
+            'amount': total_amount,
+            'notes': f'Cart order with {len(cart_items)} items'
         }
-        
-        if service_id:
-            service = Service.objects.get(id=service_id)
-            order_data.update({
-                'service': service,
-                'amount': service.price or 0
-            })
-        elif pricing_plan_id:
-            pricing_plan = PricingPlan.objects.get(id=pricing_plan_id)
-            order_data.update({
-                'pricing_plan': pricing_plan,
-                'amount': pricing_plan.price
-            })
-        else:
-            return JsonResponse({'error': 'Service or pricing plan required'}, status=400)
         
         order = Order.objects.create(**order_data)
         
@@ -261,8 +266,7 @@ def checkout(request):
             'customer_name': customer_name,
             'customer_email': customer_email,
             'customer_phone': customer_phone,
-            'service_id': service_id,
-            'pricing_plan_id': pricing_plan_id
+            'cart_items': cart_items
         }
         
         session = stripe_service.create_checkout_session(session_data, request)
@@ -372,6 +376,20 @@ def api_pricing(request):
         'id', 'name', 'description', 'price', 'price_period', 'features'
     )
     return JsonResponse({'pricing_plans': list(pricing_plans)})
+
+@api_view(['GET'])
+def api_pricing_option(request, option_id):
+    try:
+        option = ServicePricingOption.objects.get(id=option_id)
+        return Response({
+            'id': option.id,
+            'name': option.name,
+            'price': option.price,
+            'period': option.period,
+            'features': option.features
+        })
+    except ServicePricingOption.DoesNotExist:
+        return Response({'error': 'Pricing option not found'}, status=404)
 
 
 @require_http_methods(["POST"])

@@ -1,248 +1,168 @@
 {% extends "base.html" %}
 
-{% block title %}Services - {{ site_config.site_name }} - Strategic AI Integration for Canadian Businesses{% endblock %}
+{% block title %}Pricing & Services - {{ site_config.site_name }}{% endblock %}
 
 {% block content %}
-<!-- Services Hero Section with Unsplash Background -->
-<section class="relative overflow-hidden min-h-[80vh]">
-    <!-- Services Background -->
+<!-- Pricing Hero Section with Unsplash Background -->
+<section class="relative overflow-hidden min-h-[70vh]" style="background-color: #F3F3E0;">
+    <!-- Modern Background -->
     <div class="absolute inset-0">
         <img 
-            src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-            alt="Strategic Business Solutions" 
-            class="w-full h-full object-cover opacity-50"
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" 
+            alt="Business Analytics" 
+            class="w-full h-full object-cover opacity-40"
         />
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white/70 to-purple-50/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-[#27548A]/20 via-[#F3F3E0]/50 to-[#183B4E]/20"></div>
     </div>
     
     <!-- Enhanced Floating Elements -->
-    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-3xl float-animation"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full blur-3xl float-reverse"></div>
+    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-gradient-to-r from-[#27548A]/15 to-[#183B4E]/15 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-to-r from-[#DDA853]/10 to-[#F3F3E0]/10 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div class="text-center space-y-8">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center space-y-8 fade-in" style="--delay: 0.1s;">
             <!-- Hero Badge -->
-            <div class="inline-flex items-center space-x-3 glass-morphism px-6 py-3 text-sm font-medium">
-                <i data-lucide="zap" class="w-5 h-5 text-yellow-600"></i>
-                <span class="text-foreground/80">Comprehensive Services</span>
+            <div class="inline-flex items-center space-x-3 glass-card px-6 py-3 text-sm font-medium fade-in" style="--delay: 0.2s; background-color: rgba(243, 243, 224, 0.7); border: 1px solid rgba(221, 168, 83, 0.3);">
+                <i data-lucide="tag" class="w-5 h-5 text-[#DDA853]"></i>
+                <span class="text-[#183B4E]">Transparent Pricing</span>
             </div>
 
             <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                <span class="gradient-text">Strategic Solutions</span><br>
-                <span class="text-foreground">for Canadian</span><br>
-                <span class="gradient-text">Business Growth</span>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
+                <span class="text-[#183B4E]">Strategic Solutions</span><br>
+                <span class="text-gradient-gold">Built for Growth</span>
             </h1>
 
             <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl text-muted-foreground leading-relaxed">
-                Beyond isolated tactics—we deliver comprehensive, integrated strategies that align with your values 
-                and drive sustainable growth through strategic AI integration and digital excellence.
+            <p class="mx-auto max-w-3xl text-xl text-[#183B4E]/80 leading-relaxed fade-in" style="--delay: 0.4s;">
+                Invest in comprehensive digital strategies that drive sustainable business growth. 
+                <span class="font-semibold text-[#27548A]">No hidden fees</span>, just transparent pricing for transformative results.
             </p>
-        </div>
-    </div>
-</section>
-
-<!-- Core Services Section -->
-<section class="py-20 bg-background">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center space-y-4 mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">Our Core</span>
-                <span class="gradient-text">Services</span>
-            </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Tailored solutions that connect business goals with smart execution, designed specifically for the Canadian market.
-            </p>
-        </div>
-
-        <!-- Services Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            {% for service in services %}
-            <div class="card-modern p-8 group relative overflow-hidden">
-                <!-- Background Pattern -->
-                <div class="absolute inset-0 opacity-5">
-                    <div class="w-full h-full bg-gradient-to-br from-blue-600 to-purple-600"></div>
-                </div>
-                
-                <div class="relative z-10">
-                    <!-- Service Header -->
-                    <div class="flex items-start justify-between mb-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-8 h-8 text-white"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold text-foreground">{{ service.title }}</h3>
-                                {% if service.price_type == 'custom' %}
-                                <span class="text-sm text-blue-600 font-medium">Custom Pricing</span>
-                                {% elif service.price %}
-                                <span class="text-lg font-semibold text-blue-600">${{ service.price }}{% if service.price_type %}/{{ service.price_type }}{% endif %}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service Description -->
-                    <p class="text-muted-foreground mb-8 text-lg leading-relaxed">
-                        {{ service.description }}
-                    </p>
-
-                    <!-- Service Features -->
-                    {% if service.features %}
-                    <div class="mb-8">
-                        <h4 class="text-lg font-semibold text-foreground mb-4">What's Included:</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {% for feature in service.features %}
-                            <div class="flex items-center space-x-3">
-                                <i data-lucide="check-circle" class="w-5 h-5 text-green-500 flex-shrink-0"></i>
-                                <span class="text-sm text-muted-foreground">{{ feature }}</span>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
-
-                    <!-- Service CTA -->
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="/contact/?service={{ service.id }}" class="btn-primary flex-1 text-center">
-                            <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-                            Book Consultation
-                        </a>
-                        <a href="/services/{{ service.slug }}/" class="btn-secondary flex-1 text-center">
-                            <i data-lucide="info" class="w-5 h-5 mr-2"></i>
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <!-- Fallback services if none exist -->
-            <div class="card-modern p-8 group relative overflow-hidden">
-                <div class="absolute inset-0 opacity-5">
-                    <div class="w-full h-full bg-gradient-to-br from-blue-600 to-purple-600"></div>
-                </div>
-                
-                <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
-                                <i data-lucide="target" class="w-8 h-8 text-white"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold text-foreground">Digital Strategy & Consulting</h3>
-                                <span class="text-sm text-blue-600 font-medium">Custom Pricing</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="text-muted-foreground mb-8 text-lg leading-relaxed">
-                        Comprehensive digital strategy development that connects business goals with smart, technology-enabled execution tailored for Canadian businesses.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="/contact/" class="btn-primary flex-1 text-center">
-                            <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-                            Book Consultation
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-modern p-8 group relative overflow-hidden">
-                <div class="absolute inset-0 opacity-5">
-                    <div class="w-full h-full bg-gradient-to-br from-blue-600 to-purple-600"></div>
-                </div>
-                
-                <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-6">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center">
-                                <i data-lucide="database" class="w-8 h-8 text-white"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-2xl font-bold text-foreground">Salesforce + CRM Optimization</h3>
-                                <span class="text-sm text-blue-600 font-medium">Custom Pricing</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="text-muted-foreground mb-8 text-lg leading-relaxed">
-                        Expert Salesforce configuration, customization, and optimization. System setup, process optimization, and comprehensive training.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="/contact/" class="btn-primary flex-1 text-center">
-                            <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-                            Book Consultation
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
         </div>
     </div>
 </section>
 
 <!-- Pricing Plans Section -->
 {% if pricing_plans %}
-<section class="py-20 bg-muted/20">
+<section class="py-20" style="background-color: #F3F3E0;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center space-y-4 mb-16">
-            <div class="inline-flex items-center space-x-2 bg-background/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm">
-                <i data-lucide="dollar-sign" class="w-4 h-4 text-green-500"></i>
-                <span class="text-muted-foreground">Pricing Plans</span>
-            </div>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">Transparent</span>
-                <span class="gradient-text">Pricing</span>
+        <div class="text-center space-y-4 mb-16 fade-in" style="--delay: 0.1s;">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#183B4E]">
+                Choose Your <span class="text-gradient-gold">Growth Plan</span>
             </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Choose the plan that best fits your business needs and budget.
+            <p class="text-xl text-[#183B4E]/80 max-w-2xl mx-auto">
+                Flexible pricing options designed to scale with your Canadian business
             </p>
         </div>
 
-        <!-- Pricing Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for plan in pricing_plans %}
-            <div class="card-modern p-8 relative {% if plan.is_featured %}ring-2 ring-blue-600 scale-105{% endif %}">
-                {% if plan.is_featured %}
+            <div class="card-modern p-8 relative {% if plan.is_popular %}ring-2 ring-[#DDA853]{% endif %} fade-in" style="--delay: calc(0.2s + {{ forloop.counter0 }} * 0.1s); background-color: white; box-shadow: 0 10px 25px -5px rgba(39, 84, 138, 0.1);">
+                {% if plan.is_popular %}
                 <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    <span class="bg-gradient-to-r from-[#27548A] to-[#183B4E] text-white px-4 py-2 rounded-full text-sm font-semibold">
                         Most Popular
                     </span>
                 </div>
                 {% endif %}
                 
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-bold text-foreground mb-2">{{ plan.name }}</h3>
-                    <p class="text-muted-foreground mb-6">{{ plan.description }}</p>
-                    
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold text-foreground">${{ plan.price }}</span>
-                        {% if plan.price_period %}
-                        <span class="text-muted-foreground">/ {{ plan.price_period }}</span>
+                <div class="space-y-6">
+                    <!-- Plan Header -->
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-[#183B4E]">{{ plan.name }}</h3>
+                        {% if plan.description %}
+                        <p class="text-[#183B4E]/70 mt-2">{{ plan.description|truncatewords:15 }}</p>
                         {% endif %}
                     </div>
+
+                    <!-- Plan Price with Dropdown -->
+                    <div class="text-center">
+                        {% if plan.servicepricingoption_set.all %}
+                        <div class="space-y-3">
+                            <select id="plan-pricing-option-{{ plan.id }}" class="w-full py-3 px-4 border-2 border-[#DDA853]/30 rounded-xl bg-white text-[#183B4E] font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-[#27548A] focus:border-[#27548A] transition-all duration-300">
+                                {% for option in plan.servicepricingoption_set.all %}
+                                <option value="{{ option.id }}" data-price="{{ option.price }}" data-period="{{ option.period }}" data-name="{{ option.name }}">
+                                    {{ option.name }} - ${{ option.price|floatformat:0 }} CAD {% if option.period == 'monthly' %}/ month{% elif option.period == 'yearly' %}/ year{% elif option.period == 'one-time' %}one-time{% endif %}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-[#DDA853]"></i>
+                                </div>
+                            </div>
+                            <div class="text-center" id="plan-price-display-{{ plan.id }}">
+                                <div class="flex items-baseline justify-center space-x-1">
+                                    <span class="text-4xl font-bold text-[#27548A]">${{ plan.servicepricingoption_set.first.price|floatformat:0 }}</span>
+                                    <span class="text-[#183B4E]/70">CAD</span>
+                                </div>
+                                <p class="text-[#183B4E]/70 text-sm mt-1">
+                                    {% if plan.servicepricingoption_set.first.period == 'monthly' %}
+                                        per month
+                                    {% elif plan.servicepricingoption_set.first.period == 'yearly' %}
+                                        per year
+                                    {% else %}
+                                        one-time
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="flex items-baseline justify-center space-x-1">
+                            <span class="text-4xl font-bold text-[#27548A]">${{ plan.price|floatformat:0 }}</span>
+                            <span class="text-[#183B4E]/70">CAD</span>
+                        </div>
+                        <p class="text-[#183B4E]/70 text-sm mt-1">
+                            {% if plan.price_period == 'monthly' %}
+                                per month
+                            {% elif plan.price_period == 'yearly' %}
+                                per year
+                            {% else %}
+                                one-time
+                            {% endif %}
+                        </p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Plan Features -->
+                    {% if plan.features %}
+                    <ul class="space-y-3" id="plan-features-{{ plan.id }}">
+                        {% for feature in plan.features %}
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="check" class="w-5 h-5 text-[#DDA853] mt-0.5 flex-shrink-0"></i>
+                            <span class="text-[#183B4E]/70">{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    
+                    <!-- Plan Pricing Option Features -->
+                    {% if plan.servicepricingoption_set.all %}
+                    <ul class="space-y-3" id="plan-option-features-{{ plan.id }}">
+                        {% with first_option=plan.servicepricingoption_set.first %}
+                        {% if first_option.features %}
+                        {% for feature in first_option.features %}
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="check" class="w-5 h-5 text-[#DDA853] mt-0.5 flex-shrink-0"></i>
+                            <span class="text-[#183B4E]/70">{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </ul>
+                    {% endif %}
+
+                    <!-- Buy Button -->
+                    <div class="pt-4">
+                        <button 
+                            onclick="purchasePlan('{{ plan.id }}', '{{ plan.name }}', '{{ plan.price }}')" 
+                            class="w-full {% if plan.is_popular %}btn-gold{% else %}btn-primary{% endif %} justify-center transition-all duration-300 hover:scale-105"
+                        >
+                            <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
-                {% if plan.features %}
-                <ul class="space-y-4 mb-8">
-                    {% for feature in plan.features %}
-                    <li class="flex items-center space-x-3">
-                        <i data-lucide="check" class="w-5 h-5 text-green-500 flex-shrink-0"></i>
-                        <span class="text-muted-foreground">{{ feature }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-
-                <a href="/contact/?plan={{ plan.id }}" class="btn-primary w-full text-center">
-                    <i data-lucide="arrow-right" class="w-5 h-5 mr-2"></i>
-                    Get Started
-                </a>
             </div>
             {% endfor %}
         </div>
@@ -250,74 +170,229 @@
 </section>
 {% endif %}
 
-<!-- Process Section -->
-<section class="py-20 bg-background">
+<!-- Enhanced Services Section -->
+<section class="py-20" style="background-color: white;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center space-y-4 mb-16">
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight">
-                <span class="text-foreground">Our</span>
-                <span class="gradient-text">Process</span>
+        <div class="text-center space-y-4 mb-16 fade-in" style="--delay: 0.1s;">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+                <span class="text-[#183B4E]">Individual</span> <span class="text-gradient-gold">Services</span>
             </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-                A proven methodology that ensures successful project delivery and measurable results.
+            <p class="text-xl text-[#183B4E]/80 max-w-2xl mx-auto">
+                Tailored solutions for specific business needs and objectives
             </p>
         </div>
 
-        <!-- Process Steps -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="text-center space-y-6">
-                <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto">
-                    <span class="text-white font-bold text-2xl">1</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for service in services %}
+            <div class="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105 fade-in" style="--delay: calc(0.2s + {{ forloop.counter0 }} * 0.1s);">
+                <!-- Card Background with Gradient -->
+                <div class="absolute inset-0 bg-gradient-to-br from-[#F3F3E0] via-white to-[#F3F3E0]/50 opacity-90"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-[#27548A]/5 via-transparent to-[#DDA853]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <!-- Animated Border -->
+                <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#27548A]/20 via-[#DDA853]/20 to-[#183B4E]/20 p-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="h-full w-full rounded-2xl bg-white"></div>
                 </div>
-                <h3 class="text-xl font-semibold text-foreground">Discovery & Analysis</h3>
-                <p class="text-muted-foreground">Comprehensive assessment of your current systems, processes, and business objectives.</p>
+
+                <!-- Card Content -->
+                <div class="relative p-8 h-full flex flex-col">
+                    <!-- Service Icon & Title -->
+                    <div class="flex items-start space-x-4 mb-6">
+                        <div class="relative">
+                            <div class="icon-container group-hover:scale-110 transition-all duration-500 relative z-10" style="background: linear-gradient(135deg, #27548A, #183B4E); box-shadow: 0 8px 25px rgba(39, 84, 138, 0.3);">
+                                <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% elif 'marketing' in service.title.lower %}megaphone{% else %}settings{% endif %}" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <!-- Icon Glow Effect -->
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-[#27548A] to-[#183B4E] opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500 transform scale-150"></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-[#183B4E] group-hover:text-[#27548A] transition-colors duration-300">{{ service.title }}</h3>
+                            <div class="h-0.5 bg-gradient-to-r from-[#DDA853] to-transparent mt-2 w-0 group-hover:w-full transition-all duration-500"></div>
+                        </div>
+                    </div>
+
+                    <!-- Service Description -->
+                    <p class="text-[#183B4E]/80 mb-6 leading-relaxed flex-grow">
+                        {{ service.short_description|default:service.description|truncatewords:20 }}
+                    </p>
+
+                    <!-- Service Features -->
+                    {% if service.features %}
+                    <ul class="space-y-2 mb-6">
+                        {% for feature in service.features|slice:":3" %}
+                        <li class="flex items-center space-x-2 text-sm text-[#183B4E]/80 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc({{ forloop.counter0 }} * 0.1s);">
+                            <i data-lucide="check" class="w-4 h-4 text-[#DDA853] group-hover:scale-110 transition-transform duration-300"></i>
+                            <span>{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    
+                    <!-- Service Pricing Options Features -->
+                    {% if service.servicepricingoption_set.all %}
+                    <div id="service-features-{{ service.id }}" class="space-y-2 mb-6">
+                        {% with first_option=service.servicepricingoption_set.first %}
+                        {% if first_option.features %}
+                        {% for feature in first_option.features|slice:":3" %}
+                        <div class="flex items-center space-x-2 text-sm text-[#183B4E]/80 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc({{ forloop.counter0 }} * 0.1s);">
+                            <i data-lucide="check" class="w-4 h-4 text-[#DDA853] group-hover:scale-110 transition-transform duration-300"></i>
+                            <span>{{ feature }}</span>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Enhanced Service Pricing -->
+                    <div class="mb-6">
+                        {% if service.price_type == 'custom' %}
+                            <div class="text-center bg-gradient-to-r from-[#F3F3E0]/50 to-[#DDA853]/10 rounded-xl p-4 border border-[#DDA853]/20">
+                                <span class="text-2xl font-bold text-[#27548A]">Custom Quote</span>
+                                <p class="text-[#183B4E]/70 text-sm mt-1">Tailored to your needs</p>
+                            </div>
+                        {% else %}
+                            {% if service.servicepricingoption_set.all %}
+                            <div class="space-y-3">
+                                <div class="relative">
+                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-3 px-4 border-2 border-[#DDA853]/30 rounded-xl bg-white/90 text-[#183B4E] font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-[#27548A] focus:border-[#27548A] transition-all duration-300 backdrop-blur-sm">
+                                        {% for option in service.servicepricingoption_set.all %}
+                                        <option value="{{ option.id }}" data-price="{{ option.price }}" data-period="{{ option.period }}" data-name="{{ option.name }}">
+                                            {{ option.name }} - ${{ option.price|floatformat:0 }} CAD {% if option.period == 'monthly' %}/ month{% elif option.period == 'yearly' %}/ year{% elif option.period == 'hourly' %}/ hour{% elif option.period == 'one-time' %}one-time{% endif %}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                        <i data-lucide="chevron-down" class="w-5 h-5 text-[#DDA853] group-hover:text-[#27548A] transition-colors duration-300"></i>
+                                    </div>
+                                </div>
+                                <div class="text-center bg-gradient-to-r from-[#F3F3E0]/30 to-[#DDA853]/5 rounded-lg p-3" id="service-price-display-{{ service.id }}">
+                                    <div class="flex items-baseline justify-center space-x-1">
+                                        <span class="text-2xl font-bold text-[#27548A]">${{ service.servicepricingoption_set.first.price|floatformat:0 }}</span>
+                                        <span class="text-[#183B4E]/70">CAD</span>
+                                    </div>
+                                    <p class="text-[#183B4E]/70 text-sm">
+                                        {% if service.servicepricingoption_set.first.period == 'monthly' %}per month
+                                        {% elif service.servicepricingoption_set.first.period == 'yearly' %}per year
+                                        {% elif service.servicepricingoption_set.first.period == 'hourly' %}per hour
+                                        {% else %}one-time{% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="text-center bg-gradient-to-r from-[#F3F3E0]/30 to-[#DDA853]/5 rounded-lg p-3">
+                                <div class="flex items-baseline justify-center space-x-1">
+                                    <span class="text-2xl font-bold text-[#27548A]">${{ service.price|floatformat:0 }}</span>
+                                    <span class="text-[#183B4E]/70">CAD</span>
+                                    {% if service.price_type != 'fixed' %}
+                                    <span class="text-[#183B4E]/70 text-sm">
+                                        {% if service.price_type == 'hourly' %}/hour{% elif service.price_type == 'monthly' %}/month{% endif %}
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+                    <!-- Enhanced Action Buttons -->
+                    <div class="space-y-3 mt-auto">
+                        {% if service.price_type == 'custom' %}
+                            <a href="/contact/?service={{ service.id }}" class="w-full btn-primary justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group">
+                                <span class="relative z-10 flex items-center justify-center">
+                                    <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                                    Get Quote
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-[#27548A] to-[#183B4E] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </a>
+                        {% else %}
+                            <button 
+                                onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '{{ service.price|default:0 }}')" 
+                                class="w-full btn-gold justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group"
+                            >
+                                <span class="relative z-10 flex items-center justify-center">
+                                    <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
+                                    Add to Cart
+                                </span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-[#DDA853] to-[#F3F3E0] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                            </button>
+                        {% endif %}
+                        
+                        <a href="/services/{{ service.slug }}/" class="w-full btn-ghost justify-center group relative overflow-hidden">
+                            <span class="relative z-10 flex items-center justify-center">
+                                <i data-lucide="info" class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
+                                Learn More
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Floating Elements -->
+                <div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-[#DDA853]/10 to-[#27548A]/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
+                <div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-br from-[#183B4E]/10 to-[#DDA853]/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 blur-lg" style="transition-delay: 0.2s;"></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-20" style="background-color: #F3F3E0;">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center space-y-4 mb-16 fade-in" style="--delay: 0.1s;">
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#183B4E]">
+                Frequently Asked <span class="text-gradient-gold">Questions</span>
+            </h2>
+        </div>
+
+        <div class="space-y-6">
+            <div class="card-modern p-6 fade-in" style="--delay: 0.2s; background-color: white; box-shadow: 0 10px 25px -5px rgba(39, 84, 138, 0.1); transition: all 0.3s ease;">
+                <h3 class="text-lg font-semibold mb-3 text-[#183B4E]">What payment methods do you accept?</h3>
+                <p class="text-[#183B4E]/80">We accept all major credit cards (Visa, MasterCard, American Express) and electronic payments through our secure Stripe integration. All prices are in Canadian dollars (CAD).</p>
             </div>
 
-            <div class="text-center space-y-6">
-                <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto">
-                    <span class="text-white font-bold text-2xl">2</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground">Strategy Development</h3>
-                <p class="text-muted-foreground">Custom strategy creation with clear roadmap, timelines, and success metrics.</p>
+            <div class="card-modern p-6 fade-in" style="--delay: 0.3s; background-color: white; box-shadow: 0 10px 25px -5px rgba(39, 84, 138, 0.1); transition: all 0.3s ease;">
+                <h3 class="text-lg font-semibold mb-3 text-[#183B4E]">Can I upgrade or downgrade my plan?</h3>
+                <p class="text-[#183B4E]/80">Yes! You can change your plan at any time. Upgrades take effect immediately, while downgrades take effect at your next billing cycle. Contact us for assistance with plan changes.</p>
             </div>
 
-            <div class="text-center space-y-6">
-                <div class="w-20 h-20 bg-gradient-to-r from-pink-600 to-red-600 rounded-full flex items-center justify-center mx-auto">
-                    <span class="text-white font-bold text-2xl">3</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground">Implementation</h3>
-                <p class="text-muted-foreground">Systematic execution with regular check-ins and progress updates.</p>
+            <div class="card-modern p-6 fade-in" style="--delay: 0.4s; background-color: white; box-shadow: 0 10px 25px -5px rgba(39, 84, 138, 0.1); transition: all 0.3s ease;">
+                <h3 class="text-lg font-semibold mb-3 text-[#183B4E]">Do you offer refunds?</h3>
+                <p class="text-[#183B4E]/80">We offer a 30-day satisfaction guarantee on all our services. If you're not completely satisfied, we'll work with you to make it right or provide a full refund.</p>
             </div>
 
-            <div class="text-center space-y-6">
-                <div class="w-20 h-20 bg-gradient-to-r from-red-600 to-orange-600 rounded-full flex items-center justify-center mx-auto">
-                    <span class="text-white font-bold text-2xl">4</span>
-                </div>
-                <h3 class="text-xl font-semibold text-foreground">Optimization</h3>
-                <p class="text-muted-foreground">Continuous monitoring, optimization, and support for sustained growth.</p>
+            <div class="card-modern p-6 fade-in" style="--delay: 0.5s; background-color: white; box-shadow: 0 10px 25px -5px rgba(39, 84, 138, 0.1); transition: all 0.3s ease;">
+                <h3 class="text-lg font-semibold mb-3 text-[#183B4E]">What's included in ongoing support?</h3>
+                <p class="text-[#183B4E]/80">All plans include email support, documentation access, and regular check-ins. Higher-tier plans include priority support, dedicated account management, and additional consultation hours.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800">
+<section class="py-20" style="background: linear-gradient(135deg, #27548A, #183B4E); position: relative; overflow: hidden;">
+    <!-- Background Elements -->
+    <div style="position: absolute; top: -10rem; right: -10rem; width: 30rem; height: 30rem; border-radius: 9999px; background-color: #DDA853; opacity: 0.05; animation: float 20s ease-in-out infinite;"></div>
+    <div style="position: absolute; bottom: -15rem; left: -5rem; width: 25rem; height: 25rem; border-radius: 9999px; background-color: #F3F3E0; opacity: 0.05; animation: floatReverse 25s ease-in-out infinite;"></div>
+    
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="space-y-8">
-            <h2 class="text-3xl md:text-5xl font-bold text-white">
+        <div class="space-y-8 fade-in" style="--delay: 0.1s;">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#F3F3E0]">
                 Ready to Transform Your Business?
             </h2>
-            <p class="text-xl text-blue-100 leading-relaxed">
-                Let's discuss how our strategic approach can help your Canadian business thrive in the digital landscape.
+            <p class="text-xl text-[#F3F3E0]/90 leading-relaxed fade-in" style="--delay: 0.2s;">
+                Not sure which option is right for you? Let's discuss your specific needs and find the perfect solution.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="/contact/" class="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-all hover:scale-105 shadow-xl">
-                    <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
-                    Schedule Free Consultation
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in" style="--delay: 0.3s;">
+                <a href="/contact/" class="btn-gold inline-flex items-center px-8 py-4 bg-[#DDA853] text-[#183B4E] font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-xl" style="position: relative; overflow: hidden;">
+                    <span style="position: relative; z-index: 10; display: flex; align-items: center;">
+                        <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                        Free Consultation
+                    </span>
+                    <span style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, #DDA853, #F3F3E0); opacity: 0; transition: opacity 0.3s ease; z-index: 1;"></span>
                 </a>
-                <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-all">
-                    <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
+                <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="btn-ghost inline-flex items-center px-8 py-4 border-2 border-[#F3F3E0]/30 text-[#F3F3E0] font-semibold rounded-lg hover:border-[#F3F3E0] transition-all duration-300">
+                    <i data-lucide="phone" class="w-5 h-5 mr-2 text-[#DDA853]"></i>
                     Call {{ site_config.phone|default:"416-556-6961" }}
                 </a>
             </div>
@@ -326,9 +401,416 @@
 </section>
 
 <script>
-    // Initialize Lucide icons for this page
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
+// Cart functionality
+const cart = {
+    items: JSON.parse(localStorage.getItem('cart') || '[]'),
+    
+    addItem: function(item) {
+        // Check if item already exists
+        const existingItem = this.items.find(i => i.id === item.id && i.itemType === item.itemType);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            this.items.push({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                priceType: item.priceType || 'one-time',
+                maintenance: item.maintenance || 0,
+                quantity: item.quantity || 1,
+                itemType: item.itemType || 'service'
+            });
+        }
+        
+        this.saveCart();
+        this.showNotification(`${item.name} added to cart!`);
+    },
+    
+    saveCart: function() {
+        try {
+            localStorage.setItem('cart', JSON.stringify(this.items));
+        } catch (e) {
+            console.warn('Could not save to localStorage, using session storage');
+            this.items = this.items; // Keep in memory
+        }
+    },
+    
+    showNotification: function(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'fixed top-4 right-4 bg-[#27548A] text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+        notification.innerHTML = `
+            <div class="flex items-center space-x-2">
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Initialize lucide icons for the notification
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        
+        // Animate in
+        setTimeout(() => {
+            notification.classList.remove('translate-x-full');
+        }, 100);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.classList.add('translate-x-full');
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
     }
+};
+
+// Fixed purchase functions
+function purchaseService(serviceId, serviceName, defaultPrice) {
+    // Check if this service has pricing options
+    const pricingSelect = document.getElementById(`service-pricing-option-${serviceId}`);
+    
+    if (pricingSelect) {
+        // Get the selected option
+        const selectedOption = pricingSelect.options[pricingSelect.selectedIndex];
+        const optionId = selectedOption.value;
+        const optionName = selectedOption.getAttribute('data-name');
+        const optionPrice = selectedOption.getAttribute('data-price');
+        const optionPeriod = selectedOption.getAttribute('data-period');
+        
+        // Add the selected pricing option to cart
+        cart.addItem({
+            id: `service_option_${optionId}`,
+            name: `${serviceName} - ${optionName}`,
+            price: parseFloat(optionPrice),
+            priceType: optionPeriod || 'one-time',
+            maintenance: 0,
+            quantity: 1,
+            itemType: 'service_option'
+        });
+    } else {
+        // Add regular service to cart
+        cart.addItem({
+            id: `service_${serviceId}`,
+            name: serviceName,
+            price: parseFloat(defaultPrice) || 0,
+            priceType: 'one-time',
+            maintenance: 0,
+            quantity: 1,
+            itemType: 'service'
+        });
+    }
+    
+    // Redirect to cart page after adding item
+    // setTimeout(() => {
+    //     window.location.href = '/cart/';
+    // }, 1500);
+}
+
+function purchasePlan(planId, planName, defaultPrice) {
+    // Check if this plan has pricing options
+    const pricingSelect = document.getElementById(`plan-pricing-option-${planId}`);
+    
+    if (pricingSelect) {
+        // Get the selected option
+        const selectedOption = pricingSelect.options[pricingSelect.selectedIndex];
+        const optionId = selectedOption.value;
+        const optionName = selectedOption.getAttribute('data-name');
+        const optionPrice = selectedOption.getAttribute('data-price');
+        const optionPeriod = selectedOption.getAttribute('data-period');
+        
+        // Add the selected pricing option to cart
+        cart.addItem({
+            id: `plan_option_${optionId}`,
+            name: `${planName} - ${optionName}`,
+            price: parseFloat(optionPrice),
+            priceType: optionPeriod || 'one-time',
+            maintenance: 0,
+            quantity: 1,
+            itemType: 'plan_option'
+        });
+    } else {
+        // Add regular plan to cart
+        cart.addItem({
+            id: `plan_${planId}`,
+            name: planName,
+            price: parseFloat(defaultPrice) || 0,
+            priceType: 'one-time',
+            maintenance: 0,
+            quantity: 1,
+            itemType: 'plan'
+        });
+    }
+    
+    // Redirect to cart page after adding item
+    // setTimeout(() => {
+    //     window.location.href = '/cart/';
+    // }, 1500);
+}
+
+// Update price display when dropdown changes
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle service pricing option changes
+    document.querySelectorAll('[id^="service-pricing-option-"]').forEach(select => {
+        const serviceId = select.id.replace('service-pricing-option-', '');
+        const priceDisplay = document.getElementById(`service-price-display-${serviceId}`);
+        const featuresDisplay = document.getElementById(`service-features-${serviceId}`);
+        
+        if (priceDisplay) {
+            select.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const price = selectedOption.getAttribute('data-price');
+                const period = selectedOption.getAttribute('data-period');
+                const optionId = selectedOption.value;
+                
+                let periodText = 'one-time';
+                if (period === 'monthly') periodText = 'per month';
+                else if (period === 'yearly') periodText = 'per year';
+                else if (period === 'hourly') periodText = 'per hour';
+                
+                priceDisplay.innerHTML = `
+                    <div class="flex items-baseline justify-center space-x-1">
+                        <span class="text-2xl font-bold text-[#27548A]">${parseFloat(price).toFixed(0)}</span>
+                        <span class="text-[#183B4E]/70">CAD</span>
+                    </div>
+                    <p class="text-[#183B4E]/70 text-sm">${periodText}</p>
+                `;
+                
+                // Update features based on selected option
+                if (featuresDisplay) {
+                    // Fetch the features for this option using AJAX
+                    fetch(`/api/pricing-options/${optionId}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.features && data.features.length > 0) {
+                                let featuresHtml = '';
+                                data.features.slice(0, 3).forEach((feature, index) => {
+                                    featuresHtml += `
+                                        <div class="flex items-center space-x-2 text-sm text-[#183B4E]/80 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc(${index} * 0.1s);">
+                                            <i data-lucide="check" class="w-4 h-4 text-[#DDA853] group-hover:scale-110 transition-transform duration-300"></i>
+                                            <span>${feature}</span>
+                                        </div>
+                                    `;
+                                });
+                                featuresDisplay.innerHTML = featuresHtml;
+                                // Initialize Lucide icons for new elements
+                                if (typeof lucide !== 'undefined') {
+                                    lucide.createIcons();
+                                }
+                            }
+                        })
+                        .catch(error => console.error('Error fetching pricing option features:', error));
+                }
+            });
+        }
+    });
+    
+    // Handle plan pricing option changes
+    document.querySelectorAll('[id^="plan-pricing-option-"]').forEach(select => {
+        const planId = select.id.replace('plan-pricing-option-', '');
+        const priceDisplay = document.getElementById(`plan-price-display-${planId}`);
+        const planFeatures = document.getElementById(`plan-features-${planId}`);
+        const optionFeatures = document.getElementById(`plan-option-features-${planId}`);
+        
+        if (priceDisplay) {
+            select.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const price = selectedOption.getAttribute('data-price');
+                const period = selectedOption.getAttribute('data-period');
+                const optionId = selectedOption.value;
+                
+                let periodText = 'one-time';
+                if (period === 'monthly') periodText = 'per month';
+                else if (period === 'yearly') periodText = 'per year';
+                
+                priceDisplay.innerHTML = `
+                    <div class="flex items-baseline justify-center space-x-1">
+                        <span class="text-4xl font-bold text-[#27548A]">${parseFloat(price).toFixed(0)}</span>
+                        <span class="text-[#183B4E]/70">CAD</span>
+                    </div>
+                    <p class="text-[#183B4E]/70 text-sm mt-1">${periodText}</p>
+                `;
+                
+                // Update features based on selected option
+                if (optionFeatures) {
+                    // Hide plan features if showing option features
+                    if (planFeatures) {
+                        planFeatures.style.display = 'none';
+                    }
+                    
+                    // Fetch the features for this option using AJAX
+                    fetch(`/api/pricing-options/${optionId}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.features && data.features.length > 0) {
+                                let featuresHtml = '';
+                                data.features.forEach(feature => {
+                                    featuresHtml += `
+                                        <li class="flex items-start space-x-3">
+                                            <i data-lucide="check" class="w-5 h-5 text-[#DDA853] mt-0.5 flex-shrink-0"></i>
+                                            <span class="text-[#183B4E]/70">${feature}</span>
+                                        </li>
+                                    `;
+                                });
+                                optionFeatures.innerHTML = featuresHtml;
+                                optionFeatures.style.display = 'block';
+                                
+                                // Initialize Lucide icons for new elements
+                                if (typeof lucide !== 'undefined') {
+                                    lucide.createIcons();
+                                }
+                            }
+                        })
+                        .catch(error => console.error('Error fetching pricing option features:', error));
+                }
+            });
+        }
+    });
+});
+
+// Initialize Lucide icons
+if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+}
+
+// Add custom styles for enhanced animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+    }
+    
+    @keyframes floatReverse {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(20px) rotate(-180deg); }
+    }
+    
+    .animate-float {
+        animation: float 20s ease-in-out infinite;
+    }
+    
+    .animate-floatReverse {
+        animation: floatReverse 25s ease-in-out infinite;
+    }
+    
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease-out forwards;
+        animation-delay: var(--delay, 0s);
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .text-gradient-gold {
+        background: linear-gradient(135deg, #DDA853, #F3F3E0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .icon-container {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card-modern {
+        border-radius: 1.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card-modern:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px -10px rgba(39, 84, 138, 0.2);
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #27548A, #183B4E);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(39, 84, 138, 0.3);
+    }
+    
+    .btn-gold {
+        background: linear-gradient(135deg, #DDA853, #F3F3E0);
+        color: #183B4E;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn-gold:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(221, 168, 83, 0.3);
+    }
+    
+    .btn-ghost {
+        background: transparent;
+        color: #183B4E;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.75rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid rgba(24, 59, 78, 0.2);
+        cursor: pointer;
+    }
+    
+    .btn-ghost:hover {
+        background: rgba(24, 59, 78, 0.05);
+        border-color: rgba(24, 59, 78, 0.3);
+    }
+    
+    .glass-card {
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+`;
+document.head.appendChild(style);
 </script>
+
+{% csrf_token %}
 {% endblock %}

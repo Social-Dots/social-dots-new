@@ -95,10 +95,39 @@ class TeamMember(models.Model):
         return f"{self.name} - {self.position}"
 
 
+class ServicePricingOption(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=200, blank=True)
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal('0.01'))],
+        help_text="Price in CAD"
+    )
+    period = models.CharField(max_length=20, choices=[
+        ('one_time', 'One Time'),
+        ('monthly', 'Monthly'),
+        ('yearly', 'Yearly')
+    ], default='one_time')
+    features = models.JSONField(default=list, blank=True)
+    is_popular = models.BooleanField(default=False)
+    order = models.PositiveIntegerField(default=0)
+    service = models.ForeignKey('Service', on_delete=models.CASCADE, related_name='pricing_options')
+    stripe_price_id = models.CharField(max_length=100, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['order', 'price']
+
+    def __str__(self):
+        return f"{self.name} - ${self.price}/{self.period} - {self.service.title}"
+
+
 class Service(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    description = models.TextField()
+    description = RichTextUploadingField()
     short_description = models.CharField(max_length=300, blank=True)
     icon = models.CharField(max_length=50, blank=True, help_text="Font Awesome icon class")
     image = models.CharField(max_length=200, blank=True, null=True, help_text="Service image path")
@@ -108,19 +137,27 @@ class Service(models.Model):
         blank=True, 
         null=True,
         validators=[MinValueValidator(Decimal('0.01'))],
-        help_text="Price in CAD"
+        help_text="Base price in CAD"
     )
     price_type = models.CharField(max_length=20, choices=[
         ('fixed', 'Fixed Price'),
         ('hourly', 'Per Hour'),
         ('monthly', 'Per Month'),
-        ('custom', 'Custom Quote')
+        ('custom', 'Custom Quote'),
+        ('tiered', 'Tiered Pricing')
     ], default='custom')
     features = models.JSONField(default=list, blank=True)
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
     stripe_price_id = models.CharField(max_length=100, blank=True)
+    service_type = models.CharField(max_length=50, choices=[
+        ('social_media', 'Social Media'),
+        ('seo', 'SEO'),
+        ('blog', 'Blog'),
+        ('video', 'Video'),
+        ('other', 'Other')
+    ], default='other')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -129,7 +166,7 @@ class Service(models.Model):
 
     def clean(self):
         """Business rule validation for Social Dots services"""
-        if self.price_type != 'custom' and not self.price:
+        if self.price_type not in ['custom', 'tiered'] and not self.price:
             raise ValidationError("Price is required for non-custom pricing types")
         
         if self.price and self.price_type == 'custom':

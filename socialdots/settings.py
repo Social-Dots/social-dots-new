@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-producti
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-DEBUG = False # Set to True for development, False for production
+DEBUG = True # Set to True for development, False for production
 
 # DEBUG = False
 print("DEBUG:", DEBUG)
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'core',
     'whitenoise',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.site_config',
             ],
         },
     },
