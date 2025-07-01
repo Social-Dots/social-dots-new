@@ -399,6 +399,68 @@ class CalendarEvent(models.Model):
         return f"{self.title} - {self.start_time.strftime('%Y-%m-%d %H:%M')}"
 
 
+class PortfolioCategory(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True, blank=True)
+    description = models.TextField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Portfolio Category"
+        verbose_name_plural = "Portfolio Categories"
+        ordering = ['order', 'name']
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.name
+
+
+class Portfolio(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, blank=True)
+    description = models.TextField(blank=True)
+    image = models.CharField(max_length=200, help_text="Portfolio image path")
+    category = models.ForeignKey(PortfolioCategory, on_delete=models.CASCADE, related_name='portfolios')
+    content_type = models.CharField(max_length=20, choices=[
+        ('post', 'Post'),
+        ('video', 'Video'),
+        ('blog', 'Blog'),
+        ('email', 'Email'),
+        ('technology', 'Technology')
+    ], default='post')
+    video_url = models.URLField(blank=True, help_text="YouTube video URL")
+    blog_link = models.URLField(blank=True, help_text="Link to blog post")
+    technology_used = models.JSONField(default=list, blank=True, help_text="List of technologies used")
+    is_featured = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Portfolio"
+        verbose_name_plural = "Portfolios"
+        ordering = ['order', '-created_at']
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+    
+    def get_absolute_url(self):
+        return reverse('portfolio_detail', kwargs={'slug': self.slug})
+    
+    def __str__(self):
+        return self.title
+
+
 class AIAgentLog(models.Model):
     LOG_TYPES = [
         ('whatsapp', 'WhatsApp'),

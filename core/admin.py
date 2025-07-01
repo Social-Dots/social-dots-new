@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import (
     SiteConfiguration, TeamMember, Service, ServicePricingOption, PricingPlan, Project, 
-    BlogPost, Testimonial, Lead, Order, CalendarEvent, AIAgentLog
+    BlogPost, Testimonial, Lead, Order, CalendarEvent, AIAgentLog, PortfolioCategory, Portfolio
 )
 
 
@@ -270,6 +270,41 @@ class AIAgentLogAdmin(admin.ModelAdmin):
 
     def has_change_permission(self, request, obj=None):
         return False
+
+
+@admin.register(PortfolioCategory)
+class PortfolioCategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug', 'order', 'is_active', 'created_at']
+    list_filter = ['is_active']
+    search_fields = ['name', 'description']
+    list_editable = ['order', 'is_active']
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ['order', 'name']
+
+
+@admin.register(Portfolio)
+class PortfolioAdmin(admin.ModelAdmin):
+    list_display = ['title', 'category', 'content_type', 'is_featured', 'is_active', 'order']
+    list_filter = ['category', 'content_type', 'is_featured', 'is_active']
+    search_fields = ['title', 'description']
+    list_editable = ['is_featured', 'is_active', 'order']
+    prepopulated_fields = {'slug': ('title',)}
+    ordering = ['order', '-created_at']
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('title', 'slug', 'description', 'image')
+        }),
+        ('Categorization', {
+            'fields': ('category', 'content_type')
+        }),
+        ('Content Links', {
+            'fields': ('video_url', 'blog_link', 'technology_used')
+        }),
+        ('Display Settings', {
+            'fields': ('is_featured', 'is_active', 'order')
+        }),
+    )
 
 
 admin.site.site_header = "Social Dots Inc. Administration"

@@ -143,6 +143,68 @@
 <!-- Cart Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Check if cart object exists
+        console.log('Checking cart object:', window.cart);
+        
+        // Create cart object if it doesn't exist
+        if (typeof window.cart === 'undefined') {
+            console.log('Cart object not found, creating fallback cart');
+            window.cart = {
+                items: [],
+                init: function() { 
+                    console.log('Using fallback init'); 
+                    try {
+                        const savedCart = localStorage.getItem('cart');
+                        console.log('Saved cart from localStorage:', savedCart);
+                        if (savedCart) {
+                            this.items = JSON.parse(savedCart);
+                        }
+                    } catch (error) {
+                        console.error('Error in cart init:', error);
+                    }
+                },
+                addItem: function(item) {
+                    console.log('Using fallback addItem', item);
+                    this.items.push(item);
+                    this.saveCart();
+                    return true;
+                },
+                removeItem: function(itemId, priceType) {
+                    this.items = this.items.filter(item => !(item.id === itemId && item.priceType === priceType));
+                    this.saveCart();
+                },
+                updateQuantity: function(itemId, priceType, quantity) {
+                    const item = this.items.find(i => i.id === itemId && i.priceType === priceType);
+                    if (item) {
+                        item.quantity = quantity;
+                        if (item.quantity <= 0) {
+                            this.removeItem(itemId, priceType);
+                        } else {
+                            this.saveCart();
+                        }
+                    }
+                },
+                saveCart: function() { 
+                    console.log('Using fallback saveCart');
+                    try {
+                        localStorage.setItem('cart', JSON.stringify(this.items));
+                    } catch (e) {
+                        console.error('Error saving to localStorage:', e);
+                    }
+                },
+                showNotification: function(msg) { 
+                    console.log('Notification:', msg);
+                    alert(msg); 
+                },
+                getTotal: function() {
+                    return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+                }
+            };
+            
+            // Initialize the fallback cart
+            window.cart.init();
+        }
+        
         // Initialize Lucide icons
         lucide.createIcons();
         
@@ -169,7 +231,7 @@
             cartItemsContainer.innerHTML = '';
             
             // Get cart items
-            const items = cart.items;
+            const items = window.cart.items;
             
             // Show empty cart message if no items
             if (items.length === 0) {
@@ -231,20 +293,20 @@
                 
                 decreaseBtn.addEventListener('click', () => {
                     if (item.quantity > 1) {
-                        cart.updateQuantity(item.id, item.priceType, item.quantity - 1);
+                        window.cart.updateQuantity(item.id, item.priceType, item.quantity - 1);
                         renderCart();
                     }
                 });
                 
                 increaseBtn.addEventListener('click', () => {
-                    cart.updateQuantity(item.id, item.priceType, item.quantity + 1);
+                    window.cart.updateQuantity(item.id, item.priceType, item.quantity + 1);
                     renderCart();
                 });
                 
                 quantityInput.addEventListener('change', () => {
                     const newQuantity = parseInt(quantityInput.value);
                     if (newQuantity > 0) {
-                        cart.updateQuantity(item.id, item.priceType, newQuantity);
+                        window.cart.updateQuantity(item.id, item.priceType, newQuantity);
                         renderCart();
                     } else {
                         quantityInput.value = item.quantity;
@@ -252,8 +314,8 @@
                 });
                 
                 removeBtn.addEventListener('click', () => {
-                    cart.removeItem(item.id, item.priceType);
-                    cart.showNotification(`${item.name} removed from cart`);
+                    window.cart.removeItem(item.id, item.priceType);
+                    window.cart.showNotification(`${item.name} removed from cart`);
                     renderCart();
                 });
                 
@@ -305,15 +367,16 @@
         }
         
         // Initial render
+        console.log('Rendering cart with items:', window.cart.items);
         renderCart();
         
         // Update hidden input with cart items on form submit
         checkoutForm.addEventListener('submit', function(e) {
             // Populate the hidden input with cart items
-            cartItemsInput.value = JSON.stringify(cart.items);
+            cartItemsInput.value = JSON.stringify(window.cart.items);
             
             // If cart is empty, prevent form submission
-            if (cart.items.length === 0) {
+            if (window.cart.items.length === 0) {
                 e.preventDefault();
                 alert('Your cart is empty. Please add items before checkout.');
             }

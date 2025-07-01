@@ -3,135 +3,156 @@
 <html lang="en-CA" class="light">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}{{ site_config.site_name|default:"Social Dots Inc." }}{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{{ site_config.meta_description|default:'Strategic AI integration and digital solutions for Canadian businesses' }}{% endblock %}">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        border: "hsl(var(--border))",
-                        input: "hsl(var(--input))",
-                        ring: "hsl(var(--ring))",
-                        background: "hsl(var(--background))",
-                        foreground: "hsl(var(--foreground))",
-                        primary: {
-                            DEFAULT: "hsl(var(--primary))",
-                            foreground: "hsl(var(--primary-foreground))",
-                        },
-                        secondary: {
-                            DEFAULT: "hsl(var(--secondary))",
-                            foreground: "hsl(var(--secondary-foreground))",
-                        },
-                        destructive: {
-                            DEFAULT: "hsl(var(--destructive))",
-                            foreground: "hsl(var(--destructive-foreground))",
-                        },
-                        muted: {
-                            DEFAULT: "hsl(var(--muted))",
-                            foreground: "hsl(var(--muted-foreground))",
-                        },
-                        accent: {
-                            DEFAULT: "hsl(var(--accent))",
-                            foreground: "hsl(var(--accent-foreground))",
-                        },
-                        popover: {
-                            DEFAULT: "hsl(var(--popover))",
-                            foreground: "hsl(var(--popover-foreground))",
-                        },
-                        card: {
-                            DEFAULT: "hsl(var(--card))",
-                            foreground: "hsl(var(--card-foreground))",
-                        },
-                        // Custom color palette
-                        cream: '#F3F3E0',
-                        navy: '#27548A',
-                        darkNavy: '#183B4E',
-                        gold: '#DDA853',
+    tailwind.config = {
+        darkMode: 'class',
+        theme: {
+            extend: {
+                colors: {
+                    border: "hsl(var(--border))",
+                    input: "hsl(var(--input))",
+                    ring: "hsl(var(--ring))",
+                    background: "hsl(var(--background))",
+                    foreground: "hsl(var(--foreground))",
+                    primary: {
+                        DEFAULT: "hsl(var(--primary))",
+                        foreground: "hsl(var(--primary-foreground))",
                     },
-                    borderRadius: {
-                        lg: "var(--radius)",
-                        md: "calc(var(--radius) - 2px)",
-                        sm: "calc(var(--radius) - 4px)",
-                    }
+                    secondary: {
+                        DEFAULT: "hsl(var(--secondary))",
+                        foreground: "hsl(var(--secondary-foreground))",
+                    },
+                    destructive: {
+                        DEFAULT: "hsl(var(--destructive))",
+                        foreground: "hsl(var(--destructive-foreground))",
+                    },
+                    muted: {
+                        DEFAULT: "hsl(var(--muted))",
+                        foreground: "hsl(var(--muted-foreground))",
+                    },
+                    accent: {
+                        DEFAULT: "hsl(var(--accent))",
+                        foreground: "hsl(var(--accent-foreground))",
+                    },
+                    popover: {
+                        DEFAULT: "hsl(var(--popover))",
+                        foreground: "hsl(var(--popover-foreground))",
+                    },
+                    card: {
+                        DEFAULT: "hsl(var(--card))",
+                        foreground: "hsl(var(--card-foreground))",
+                    },
+                    // Custom color palette
+                    cream: '#F3F3E0',
+                    navy: '#27548A',
+                    darkNavy: '#183B4E',
+                    gold: '#DDA853',
+                    // New colors added here
+                    deepBlue: '#0B32A4',
+                    brightBlue: '#0E42CE',
+                    vibrantOrange: '#FFA300'
+                },
+                borderRadius: {
+                    lg: "var(--radius)",
+                    md: "calc(var(--radius) - 2px)",
+                    sm: "calc(var(--radius) - 4px)",
                 }
             }
         }
-    </script>
+    }
+</script>
     
     <!-- shadcn/ui CSS Variables and Modern Design System -->
     <style>
-        :root {
-            /* Custom Color Palette */
-            --cream: 60 40% 92%; /* #F3F3E0 */
-            --navy: 210 55% 35%; /* #27548A */
-            --dark-navy: 202 50% 20%; /* #183B4E */
-            --gold: 36 65% 59%; /* #DDA853 */
-            
-            /* Modern Light Theme Variables with New Color Palette */
-            --background: var(--cream);
-            --foreground: var(--dark-navy);
-            --card: 0 0% 100%;
-            --card-foreground: var(--dark-navy);
-            --popover: 0 0% 100%;
-            --popover-foreground: var(--dark-navy);
-            --primary: var(--navy);
-            --primary-foreground: var(--cream);
-            --secondary: var(--gold);
-            --secondary-foreground: var(--dark-navy);
-            --muted: 210 40% 96%;
-            --muted-foreground: 215 25% 40%;
-            --accent: var(--gold);
-            --accent-foreground: var(--dark-navy);
-            --destructive: 0 84% 60%;
-            --destructive-foreground: 0 0% 98%;
-            --border: 214 32% 91%;
-            --input: 214 32% 91%;
-            --ring: var(--navy);
-            --radius: 0.75rem;
-            
-            /* Social Dots Brand Colors */
-            --brand-primary: {{ site_config.primary_color|default:"#27548A" }};
-            --brand-secondary: {{ site_config.secondary_color|default:"#183B4E" }};
-            --brand-accent: {{ site_config.accent_color|default:"#DDA853" }};
-        }
+    :root {
+        /* Custom Color Palette */
+        --cream: 60 40% 92%; /* #F3F3E0 */
+        --navy: 210 55% 35%; /* #27548A */
+        --dark-navy: 202 50% 20%; /* #183B4E */
+        --gold: 36 65% 59%; /* #DDA853 */
+        /* New colors added as CSS variables */
+        --deep-blue: 226 87% 34%; /* #0B32A4 */
+        --bright-blue: 226 88% 43%; /* #0E42CE */
+        --vibrant-orange: 39 100% 50%; /* #FFA300 */
+        
+        /* Modern Light Theme Variables with New Color Palette */
+        --background: var(--cream);
+        --foreground: var(--dark-navy);
+        --card: 0 0% 100%;
+        --card-foreground: var(--dark-navy);
+        --popover: 0 0% 100%;
+        --popover-foreground: var(--dark-navy);
+        --primary: var(--bright-blue); /* Updated to use brightBlue */
+        --primary-foreground: var(--cream);
+        --secondary: var(--vibrant-orange); /* Updated to use vibrantOrange */
+        --secondary-foreground: var(--dark-navy);
+        --muted: 210 40% 96%;
+        --muted-foreground: 215 25% 40%;
+        --accent: var(--vibrant-orange); /* Updated to use vibrantOrange */
+        --accent-foreground: var(--dark-navy);
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 214 32% 91%;
+        --input: 214 32% 91%;
+        --ring: var(--bright-blue); /* Updated to use brightBlue */
+        --radius: 0.75rem;
+        
+        /* Social Dots Brand Colors */
+        --brand-primary: {{ site_config.primary_color|default:"#0E42CE" }}; /* Updated default to brightBlue */
+        --brand-secondary: {{ site_config.secondary_color|default:"#0B32A4" }}; /* Updated default to deepBlue */
+        --brand-accent: {{ site_config.accent_color|default:"#FFA300" }}; /* Updated default to vibrantOrange */
+    }
 
-        * {
-            @apply border-border;
-        }
+    /* Updated button styles to use new colors */
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-cream bg-brightBlue hover:bg-deepBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vibrantOrange transition-all duration-300 ease-in-out transform hover:-translate-y-1;
+    }
 
-        body {
-            @apply bg-background text-foreground font-sans antialiased;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+    /* Updated gradient text to use new colors */
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-deepBlue to-brightBlue;
+    }
 
-        /* Modern Button Styles */
-        .btn-primary {
-            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-cream bg-navy hover:bg-darkNavy focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold transition-all duration-300 ease-in-out transform hover:-translate-y-1;
-        }
+    /* Updated glass card border color */
+    .glass-card {
+        @apply bg-cream/70 backdrop-blur-lg rounded-xl shadow-xl;
+        border: 1px solid rgba(255, 163, 0, 0.2); /* Using vibrantOrange */
+        transition: all 0.5s ease;
+    }
+    
+    .glass-card:hover {
+        @apply shadow-2xl;
+        border: 1px solid rgba(255, 163, 0, 0.4); /* Using vibrantOrange */
+        transform: translateY(-5px) scale(1.02);
+    }
 
-        .btn-secondary {
-            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-navy bg-cream hover:bg-gold/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy transition-all duration-300 ease-in-out transform hover:-translate-y-1;
-        }
-
-        .btn-ghost {
-            @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-darkNavy hover:text-navy focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold/50 transition-all duration-300 ease-in-out;
+    /* Updated nav indicator to use vibrantOrange */
+    .nav-indicator {
+        background: linear-gradient(90deg, var(--vibrant-orange), var(--gold-light));
+        box-shadow: 0 2px 8px rgba(255, 163, 0, 0.3); /* Using vibrantOrange */
+    }  
+        /* Mobile responsive button adjustments */
+        @media (max-width: 640px) {
+            .btn-primary, .btn-secondary, .btn-ghost, .btn-gold {
+                @apply text-xs px-3 py-2 w-full justify-center;
+            }
         }
         
         .btn-gold {
-            background: linear-gradient(135deg, #DDA853, #F3F3E0);
-            color: #183B4E;
-            @apply inline-flex items-center justify-center px-4 py-2 rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy transition-all duration-300 ease-in-out transform hover:-translate-y-1 border-none;
+            background: linear-gradient(135deg, #FFA300, #F3F3E0);
+            color: #0B32A4;
+            @apply inline-flex items-center justify-center px-4 py-2 rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brightBlue transition-all duration-300 ease-in-out transform hover:-translate-y-1 border-none;
         }
         
         .btn-gold:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(221, 168, 83, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 163, 0, 0.3);
         }
         
         .btn-ghost::after {
@@ -146,67 +167,100 @@
         }
         
         .btn-ghost:hover::after {
-            background-color: #27548A;
+            background-color: #0E42CE;
         }
 
-        /* Modern Card Styles */
+        /* Modern Card Styles with Mobile Responsiveness */
         .card-modern {
             @apply bg-cream rounded-xl shadow-md overflow-hidden;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
-            border: 1px solid rgba(221, 168, 83, 0.1);
+            border: 1px solid rgba(255, 163, 0, 0.1);
         }
         
         .card-modern:hover {
             @apply shadow-xl;
             transform: translateY(-8px);
-            border: 1px solid rgba(221, 168, 83, 0.3);
+            border: 1px solid rgba(255, 163, 0, 0.3);
+        }
+        
+        /* Mobile responsive card adjustments */
+        @media (max-width: 640px) {
+            .card-modern {
+                @apply p-4;
+            }
+            
+            .card-modern:hover {
+                transform: translateY(-4px);
+            }
         }
 
         /* Modern Text Gradient */
         .text-gradient {
-            @apply bg-clip-text text-transparent bg-gradient-to-r from-navy to-darkNavy;
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-deepBlue to-brightBlue;
         }
         
         .text-gradient-gold {
             @apply bg-clip-text text-transparent bg-gradient-to-r from-gold to-amber-500;
         }
 
-        /* Modern Glassmorphism */
+        /* Modern Glassmorphism with Mobile Responsiveness */
         .glass-card {
             @apply bg-cream/70 backdrop-blur-lg rounded-xl shadow-xl;
-            border: 1px solid rgba(221, 168, 83, 0.2);
+            border: 1px solid rgba(255, 163, 0, 0.2);
             transition: all 0.5s ease;
         }
         
         .glass-card:hover {
             @apply shadow-2xl;
-            border: 1px solid rgba(221, 168, 83, 0.4);
+            border: 1px solid rgba(255, 163, 0, 0.4);
             transform: translateY(-5px) scale(1.02);
         }
         
-        /* Feature Card */
+        /* Mobile responsive glass card adjustments */
+        @media (max-width: 640px) {
+            .glass-card {
+                @apply px-3 py-2;
+            }
+            
+            .glass-card:hover {
+                transform: translateY(-3px) scale(1.01);
+            }
+        }
+        
+        /* Feature Card with Mobile Responsiveness */
         .feature-card {
             @apply p-6 rounded-xl bg-cream;
-            border: 1px solid rgba(221, 168, 83, 0.1);
+            border: 1px solid rgba(255, 163, 0, 0.1);
             transition: all 0.4s ease;
         }
         
         .feature-card:hover {
             @apply shadow-lg;
-            border: 1px solid rgba(221, 168, 83, 0.3);
+            border: 1px solid rgba(255, 163, 0, 0.3);
             transform: translateY(-5px);
         }
         
-        /* Pricing Card */
+        /* Mobile responsive feature card adjustments */
+        @media (max-width: 640px) {
+            .feature-card {
+                @apply p-4;
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-3px);
+            }
+        }
+        
+        /* Pricing Card with Mobile Responsiveness */
         .pricing-card {
             @apply p-6 rounded-xl bg-cream;
-            border: 1px solid rgba(39, 84, 138, 0.1);
+            border: 1px solid rgba(11, 50, 164, 0.1);
             transition: all 0.4s ease;
         }
         
         .pricing-card.featured {
-            @apply bg-gradient-to-br from-navy/5 to-navy/10;
-            border: 1px solid rgba(39, 84, 138, 0.3);
+            @apply bg-gradient-to-br from-deepBlue/5 to-deepBlue/10;
+            border: 1px solid rgba(11, 50, 164, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -218,24 +272,35 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(to right, #27548A, #DDA853);
+            background: linear-gradient(to right, #0B32A4, #FFA300);
         }
         
         .pricing-card:hover {
             @apply shadow-xl;
             transform: translateY(-8px) scale(1.02);
         }
+        
+        /* Mobile responsive pricing card adjustments */
+        @media (max-width: 640px) {
+            .pricing-card {
+                @apply p-5;
+            }
+            
+            .pricing-card:hover {
+                transform: translateY(-3px) scale(1.01);
+            }
+        }
 
         .gradient-text {
-            @apply bg-gradient-to-r from-navy via-darkNavy to-navy bg-clip-text text-transparent;
+            @apply bg-gradient-to-r from-deepBlue via-brightBlue to-deepBlue bg-clip-text text-transparent;
         }
 
         .glass-morphism {
             backdrop-filter: blur(20px);
             background: rgba(243, 243, 224, 0.8);
-            border: 1px solid rgba(221, 168, 83, 0.2);
+            border: 1px solid rgba(255, 163, 0, 0.2);
             border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(24, 59, 78, 0.1);
+            box-shadow: 0 8px 32px rgba(11, 50, 164, 0.1);
         }
 
         /* Modern Navigation */
@@ -243,8 +308,8 @@
             @apply fixed top-0 w-full z-50;
             backdrop-filter: blur(20px);
             background: rgba(243, 243, 224, 0.9);
-            border-bottom: 1px solid rgba(221, 168, 83, 0.2);
-            box-shadow: 0 1px 30px rgba(24, 59, 78, 0.1);
+            border-bottom: 1px solid rgba(255, 163, 0, 0.2);
+            box-shadow: 0 1px 30px rgba(11, 50, 164, 0.1);
             transition: all 0.3s ease;
         }
         
@@ -312,11 +377,16 @@
     left: 0;
     height: 3px;
     width: 0;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    background: linear-gradient(90deg, var(--vibrant-orange), var(--gold));
     border-radius: 4px;
     transition: width 0.3s ease, opacity 0.3s ease;
     opacity: 0;
-    box-shadow: 0 2px 8px rgba(var(--gold-rgb), 0.3);
+    box-shadow: 0 2px 8px rgba(255, 163, 0, 0.3);
+}
+
+.nav-link:hover .nav-text {
+    color: var(--vibrant-orange);
+    transform: translateY(-2px);
 }
 
 .nav-link:hover .nav-indicator {
@@ -330,7 +400,7 @@
 }
 
 .nav-link.active .nav-text {
-    color: var(--gold);
+    color: var(--vibrant-orange);
     font-weight: 600;
 }
 
@@ -341,7 +411,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(var(--gold-rgb), 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(255, 163, 0, 0.1) 0%, transparent 70%);
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -381,9 +451,9 @@
 }
 
 .mobile-nav-link:hover {
-    background-color: rgba(var(--navy-rgb), 0.05);
+    background-color: rgba(11, 50, 164, 0.05);
     transform: translateX(4px);
-    color: var(--gold);
+    color: var(--vibrant-orange);
 }
 
 .mobile-nav-link::after {
@@ -393,7 +463,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--gold), transparent);
+    background: linear-gradient(90deg, var(--vibrant-orange), transparent);
     transition: width 0.3s ease;
 }
 
@@ -407,7 +477,7 @@
 
 .mobile-nav-link:hover i {
     transform: scale(1.2);
-    color: var(--gold);
+    color: var(--vibrant-orange);
 }
 
 /* Hero Gradient - Custom Theme */
@@ -423,7 +493,7 @@
 
         /* Animated background - Custom Theme */
         .animated-bg {
-            background: linear-gradient(-45deg, #F3F3E0, #E8E8D5, #DDA853, #27548A);
+            background: linear-gradient(-45deg, #F3F3E0, #FFA300, #0E42CE, #0B32A4);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
         }
@@ -507,12 +577,12 @@
 
         /* Enhanced Glowing effect */
         .glow-effect {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2), 0 0 90px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 30px rgba(14, 66, 206, 0.4), 0 0 60px rgba(14, 66, 206, 0.2), 0 0 90px rgba(14, 66, 206, 0.1);
             transition: box-shadow 0.3s ease-in-out;
         }
 
         .glow-effect:hover {
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 80px rgba(59, 130, 246, 0.3), 0 0 120px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 40px rgba(14, 66, 206, 0.6), 0 0 80px rgba(14, 66, 206, 0.3), 0 0 120px rgba(14, 66, 206, 0.2);
         }
 
         /* Icon containers with rounded elegance */
@@ -520,17 +590,17 @@
             width: 60px;
             height: 60px;
             border-radius: 20px;
-            background: linear-gradient(145deg, rgba(59, 130, 246, 1) 0%, rgba(29, 78, 216, 1) 100%);
+            background: linear-gradient(145deg, rgba(14, 66, 206, 1) 0%, rgba(11, 50, 164, 1) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 8px 24px rgba(14, 66, 206, 0.3);
             transition: all 0.3s ease;
         }
 
         .icon-container:hover {
             transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 12px 40px rgba(14, 66, 206, 0.4);
         }
 
         /* Custom scrollbar */
@@ -562,10 +632,10 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body class="min-h-screen bg-background">
-    <!-- Enhanced Modern Navigation Bar -->    
-    <nav class="nav-modern sticky top-0 z-50 w-full backdrop-blur-xl bg-cream/95 shadow-2xl ease-in-out border-b border-gold/30 animate-fadeIn">
+    <!-- Enhanced Modern Navigation Bar with Mobile Responsiveness -->    
+    <nav class="nav-modern sticky top-0 z-50 w-full backdrop-blur-xl bg-white border-w ease-in-out animate-fadeIn">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20"> 
+            <div class="flex justify-between items-center h-16 sm:h-20"> 
                 <!-- Enhanced Logo with Animation -->
                 <div class="flex items-center">
                     <a href="/" class="flex items-center space-x-4 group"> 
@@ -575,8 +645,8 @@
                             <span class="text-white font-bold text-xl relative z-10">SD</span>
                         </div> {% endcomment %}
                         <div class="flex flex-col">
-                            <span class="text-2xl font-bold gradient-text">{{ site_config.site_name|default:"Social Dots" }}</span>
-                            <span class="text-xs text-navy/70 font-medium tracking-wider">DIGITAL SOLUTIONS</span>
+                            <span class="text-xl sm:text-2xl font-bold gradient-text">{{ site_config.site_name|default:"Social Dots" }}</span>
+                            <span class="text-[10px] sm:text-xs text-navy/70 font-medium tracking-wider">DIGITAL SOLUTIONS</span>
                         </div>
                     </a>
                 </div>
@@ -586,32 +656,32 @@
                     <div class="ml-10 flex items-baseline space-x-8"> 
                         <a href="/" class="nav-link group" style="--nav-item-index: 0">
                             <span class="nav-text font-medium">Home</span>
-                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
                         </a>
                         <a href="/services/" class="nav-link group" style="--nav-item-index: 1">
                             <span class="nav-text font-medium">Services</span>
-                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
                         </a>
                         <a href="/portfolio/" class="nav-link group" style="--nav-item-index: 2">
                             <span class="nav-text font-medium">Portfolio</span>
-                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
                         </a>
                         <a href="/about/" class="nav-link group" style="--nav-item-index: 3">
                             <span class="nav-text font-medium">About</span>
-                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
                         </a>
                         <a href="/blog/" class="nav-link group" style="--nav-item-index: 4">
                             <span class="nav-text font-medium">Blog</span>
-                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
                         </a>
                         <a href="/cart/" class="nav-link group relative" style="--nav-item-index: 6">
                             <span class="nav-text font-medium flex items-center">
                                 <i data-lucide="shopping-cart" class="w-5 h-5 mr-1"></i>
-                                <span id="cart-count" class="absolute -top-2 -right-2 bg-gold text-darkNavy text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                                <span id="cart-count" class="absolute -top-2 -right-2 bg-vibrantOrange text-deepBlue text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
                             </span>
-                            <span class="nav-indicator bg-gradient-to-r from-gold to-gold/70"></span>
+                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
                         </a>
-                        <a href="/contact/" class="font-bold btn-gold transition-all duration-300 hover:scale-105 shadow-lg hover:linear-gradient(135deg, #DDA853, #F3F3E0) px-4 py-3 ml-4 flex items-center space-x-2 group rounded-sm">
+                        <a href="/contact/" class="font-bold btn-gold transition-all duration-300 hover:scale-105 shadow-lg hover:linear-gradient(135deg, #FFA300, #F3F3E0) px-4 py-3 ml-4 flex items-center space-x-2 group rounded-sm">
                             <span>Get Started</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -620,10 +690,10 @@
                     </div>
                 </div>
 
-                <!-- Enhanced Mobile menu button with animation -->
+                <!-- Enhanced Mobile menu button with animation and improved touch target -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-toggle" class="p-2 rounded-xl bg-navy/5 hover:bg-navy/10 focus:outline-none focus:ring-2 focus:ring-gold transition-all duration-300 ease-in-out">
-                        <i data-lucide="menu" class="h-6 w-6 text-navy"></i>
+                    <button id="mobile-menu-toggle" class="p-3 rounded-xl bg-deepBlue/5 hover:bg-deepBlue/10 focus:outline-none focus:ring-2 focus:ring-vibrantOrange transition-all duration-300 ease-in-out">
+                        <i data-lucide="menu" class="h-6 w-6 text-deepBlue"></i>
                     </button>
                 </div>
             </div>
@@ -631,7 +701,7 @@
 
         <!-- Enhanced Mobile Navigation with smooth animation -->
         <div id="mobile-menu" class="md:hidden hidden transform transition-all duration-300 ease-in-out">
-            <div class="px-3 pt-3 pb-4 space-y-1 sm:px-4 bg-cream/95 backdrop-blur-xl border-t border-gold/20 shadow-xl rounded-b-2xl mx-2">
+            <div class="px-3 pt-3 pb-4 space-y-1 sm:px-4 bg-cream/95 backdrop-blur-xl border-t border-vibrantOrange/20 shadow-xl rounded-b-2xl mx-2 max-h-[80vh] overflow-y-auto">
                 <a href="/" class="mobile-nav-link" style="--mobile-nav-item-index: 0">
                     <i data-lucide="home" class="h-5 w-5 mr-3 text-navy/70"></i>
                     <span>Home</span>
@@ -655,7 +725,7 @@
                 <a href="/cart/" class="mobile-nav-link" style="--mobile-nav-item-index: 6">
                     <i data-lucide="shopping-cart" class="h-5 w-5 mr-3 text-navy/70"></i>
                     <span>Cart</span>
-                    <span id="mobile-cart-count" class="ml-auto bg-gold text-darkNavy text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    <span id="mobile-cart-count" class="ml-auto bg-vibrantOrange text-deepBlue text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
                 </a>
                 <a href="/contact/" class="btn-gold flex items-center justify-center space-x-2 px-4 py-3 mt-3 text-base font-medium transition-all duration-300 ease-in-out shadow-md rounded-xl group">
                     <span>Get Started</span>
@@ -676,7 +746,7 @@
     <!-- Modern Footer -->
     <style>
         .gradient-text {
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(135deg, #0B32A4, #0E42CE);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -764,7 +834,7 @@
         <div class="absolute inset-0 bg-gray-900/30 pointer-events-none"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 gap-y-12">
                 <!-- Company Info -->
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
@@ -933,7 +1003,11 @@
                         link.classList.add('active');
                         // Add special styling for active mobile link
                         link.style.backgroundColor = 'rgba(var(--navy-rgb), 0.05)';
-                        link.querySelector('i').style.color = 'var(--gold)';
+                        // Check if the icon exists before trying to style it
+                        const icon = link.querySelector('i');
+                        if (icon) {
+                            icon.style.color = 'var(--gold)';
+                        }
                     }
                 });
             }
@@ -942,82 +1016,127 @@
             setActiveNavLink();
             
             // Cart functionality
+            console.log('Defining cart object');
             window.cart = {
                 items: [],
                 
                 // Initialize cart from localStorage
-            init: function() {
-                const savedCart = localStorage.getItem('cart');
-                if (savedCart) {
-                    this.items = JSON.parse(savedCart);
-                    this.updateCartCount();
-                }
-            },
-            
-            // Add item to cart
-            addItem: function(item) {
-                // Check if item already exists
-                const existingItem = this.items.find(i => i.id === item.id && i.priceType === item.priceType);
+                init: function() {
+                    console.log('Cart init method called');
+                    try {
+                        const savedCart = localStorage.getItem('cart');
+                        console.log('Saved cart from localStorage:', savedCart);
+                        if (savedCart) {
+                            this.items = JSON.parse(savedCart);
+                            this.updateCartCount();
+                        }
+                    } catch (error) {
+                        console.error('Error in cart init:', error);
+                    }
+                },
                 
-                if (existingItem) {
-                    existingItem.quantity += item.quantity;
-                } else {
-                    this.items.push(item);
-                }
-                
-                this.saveCart();
-                this.updateCartCount();
-                this.showNotification(`${item.name} added to cart`);
-            },
-            
-            // Remove item from cart
-            removeItem: function(itemId, priceType) {
-                this.items = this.items.filter(item => !(item.id === itemId && item.priceType === priceType));
-                this.saveCart();
-                this.updateCartCount();
-            },
-            
-            // Update item quantity
-            updateQuantity: function(itemId, priceType, quantity) {
-                const item = this.items.find(i => i.id === itemId && i.priceType === priceType);
-                if (item) {
-                    item.quantity = quantity;
-                    if (item.quantity <= 0) {
-                        this.removeItem(itemId, priceType);
-                    } else {
+                // Add item to cart
+                addItem: function(item) {
+                    console.log('addItem called with:', item);
+                    try {
+                        // Check if item already exists
+                        const existingItem = this.items.find(i => i.id === item.id && i.priceType === item.priceType);
+                        console.log('Existing item found:', existingItem);
+                        
+                        if (existingItem) {
+                            existingItem.quantity += item.quantity;
+                            console.log('Updated quantity for existing item:', existingItem);
+                        } else {
+                            this.items.push(item);
+                            console.log('Added new item to cart');
+                        }
+                        
                         this.saveCart();
                         this.updateCartCount();
+                        this.showNotification(`${item.name} added to cart`);
+                        console.log('Item successfully added to cart');
+                        return true;
+                    } catch (error) {
+                        console.error('Error in addItem method:', error);
+                        return false;
                     }
-                }
-            },
-            
-            // Save cart to localStorage
-            saveCart: function() {
-                localStorage.setItem('cart', JSON.stringify(this.items));
-            },
-            
-            // Update cart count in UI
-            updateCartCount: function() {
-                const count = this.items.reduce((total, item) => total + item.quantity, 0);
-                document.getElementById('cart-count').textContent = count;
-                document.getElementById('mobile-cart-count').textContent = count;
-            },
+                },
+                
+                // Remove item from cart
+                removeItem: function(itemId, priceType) {
+                    this.items = this.items.filter(item => !(item.id === itemId && item.priceType === priceType));
+                    this.saveCart();
+                    this.updateCartCount();
+                },
+                
+                // Update item quantity
+                updateQuantity: function(itemId, priceType, quantity) {
+                    const item = this.items.find(i => i.id === itemId && i.priceType === priceType);
+                    if (item) {
+                        item.quantity = quantity;
+                        if (item.quantity <= 0) {
+                            this.removeItem(itemId, priceType);
+                        } else {
+                            this.saveCart();
+                            this.updateCartCount();
+                        }
+                    }
+                },
+                
+                // Save cart to localStorage
+                saveCart: function() {
+                    console.log('saveCart called, items:', this.items);
+                    try {
+                        localStorage.setItem('cart', JSON.stringify(this.items));
+                        console.log('Cart saved to localStorage successfully');
+                    } catch (error) {
+                        console.error('Error saving cart to localStorage:', error);
+                    }
+                },
+                
+                // Update cart count in UI
+                updateCartCount: function() {
+                    console.log('updateCartCount called');
+                    try {
+                        const count = this.items.reduce((total, item) => total + item.quantity, 0);
+                        console.log('Cart count calculated:', count);
+                        
+                        const cartCountElement = document.getElementById('cart-count');
+                        const mobileCartCountElement = document.getElementById('mobile-cart-count');
+                        
+                        if (cartCountElement) {
+                            cartCountElement.textContent = count;
+                        } else {
+                            console.error('cart-count element not found');
+                        }
+                        
+                        if (mobileCartCountElement) {
+                            mobileCartCountElement.textContent = count;
+                        } else {
+                            console.error('mobile-cart-count element not found');
+                        }
+                        
+                        console.log('Cart count updated in UI');
+                    } catch (error) {
+                        console.error('Error updating cart count:', error);
+                    }
+                },
             
             // Show notification
             showNotification(message, type = 'success') {
                 // Create notification element
                 const notification = document.createElement('div');
-                notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg transition-all transform translate-x-full ${type === 'success' ? 'bg-green-100 text-green-800 border-l-4 border-green-500' : 'bg-red-100 text-red-800 border-l-4 border-red-500'}`;
+                notification.className = `fixed bottom-4 right-4 z-50 p-4 rounded-lg shadow-xl transition-all transform translate-y-full opacity-0 ${type === 'success' ? 'bg-gradient-to-r from-green-500 to-teal-500 text-white' : 'bg-gradient-to-r from-red-500 to-pink-500 text-white'}`;
                 notification.innerHTML = `
                     <div class="flex items-center">
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 bg-white bg-opacity-20 rounded-full p-2">
                             <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i>
                         </div>
                         <div class="ml-3">
                             <p class="text-sm font-medium">${message}</p>
                         </div>
                         <div class="ml-auto pl-3">
-                            <button type="button" class="inline-flex text-gray-400 hover:text-gray-500">
+                            <button type="button" class="inline-flex text-white hover:text-gray-200 transition-colors duration-200">
                                 <i data-lucide="x" class="w-5 h-5"></i>
                             </button>
                         </div>
@@ -1042,7 +1161,7 @@
                 // Add close button functionality
                 const closeButton = notification.querySelector('button');
                 closeButton.addEventListener('click', () => {
-                    notification.classList.add('translate-x-full', 'opacity-0');
+                    notification.classList.add('translate-y-full', 'opacity-0');
                     setTimeout(() => {
                         notification.remove();
                     }, 300);
@@ -1050,12 +1169,14 @@
                 
                 // Animate in
                 setTimeout(() => {
-                    notification.classList.remove('translate-x-full');
+                    notification.classList.remove('translate-y-full', 'opacity-0');
+                    notification.classList.add('translate-y-0', 'opacity-100');
                 }, 10);
                 
                 // Auto remove after 5 seconds
                 setTimeout(() => {
-                    notification.classList.add('translate-x-full', 'opacity-0');
+                    notification.classList.remove('translate-y-0', 'opacity-100');
+                    notification.classList.add('translate-y-full', 'opacity-0');
                     setTimeout(() => {
                         notification.remove();
                     }, 300);
@@ -1068,8 +1189,270 @@
             }
             };
             
-            // Initialize cart
-            window.cart.init();
+            // Initialize cart with debugging
+            console.log('Initializing cart object');
+            
+            // Ensure cart object exists before trying to initialize
+            if (!window.cart) {
+                console.error('Cart object not defined on window');
+                // Create a new cart object if it doesn't exist
+                window.cart = {
+                    items: [],
+                    init: function() { 
+                        console.log('Using created init'); 
+                        try {
+                            const savedCart = localStorage.getItem('cart');
+                            console.log('Saved cart from localStorage:', savedCart);
+                            if (savedCart) {
+                                this.items = JSON.parse(savedCart);
+                                this.updateCartCount();
+                            }
+                        } catch (error) {
+                            console.error('Error in cart init:', error);
+                        }
+                    },
+                    addItem: function(item) {
+                        console.log('Using created addItem', item);
+                        this.items = this.items || [];
+                        this.items.push(item);
+                        // Try to save to localStorage
+                        try {
+                            localStorage.setItem('cart', JSON.stringify(this.items));
+                        } catch (e) {
+                            console.error('Error saving to localStorage:', e);
+                        }
+                        return true;
+                    },
+                    saveCart: function() { 
+                        console.log('Using created saveCart');
+                        try {
+                            localStorage.setItem('cart', JSON.stringify(this.items));
+                        } catch (e) {
+                            console.error('Error saving to localStorage:', e);
+                        }
+                    },
+                    updateCartCount: function() { 
+                        console.log('Using created updateCartCount');
+                        try {
+                            const count = this.items.reduce((total, item) => total + item.quantity, 0);
+                            const cartCountElement = document.getElementById('cart-count');
+                            const mobileCartCountElement = document.getElementById('mobile-cart-count');
+                            
+                            if (cartCountElement) {
+                                cartCountElement.textContent = count;
+                            } else {
+                                console.error('cart-count element not found');
+                            }
+                            
+                            if (mobileCartCountElement) {
+                                mobileCartCountElement.textContent = count;
+                            } else {
+                                console.error('mobile-cart-count element not found');
+                            }
+                            
+                            console.log('Cart count updated in UI');
+                        } catch (error) {
+                            console.error('Error updating cart count:', error);
+                        }
+                    },
+                    showNotification: function(msg, type = 'success') { 
+                        console.log('Notification:', msg);
+                        // Create notification element
+                        const notification = document.createElement('div');
+                        notification.className = `fixed bottom-4 right-4 z-50 p-4 rounded-lg shadow-xl transition-all transform translate-y-full opacity-0 ${type === 'success' ? 'bg-gradient-to-r from-green-500 to-teal-500 text-white' : 'bg-gradient-to-r from-red-500 to-pink-500 text-white'}`;
+                        notification.innerHTML = `
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-white bg-opacity-20 rounded-full p-2">
+                                    <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">${msg}</p>
+                                </div>
+                                <div class="ml-auto pl-3">
+                                    <button type="button" class="inline-flex text-white hover:text-gray-200 transition-colors duration-200">
+                                        <i data-lucide="x" class="w-5 h-5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Add to DOM
+                        document.body.appendChild(notification);
+                        
+                        // Initialize Lucide icons if available
+                        if (typeof lucide !== 'undefined') {
+                            lucide.createIcons({
+                                icons: {
+                                    'check-circle': lucide.icons['check-circle'],
+                                    'alert-circle': lucide.icons['alert-circle'],
+                                    'x': lucide.icons['x']
+                                },
+                                attrs: {
+                                    class: "w-5 h-5"
+                                }
+                            }, notification);
+                        }
+                        
+                        // Add close button functionality
+                        const closeButton = notification.querySelector('button');
+                        if (closeButton) {
+                            closeButton.addEventListener('click', () => {
+                                notification.classList.add('translate-y-full', 'opacity-0');
+                                setTimeout(() => {
+                                    notification.remove();
+                                }, 300);
+                            });
+                        }
+                        
+                        // Animate in
+                        setTimeout(() => {
+                            notification.classList.remove('translate-y-full', 'opacity-0');
+                            notification.classList.add('translate-y-0', 'opacity-100');
+                        }, 10);
+                        
+                        // Auto remove after 5 seconds
+                        setTimeout(() => {
+                            notification.classList.remove('translate-y-0', 'opacity-100');
+                            notification.classList.add('translate-y-full', 'opacity-0');
+                            setTimeout(() => {
+                                notification.remove();
+                            }, 300);
+                        }, 5000);
+                    }
+                };
+            }
+            
+            try {
+                window.cart.init();
+                console.log('Cart initialized successfully');
+            } catch (error) {
+                console.error('Error initializing cart:', error);
+                // Create a fallback cart if initialization fails
+                console.log('Creating fallback cart');
+                window.cart = window.cart || {};
+                window.cart.items = window.cart.items || [];
+                
+                // Try to load saved cart items from localStorage in fallback
+                try {
+                    const savedCart = localStorage.getItem('cart');
+                    if (savedCart) {
+                        window.cart.items = JSON.parse(savedCart);
+                    }
+                } catch (error) {
+                    console.error('Error loading saved cart in fallback:', error);
+                }
+                window.cart.init = window.cart.init || function() { 
+                    console.log('Using fallback init'); 
+                    // Call updateCartCount to refresh the UI
+                    if (typeof this.updateCartCount === 'function') {
+                        this.updateCartCount();
+                    }
+                };
+                window.cart.addItem = window.cart.addItem || function(item) {
+                    console.log('Using fallback addItem', item);
+                    this.items.push(item);
+                    return true;
+                };
+                window.cart.saveCart = window.cart.saveCart || function() { 
+                    console.log('Using fallback saveCart'); 
+                    try {
+                        localStorage.setItem('cart', JSON.stringify(this.items));
+                    } catch (e) {
+                        console.error('Error saving cart:', e);
+                    }
+                };
+                window.cart.updateCartCount = window.cart.updateCartCount || function() {
+                    console.log('Using fallback updateCartCount');
+                    try {
+                        const count = this.items.reduce((total, item) => total + (item.quantity || 1), 0);
+                        const cartCountElement = document.getElementById('cart-count');
+                        const mobileCartCountElement = document.getElementById('mobile-cart-count');
+                        
+                        if (cartCountElement) {
+                            cartCountElement.textContent = count;
+                        } else {
+                            console.error('cart-count element not found');
+                        }
+                        
+                        if (mobileCartCountElement) {
+                            mobileCartCountElement.textContent = count;
+                        } else {
+                            console.error('mobile-cart-count element not found');
+                        }
+                        
+                        console.log('Cart count updated in UI');
+                    } catch (error) {
+                        console.error('Error updating cart count:', error);
+                    }
+                };
+                window.cart.showNotification = window.cart.showNotification || function(msg, type = 'success') { 
+                    console.log('Notification:', msg);
+                    // Create notification element
+                    const notification = document.createElement('div');
+                    notification.className = `fixed bottom-4 right-4 z-50 p-4 rounded-lg shadow-xl transition-all transform translate-y-full opacity-0 ${type === 'success' ? 'bg-gradient-to-r from-green-500 to-teal-500 text-white' : 'bg-gradient-to-r from-red-500 to-pink-500 text-white'}`;
+                    notification.innerHTML = `
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-white bg-opacity-20 rounded-full p-2">
+                                <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" class="w-5 h-5"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium">${msg}</p>
+                            </div>
+                            <div class="ml-auto pl-3">
+                                <button type="button" class="inline-flex text-white hover:text-gray-200 transition-colors duration-200">
+                                    <i data-lucide="x" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Add to DOM
+                    document.body.appendChild(notification);
+                    
+                    // Initialize Lucide icons if available
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons({
+                            icons: {
+                                'check-circle': lucide.icons['check-circle'],
+                                'alert-circle': lucide.icons['alert-circle'],
+                                'x': lucide.icons['x']
+                            },
+                            attrs: {
+                                class: "w-5 h-5"
+                            }
+                        }, notification);
+                    }
+                    
+                    // Add close button functionality
+                    const closeButton = notification.querySelector('button');
+                    if (closeButton) {
+                        closeButton.addEventListener('click', () => {
+                            notification.classList.add('translate-y-full', 'opacity-0');
+                            setTimeout(() => {
+                                notification.remove();
+                            }, 300);
+                        });
+                    }
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        notification.classList.remove('translate-y-full', 'opacity-0');
+                        notification.classList.add('translate-y-0', 'opacity-100');
+                    }, 10);
+                    
+                    // Auto remove after 5 seconds
+                    setTimeout(() => {
+                        notification.classList.remove('translate-y-0', 'opacity-100');
+                        notification.classList.add('translate-y-full', 'opacity-0');
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 300);
+                    }, 5000);
+                };
+            }
+            
+            // Verify cart is properly initialized
+            console.log('Cart initialization complete, cart object:', window.cart);
         });
     </script>
 

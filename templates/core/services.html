@@ -28,7 +28,7 @@
             </div>
 
             <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
                 <span class="text-[#183B4E]">Strategic Solutions</span><br>
                 <span class="text-gradient-gold">Built for Growth</span>
             </h1>
@@ -55,7 +55,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-2 sm:px-0">
             {% for plan in pricing_plans %}
             <div class="card-modern p-8 relative {% if plan.is_popular %}ring-2 ring-[#DDA853]{% endif %} fade-in" style="--delay: calc(0.2s + {{ forloop.counter0 }} * 0.1s); background-color: white; box-shadow: 0 10px 25px -5px rgba(39, 84, 138, 0.1);">
                 {% if plan.is_popular %}
@@ -306,16 +306,37 @@
                                 <div class="absolute inset-0 bg-gradient-to-r from-[#27548A] to-[#183B4E] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </a>
                         {% else %}
-                            <button 
-                                onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '{{ service.price|default:0 }}')" 
-                                class="w-full btn-gold justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group"
-                            >
-                                <span class="relative z-10 flex items-center justify-center">
-                                    <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
-                                    Add to Cart
-                                </span>
-                                <div class="absolute inset-0 bg-gradient-to-r from-[#DDA853] to-[#F3F3E0] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                            </button>
+                            <div class="space-y-3">
+                                <!-- Pricing Options Dropdown -->
+                                <div class="relative">
+                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-3 px-4 border-2 border-[#DDA853]/30 rounded-xl bg-white/90 text-[#183B4E] font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-[#27548A] focus:border-[#27548A] transition-all duration-300 backdrop-blur-sm">
+                                        <option value="{{ service.id }}" data-price="{{ service.price|default:0 }}" data-period="one-time" data-name="Standard">
+                                            Standard - ${{ service.price|floatformat:0 }} CAD one-time
+                                        </option>
+                                        <option value="{{ service.id }}_premium" data-price="{{ service.price|default:0|add:30 }}" data-period="one-time" data-name="Premium">
+                                            Premium - ${{ service.price|default:0|add:30|floatformat:0 }} CAD one-time
+                                        </option>
+                                        <option value="{{ service.id }}_enterprise" data-price="{{ service.price|default:0|add:60 }}" data-period="one-time" data-name="Enterprise">
+                                            Enterprise - ${{ service.price|default:0|add:60|floatformat:0 }} CAD one-time
+                                        </option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+                                        <i data-lucide="chevron-down" class="w-5 h-5 text-[#DDA853] group-hover:text-[#27548A] transition-colors duration-300"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- Add to Cart Button -->
+                                <button 
+                                    onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '{{ service.price|default:0 }}')" 
+                                    class="w-full btn-gold justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group"
+                                >
+                                    <span class="relative z-10 flex items-center justify-center">
+                                        <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
+                                        Add to Cart
+                                    </span>
+                                    <div class="absolute inset-0 bg-gradient-to-r from-[#DDA853] to-[#F3F3E0] opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                                </button>
+                            </div>
                         {% endif %}
                         
                         <a href="/services/{{ service.slug }}/" class="w-full btn-ghost justify-center group relative overflow-hidden">
@@ -401,161 +422,304 @@
 </section>
 
 <script>
-// Cart functionality
-const cart = {
-    items: JSON.parse(localStorage.getItem('cart') || '[]'),
+// Wait for DOM content to be loaded to ensure cart is available
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure cart is available
+    if (!window.cart) {
+        console.error('Cart object not available on window, creating a basic cart');
+        window.cart = {
+            items: [],
+            addItem: function(item) {
+                console.log('Using basic addItem', item);
+                this.items.push(item);
+                // Try to use custom notification
+                try {
+                    this.showNotification(`${item.name} added to cart`, 'success');
+                } catch (notifyError) {
+                    console.error('Error showing notification:', notifyError);
+                    // Fallback to alert if notification fails
+                    alert(`${item.name} added to cart`);
+                }
+                return true;
+            },
+            saveCart: function() {},
+            updateCartCount: function() {},
+            showNotification: function(msg) { alert(msg); }
+        };
+    }
     
-    addItem: function(item) {
-        // Check if item already exists
-        const existingItem = this.items.find(i => i.id === item.id && i.itemType === item.itemType);
+    // Use the global cart object
+    const cart = window.cart;
+    
+    // Add debugging to check if cart is available
+    console.log('Services page loaded, Cart object:', cart);
+
+    // Make purchase functions globally available
+    window.purchaseService = function(serviceId, serviceName, defaultPrice) {
+        console.log('purchaseService called with:', { serviceId, serviceName, defaultPrice });
         
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            this.items.push({
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                priceType: item.priceType || 'one-time',
-                maintenance: item.maintenance || 0,
-                quantity: item.quantity || 1,
-                itemType: item.itemType || 'service'
-            });
+        // Get the latest cart reference - create one if it doesn't exist
+        if (!window.cart) {
+            console.error('Cart object not available, creating one on-the-fly');
+            window.cart = {
+                items: [],
+                addItem: function(item) {
+                    console.log('Using emergency addItem', item);
+                    this.items.push(item);
+                    // Try to use custom notification
+                    try {
+                        this.showNotification(`${item.name} added to cart`, 'success');
+                    } catch (notifyError) {
+                        console.error('Error showing notification:', notifyError);
+                        // Fallback to alert if notification fails
+                        alert(`${item.name} added to cart`);
+                    }
+                    return true;
+                },
+                saveCart: function() {},
+                updateCartCount: function() {},
+                showNotification: function(msg) { alert(msg); }
+            };
         }
         
-        this.saveCart();
-        this.showNotification(`${item.name} added to cart!`);
-    },
-    
-    saveCart: function() {
+        const currentCart = window.cart;
+        
+        // Double-check cart is available
+        if (!currentCart || typeof currentCart.addItem !== 'function') {
+            console.error('Cart object is still not available or addItem is not a function');
+            // Create an emergency addItem function
+            currentCart.addItem = function(item) {
+                    console.log('Using emergency addItem function', item);
+                    currentCart.items = currentCart.items || [];
+                    currentCart.items.push(item);
+                    // Try to use custom notification
+                    try {
+                        if (typeof currentCart.showNotification === 'function') {
+                            currentCart.showNotification(`${item.name} added to cart`, 'success');
+                        } else {
+                            // Fallback to alert if showNotification is not available
+                            alert(`${item.name} added to cart`);
+                        }
+                    } catch (notifyError) {
+                        console.error('Error showing notification:', notifyError);
+                        // Fallback to alert if notification fails
+                        alert(`${item.name} added to cart`);
+                    }
+                    return true;
+                };
+        }
+        
+        // Check if this service has pricing options
+        const pricingSelect = document.getElementById(`service-pricing-option-${serviceId}`);
+        console.log('Pricing select element:', pricingSelect);
+        
         try {
-            localStorage.setItem('cart', JSON.stringify(this.items));
-        } catch (e) {
-            console.warn('Could not save to localStorage, using session storage');
-            this.items = this.items; // Keep in memory
+            if (pricingSelect) {
+                // Get the selected option
+                const selectedOption = pricingSelect.options[pricingSelect.selectedIndex];
+                const optionId = selectedOption.value;
+                const optionName = selectedOption.getAttribute('data-name');
+                const optionPrice = selectedOption.getAttribute('data-price');
+                const optionPeriod = selectedOption.getAttribute('data-period');
+                
+                console.log('Selected option:', { optionId, optionName, optionPrice, optionPeriod });
+                
+                // Create the item object
+                const item = {
+                    id: `service_option_${optionId}`,
+                    name: `${serviceName} - ${optionName}`,
+                    price: parseFloat(optionPrice),
+                    priceType: optionPeriod || 'one-time',
+                    maintenance: 0,
+                    quantity: 1,
+                    itemType: 'service_option'
+                };
+                
+                // Add the selected pricing option to cart with error handling
+                try {
+                    currentCart.addItem(item);
+                    console.log('Item added to cart successfully');
+                } catch (cartError) {
+                    console.error('Error in cart.addItem:', cartError);
+                    // Fallback: manually add to cart if method fails
+                    currentCart.items = currentCart.items || [];
+                    currentCart.items.push(item);
+                    console.log('Item added to cart using fallback method');
+                }
+            } else {
+                // Add regular service to cart
+                console.log('Adding regular service to cart');
+                const item = {
+                    id: `service_${serviceId}`,
+                    name: serviceName,
+                    price: parseFloat(defaultPrice) || 0,
+                    priceType: 'one-time',
+                    maintenance: 0,
+                    quantity: 1,
+                    itemType: 'service'
+                };
+                
+                try {
+                    currentCart.addItem(item);
+                    console.log('Regular service added to cart successfully');
+                } catch (cartError) {
+                    console.error('Error in cart.addItem:', cartError);
+                    // Fallback: manually add to cart if method fails
+                    currentCart.items = currentCart.items || [];
+                    currentCart.items.push(item);
+                    console.log('Regular service added to cart using fallback method');
+                }
+            }
+            
+            // Show confirmation message using custom notification
+            try {
+                currentCart.showNotification(`${serviceName} added to cart successfully!`, 'success');
+            } catch (notifyError) {
+                console.error('Error showing notification:', notifyError);
+            }
+            
+            // Redirect to cart page after adding item
+            // setTimeout(() => {
+            //     window.location.href = '/cart/';
+            // }, 1500);
+        } catch (error) {
+            console.error('Error adding item to cart:', error);
+            try {
+                currentCart.showNotification('Error adding item to cart: ' + error.message, 'error');
+            } catch (notifyError) {
+                console.error('Error showing notification:', notifyError);
+                // Fallback to alert if notification fails
+                alert('Error adding item to cart: ' + error.message);
+            }
         }
-    },
+    };
     
-    showNotification: function(message) {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = 'fixed top-4 right-4 bg-[#27548A] text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
-        notification.innerHTML = `
-            <div class="flex items-center space-x-2">
-                <i data-lucide="check-circle" class="w-5 h-5"></i>
-                <span>${message}</span>
-            </div>
-        `;
+    window.purchasePlan = function(planId, planName, defaultPrice) {
+        console.log('purchasePlan called with:', { planId, planName, defaultPrice });
         
-        document.body.appendChild(notification);
-        
-        // Initialize lucide icons for the notification
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+        // Get the latest cart reference - create one if it doesn't exist
+        if (!window.cart) {
+            console.error('Cart object not available, creating one on-the-fly');
+            window.cart = {
+                items: [],
+                addItem: function(item) {
+                    console.log('Using emergency addItem', item);
+                    this.items.push(item);
+                    alert(`${item.name} added to cart`);
+                    return true;
+                },
+                saveCart: function() {},
+                updateCartCount: function() {},
+                showNotification: function(msg) { alert(msg); }
+            };
         }
         
-        // Animate in
-        setTimeout(() => {
-            notification.classList.remove('translate-x-full');
-        }, 100);
+        const currentCart = window.cart;
         
-        // Remove after 3 seconds
-        setTimeout(() => {
-            notification.classList.add('translate-x-full');
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        }, 3000);
-    }
-};
-
-// Fixed purchase functions
-function purchaseService(serviceId, serviceName, defaultPrice) {
-    // Check if this service has pricing options
-    const pricingSelect = document.getElementById(`service-pricing-option-${serviceId}`);
-    
-    if (pricingSelect) {
-        // Get the selected option
-        const selectedOption = pricingSelect.options[pricingSelect.selectedIndex];
-        const optionId = selectedOption.value;
-        const optionName = selectedOption.getAttribute('data-name');
-        const optionPrice = selectedOption.getAttribute('data-price');
-        const optionPeriod = selectedOption.getAttribute('data-period');
+        // Double-check cart is available
+        if (!currentCart || typeof currentCart.addItem !== 'function') {
+            console.error('Cart object is still not available or addItem is not a function');
+            // Create an emergency addItem function
+            currentCart.addItem = function(item) {
+                console.log('Using emergency addItem function', item);
+                currentCart.items = currentCart.items || [];
+                currentCart.items.push(item);
+                alert(`${item.name} added to cart`);
+                return true;
+            };
+        }
         
-        // Add the selected pricing option to cart
-        cart.addItem({
-            id: `service_option_${optionId}`,
-            name: `${serviceName} - ${optionName}`,
-            price: parseFloat(optionPrice),
-            priceType: optionPeriod || 'one-time',
-            maintenance: 0,
-            quantity: 1,
-            itemType: 'service_option'
-        });
-    } else {
-        // Add regular service to cart
-        cart.addItem({
-            id: `service_${serviceId}`,
-            name: serviceName,
-            price: parseFloat(defaultPrice) || 0,
-            priceType: 'one-time',
-            maintenance: 0,
-            quantity: 1,
-            itemType: 'service'
-        });
-    }
-    
-    // Redirect to cart page after adding item
-    // setTimeout(() => {
-    //     window.location.href = '/cart/';
-    // }, 1500);
-}
-
-function purchasePlan(planId, planName, defaultPrice) {
-    // Check if this plan has pricing options
-    const pricingSelect = document.getElementById(`plan-pricing-option-${planId}`);
-    
-    if (pricingSelect) {
-        // Get the selected option
-        const selectedOption = pricingSelect.options[pricingSelect.selectedIndex];
-        const optionId = selectedOption.value;
-        const optionName = selectedOption.getAttribute('data-name');
-        const optionPrice = selectedOption.getAttribute('data-price');
-        const optionPeriod = selectedOption.getAttribute('data-period');
+        // Check if this plan has pricing options
+        const pricingSelect = document.getElementById(`plan-pricing-option-${planId}`);
+        console.log('Pricing select element:', pricingSelect);
         
-        // Add the selected pricing option to cart
-        cart.addItem({
-            id: `plan_option_${optionId}`,
-            name: `${planName} - ${optionName}`,
-            price: parseFloat(optionPrice),
-            priceType: optionPeriod || 'one-time',
-            maintenance: 0,
-            quantity: 1,
-            itemType: 'plan_option'
-        });
-    } else {
-        // Add regular plan to cart
-        cart.addItem({
-            id: `plan_${planId}`,
-            name: planName,
-            price: parseFloat(defaultPrice) || 0,
-            priceType: 'one-time',
-            maintenance: 0,
-            quantity: 1,
-            itemType: 'plan'
-        });
-    }
-    
-    // Redirect to cart page after adding item
-    // setTimeout(() => {
-    //     window.location.href = '/cart/';
-    // }, 1500);
-}
+        try {
+            if (pricingSelect) {
+                // Get the selected option
+                const selectedOption = pricingSelect.options[pricingSelect.selectedIndex];
+                const optionId = selectedOption.value;
+                const optionName = selectedOption.getAttribute('data-name');
+                const optionPrice = selectedOption.getAttribute('data-price');
+                const optionPeriod = selectedOption.getAttribute('data-period');
+                
+                console.log('Selected option:', { optionId, optionName, optionPrice, optionPeriod });
+                
+                // Create the item object
+                const item = {
+                    id: `plan_option_${optionId}`,
+                    name: `${planName} - ${optionName}`,
+                    price: parseFloat(optionPrice),
+                    priceType: optionPeriod || 'one-time',
+                    maintenance: 0,
+                    quantity: 1,
+                    itemType: 'plan_option'
+                };
+                
+                // Add the selected pricing option to cart with error handling
+                try {
+                    currentCart.addItem(item);
+                    console.log('Plan option added to cart successfully');
+                } catch (cartError) {
+                    console.error('Error in cart.addItem:', cartError);
+                    // Fallback: manually add to cart if method fails
+                    currentCart.items = currentCart.items || [];
+                    currentCart.items.push(item);
+                    console.log('Plan option added to cart using fallback method');
+                }
+            } else {
+                // Add regular plan to cart
+                console.log('Adding regular plan to cart');
+                const item = {
+                    id: `plan_${planId}`,
+                    name: planName,
+                    price: parseFloat(defaultPrice) || 0,
+                    priceType: 'one-time',
+                    maintenance: 0,
+                    quantity: 1,
+                    itemType: 'plan'
+                };
+                
+                try {
+                    currentCart.addItem(item);
+                    console.log('Regular plan added to cart successfully');
+                } catch (cartError) {
+                    console.error('Error in cart.addItem:', cartError);
+                    // Fallback: manually add to cart if method fails
+                    currentCart.items = currentCart.items || [];
+                    currentCart.items.push(item);
+                    console.log('Regular plan added to cart using fallback method');
+                }
+            }
+            
+            // Show confirmation message using custom notification
+            try {
+                currentCart.showNotification(`${planName} added to cart successfully!`, 'success');
+            } catch (notifyError) {
+                console.error('Error showing notification:', notifyError);
+            }
+            
+            // Redirect to cart page after adding item
+            // setTimeout(() => {
+            //     window.location.href = '/cart/';
+            // }, 1500);
+        } catch (error) {
+            console.error('Error adding plan to cart:', error);
+            try {
+                currentCart.showNotification('Error adding plan to cart: ' + error.message, 'error');
+            } catch (notifyError) {
+                console.error('Error showing notification:', notifyError);
+                // Fallback to alert if notification fails
+                alert('Error adding plan to cart: ' + error.message);
+            }
+        }
+    };
 
 // Update price display when dropdown changes
-document.addEventListener('DOMContentLoaded', function() {
+// Note: This is inside the main DOMContentLoaded event listener
     // Handle service pricing option changes
-    document.querySelectorAll('[id^="service-pricing-option-"]').forEach(select => {
+    const serviceSelects = document.querySelectorAll('[id^="service-pricing-option-"]');
+    console.log('Found service pricing selects:', serviceSelects.length);
+    serviceSelects.forEach(select => {
         const serviceId = select.id.replace('service-pricing-option-', '');
         const priceDisplay = document.getElementById(`service-price-display-${serviceId}`);
         const featuresDisplay = document.getElementById(`service-features-${serviceId}`);
@@ -610,7 +774,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Handle plan pricing option changes
-    document.querySelectorAll('[id^="plan-pricing-option-"]').forEach(select => {
+    const planSelects = document.querySelectorAll('[id^="plan-pricing-option-"]');
+    console.log('Found plan pricing selects:', planSelects.length);
+    planSelects.forEach(select => {
         const planId = select.id.replace('plan-pricing-option-', '');
         const priceDisplay = document.getElementById(`plan-price-display-${planId}`);
         const planFeatures = document.getElementById(`plan-features-${planId}`);

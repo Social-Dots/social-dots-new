@@ -15,7 +15,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import (
     SiteConfiguration, Service, PricingPlan, Project, BlogPost, 
-    Testimonial, TeamMember, Lead, Order, CalendarEvent, ServicePricingOption
+    Testimonial, TeamMember, Lead, Order, CalendarEvent, ServicePricingOption,
+    Portfolio, PortfolioCategory
 )
 from .payment_service import StripePaymentService
 from .frappe_services import process_order_to_frappe
@@ -33,6 +34,48 @@ def home(request):
     team_members = TeamMember.objects.filter(is_active=True)[:4]
     recent_blog_posts = BlogPost.objects.filter(status='published')[:3]
     
+    # Get portfolio categories and items
+    portfolio_categories = PortfolioCategory.objects.filter(is_active=True)
+    
+    # Get selected category or content type filter
+    category_filter = request.GET.get('category')
+    selected_category = None
+    content_type_filter = None
+    
+    # Check if it's a special content type filter
+    if category_filter in ['posts', 'videos', 'blogs', 'emails', 'featured']:
+        if category_filter == 'featured':
+            # Featured is a special case - we'll show featured items
+            pass
+        else:
+            content_type_filter = category_filter
+            if content_type_filter == 'posts':
+                content_type_filter = 'post'
+            elif content_type_filter == 'blogs':
+                content_type_filter = 'blog'
+            elif content_type_filter == 'videos':
+                content_type_filter = 'video'
+            elif content_type_filter == 'emails':
+                content_type_filter = 'email'
+    elif category_filter:
+        # Try to get the category by slug
+        try:
+            selected_category = PortfolioCategory.objects.get(slug=category_filter)
+        except PortfolioCategory.DoesNotExist:
+            selected_category = portfolio_categories.first() if portfolio_categories.exists() else None
+    else:
+        # Default view - show featured items
+        pass
+    
+    # Get portfolios based on selected filter
+    if content_type_filter:
+        portfolios = Portfolio.objects.filter(content_type=content_type_filter, is_active=True)
+    elif selected_category:
+        portfolios = Portfolio.objects.filter(category=selected_category, is_active=True)
+    elif category_filter == 'featured' or not category_filter:
+        # Show featured items for both explicit 'featured' filter and default view
+        portfolios = Portfolio.objects.filter(is_active=True, is_featured=True)[:6]
+    
     context = {
         'site_config': site_config,
         'featured_services': featured_services,
@@ -40,6 +83,10 @@ def home(request):
         'featured_testimonials': featured_testimonials,
         'team_members': team_members,
         'recent_blog_posts': recent_blog_posts,
+        'portfolio_categories': portfolio_categories,
+        'selected_category': selected_category,
+        'content_type_filter': content_type_filter,
+        'portfolios': portfolios,
     }
     
     return render(request, 'core/home.html', context)

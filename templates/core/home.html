@@ -8,6 +8,13 @@
     <!DOCTYPE html>
 <html lang="en">
     <style>
+        :root {
+            /* New color palette */
+            --deepBlue: #0B32A4;
+            --brightBlue: #0E42CE;
+            --vibrantOrange: #FFA300;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -24,13 +31,13 @@
             display: flex;
             align-items: center;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, #F3F3E0 0%, #F3F3E0 50%, #F5F5E5 100%);
-            background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background:rgb(255, 255, 255);
             background-size: cover;
             background-position: center;
             background-blend-mode: overlay;
             overflow: hidden;
             position: relative;
+            width: 100%;
         }
         
         .hero-section::before {
@@ -39,8 +46,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(243, 243, 224, 0.92) 0%, rgba(243, 243, 224, 0.85) 100%);
+            height: 100%;               
+            background: rgb(255, 255, 255);
             z-index: 1;
         }
 
@@ -54,6 +61,170 @@
             width: 100%;
             position: relative;
             z-index: 2;
+            padding: 0 1rem;
+        }
+        
+        /* Improved mobile responsiveness for hero section */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr 400px;
+                gap: 2rem;
+            }
+            
+            .hero-slider {
+                width: 450px;
+                right: -50px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .hero-container {
+                grid-template-columns: 1fr 350px;
+                gap: 1.5rem;
+            }
+            
+            .hero-slider {
+                width: 400px;
+                right: -30px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .hero-section {
+                padding: 3rem 1rem;
+            }
+            
+            .hero-content {
+                order: 1;
+            }
+            
+            .hero-slider {
+                position: relative;
+                right: auto;
+                order: 2;
+                margin: 2rem auto 0;
+                width: 100%;
+                max-width: 500px;
+                height: 400px;
+                overflow: hidden;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            .cta-button {
+                padding: 0.9rem 1.8rem;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 2rem 0.75rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .badge {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .hero-slider {
+                height: 350px;
+                max-width: 100%;
+            }
+            
+            .slider-track {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(10, 90px);
+                gap: 8px;
+                padding: 8px;
+            }
+            
+            .slide-icon {
+                font-size: 2rem;
+            }
+            
+            .slide-title {
+                font-size: 0.9rem;
+            }
+            
+            .slide-description {
+                font-size: 0.7rem;
+            }
+            
+            .action-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.65rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .social-icons {
+                gap: 0.75rem;
+            }
+            
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .desktop-break {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 375px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .hero-features li {
+                font-size: 0.9rem;
+            }
+            
+            .hero-slider {
+                height: 300px;
+            }
+            
+            .slider-track {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(10, 80px);
+            }
+            
+            .social-icons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
 
         .hero-content {
@@ -64,34 +235,48 @@
         .badge {
             display: inline-flex;
             align-items: center;
-            background-color: rgba(221, 168, 83, 0.15);
-            color: #183B4E;
+            background-color: rgba(255, 163, 0, 0.15);
+            color: var(--deepBlue);
             padding: 0.5rem 1rem;
             border-radius: 50px;
             font-size: 0.875rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(221, 168, 83, 0.3);
-            box-shadow: 0 2px 10px rgba(221, 168, 83, 0.1);
+            border: 1px solid var(--vibrantOrange);
+            box-shadow: 0 2px 10px rgba(255, 163, 0, 0.1);
         }
 
         .badge::before {
             content: "★";
             margin-right: 0.5rem;
-            color: #DDA853;
+            color: var(--vibrantOrange);
         }
 
         .hero-title {
             font-size: 3.5rem;
             font-weight: 800;
             line-height: 1.1;
-            color: #183B4E;
+            color: var(--deepBlue);
             margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(24, 59, 78, 0.05);
+            text-shadow: 0 2px 10px rgba(11, 50, 164, 0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.75rem;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
         }
 
         .hero-title .highlight {
-            background: linear-gradient(45deg, #27548A, #183B4E);
+            background: linear-gradient(45deg, var(--brightBlue), var(--deepBlue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -99,10 +284,32 @@
 
         .hero-subtitle {
             font-size: 1.125rem;
-            color: #27548A;
+            color: var(--brightBlue);
             margin-bottom: 2rem;
             line-height: 1.6;
             max-width: 90%;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-subtitle {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 1rem;
+            }
+            
+            .hero-features {
+                display: inline-block;
+                text-align: left;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .badge {
+                margin-left: auto;
+                margin-right: auto;
+                display: inline-flex;
+            }
         }
 
         .hero-features {
@@ -119,7 +326,7 @@
 
         .hero-features li::before {
             content: "●";
-            color: #2196f3;
+            color: var(--brightBlue);
             margin-right: 0.75rem;
             font-size: 1.2rem;
         }
@@ -127,22 +334,22 @@
         .cta-button {
             display: inline-flex;
             align-items: center;
-            background: linear-gradient(135deg, #DDA853, #F3F3E0);
-            color: #183B4E;
+            background: linear-gradient(135deg, var(--vibrantOrange), #F3F3E0);
+            color: var(--deepBlue);
             padding: 1rem 2rem;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(221, 168, 83, 0.3);
-            {% comment %} border: 1px solid rgba(221, 168, 83, 0.5); {% endcomment %}
+            box-shadow: 0 4px 15px rgba(255, 163, 0, 0.3);
+            {% comment %} border: 1px solid rgba(255, 163, 0, 0.5); {% endcomment %}
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(221, 168, 83, 0.4);
-            background: linear-gradient(45deg, #DDA853, #e9b968);
+            box-shadow: 0 8px 25px rgba(255, 163, 0, 0.4);
+            background: linear-gradient(45deg, var(--vibrantOrange), #F3F3E0);
         }
 
         .cta-button svg {
@@ -150,17 +357,42 @@
         }
 
         .hero-slider {
-            position: absolute;
-            right: -100px;
-            top: 0;
-            bottom: 0;
+            position: relative;
             width: 600px;
+            height: 600px;
             overflow: visible;
             pointer-events: none;
+            margin-left: auto;
+            z-index: 3;
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-slider {
+                width: 450px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .hero-slider {
+                width: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-container {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .hero-slider {
+                margin: 2rem auto 0;
+                width: 100%;
+                max-width: 500px;
+            }
         }
 
         .slider-track {
-            position: absolute;
+            position: relative;
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -170,6 +402,7 @@
             height: 1440px;
             animation: slideUp 15s linear infinite;
             pointer-events: auto;
+            z-index: 3;
         }
         
         @keyframes slideUp {
@@ -333,51 +566,51 @@
 
         /* Color variations */
         .slide-1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--deepBlue) 0%, var(--brightBlue) 100%);
         }
 
         .slide-2 {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, var(--brightBlue) 0%, var(--deepBlue) 100%);
         }
 
         .slide-3 {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, var(--vibrantOrange) 0%, var(--deepBlue) 100%);
         }
 
         .slide-4 {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            background: linear-gradient(135deg, var(--deepBlue) 0%, var(--vibrantOrange) 100%);
         }
 
         .slide-5 {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background: linear-gradient(135deg, var(--brightBlue) 0%, var(--vibrantOrange) 100%);
         }
 
         .slide-6 {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: linear-gradient(135deg, var(--vibrantOrange) 0%, var(--brightBlue) 100%);
         }
 
         .slide-7 {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            background: linear-gradient(135deg, var(--deepBlue) 0%, rgba(11, 50, 164, 0.7) 100%);
         }
 
         .slide-8 {
-            background: linear-gradient(135deg, #ff8a80 0%, #ea4335 100%);
+            background: linear-gradient(135deg, var(--vibrantOrange) 0%, rgba(255, 163, 0, 0.7) 100%);
         }
 
         .slide-9 {
-            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            background: linear-gradient(135deg, var(--brightBlue) 0%, rgba(14, 66, 206, 0.7) 100%);
         }
 
         .slide-10 {
-            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            background: linear-gradient(135deg, var(--deepBlue) 0%, var(--vibrantOrange) 50%, var(--brightBlue) 100%);
         }
 
         .slide-11 {
-            background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+            background: linear-gradient(135deg, var(--vibrantOrange) 0%, rgba(255, 163, 0, 0.5) 100%);
         }
 
         .slide-12 {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            background: linear-gradient(135deg, var(--brightBlue) 0%, var(--deepBlue) 50%, var(--vibrantOrange) 100%);
         }
 
         .social-icons {
@@ -402,12 +635,12 @@
             transform: translateY(-2px);
         }
 
-        .social-icon.facebook { background-color: #3b5998; }
-        .social-icon.instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
-        .social-icon.linkedin { background-color: #0077b5; }
-        .social-icon.twitter { background-color: #1da1f2; }
-        .social-icon.youtube { background-color: #ff0000; }
-        .social-icon.tiktok { background-color: #000; }
+        .social-icon.facebook { background-color: var(--deepBlue); }
+        .social-icon.instagram { background: linear-gradient(45deg, var(--deepBlue), var(--brightBlue), var(--vibrantOrange)); }
+        .social-icon.linkedin { background-color: var(--brightBlue); }
+        .social-icon.twitter { background-color: var(--brightBlue); }
+        .social-icon.youtube { background-color: var(--vibrantOrange); }
+        .social-icon.tiktok { background-color: var(--deepBlue); }
 
         .trusted-by {
             color: #666;
@@ -416,30 +649,127 @@
         }
 
         .trusted-number {
-            color: #2196f3;
+            color: var(--brightBlue);
             font-weight: 700;
         }
 
-        @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-slider {
-                height: 500px;
-            }
+        <style>
+    /* Existing styles... */
 
-            .slider-track {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(8, 100px);
-            }
+    /* Mobile Responsiveness for Hero Slider */
+    @media (max-width: 1024px) {
+        .hero-slider {
+            width: 450px;
+            right: -50px;
         }
-    </style>
+    }
+    
+    @media (max-width: 900px) {
+        .hero-slider {
+            width: 400px;
+            right: -30px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .hero-section {
+            padding: 3rem 1rem;
+        }
+        
+        .hero-content {
+            order: 1;
+        }
+        
+        .hero-slider {
+            position: relative;
+            right: auto;
+            order: 2;
+            margin: 2rem auto 0;
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .social-icons {
+            justify-content: center;
+        }
+        
+        .cta-button {
+            padding: 0.9rem 1.8rem;
+            font-size: 0.95rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-slider {
+            height: 350px;
+            max-width: 100%;
+        }
+        
+        .slider-track {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(10, 90px);
+            gap: 8px;
+            padding: 8px;
+        }
+        
+        .slide-icon {
+            font-size: 2rem;
+        }
+        
+        .slide-title {
+            font-size: 0.9rem;
+        }
+        
+        .slide-description {
+            font-size: 0.7rem;
+        }
+        
+        .action-btn {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.65rem;
+        }
+    }
+    
+    @media (max-width: 375px) {
+        .hero-slider {
+            height: 300px;
+        }
+        
+        .slider-track {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(10, 80px);
+        }
+    }
+
+    /* Additional mobile-specific styles for the slider */
+    @media (max-width: 768px) {
+        .slider-track {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(8, 100px);
+            width: 100%;
+            padding: 0;
+        }
+        
+        .slide-item.large, 
+        .slide-item.wide, 
+        .slide-item.extra-large {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+        
+        .slide-item.tall {
+            grid-row: span 1;
+        }
+    }
+</style>
 </head>
 <body>
     <section class="hero-section">
@@ -451,15 +781,21 @@
                 </div>
                 
                 <h1 class="hero-title">
-                    Expert social media <br>
-                    <span class="highlight">management</span> from <br>
+                    Expert social media <br class="desktop-break">
+                    <span class="highlight">management</span> from <br class="desktop-break">
                     only $99/mo
                 </h1>
                 
+                <div class="mobile-benefits">
+
+             </div>
+             
                 <p class="hero-subtitle">
                     Strategic AI integration and comprehensive digital solutions designed specifically for the Canadian market with 15+ years of expertise.
                 </p>
                 
+             
+
                 <ul class="hero-features">
                     <li><strong>Premium</strong> content with your branding</li>
                     <li><strong>80% cheaper</strong> than alternatives</li>
@@ -490,6 +826,7 @@
                     <a href="#" class="social-icon tiktok">♪</a>
                 </div>
             </div>
+        
             
             <!-- Right Slider -->
             <div class="hero-slider">
@@ -508,6 +845,42 @@
                     </div>
                     
                     <div class="slide-item medium slide-2" onclick="redirectTo('/services/content-creation')">
+                        <div class="slide-content">
+                            <div class="slide-icon">✨</div>
+                            <div class="slide-title">CONTENT</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item tall slide-3" onclick="redirectTo('/services/video-marketing')">
+                        <div class="slide-content">
+                            <div class="slide-icon">🎥</div>
+                            <div class="slide-title">VIDEO MARKETING</div>
+                            <div class="slide-description">Engaging visual content</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="slide-item medium slide-4" onclick="redirectTo('/services/social-media')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📱</div>
+                            <div class="slide-title">SOCIAL POSTS</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="slide-item wide slide-5" onclick="redirectTo('/services/analytics')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📊</div>
+                            <div class="slide-title">ANALYTICS & INSIGHTS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide-item medium slide-6" onclick="redirectTo('/services/instagram-stories')">
+                        <div class="slide-content">
+                            <div class="slide-icon">📖</div>
+                            <div class="slide-title">STORIES</div>
+                        </div>
+                    </div>                    <div class="slide-item medium slide-2" onclick="redirectTo('/services/content-creation')">
                         <div class="slide-content">
                             <div class="slide-icon">✨</div>
                             <div class="slide-title">CONTENT</div>
@@ -747,94 +1120,177 @@
     </script>
 
 
-{% include "core/trust-logos-strip.html" %}
 
 <!-- What We Do Section -->
-<section class="py-20 bg-cream">
+<section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-darkNavy">What We <span class="text-gold">Do</span></h2>
-            <p class="text-lg text-navy max-w-3xl mx-auto">We help Canadian businesses leverage AI and digital solutions to streamline operations, enhance customer experiences, and drive growth.</p>
-            <div class="w-24 h-1 bg-gold mx-auto mt-6 rounded-full"></div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-deepBlue">Examples of <span class="text-vibrantOrange">our work</span></h2>
+            <p class="text-lg text-brightBlue max-w-3xl mx-auto">Get your design & marketing work done without the hassle of unreliable freelancers, costly agencies. Pay a fixed, monthly, and predictable rate, with no contracts or surprises.</p>
+            <div class="w-24 h-1 bg-vibrantOrange mx-auto mt-6 rounded-full"></div>
+            
+            <!-- Portfolio Category Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mt-8 mb-8">
+                <a href="?category=featured" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if not content_type_filter and not selected_category %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+                    Featured
+                </a>
+                {% for category in portfolio_categories %}
+                <a href="?category={{ category.slug }}" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if selected_category == category %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+                <a href="?category=posts" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'post' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                    </svg>
+                    Posts
+                </a>
+                <a href="?category=videos" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'video' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                    </svg>
+                    Videos
+                </a>
+                <a href="?category=emails" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'email' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                    </svg>
+                    Emails
+                </a>
+                <a href="?category=blogs" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'blog' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
+                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path>
+                        <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
+                    </svg>
+                    Blogs
+                </a>
+            </div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Service Card 1 -->
-            <div class="bg-darkNavy/5 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-gold hover:bg-darkNavy/10 border border-gold/20">
-                <div class="w-14 h-14 bg-gold/20 rounded-lg flex items-center justify-center mb-6">
-                    <img src="{% static 'images/services/service1.svg' %}" alt="Digital Strategy" class="w-8 h-8 text-navy" />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% if portfolios %}
+                {% for portfolio in portfolios %}
+                    <div class="relative overflow-hidden rounded-xl group border border-gray-200 shadow-sm">
+                        <!-- Instagram-style card with user info at top -->
+                        <div class="bg-white p-3 z-10 flex items-center border-b border-gray-100">
+                            <div class="w-8 h-8 rounded-full bg-vibrantOrange/20 flex items-center justify-center mr-2">
+                                <img src="{% static 'images/profile-placeholder.jpg' %}" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-sm font-semibold text-deepBlue">Socialdots</div>
+                            </div>
+                            <div class="text-gray-500">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Portfolio image -->
+                        <div class="aspect-w-1 aspect-h-1 w-full">
+                            <img src="{{ portfolio.image }}" alt="{{ portfolio.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        </div>
+                        
+                        <!-- Content overlay on hover -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">{{ portfolio.title }}</h3>
+                            <p class="text-white/80 text-sm mb-4">{{ portfolio.description|truncatechars:100 }}</p>
+                            
+                            {% if portfolio.content_type == 'video' and portfolio.video_url %}
+                                <a href="{{ portfolio.video_url }}" target="_blank" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Watch Video
+                                </a>
+                            {% elif portfolio.content_type == 'blog' and portfolio.blog_link %}
+                                <a href="{{ portfolio.blog_link }}" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                    </svg>
+                                    Read Blog
+                                </a>
+                            {% elif portfolio.content_type == 'email' %}
+                                <a href="#" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                    View Email
+                                </a>
+                            {% else %}
+                                <a href="#" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    View Details
+                                </a>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Instagram-style action buttons -->
+                        <div class="bg-white p-3 border-t border-gray-100">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-span-3 text-center py-10">
+                    <p class="text-lg text-brightBlue">No portfolio items found for this category.</p>
                 </div>
-                <h3 class="text-xl font-semibold mb-3 text-darkNavy">Digital Strategy</h3>
-                <p class="text-navy mb-6">Comprehensive digital roadmaps tailored to your business goals and market position.</p>
-                <a href="/services/" class="text-darkNavy font-medium hover:text-gold transition-colors flex items-center">
-                    Learn more
-                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"></path>
-                        <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- Service Card 2 -->
-            <div class="bg-darkNavy/5 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-gold hover:bg-darkNavy/10 border border-gold/20">
-                <div class="w-14 h-14 bg-gold/20 rounded-lg flex items-center justify-center mb-6">
-                    <img src="{% static 'images/services/service2.svg' %}" alt="AI Integration" class="w-8 h-8 text-navy" />
-                </div>
-                <h3 class="text-xl font-semibold mb-3 text-darkNavy">AI Integration</h3>
-                <p class="text-navy mb-6">Custom AI solutions that automate processes, analyze data, and provide actionable insights.</p>
-                <a href="/services/" class="text-darkNavy font-medium hover:text-gold transition-colors flex items-center">
-                    Learn more
-                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"></path>
-                        <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- Service Card 3 -->
-            <div class="bg-darkNavy/5 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-gold hover:bg-darkNavy/10 border border-gold/20">
-                <div class="w-14 h-14 bg-gold/20 rounded-lg flex items-center justify-center mb-6">
-                    <img src="{% static 'images/services/service3.svg' %}" alt="Digital Marketing" class="w-8 h-8 text-navy" />
-                </div>
-                <h3 class="text-xl font-semibold mb-3 text-darkNavy">Digital Marketing</h3>
-                <p class="text-navy mb-6">Data-driven marketing strategies that increase visibility, engagement, and conversion rates.</p>
-                <a href="/services/" class="text-darkNavy font-medium hover:text-gold transition-colors flex items-center">
-                    Learn more
-                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"></path>
-                        <path d="M12 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
+            {% endif %}
         </div>
     </div>
 </section>
 
 <!-- Process Flow Section -->
-<section style="background-color: #F3F3E0; padding-top: 6rem; padding-bottom: 6rem; position: relative; overflow: hidden;">
+<section style="bg-white; padding-top: 6rem; padding-bottom: 6rem; position: relative; overflow: hidden;">
     <!-- Background Elements -->
     <div class="absolute inset-0">
-        <img 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-            alt="Team Collaboration" 
-            class="w-full h-full object-cover opacity-40"
-        />
         <div class="absolute inset-0 bg-gradient-to-r from-cream/80 via-white/70 to-darkNavy/10"></div>
     </div>
 
     <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding: 1rem; position: relative; z-index: 10;">
         <!-- Section Header -->
         <div style="text-align: center; margin-bottom: 4rem; animation: fadeIn 0.8s ease-out forwards;">
-            <div style="display: inline-flex; align-items: center; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.375rem; padding-bottom: 0.375rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; background-color: rgba(221, 168, 83, 0.1); color: #183B4E; border: 1px solid rgba(221, 168, 83, 0.3); margin-bottom: 1rem;">
-                <svg style="width: 1rem; height: 1rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div style="display: inline-flex; align-items: center; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.375rem; padding-bottom: 0.375rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; background-color: rgba(255, 163, 0, 0.1); color: var(--deepBlue); border: 1px solid rgba(255, 163, 0, 0.3); margin-bottom: 1rem;">
+                <svg style="width: 1rem; height: 1rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                 </svg>
                 <span>Our Process</span>
             </div>
-            <h2 style="font-size: 2.5rem; font-weight: 800; color: #183B4E; margin-bottom: 1rem;">
-                How We <span style="background: linear-gradient(to right, #27548A, #183B4E); -webkit-background-clip: text; background-clip: text; color: transparent;">Transform</span> Your Business
+            <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--deepBlue); margin-bottom: 1rem;">
+                How We <span style="background: linear-gradient(to right, var(--brightBlue), var(--deepBlue)); -webkit-background-clip: text; background-clip: text; color: transparent;">Transform</span> Your Business
             </h2>
-            <p style="max-width: 36rem; margin-left: auto; margin-right: auto; color: #183B4E; opacity: 0.8; font-size: 1.125rem;">
+            <p style="max-width: 36rem; margin-left: auto; margin-right: auto; color: var(--deepBlue); opacity: 0.8; font-size: 1.125rem;">
                 Our proven methodology ensures a seamless journey from concept to implementation, delivering measurable results at every stage.
             </p>
         </div>
@@ -845,24 +1301,24 @@
             <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.1s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
                 <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">1</div>
                 <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Discovery</h3>
-                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+                <p style="color: var(--deepBlue); opacity: 0.8; margin-bottom: 1.5rem;">
                     We analyze your business needs, market position, and competitive landscape to identify strategic opportunities.
                 </p>
                 <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Business Analysis</span>
                     </li>
-                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Market Research</span>
                     </li>
-                    <li style="display: flex; align-items: center; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Goal Setting</span>
@@ -871,27 +1327,27 @@
             </div>
 
             <!-- Step 2 -->
-            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.2s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
-                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">2</div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Strategy</h3>
-                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(255, 163, 0, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.2s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
+                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: var(--brightBlue); color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(14, 66, 206, 0.3);">2</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--deepBlue); margin-top: 1rem; margin-bottom: 1rem;">Strategy</h3>
+                <p style="color: var(--deepBlue); opacity: 0.8; margin-bottom: 1.5rem;">
                     We develop a comprehensive roadmap tailored to your specific goals, timeline, and budget constraints.
                 </p>
                 <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Solution Design</span>
                     </li>
-                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Resource Planning</span>
                     </li>
-                    <li style="display: flex; align-items: center; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Timeline Creation</span>
@@ -900,26 +1356,26 @@
             </div>
 
             <!-- Step 3 -->
-            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
-                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">3</div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Implementation</h3>
-                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(255, 163, 0, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.3s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
+                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: var(--brightBlue); color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(14, 66, 206, 0.3);">3</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--deepBlue); margin-top: 1rem; margin-bottom: 1rem;">Implementation</h3>
+                <p style="color: var(--deepBlue); opacity: 0.8; margin-bottom: 1.5rem;">
                     Our expert team executes the strategy with precision, ensuring seamless integration with your existing systems.
                 </p>
                 <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Agile Development</span>
                     </li>
-                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: #183B4E;">
-                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <li style="display: flex; align-items: center; margin-bottom: 0.75rem; color: var(--deepBlue);">
+                        <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                         <span>Quality Assurance</span>
                     </li>
-                    <li style="display: flex; align-items: center; color: #183B4E;">
+                    <li style="display: flex; align-items: center; color: var(--deepBlue);">
                         <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
@@ -929,10 +1385,10 @@
             </div>
 
             <!-- Step 4 -->
-            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(221, 168, 83, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.4s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
-                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: #27548A; color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3);">4</div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; color: #183B4E; margin-top: 1rem; margin-bottom: 1rem;">Optimization</h3>
-                <p style="color: #183B4E; opacity: 0.8; margin-bottom: 1.5rem;">
+            <div style="background-color: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); position: relative; border: 1px solid rgba(255, 163, 0, 0.1); animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.4s; opacity: 0; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.1)';">
+                <div style="position: absolute; top: -1.5rem; left: 1.5rem; background-color: var(--brightBlue); color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 10px 15px -3px rgba(14, 66, 206, 0.3);">4</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--deepBlue); margin-top: 1rem; margin-bottom: 1rem;">Optimization</h3>
+                <p style="color: var(--deepBlue); opacity: 0.8; margin-bottom: 1.5rem;">
                     We continuously monitor performance, gather feedback, and refine our approach to maximize your ROI.
                 </p>
                 <ul style="list-style-type: none; padding: 0; margin: 0;">
@@ -948,7 +1404,7 @@
                         </svg>
                         <span>Iterative Improvements</span>
                     </li>
-                    <li style="display: flex; align-items: center; color: #183B4E;">
+                    <li style="display: flex; align-items: center; color: var(--deepBlue);">
                         <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: #DDA853;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
@@ -960,7 +1416,7 @@
 
         <!-- CTA Button -->
         <div style="text-align: center; margin-top: 4rem; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.5s; opacity: 0;">
-            <a href="{% url 'contact' %}" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 2rem; padding-right: 2rem; padding-top: 0.875rem; padding-bottom: 0.875rem; border-radius: 0.5rem; font-size: 1.125rem; font-weight: 500; color: #F3F3E0; background: linear-gradient(to right, #27548A, #183B4E); box-shadow: 0 10px 15px -3px rgba(39, 84, 138, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
+            <a href="{% url 'contact' %}" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 2rem; padding-right: 2rem; padding-top: 0.875rem; padding-bottom: 0.875rem; border-radius: 0.5rem; font-size: 1.125rem; font-weight: 500; color: #F3F3E0; background: linear-gradient(to right, var(--brightBlue), var(--deepBlue)); box-shadow: 0 10px 15px -3px rgba(14, 66, 206, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
                 <span style="position: relative; z-index: 10;">Start Your Journey Today</span>
             </a>
         </div>
@@ -968,16 +1424,16 @@
 </section>
 
 <!-- Featured Services -->
-<section class="py-20 bg-background" style="background-color: #183B4E;">
+<section class="py-20 bg-background" style="background-color: var(--deepBlue);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center space-y-4 mb-16">
-            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm" style="background-color: rgba(221, 168, 83, 0.1); border-color: rgba(221, 168, 83, 0.3);">
-                <i data-lucide="zap" class="w-4 h-4 text-yellow-500" style="color: #DDA853;"></i>
+            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm" style="background-color: rgba(255, 163, 0, 0.1); border-color: rgba(255, 163, 0, 0.3);">
+                <i data-lucide="zap" class="w-4 h-4 text-yellow-500" style="color: var(--vibrantOrange);"></i>
                 <span class="text-muted-foreground" style="color: #F3F3E0;">Core Services</span>
             </div>
             <h2 class="text-3xl md:text-5xl font-bold tracking-tight" style="color: #F3F3E0;">
-                <span class="gradient-text" style="background: linear-gradient(to right, #DDA853, #F3F3E0); -webkit-background-clip: text; background-clip: text; color: transparent;">Strategic Solutions</span> that Connect<br>
+                <span class="gradient-text" style="background: linear-gradient(to right, var(--vibrantOrange), #F3F3E0); -webkit-background-clip: text; background-clip: text; color: transparent;">Strategic Solutions</span> that Connect<br>
                 Business Goals with Smart Execution
             </h2>
             <p class="text-xl text-muted-foreground max-w-3xl mx-auto" style="color: #F3F3E0; opacity: 0.8;">
@@ -988,15 +1444,17 @@
         <!-- Services Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for service in featured_services %}
-            <div class="card-modern p-8 group bg-darkNavy/5 border border-gold hover:border-gold hover:bg-darkNavy/10 transition-all duration-300 rounded-lg shadow-md">
+            <div class="card-modern p-8 group bg-deepBlue/5 border border-vibrantOrange hover:border-vibrantOrange hover:bg-deepBlue/10 transition-all duration-300 rounded-lg shadow-md">
                 <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-gold/20 p-3 rounded-lg">
-                        <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-7 h-7 text-darkNavy"></i>
+                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-white p-3 rounded-lg">
+                        <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-7 h-7 text-white border-gold"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-darkNavy">{{ service.title }}</h3>
+                    <h3 class="text-xl font-semibold" style="color: #FFA300;">{{ service.title }}</h3>
                 </div>
                 
-                <div class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
+                <div style="background-color: #FFA300; color: #1e293b;" class="text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">
+                starting from $200
+                </div>
                 
                 <p class="text-navy mb-6 leading-relaxed text-white ">
                     {{ service.short_description|default:service.description|truncatewords:20 }}
@@ -1006,7 +1464,7 @@
                 <ul class="space-y-2 mb-6 ">
                     {% for feature in service.features|slice:":3" %}
                     <li class="flex items-center space-x-2 text-sm text-white ">
-                        <i data-lucide="check" class="w-4 h-4 text-green-500"></i>
+                        <i data-lucide="check" class="w-4 h-4 text-vibrantOrange"></i>
                         <span>{{ feature }}</span>
                     </li>
                     {% endfor %}
@@ -1014,12 +1472,12 @@
                 {% endif %}
                 
                 <div class="flex justify-between items-center mt-4">
-                    <a href="/services/{{ service.slug }}/" class="inline-flex items-center px-4 py-2 text-sm border-2 border-white-400 rounded-md font-medium text-gold hover:text-gold transition-colors">
+                    <a href="/services/{{ service.slug }}/" class="inline-flex items-center px-4 py-2 text-sm border-2 border-white-400 rounded-md font-medium text-vibrantOrange hover:text-vibrantOrange transition-colors">
                         Learn More
                         <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                     
-                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gold hover:bg-gold transition-colors duration-300 rounded-md">
+                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-vibrantOrange hover:bg-vibrantOrange transition-colors duration-300 rounded-md">
                         Buy Now
                     </a>
                 </div>
