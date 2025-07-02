@@ -372,14 +372,55 @@
         
         // Update hidden input with cart items on form submit
         checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
             // Populate the hidden input with cart items
             cartItemsInput.value = JSON.stringify(window.cart.items);
             
             // If cart is empty, prevent form submission
             if (window.cart.items.length === 0) {
-                e.preventDefault();
                 alert('Your cart is empty. Please add items before checkout.');
+                return;
             }
+            
+            // Show loading state
+            const checkoutButton = document.getElementById('checkout-button');
+            const originalButtonText = checkoutButton.innerHTML;
+            checkoutButton.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin mr-2"></i> Processing...';
+            checkoutButton.disabled = true;
+            lucide.createIcons(); // Initialize the loader icon
+            
+            // Submit form via AJAX
+            const formData = new FormData(checkoutForm);
+            
+            fetch('/checkout/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                if (data.checkout_url) {
+                    // Redirect to Stripe checkout
+                    window.location.href = data.checkout_url;
+                } else {
+                    throw new Error('No checkout URL received from server');
+                }
+            })
+            .catch(error => {
+                console.error('Checkout error:', error);
+                alert('Error during checkout: ' + error.message);
+                
+                // Reset button state
+                checkoutButton.innerHTML = originalButtonText;
+                checkoutButton.disabled = false;
+            });
         });
     });
 </script>
