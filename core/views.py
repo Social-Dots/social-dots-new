@@ -1,6 +1,7 @@
 import json
 import logging
 from datetime import datetime, timedelta
+from decimal import Decimal
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -93,12 +94,45 @@ def home(request):
 
 
 def services(request):
-    services_list = Service.objects.filter(is_active=True)
-    pricing_plans = PricingPlan.objects.filter(is_active=True)
+    # Only get services and their pricing options
+    services_list = Service.objects.filter(is_active=True).prefetch_related('pricing_options')
+    
+    # Add pricing options for each service
+    for service in services_list:
+        # Get pricing options from ServicePricingOption model
+        db_pricing_options = service.pricing_options.all().order_by('order', 'price')
+        
+        if db_pricing_options.exists():
+            # Use database pricing options
+            service.pricing_options_list = db_pricing_options
+            print(f"Service '{service.title}': Found {db_pricing_options.count()} pricing options")
+        else:
+            # Only use fallback if no database options exist
+            base_price = service.price or Decimal('100.00')
+            service.pricing_options_list = [
+                {
+                    'name': 'Standard', 
+                    'price': base_price, 
+                    'period': 'one_time',
+                    'description': 'Basic package'
+                },
+                {
+                    'name': 'Premium', 
+                    'price': base_price + Decimal('30.00'), 
+                    'period': 'one_time',
+                    'description': 'Enhanced package'
+                },
+                {
+                    'name': 'Enterprise', 
+                    'price': base_price + Decimal('60.00'), 
+                    'period': 'one_time',
+                    'description': 'Full-featured package'
+                }
+            ]
+            print(f"Service '{service.title}': Using fallback pricing options")
     
     context = {
-        'services': services_list,
-        'pricing_plans': pricing_plans,
+        'services_list': services_list,
     }
     
     return render(request, 'core/services.html', context)

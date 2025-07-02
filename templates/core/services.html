@@ -183,7 +183,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for service in services %}
+            {% for service in services_list %}
             <div class="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105 fade-in" style="--delay: calc(0.2s + {{ forloop.counter0 }} * 0.1s);">
                 <!-- Card Background with Gradient -->
                 <div class="absolute inset-0 bg-gradient-to-br from-[#F3F3E0] via-white to-[#F3F3E0]/50 opacity-90"></div>
@@ -308,21 +308,31 @@
                         {% else %}
                             <div class="space-y-3">
                                 <!-- Pricing Options Dropdown -->
-                                <div class="relative">
-                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-3 px-4 border-2 border-[#DDA853]/30 rounded-xl bg-white/90 text-[#183B4E] font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-[#27548A] focus:border-[#27548A] transition-all duration-300 backdrop-blur-sm">
-                                        <option value="{{ service.id }}" data-price="{{ service.price|default:0 }}" data-period="one-time" data-name="Standard">
-                                            Standard - ${{ service.price|floatformat:0 }} CAD one-time
-                                        </option>
-                                        <option value="{{ service.id }}_premium" data-price="{{ service.price|default:0|add:30 }}" data-period="one-time" data-name="Premium">
-                                            Premium - ${{ service.price|default:0|add:30|floatformat:0 }} CAD one-time
-                                        </option>
-                                        <option value="{{ service.id }}_enterprise" data-price="{{ service.price|default:0|add:60 }}" data-period="one-time" data-name="Enterprise">
-                                            Enterprise - ${{ service.price|default:0|add:60|floatformat:0 }} CAD one-time
-                                        </option>
+                                <div class="relative group/dropdown">
+                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-3 px-4 border-2 border-[#DDA853]/30 rounded-xl bg-white/95 text-[#183B4E] font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-[#27548A] focus:border-[#27548A] hover:border-[#DDA853] hover:shadow-lg transition-all duration-300 backdrop-blur-sm shadow-sm">
+                                        {% for option in service.pricing_options_list %}
+                                            {% if option.id %}
+                                                <!-- For database ServicePricingOption objects -->
+                                                <option value="{{ service.id }}_{{ option.id }}" data-price="{{ option.price }}" data-period="{{ option.period }}" data-name="{{ option.name }}">
+                                                    {{ option.name }} - ${{ option.price|floatformat:0 }} CAD {% if option.period == 'one_time' %}one-time{% elif option.period == 'monthly' %}monthly{% elif option.period == 'yearly' %}yearly{% endif %}
+                                                </option>
+                                            {% else %}
+                                                <!-- For dictionary pricing options -->
+                                                <option value="{{ service.id }}_{{ option.name|lower }}" data-price="{{ option.price }}" data-period="{{ option.period }}" data-name="{{ option.name }}">
+                                                    {{ option.name }} - ${{ option.price|floatformat:0 }} CAD {% if option.period == 'one_time' %}one-time{% elif option.period == 'monthly' %}monthly{% elif option.period == 'yearly' %}yearly{% endif %}
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                     <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                                        <i data-lucide="chevron-down" class="w-5 h-5 text-[#DDA853] group-hover:text-[#27548A] transition-colors duration-300"></i>
+                                        <div class="bg-gradient-to-r from-[#DDA853]/15 to-[#27548A]/15 rounded-full p-1.5 group-hover/dropdown:from-[#DDA853]/25 group-hover/dropdown:to-[#27548A]/25 transform group-hover/dropdown:scale-110 group-focus-within/dropdown:scale-110 group-focus-within/dropdown:from-[#27548A]/30 group-focus-within/dropdown:to-[#183B4E]/30 transition-all duration-300 shadow-sm">
+                                        <i data-lucide="chevron-down" class="w-5 h-5 text-[#DDA853] group-hover/dropdown:text-[#27548A] group-focus-within/dropdown:text-[#183B4E] transition-all duration-300"></i>
+                                        </div>
                                     </div>
+                                    <!-- Subtle highlight effect on hover -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-[#DDA853]/5 to-[#27548A]/5 opacity-0 group-hover/dropdown:opacity-100 rounded-xl transition-opacity duration-300 pointer-events-none"></div>
+                                    <!-- Subtle glow effect on focus -->
+                                    <div class="absolute -inset-0.5 bg-gradient-to-r from-[#DDA853]/20 to-[#27548A]/20 opacity-0 group-focus-within/dropdown:opacity-100 rounded-xl blur-sm transition-opacity duration-300 pointer-events-none"></div>
                                 </div>
                                 
                                 <!-- Add to Cart Button -->
