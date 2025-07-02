@@ -6,13 +6,30 @@ from .models import Order, Service, PricingPlan
 
 logger = logging.getLogger(__name__)
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+# Log the Stripe API key status (without revealing the actual key)
+if settings.STRIPE_SECRET_KEY:
+    logger.info("Stripe API key is configured")
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+else:
+    logger.error("Stripe API key is not configured! Check your environment variables.")
+    # Set a default value to prevent NoneType errors, but this won't work for actual API calls
+    stripe.api_key = "missing_stripe_key"
 
 
 class StripePaymentService:
     @staticmethod
     def create_checkout_session(order_data, request):
         try:
+            # Check if Stripe API key is properly configured
+            if not settings.STRIPE_SECRET_KEY or settings.STRIPE_SECRET_KEY == "missing_stripe_key":
+                logger.error("Cannot create checkout session: Stripe API key is not configured")
+                raise ValueError("Stripe API key is not configured. Please check your environment variables.")
+                
+            # Check if stripe.checkout is available
+            if not hasattr(stripe, 'checkout') or stripe.checkout is None:
+                logger.error("stripe.checkout is not available. This could be due to an API key issue or Stripe library problem.")
+                raise AttributeError("stripe.checkout is not available. Check Stripe configuration.")
+                
             domain = request.build_absolute_uri('/')[:-1]
             
             line_items = []
@@ -96,6 +113,7 @@ class StripePaymentService:
                         'quantity': 1,
                     })
 
+            logger.info(f"Creating Stripe checkout session with {len(line_items)} line items")
             session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
                 line_items=line_items,
@@ -110,8 +128,15 @@ class StripePaymentService:
                 }
             )
             
+            logger.info(f"Successfully created Stripe checkout session: {session.id}")
             return session
             
+        except AttributeError as e:
+            logger.error(f"Stripe module error: {str(e)}")
+            raise
+        except ValueError as e:
+            logger.error(f"Configuration error: {str(e)}")
+            raise
         except Exception as e:
             logger.error(f"Error creating Stripe checkout session: {str(e)}")
             raise

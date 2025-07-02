@@ -350,19 +350,37 @@ def checkout(request):
             'cart_items': cart_items
         }
         
-        session = stripe_service.create_checkout_session(session_data, request)
+        try:
+            session = stripe_service.create_checkout_session(session_data, request)
+            
+            order.stripe_session_id = session.id
+            order.save()
+            
+            return JsonResponse({
+                'checkout_url': session.url,
+                'session_id': session.id
+            })
+        except ValueError as e:
+            # Configuration error (missing API keys)
+            logger.error(f"Stripe configuration error: {e}")
+            return JsonResponse({
+                'error': 'Payment system is not properly configured. Please contact support.',
+                'details': str(e)
+            }, status=500)
+        except AttributeError as e:
+            # Stripe module error
+            logger.error(f"Stripe module error: {e}")
+            return JsonResponse({
+                'error': 'Payment system is currently unavailable. Please try again later or contact support.',
+                'details': str(e)
+            }, status=500)
         
-        order.stripe_session_id = session.id
-        order.save()
-        
-        return JsonResponse({
-            'checkout_url': session.url,
-            'session_id': session.id
-        })
-        
+    except json.JSONDecodeError:
+        logger.error("Invalid cart data format")
+        return JsonResponse({'error': 'Invalid cart data format'}, status=400)
     except Exception as e:
         logger.error(f"Checkout error: {e}")
-        return JsonResponse({'error': 'Failed to create checkout session'}, status=500)
+        return JsonResponse({'error': 'Failed to create checkout session', 'details': str(e)}, status=500)
 
 
 def payment_success(request):
