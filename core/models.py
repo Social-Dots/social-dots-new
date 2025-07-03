@@ -130,7 +130,7 @@ class Service(models.Model):
     description = RichTextUploadingField()
     short_description = models.CharField(max_length=300, blank=True)
     icon = models.CharField(max_length=50, blank=True, help_text="Font Awesome icon class")
-    image = models.CharField(max_length=200, blank=True, null=True, help_text="Service image path")
+    image = models.ImageField(upload_to='service_images/', blank=True, null=True)
     price = models.DecimalField(
         max_digits=10, 
         decimal_places=2, 
@@ -227,7 +227,7 @@ class Project(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     client_name = models.CharField(max_length=100, blank=True)
     description = models.TextField()
-    image = models.CharField(max_length=200, blank=True, null=True, help_text="Project image path")
+    image = models.ImageField(upload_to='project_images/', blank=True, null=True)
     gallery = models.JSONField(default=list, blank=True, help_text="List of image URLs")
     technologies = models.JSONField(default=list, blank=True)
     project_url = models.URLField(blank=True)
@@ -426,7 +426,7 @@ class Portfolio(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField(blank=True)
-    image = models.CharField(max_length=200, help_text="Portfolio image path")
+    image = models.ImageField(upload_to='portfolio_images/', blank=True, null=True)
     category = models.ForeignKey(PortfolioCategory, on_delete=models.CASCADE, related_name='portfolios')
     content_type = models.CharField(max_length=20, choices=[
         ('post', 'Post'),

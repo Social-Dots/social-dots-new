@@ -12,57 +12,52 @@
             alt="Portfolio Success Stories" 
             class="w-full h-full object-cover opacity-40"
         />
-        <div class="absolute inset-0 bg-gradient-to-br from-[#27548A]/20 via-[#F3F3E0]/50 to-[#183B4E]/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0B32A4]/20 via-[#F3F3E0]/50 to-[#0E42CE]/20"></div>
     </div>
     
     <!-- Enhanced Floating Elements -->
-    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-gradient-to-r from-[#27548A]/15 to-[#183B4E]/15 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-to-r from-[#DDA853]/10 to-[#F3F3E0]/10 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div class="text-center space-y-8 fade-in" style="--delay: 0.1s;">
-            <!-- Hero Badge -->
-            <div class="inline-flex items-center space-x-3 glass-card px-6 py-3 text-sm font-medium fade-in" style="--delay: 0.2s; background-color: rgba(243, 243, 224, 0.7); border: 1px solid rgba(221, 168, 83, 0.3);">
-                <i data-lucide="briefcase" class="w-5 h-5 text-[#DDA853]"></i>
-                <span class="text-[#183B4E]">Our Work & Impact</span>
-            </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        
 
-            <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
-                <span class="text-[#183B4E]">Success Stories</span><br>
-                <span class="text-gradient-gold">That Drive Results</span>
-            </h1>
+        <!-- Portfolio Grid Section -->
+        <div class="text-center mb-12 fade-in" style="--delay: 0.1s;">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#0B32A4] mb-4">Our Featured Projects</h2>
+        </div>
 
-            <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl text-[#183B4E]/80 leading-relaxed fade-in" style="--delay: 0.4s;">
-                Explore how we've helped Canadian businesses transform their digital presence, streamline operations, 
-                and achieve measurable growth through strategic AI integration and comprehensive digital solutions.
-            </p>
-            
-            <!-- Hero CTA Buttons -->
-            <div class="flex flex-wrap justify-center gap-4 mt-8 fade-in" style="--delay: 0.5s;">
-                <a href="#portfolio-grid" class="btn-primary px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
-                    <i data-lucide="eye" class="w-5 h-5"></i>
-                    <span>View Projects</span>
-                </a>
-                <a href="{% url 'contact' %}" class="btn-gold px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
-                    <i data-lucide="message-square" class="w-5 h-5"></i>
-                    <span>Discuss Your Project</span>
-                </a>
+        <!-- Project Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for project in projects %}
+            <div class="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] bg-gradient-to-br from-[#0B32A4] to-[#0E42CE]">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0B32A4]/90 via-[#0E42CE]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <a href="/portfolio/{{ project.slug }}/" class="bg-[#FFA300] text-white w-full text-center py-3 rounded-full flex items-center justify-center gap-2 transition-all duration-300 hover:translate-y-[-2px]">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                            <span>View Case Study</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Filter Section -->
-            {% if all_technologies %}
-            <div class="flex flex-wrap justify-center gap-4 pt-8 fade-in" style="--delay: 0.6s;">
-                <a href="/portfolio/" class="glass-card px-6 py-2 rounded-full {% if not current_tech %}bg-[#DDA853] text-white border-[#DDA853]{% else %}text-[#183B4E] border border-[#DDA853]/30 hover:border-[#DDA853] hover:bg-[#DDA853]/10{% endif %} font-medium transition-all duration-300 hover:shadow-md">
-                    All Projects
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center space-x-4 mt-12">
+            {% if projects.has_previous %}
+                <a href="?page={{ projects.previous_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-ghost px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#0B32A4]/20 hover:border-[#0B32A4]/50">
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    <span class="font-medium">Previous</span>
                 </a>
-                {% for tech in all_technologies %}
-                <a href="/portfolio/?tech={{ tech }}" class="glass-card px-6 py-2 rounded-full {% if current_tech == tech %}bg-[#DDA853] text-white border-[#DDA853]{% else %}text-[#183B4E] border border-[#DDA853]/30 hover:border-[#DDA853] hover:bg-[#DDA853]/10{% endif %} font-medium transition-all duration-300 hover:shadow-md">
-                    {{ tech }}
+            {% endif %}
+
+            <span class="glass-card px-6 py-3 rounded-full text-[#0B32A4] font-medium">
+                Page {{ projects.number }} of {{ projects.paginator.num_pages }}
+            </span>
+
+            {% if projects.has_next %}
+                <a href="?page={{ projects.next_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}" class="btn-ghost px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#0B32A4]/20 hover:border-[#0B32A4]/50">
+                    <span class="font-medium">Next</span>
+                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
                 </a>
-                {% endfor %}
-            </div>
             {% endif %}
         </div>
     </div>
@@ -306,33 +301,60 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-20 relative overflow-hidden">
-    <!-- Background with gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-br from-[#27548A] via-[#183B4E] to-[#27548A] opacity-95"></div>
-    
-    <!-- Floating elements -->
-    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-[#DDA853]/5 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
-    
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <div class="space-y-8 fade-in" style="--delay: 0.1s;">
-            <h2 class="text-3xl md:text-5xl font-bold text-white">
-                Ready to Create Your <span class="text-[#DDA853]">Success Story</span>?
-            </h2>
-            <p class="text-xl text-white/80 leading-relaxed">
-                Let's discuss your project and explore how we can help you achieve similar results for your Canadian business.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center fade-in" style="--delay: 0.3s;">
-                <a href="/contact/" class="btn-gold px-8 py-4 rounded-full flex items-center gap-3 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
-                    <i data-lucide="calendar" class="w-5 h-5"></i>
-                    <span class="font-medium">Start Your Project</span>
-                </a>
-                <a href="/services/" class="px-8 py-4 border-2 border-white text-white font-medium rounded-full hover:bg-white/10 transition-all duration-300 flex items-center gap-3">
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    <span>Explore Services</span>
-                </a>
+<!-- Featured Services Section -->
+<section class="py-20 bg-gradient-to-br from-[#0B32A4]/5 via-white to-[#0E42CE]/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Service Card 1 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] flex items-center justify-center mb-4">
+                    <i data-lucide="brain-circuit" class="w-6 h-6 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-[#0B32A4] mb-3">AI Integration</h3>
+                <p class="text-[#0B32A4]/70">Custom AI solutions that drive efficiency and innovation in your business processes.</p>
             </div>
+
+            <!-- Service Card 2 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] flex items-center justify-center mb-4">
+                    <i data-lucide="database" class="w-6 h-6 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-[#0B32A4] mb-3">Salesforce Optimization</h3>
+                <p class="text-[#0B32A4]/70">Complete CRM overhaul for improved lead conversion and customer management.</p>
+            </div>
+
+            <!-- Service Card 3 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] flex items-center justify-center mb-4">
+                    <i data-lucide="globe" class="w-6 h-6 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-[#0B32A4] mb-3">Digital Transformation</h3>
+                <p class="text-[#0B32A4]/70">End-to-end digital solutions that modernize your business operations.</p>
+            </div>
+
+            <!-- Service Card 4 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] flex items-center justify-center mb-4">
+                    <i data-lucide="bar-chart" class="w-6 h-6 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-[#0B32A4] mb-3">Analytics & Insights</h3>
+                <p class="text-[#0B32A4]/70">Data-driven strategies that help you make informed business decisions.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-20 bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid-white/10"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
+            <p class="text-white/80 text-xl mb-8 max-w-2xl mx-auto">Let's discuss how we can help you achieve your digital transformation goals with our proven expertise.</p>
+            <a href="/contact/" class="inline-flex items-center px-8 py-3 rounded-full bg-[#FFA300] text-white font-medium hover:bg-[#FFA300]/90 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg">
+                <i data-lucide="message-square" class="w-5 h-5 mr-2"></i>
+                Start Your Project
+            </a>
         </div>
     </div>
 </section>
