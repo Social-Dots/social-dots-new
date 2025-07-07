@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-producti
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-DEBUG = False # Set to True for development, False for production
+DEBUG = True # Set to True for development, False for production
 
 # DEBUG = False
 print("DEBUG:", DEBUG)
@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'whitenoise',
     'rest_framework',
     'import_export',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -193,7 +195,14 @@ GOOGLE_CALENDAR_CLIENT_ID = os.environ.get('GOOGLE_CALENDAR_CLIENT_ID')
 GOOGLE_CALENDAR_CLIENT_SECRET = os.environ.get('GOOGLE_CALENDAR_CLIENT_SECRET')
 GOOGLE_CALENDAR_REDIRECT_URI = os.environ.get('GOOGLE_CALENDAR_REDIRECT_URI')
 
+# Cloudinary Configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'dsmgydskc'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '616489924851549'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'scAYejOSgGs8W8H0QY6LSQ3DjYk'),
+}
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')

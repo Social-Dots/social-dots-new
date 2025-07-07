@@ -22,7 +22,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Montserrat ;
             
         }
 
@@ -283,8 +283,8 @@
         }
 
         .hero-subtitle {
-            font-size: 1.125rem;
-            color: var(--brightBlue);
+            font-size: 1.125rem
+            color:rgb(37, 37, 36);
             margin-bottom: 2rem;
             line-height: 1.6;
             max-width: 90%;
@@ -334,7 +334,7 @@
         .cta-button {
             display: inline-flex;
             align-items: center;
-            background: linear-gradient(135deg, var(--vibrantOrange), #F3F3E0);
+            background:  #FFA300;
             color: var(--deepBlue);
             padding: 1rem 2rem;
             border-radius: 8px;
@@ -349,7 +349,7 @@
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(255, 163, 0, 0.4);
-            background: linear-gradient(45deg, var(--vibrantOrange), #F3F3E0);
+            background:  #FFA300;
         }
 
         .cta-button svg {
@@ -641,12 +641,15 @@
             transform: translateY(-2px);
         }
 
-        .social-icon.facebook { background-color: var(--deepBlue); }
-        .social-icon.instagram { background: linear-gradient(45deg, var(--deepBlue), var(--brightBlue), var(--vibrantOrange)); }
-        .social-icon.linkedin { background-color: var(--brightBlue); }
-        .social-icon.twitter { background-color: var(--brightBlue); }
-        .social-icon.youtube { background-color: var(--vibrantOrange); }
-        .social-icon.tiktok { background-color: var(--deepBlue); }
+        .social-icon.facebook,
+        .social-icon.instagram,
+        .social-icon.linkedin,
+        .social-icon.twitter,
+        .social-icon.youtube,
+        .social-icon.tiktok {
+        background-color: grey !important;
+        background-image: none !important;
+        }
 
         .trusted-by {
             color: #666;
@@ -775,7 +778,7 @@
             grid-row: span 1;
         }
     }
-    .slide-item.with-image.slide-content-bg {
+    .slide-item.with-image.slide-bg {
     background-image: url("{% static 'images/slider/content.jpg' %}");
     background-size: cover;
     background-position: center;
@@ -805,7 +808,7 @@
     background-position: center;
     position: relative;
 }
-.slide-item.with-image.slide-influencer-bg {
+.slide-item.with-image.slide-bg {
     background-image: url("{% static 'images/slider/influencers.jpg' %}");
     background-size: cover;
     background-position: center;
@@ -853,16 +856,16 @@
                 </div>
                 
                 <h1 class="hero-title">
-                    Expert social media <br class="desktop-break">
-                    <span class="highlight">management</span> from <br class="desktop-break">
-                    only $99/mo
+                    Expert Social Media <br class="desktop-break">
+                    <span class="highlight">Management</span> From <br class="desktop-break">
+                    Only $99/mo
                 </h1>
                 
                 <div class="mobile-benefits">
 
              </div>
              
-                <p class="hero-subtitle">
+                <p class="hero-subtitle color-black">
                     Strategic AI integration and comprehensive digital solutions designed specifically for the Canadian market with 15+ years of expertise.
                 </p>
                 
@@ -874,7 +877,7 @@
                     <li>Made by <strong>real people</strong> - not AI</li>
                 </ul>
                 
-                <a href="#contact" class="cta-button bg-linear-gradient(135deg, #DDA853, #F3F3E0)">
+                <a href="#contact" class="cta-button color:#FFA300;">
                     Schedule a free demo call
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -905,225 +908,225 @@
                     <!-- Row 1 -->
                     <div class="slide-item large slide-1 with-image slide-brand-strategy" onclick="redirectTo('/services/digital-strategy-consulting')">
                         <div class="slide-content">
-                            <div class="slide-title">BRAND STRATEGY</div>
-                            <div class="slide-description">Build your unique identity</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                             <div class="slide-actions">
-                                <div class="action-btn">Create</div>
-                                <div class="action-btn">Brand</div>
+                                <div class="action-btn"></div>
+                                <div class="action-btn"></div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-2 with-image slide-content-bg" onclick="redirectTo('/contact/?service=12')">
                         <div class="slide-content">
-                            <div class="slide-title">CONTENT</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services/short-form-videos')">
                         <div class="slide-content">
-                            <div class="slide-title">VIDEO MARKETING</div>
-                            <div class="slide-description">Engaging visual content</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                         </div>
                     </div>
                     
                     <!-- Row 2 -->
                     <div class="slide-item medium slide-4 with-image slide-social-bg" onclick="redirectTo('/services/social-media-posts')">
                         <div class="slide-content">
-                            <div class="slide-title">SOCIAL POSTS</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <!-- Row 3 -->
                     <div class="slide-item wide slide-5 with-image slide-analytics-bg" onclick="redirectTo('/services/salesforce-crm-optimization')">
                        <div class="slide-content">
-                           <div class="slide-icon">📊</div>
-                           <div class="slide-title">ANALYTICS & INSIGHTS</div>
+                           <div class="slide-icon"></div>
+                           <div class="slide-title"></div>
                        </div>
                     </div>
                     
                     <div class="slide-item medium slide-6 with-image slide-story-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-title">STORIES</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>  
 
                     <div class="slide-item medium slide-2 with-image slide-content-bg" onclick="redirectTo('/contact/?service=12')">
                         <div class="slide-content">
-                            <div class="slide-title">CONTENT</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services/short-form-videos')">
                         <div class="slide-content">
-                            <div class="slide-title">VIDEO MARKETING</div>
-                            <div class="slide-description">Engaging visual content</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                         </div>
                     </div>
                     
                     <!-- Row 2 -->
                     <div class="slide-item medium slide-4 with-image slide-social-bg" onclick="redirectTo('/services/social-media-posts')">
                         <div class="slide-content">
-                            <div class="slide-title">SOCIAL POSTS</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <!-- Row 3 -->
                     <div class="slide-item wide slide-5 with-image slide-analytics-bg" onclick="redirectTo('/services/salesforce-crm-optimization')">
                         <div class="slide-content">
-                            <div class="slide-icon">📊</div>
-                            <div class="slide-title">ANALYTICS & INSIGHTS</div>
+                            <div class="slide-icon"></div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-6 with-image slide-story-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-title">STORIES</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <!-- Row 4 -->
                     <div class="slide-item medium slide-7 with-image slide-influencer-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-title">INFLUENCER</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item large slide-8 with-image slide-paid-bg" onclick="redirectTo('/services/digital-strategy-consulting')">
                         <div class="slide-content">
-                            <div class="slide-title">PAID ADVERTISING</div>
-                            <div class="slide-description">Targeted campaigns</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                             <div class="slide-actions">
-                                <div class="action-btn">Target</div>
-                                <div class="action-btn">Convert</div>
+                                <div class="action-btn"></div>
+                                <div class="action-btn"></div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-9" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-icon">✍️</div>
-                            <div class="slide-title">COPY</div>
+                            <div class="slide-icon"></div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <!-- Row 5 -->
                     <div class="slide-item wide slide-10 with-image slide-community-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-title">COMMUNITY MANAGEMENT</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item tall slide-11 with-image slide-graphic-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">GRAPHIC DESIGN</div>
-                            <div class="slide-description">Visual excellence</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                         </div>
                     </div>
                     
                     <!-- Row 6 -->
                     <div class="slide-item medium slide-12 with-image slide-seo-bg" onclick="redirectTo('/services/seo-backlinks')">
                         <div class="slide-content">
-                            <div class="slide-title">SEO</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-1 with-image slide-email-bg" onclick="redirectTo('/services/email-design')">
                         <div class="slide-content">
-                            <div class="slide-title">EMAIL</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <!-- Duplicate set for seamless loop -->
                     <div class="slide-item large slide-1 with-image slide-brand-strategy" onclick="redirectTo('/services/digital-strategy-consulting')">
                         <div class="slide-content">
-                            <div class="slide-title">BRAND STRATEGY</div>
-                            <div class="slide-description">Build your unique identity</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                             <div class="slide-actions">
-                                <div class="action-btn">Create</div>
-                                <div class="action-btn">Brand</div>
+                                <div class="action-btn"></div>
+                                <div class="action-btn"></div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-2 with-image slide-content-bg" onclick="redirectTo('/contact/?service=12')">
                         <div class="slide-content">
-                            <div class="slide-title">CONTENT</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services/short-form-videos')">
                         <div class="slide-content">
-                            <div class="slide-title">VIDEO MARKETING</div>
-                            <div class="slide-description">Engaging visual content</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-4 with-image slide-social-bg" onclick="redirectTo('/services/social-media-posts')">
                         <div class="slide-content">
-                            <div class="slide-title">SOCIAL POSTS</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                    <div class="slide-item wide slide-5 with-image slide-analytics-bg" onclick="redirectTo('/services/salesforce-crm-optimization')">
                         <div class="slide-content">
-                            <div class="slide-icon">📊</div>
-                            <div class="slide-title">ANALYTICS & INSIGHTS</div>
+                            <div class="slide-icon"></div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-6 with-image slide-story-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-title">STORIES</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-7 with-image slide-influencer-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-title">INFLUENCER</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>                  
                     
                     <div class="slide-item large slide-8 with-image slide-paid-bg" onclick="redirectTo('/services/digital-strategy-consulting')">
                         <div class="slide-content">
-                            <div class="slide-title">PAID ADVERTISING</div>
-                            <div class="slide-description">Targeted campaigns</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                             <div class="slide-actions">
-                                <div class="action-btn">Target</div>
-                                <div class="action-btn">Convert</div>
+                                <div class="action-btn"></div>
+                                <div class="action-btn"></div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-9" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-icon">✍️</div>
-                            <div class="slide-title">COPY</div>
+                            <div class="slide-icon"></div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item wide slide-10 with-image slide-community-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
-                            <div class="slide-title">COMMUNITY MANAGEMENT</div>
+                            <div class="slide-title"></div>
                         </div>                  
                     </div>
                     
                     <div class="slide-item tall slide-11 with-image slide-graphic-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">GRAPHIC DESIGN</div>
-                            <div class="slide-description">Visual excellence</div>
+                            <div class="slide-title"></div>
+                            <div class="slide-description"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-12 with-image slide-seo-bg" onclick="redirectTo('/services/seo-backlinks')">
                         <div class="slide-content">
-                            <div class="slide-title">SEO</div>
+                            <div class="slide-title"></div>
                         </div>
                     </div>
                     
                     <div class="slide-item medium slide-1 with-image slide-email-bg" onclick="redirectTo('/services/email-design')">
                         <div class="slide-content">
-]                            <div class="slide-title">EMAIL</div>
+]                            <div class="slide-title"></div>
                         </div>
                     </div>                  
                 </div>
@@ -1173,7 +1176,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-3xl md:text-4xl font-bold mb-4 text-deepBlue">Examples of <span class="text-vibrantOrange">our work</span></h2>
-            <p class="text-lg text-brightBlue max-w-3xl mx-auto">Get your design & marketing work done without the hassle of unreliable freelancers, costly agencies. Pay a fixed, monthly, and predictable rate, with no contracts or surprises.</p>
+            <p class="text-lg text-grey max-w-3xl mx-auto">Get your design & marketing work done without the hassle of unreliable freelancers, costly agencies. Pay a fixed, monthly, and predictable rate, with no contracts or surprises.</p>
             <div class="w-24 h-1 bg-vibrantOrange mx-auto mt-6 rounded-full"></div>
             
             <!-- Portfolio Category Tabs -->

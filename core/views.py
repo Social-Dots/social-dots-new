@@ -3,7 +3,7 @@ import logging
 from datetime import datetime, timedelta
 from decimal import Decimal
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.utils.decorators import method_decorator
@@ -637,3 +637,103 @@ def health_check(request):
             'error': str(e),
             'timestamp': timezone.now().isoformat()
         }, status=500)
+
+@require_http_methods(["GET"])
+def api_portfolio(request):
+    category_filter = request.GET.get('category')
+    content_type_filter = request.GET.get('content_type')
+    
+    # Initialize the queryset
+    portfolios = Portfolio.objects.filter(is_active=True)
+    
+    # Apply filters if provided
+    if category_filter:
+        portfolios = portfolios.filter(category__slug=category_filter)
+    
+    if content_type_filter:
+        portfolios = portfolios.filter(content_type=content_type_filter)
+    
+    # Prepare the portfolio data
+    portfolio_data = []
+    for p in portfolios:
+        item = {
+            'id': p.id,
+            'title': p.title,
+            'slug': p.slug,
+            'description': p.description,
+            'category': {
+                'id': p.category.id,
+                'name': p.category.name,
+                'slug': p.category.slug
+            },
+            'content_type': p.content_type,
+            'video_url': p.video_url,
+            'blog_link': p.blog_link,
+            'technology_used': p.technology_used,
+            'is_featured': p.is_featured,
+            'created_at': p.created_at.isoformat() if p.created_at else None,
+        }
+        
+        # Use Cloudinary URL if available, otherwise fall back to regular image URL
+        if p.cloudinary_image_id:
+            item['image'] = p.get_cloudinary_url()
+        elif p.image:
+            item['image'] = p.image.url
+        else:
+            item['image'] = None
+        
+        portfolio_data.append(item)
+    
+    return JsonResponse({'portfolios': portfolio_data})
+
+def portfolio_detail(request, slug):
+    try:
+        portfolio = Portfolio.objects.get(slug=slug, is_active=True)
+        
+        # Get related portfolios from the same category
+        related_portfolios = Portfolio.objects.filter(
+            category=portfolio.category, 
+            is_active=True
+        ).exclude(id=portfolio.id)[:3]
+        
+        # Prepare portfolio data with Cloudinary URL if available
+        portfolio_data = {
+            'id': portfolio.id,
+            'title': portfolio.title,
+            'slug': portfolio.slug,
+            'description': portfolio.description,
+            'category': {
+                'id': portfolio.category.id,
+                'name': portfolio.category.name,
+                'slug': portfolio.category.slug
+            },
+            'content_type': portfolio.content_type,
+            'video_url': portfolio.video_url,
+            'blog_link': portfolio.blog_link,
+            'technology_used': portfolio.technology_used,
+            'created_at': portfolio.created_at,
+        }
+        
+        # Use Cloudinary URL if available, otherwise fall back to regular image URL
+        if portfolio.cloudinary_image_id:
+            portfolio_data['image'] = portfolio.get_cloudinary_url()
+            # Add a transformed version for thumbnails
+            portfolio_data['thumbnail'] = portfolio.get_cloudinary_url(width=400, height=300, crop='fill')
+        elif portfolio.image:
+            portfolio_data['image'] = portfolio.image.url
+            portfolio_data['thumbnail'] = portfolio.image.url
+        else:
+            portfolio_data['image'] = None
+            portfolio_data['thumbnail'] = None
+        
+        context = {
+            'portfolio': portfolio_data,
+            'related_portfolios': related_portfolios,
+            'meta_title': f"{portfolio.title} | Portfolio | Social Dots",
+            'meta_description': portfolio.description[:160] if portfolio.description else None,
+        }
+        
+        return render(request, 'core/portfolio_detail.html', context)
+        
+    except Portfolio.DoesNotExist:
+        raise Http404("Portfolio not found")

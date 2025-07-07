@@ -246,6 +246,21 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        
+        # Handle image upload to Cloudinary if image field has a file
+        if self.image and not self.cloudinary_image_id and hasattr(self.image, 'file'):
+            from .cloudinary_utils import upload_image
+            try:
+                # Upload the image to Cloudinary
+                result = upload_image(self.image, folder=f'portfolio_images/{self.slug}')
+                # Store the Cloudinary public ID
+                self.cloudinary_image_id = result['public_id']
+            except Exception as e:
+                # Log the error but continue saving the model
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.error(f"Error uploading image to Cloudinary: {e}")
+        
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -427,6 +442,7 @@ class Portfolio(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='portfolio_images/', blank=True, null=True)
+    cloudinary_image_id = models.CharField(max_length=255, blank=True, null=True, help_text="Cloudinary public ID for the image")
     category = models.ForeignKey(PortfolioCategory, on_delete=models.CASCADE, related_name='portfolios')
     content_type = models.CharField(max_length=20, choices=[
         ('post', 'Post'),
@@ -456,6 +472,17 @@ class Portfolio(models.Model):
     
     def get_absolute_url(self):
         return reverse('portfolio_detail', kwargs={'slug': self.slug})
+    
+    def get_cloudinary_url(self, **options):
+        """
+        Get the Cloudinary URL for the image with optional transformations
+        """
+        if self.cloudinary_image_id:
+            from .cloudinary_utils import get_optimized_url
+            return get_optimized_url(self.cloudinary_image_id, **options)
+        elif self.image:
+            return self.image.url
+        return None
     
     def __str__(self):
         return self.title
