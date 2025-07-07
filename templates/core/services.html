@@ -12,12 +12,12 @@
             alt="Business Analytics" 
             class="w-full h-full object-cover opacity-40"
         />
-        <div class="absolute inset-0 bg-gradient-to-br from-[#0B32A4]/20 via-[#0E42CE]/50 to-[#FFA300]/20"></div>
+        <div class="absolute inset-0 bg-[#0B32A4]/30"></div>
     </div>
     
     <!-- Enhanced Floating Elements -->
-    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-gradient-to-r from-[#0B32A4]/15 to-[#0E42CE]/15 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-gradient-to-r from-[#FFA300]/10 to-[#0E42CE]/10 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
+    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-[#0B32A4]/15 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-[#FFA300]/10 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
     
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="text-center space-y-8 fade-in" style="--delay: 0.1s;">
@@ -30,13 +30,13 @@
             <!-- Hero Headline -->
             <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
                 <span class="text-[#0B32A4]">Strategic Solutions</span><br>
-                <span class="text-gradient-gold">Built for Growth</span>
+                <span class="text-[#FFA300]">Built for Growth</span>
             </h1>
 
             <!-- Hero Subheading -->
             <p class="mx-auto max-w-3xl text-xl text-[#0B32A4] leading-relaxed fade-in" style="--delay: 0.4s;">
                 Invest in comprehensive digital strategies that drive sustainable business growth. 
-                <span class="font-semibold text-gold">No hidden fees</span>, just transparent pricing for transformative results.
+                <span class="font-semibold text-[#FFA300]">No hidden fees</span>, just transparent pricing for transformative results.
             </p>
         </div>
     </div>
@@ -48,7 +48,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center space-y-4 mb-16 fade-in" style="--delay: 0.1s;">
             <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#0B32A4]">
-                Choose Your <span class="text-gradient-gold">Growth Plan</span>
+                Choose Your <span class="text-[#FFA300]">Growth Plan</span>
             </h2>
             <p class="text-xl text-[#0B32A4]/80 max-w-2xl mx-auto">
                 Flexible pricing options designed to scale with your Canadian business
@@ -60,7 +60,7 @@
             <div class="card-modern p-8 relative {% if plan.is_popular %}ring-2 ring-[#FFA300]{% endif %} fade-in" style="--delay: calc(0.2s + {{ forloop.counter0 }} * 0.1s); background-color: white; box-shadow: 0 10px 25px -5px rgba(11, 50, 164, 0.1);">
                 {% if plan.is_popular %}
                 <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span class="bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    <span class="bg-[#0B32A4] text-white px-4 py-2 rounded-full text-sm font-semibold">
                         Most Popular
                     </span>
                 </div>
@@ -94,9 +94,9 @@
                             <div class="text-center" id="plan-price-display-{{ plan.id }}">
                                 <div class="flex items-baseline justify-center space-x-1">
                                     <span class="text-4xl font-bold text-[#0E42CE]">${{ plan.servicepricingoption_set.first.price|floatformat:0 }}</span>
-                                    <span class="text-[#0B32A4]/70">CAD</span>
+                                    <span class="text-gray-500">CAD</span>
                                 </div>
-                                <p class="text-[#0B32A4]/70 text-sm mt-1">
+                                <p class="text-gray-500 text-sm mt-1">
                                     {% if plan.servicepricingoption_set.first.period == 'monthly' %}
                                         per month
                                     {% elif plan.servicepricingoption_set.first.period == 'yearly' %}
@@ -175,7 +175,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center space-y-4 mb-16 fade-in" style="--delay: 0.1s;">
             <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
-                <span class="text-[#0B32A4]">Individual</span> <span class="text-gradient-gold">Services</span>
+                <span class="text-[#0B32A4]">Individual</span> <span class="text-[#FFA300]">Services</span>
             </h2>
             <p class="text-xl text-[#0B32A4]/80 max-w-2xl mx-auto">
                 Tailored solutions for specific business needs and objectives
@@ -184,13 +184,13 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for service in services_list %}
-            <div class="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:scale-105 fade-in" style="--delay: calc(0.2s + {{ forloop.counter0 }} * 0.1s);">
-                <!-- Card Background with Gradient -->
-                <div class="absolute inset-0 bg-gradient-to-br from-[#0B32A4] via-white to-[#0E42CE]/50 opacity-90"></div>
-                <div class="absolute inset-0 bg-gradient-to-br from-[#0E42CE]/5 via-transparent to-[#FFA300]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div class="group relative overflow-hidden rounded-2xl border border-[#0B32A4]/20 shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-xl fade-in" style="--delay: calc(0.2s + {{ forloop.counter0 }} * 0.1s);">
+                <!-- Card Background with Solid Color -->
+                <div class="absolute inset-0 bg-white border-gold opacity-90"></div>
+                <div class="absolute inset-0 bg-[#0B32A4]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 <!-- Animated Border -->
-                <div class="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#0B32A4]/20 via-[#FFA300]/20 to-[#0E42CE]/20 p-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div class="absolute inset-0 rounded-2xl bg-[#0B32A4]/20 p-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div class="h-full w-full rounded-2xl bg-white"></div>
                 </div>
 
@@ -199,20 +199,20 @@
                     <!-- Service Icon & Title -->
                     <div class="flex items-start space-x-4 mb-6">
                         <div class="relative">
-                            <div class="icon-container group-hover:scale-110 transition-all duration-500 relative z-10" style="background: linear-gradient(135deg, #0B32A4, #0E42CE); box-shadow: 0 8px 25px rgba(11, 50, 164, 0.3);">
+                            <div class="icon-container group-hover:scale-110 transition-all duration-500 relative z-10" style="background: #0E42CE; box-shadow: 0 8px 25px rgba(11, 50, 164, 0.3);">
                                 <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% elif 'marketing' in service.title.lower %}megaphone{% else %}settings{% endif %}" class="w-7 h-7 text-white"></i>
                             </div>
                             <!-- Icon Glow Effect -->
-                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500 transform scale-150"></div>
+                            <div class="absolute inset-0 rounded-full bg-[#0B32A4] opacity-0 group-hover:opacity-30 blur-xl transition-all duration-500 transform scale-150"></div>
                         </div>
                         <div class="flex-1">
                             <h3 class="text-xl font-bold text-[#0B32A4] group-hover:text-[#0E42CE] transition-colors duration-300">{{ service.title }}</h3>
-                            <div class="h-0.5 bg-gradient-to-r from-[#FFA300] to-transparent mt-2 w-0 group-hover:w-full transition-all duration-500"></div>
+                            <div class="h-0.5 bg-[#FFA300] mt-2 w-0 group-hover:w-full transition-all duration-500"></div>
                         </div>
                     </div>
 
                     <!-- Service Description -->
-                    <p class="text-[#0B32A4]/80 mb-6 leading-relaxed flex-grow">
+                    <p class="text-gray-500 mb-6 leading-relaxed flex-grow">
                         {{ service.short_description|default:service.description|truncatewords:20 }}
                     </p>
 
@@ -220,7 +220,7 @@
                     {% if service.features %}
                     <ul class="space-y-2 mb-6">
                         {% for feature in service.features|slice:":3" %}
-                        <li class="flex items-center space-x-2 text-sm text-[#0B32A4]/80 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc({{ forloop.counter0 }} * 0.1s);">
+                        <li class="flex items-center space-x-2 text-sm text-gray-500 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc({{ forloop.counter0 }} * 0.1s);">
                             <i data-lucide="check" class="w-4 h-4 text-[#FFA300] group-hover:scale-110 transition-transform duration-300"></i>
                             <span>{{ feature }}</span>
                         </li>
@@ -234,7 +234,7 @@
                         {% with first_option=service.servicepricingoption_set.first %}
                         {% if first_option.features %}
                         {% for feature in first_option.features|slice:":3" %}
-                        <div class="flex items-center space-x-2 text-sm text-[#0B32A4]/80 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc({{ forloop.counter0 }} * 0.1s);">
+                        <div class="flex items-center space-x-2 text-sm text-gray-500 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc({{ forloop.counter0 }} * 0.1s);">
                             <i data-lucide="check" class="w-4 h-4 text-[#FFA300] group-hover:scale-110 transition-transform duration-300"></i>
                             <span>{{ feature }}</span>
                         </div>
@@ -247,9 +247,9 @@
                     <!-- Enhanced Service Pricing -->
                     <div class="mb-6">
                         {% if service.price_type == 'custom' %}
-                            <div class="text-center bg-gradient-to-r from-[#0B32A4]/50 to-[#FFA300]/10 rounded-xl p-4 border border-[#FFA300]/20">
+                            <div class="text-center bg-[#0B32A4]/20 rounded-xl p-4 border border-[#FFA300]/20">
                                 <span class="text-2xl font-bold text-[#0E42CE]">Custom Quote</span>
-                                <p class="text-[#0B32A4]/70 text-sm mt-1">Tailored to your needs</p>
+                                <p class="text-gray-500 text-sm mt-1">Tailored to your needs</p>
                             </div>
                         {% else %}
                             {% if service.servicepricingoption_set.all %}
@@ -266,12 +266,12 @@
                                         <i data-lucide="chevron-down" class="w-5 h-5 text-[#FFA300] group-hover:text-[#0E42CE] transition-colors duration-300"></i>
                                     </div>
                                 </div>
-                                <div class="text-center bg-gradient-to-r from-[#0B32A4]/30 to-[#FFA300]/5 rounded-lg p-3" id="service-price-display-{{ service.id }}">
+                                <div class="text-center bg-[#0B32A4]/15 rounded-lg p-3" id="service-price-display-{{ service.id }}">
                                     <div class="flex items-baseline justify-center space-x-1">
                                         <span class="text-2xl font-bold text-[#0E42CE]">${{ service.servicepricingoption_set.first.price|floatformat:0 }}</span>
-                                        <span class="text-[#0B32A4]/70">CAD</span>
+                                        <span class="text-gray-500">CAD</span>
                                     </div>
-                                    <p class="text-[#0B32A4]/70 text-sm">
+                                    <p class="text-gray-500 text-sm">
                                         {% if service.servicepricingoption_set.first.period == 'monthly' %}per month
                                         {% elif service.servicepricingoption_set.first.period == 'yearly' %}per year
                                         {% elif service.servicepricingoption_set.first.period == 'hourly' %}per hour
@@ -280,7 +280,7 @@
                                 </div>
                             </div>
                             {% else %}
-                            <div class="text-center bg-gradient-to-r from-[#0B32A4]/30 to-[#FFA300]/5 rounded-lg p-3">
+                            <div class="text-center bg-[#0B32A4]/15 rounded-lg p-3">
                                 <div class="flex items-baseline justify-center space-x-1">
                                     <span class="text-l font-bold text-[#0E42CE]">Starting From ${{ service.price|floatformat:0 }}</span>
                                     <span class="text-[#0B32A4]/70">CAD</span>
@@ -325,7 +325,7 @@
                                         {% endfor %}
                                     </select>
                                     <div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
-                                        <div class="bg-gradient-to-r from-[#FFA300]/15 to-[#0E42CE]/15 rounded-full p-1.5 group-hover/dropdown:from-[#FFA300]/25 group-hover/dropdown:to-[#0E42CE]/25 transform group-hover/dropdown:scale-110 group-focus-within/dropdown:scale-110 group-focus-within/dropdown:from-[#0E42CE]/30 group-focus-within/dropdown:to-[#0B32A4]/30 transition-all duration-300 shadow-sm">
+                                        <div class="bg-[#FFA300]/15 rounded-full p-1.5 group-hover/dropdown:bg-[#FFA300]/25 transform group-hover/dropdown:scale-110 group-focus-within/dropdown:scale-110 group-focus-within/dropdown:bg-[#0E42CE]/30 transition-all duration-300 shadow-sm">
                                         <i data-lucide="chevron-down" class="w-5 h-5 text-[#FFA300] group-hover/dropdown:text-[#0E42CE] group-focus-within/dropdown:text-[#0B32A4] transition-all duration-300"></i>
                                         </div>
                                     </div>
@@ -359,8 +359,8 @@
                 </div>
 
                 <!-- Floating Elements -->
-                <div class="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-[#FFA300]/10 to-[#0E42CE]/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
-                <div class="absolute bottom-4 left-4 w-12 h-12 bg-gradient-to-br from-[#0B32A4]/10 to-[#FFA300]/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 blur-lg" style="transition-delay: 0.2s;"></div>
+                <div class="absolute top-4 right-4 w-16 h-16 bg-[#FFA300]/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl"></div>
+                <div class="absolute bottom-4 left-4 w-12 h-12 bg-[#0B32A4]/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 blur-lg" style="transition-delay: 0.2s;"></div>
             </div>
             {% endfor %}
         </div>
@@ -368,11 +368,11 @@
 </section>
 
 <!-- FAQ Section -->
-<section class="py-20" style="background-color: #0B32A4;">
+<section class="py-20" style="background-color: #FFFFFF;">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center space-y-4 mb-16 fade-in" style="--delay: 0.1s;">
-            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-white">
-                Frequently Asked <span class="text-gradient-gold">Questions</span>
+            <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#0B32A4]">
+                Frequently Asked <span class="text-[#FFA300]">Questions</span>
             </h2>
         </div>
 
@@ -401,17 +401,17 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-20" style="background: linear-gradient(135deg, #0B32A4, #0E42CE); position: relative; overflow: hidden;">
+<section class="py-20" style="background:rgb(255, 255, 255); position: relative; overflow: hidden;">
     <!-- Background Elements -->
     <div style="position: absolute; top: -10rem; right: -10rem; width: 30rem; height: 30rem; border-radius: 9999px; background-color: #FFA300; opacity: 0.05; animation: float 20s ease-in-out infinite;"></div>
     <div style="position: absolute; bottom: -15rem; left: -5rem; width: 25rem; height: 25rem; border-radius: 9999px; background-color: #0B32A4; opacity: 0.05; animation: floatReverse 25s ease-in-out infinite;"></div>
     
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="space-y-8 fade-in" style="--delay: 0.1s;">
-            <h2 class="text-3xl md:text-4xl font-bold text-white">
+            <h2 class="text-3xl md:text-4xl font-bold text-blue-900">
                 Ready to Transform Your Business?
             </h2>
-            <p class="text-xl text-white/90 leading-relaxed fade-in" style="--delay: 0.2s;">
+            <p class="text-xl text-gold leading-relaxed fade-in" style="--delay: 0.2s;">
                 Not sure which option is right for you? Let's discuss your specific needs and find the perfect solution.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in" style="--delay: 0.3s;">
@@ -420,7 +420,7 @@
                         <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
                         Free Consultation
                     </span>
-                    <span style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, #FFA300, #0E42CE); opacity: 0; transition: opacity 0.3s ease; z-index: 1;"></span>
+                    <span style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #0B32A4; opacity: 0; transition: opacity 0.3s ease; z-index: 1;"></span>
                 </a>
                 <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="btn-ghost inline-flex items-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:border-white transition-all duration-300">
                 <i data-lucide="phone" class="w-5 h-5 mr-2 text-[#FFA300]"></i>

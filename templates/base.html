@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}{{ site_config.site_name|default:"Social Dots Inc." }}{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{{ site_config.meta_description|default:'Strategic AI integration and digital solutions for Canadian businesses' }}{% endblock %}">
-    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dsmgydskc/image/upload/v1751896370/socaildotslog_yg8yvs.svg">
+    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -80,6 +80,8 @@
         --deep-blue: 226 87% 34%; /* #0B32A4 */
         --bright-blue: 226 88% 43%; /* #0E42CE */
         --vibrant-orange: 39 100% 50%; /* #FFA300 */
+        /* Grey for text */
+        --grey: 0 0% 40%; /* Grey for text */
         
         /* Modern Light Theme Variables with New Color Palette */
         --background: var(--cream);
@@ -114,9 +116,9 @@
         @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-cream bg-brightBlue hover:bg-deepBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-vibrantOrange transition-all duration-300 ease-in-out transform hover:-translate-y-1;
     }
 
-    /* Updated gradient text to use new colors */
+    /* Updated text to use solid color instead of gradient */
     .text-gradient {
-        @apply bg-clip-text text-transparent bg-gradient-to-r from-deepBlue to-brightBlue;
+        @apply text-deepBlue;
     }
 
     /* Updated glass card border color */
@@ -134,7 +136,7 @@
 
     /* Updated nav indicator to use vibrantOrange */
     .nav-indicator {
-        background: linear-gradient(90deg, var(--vibrant-orange), var(--gold-light));
+        background-color: var(--vibrant-orange);
         box-shadow: 0 2px 8px rgba(41, 38, 38, 0.3); /* Using vibrantOrange */
     }  
         /* Mobile responsive button adjustments */
@@ -145,7 +147,7 @@
         }
         
         .btn-gold {
-            background: linear-gradient(135deg, #FFA300, #F3F3E0);
+            background-color: #FFA300;
             color: #0B32A4;
             @apply inline-flex items-center justify-center px-4 py-2 rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brightBlue transition-all duration-300 ease-in-out transform hover:-translate-y-1 border-none;
         }
@@ -194,13 +196,13 @@
             }
         }
 
-        /* Modern Text Gradient */
+        /* Modern Text */
         .text-gradient {
-            @apply bg-clip-text text-transparent bg-gradient-to-r from-deepBlue to-brightBlue;
+            @apply text-deepBlue;
         }
         
         .text-gradient-gold {
-            @apply bg-clip-text text-transparent bg-gradient-to-r from-gold to-amber-500;
+            @apply text-vibrantOrange;
         }
 
         /* Modern Glassmorphism with Mobile Responsiveness */
@@ -259,7 +261,7 @@
         }
         
         .pricing-card.featured {
-            @apply bg-gradient-to-br from-deepBlue/5 to-deepBlue/10;
+            @apply bg-deepBlue/5;
             border: 1px solid rgba(11, 50, 164, 0.3);
             position: relative;
             overflow: hidden;
@@ -272,7 +274,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(to right, #0B32A4, #FFA300);
+            background-color: #FFA300;
         }
         
         .pricing-card:hover {
@@ -292,7 +294,7 @@
         }
 
         .gradient-text {
-            @apply bg-gradient-to-r from-deepBlue via-brightBlue to-deepBlue bg-clip-text text-transparent;
+            @apply text-deepBlue;
         }
 
         .glass-morphism {
@@ -336,12 +338,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
+    background-color: rgba(255, 255, 255, 0.3);
     transform: translateX(-100%) rotate(45deg);
     animation: logoShine 6s ease-in-out infinite;
     animation-delay: 2s;
@@ -377,7 +374,7 @@
     left: 0;
     height: 3px;
     width: 0;
-    background: linear-gradient(90deg, var(--vibrant-orange), var(--gold));
+    background-color: var(--vibrant-orange);
     border-radius: 4px;
     transition: width 0.3s ease, opacity 0.3s ease;
     opacity: 0;
@@ -411,7 +408,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 163, 0, 0.1) 0%, transparent 70%);
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -463,7 +459,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--vibrant-orange), transparent);
+    background-color: var(--vibrant-orange);
     transition: width 0.3s ease;
 }
 
@@ -480,28 +476,14 @@
     color: var(--vibrant-orange);
 }
 
-/* Hero Gradient - Custom Theme */
+/* Hero - Custom Theme */
 .hero-gradient {
-    background: linear-gradient(135deg, 
-  #F3F3E0 0%, 
-  #F5F5E5 25%, 
-  #F7F7EA 50%, 
-  #F9F9EF 75%, 
-  #FBFBF4 100%
-    );
+    background-color: #F3F3E0;
 }
 
-        /* Animated background - Custom Theme */
+        /* Background - Custom Theme */
         .animated-bg {
-            background: linear-gradient(-45deg, #F3F3E0, #FFA300, #0E42CE, #0B32A4);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            background-color: #0B32A4;
         }
 
         /* Enhanced Floating animation */
@@ -590,7 +572,7 @@
             width: 60px;
             height: 60px;
             border-radius: 20px;
-            background: linear-gradient(145deg, rgba(14, 66, 206, 1) 0%, rgba(11, 50, 164, 1) 100%);
+            background-color: #0E42CE;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -645,7 +627,7 @@
                             <span class="text-white font-bold text-xl relative z-10">SD</span>
                         </div> {% endcomment %}
                         <div class="flex flex-col">
-                            <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751895533/logo_erctvo.svg" class="h-8" alt="Logo" />
+                            <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751909635/svg_zacw0e.svg" class="h-8" alt="Logo" />
                             <span class="text-[10px] sm:text-xs text-navy/70 font-medium tracking-wider"></span>
                         </div>
                     </a>
@@ -656,32 +638,32 @@
                     <div class="ml-10 flex items-baseline space-x-8"> 
                         <a href="/" class="nav-link group" style="--nav-item-index: 0">
                             <span class="nav-text font-medium">Home</span>
-                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
+                            <span class="nav-indicator bg-vibrantOrange"></span>
                         </a>
                         <a href="/services/" class="nav-link group" style="--nav-item-index: 1">
                             <span class="nav-text font-medium">Services</span>
-                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
+                            <span class="nav-indicator bg-vibrantOrange"></span>
                         </a>
                         <a href="/portfolio/" class="nav-link group" style="--nav-item-index: 2">
                             <span class="nav-text font-medium">Portfolio</span>
-                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
+                            <span class="nav-indicator bg-vibrantOrange"></span>
                         </a>
                         <a href="/about/" class="nav-link group" style="--nav-item-index: 3">
                             <span class="nav-text font-medium">About</span>
-                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
+                            <span class="nav-indicator bg-vibrantOrange"></span>
                         </a>
                         <a href="/blog/" class="nav-link group" style="--nav-item-index: 4">
                             <span class="nav-text font-medium">Blog</span>
-                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
+                            <span class="nav-indicator bg-vibrantOrange"></span>
                         </a>
                         <a href="/cart/" class="nav-link group relative" style="--nav-item-index: 6">
                             <span class="nav-text font-medium flex items-center">
                                 <i data-lucide="shopping-cart" class="w-5 h-5 mr-1"></i>
                                 <span id="cart-count" class="absolute -top-2 -right-2 bg-vibrantOrange text-deepBlue text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
                             </span>
-                            <span class="nav-indicator bg-gradient-to-r from-vibrantOrange to-vibrantOrange/70"></span>
+                            <span class="nav-indicator bg-vibrantOrange"></span>
                         </a>
-                        <a href="/contact/" class="font-bold btn-gold transition-all duration-300 hover:scale-105 shadow-lg hover:linear-gradient(135deg, #FFA300, #F3F3E0) px-4 py-3 ml-4 flex items-center space-x-2 group rounded-sm">
+                        <a href="/contact/" class="font-bold btn-gold transition-all duration-300 hover:scale-105 shadow-lg px-4 py-3 ml-4 flex items-center space-x-2 group rounded-sm">
                             <span>Get Started</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -746,10 +728,7 @@
     <!-- Modern Footer -->
     <style>
         .gradient-text {
-            background: linear-gradient(135deg, #0B32A4, #0E42CE);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #0B32A4;
         }
         
         .canada-pin {
@@ -819,7 +798,7 @@
 
     </style>
     <!-- Enhanced Footer -->
-    <footer class="relative border-t border-gray-700 overflow-hidden" style="background: linear-gradient(135deg, #374151 0%, #1f2937 40%, #111827 70%, #1e293b 100%);">
+    <footer class="relative border-t border-gray-700 overflow-hidden" style="background-color: #0B32A4;">
         <!-- World Map Background with Canada Pin -->
         <div class="absolute inset-0 opacity-30 pointer-events-none">
             <div class="world-map-bg w-full h-full opacity-60"></div>
@@ -838,10 +817,7 @@
                 <!-- Company Info -->
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold">SD</span>
-                        </div>
-                        <span class="text-lg font-bold gradient-text">Social Dots Inc.</span>
+                        <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751909635/svg_zacw0e.svg" class="h-8" alt="Logo" />
                     </div>
                     <p class="text-gray-300 mb-6 max-w-md">
                         Empowering Canadian businesses to thrive in a constantly evolving digital world through strategic AI integration and comprehensive digital solutions.
