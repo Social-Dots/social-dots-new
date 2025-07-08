@@ -42,5 +42,5 @@ pytz==2023.3
 
 # ckEditor
 django-ckeditor==6.7.0
-cloudinary==1.30.0
-cloudinary-storage==2.0.0
+cloudinary==1.38.0
+django-cloudinary-storage==0.3.0
