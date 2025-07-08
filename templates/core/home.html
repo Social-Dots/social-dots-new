@@ -512,7 +512,7 @@
         .slide-item {
             width: 100%;
             height: 100%;
-            border-radius: 16px;
+            border-radius: 5px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -522,7 +522,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(110, 107, 107, 0.15);
             backdrop-filter: blur(5px);
         }
 
@@ -560,6 +560,7 @@
         
         /* Card with image background */
         .slide-item.with-image {
+            background-image: url("https://algorithmman.com/wp-content/uploads/2024/04/programming-languages.png");
             background-size: cover;
             background-position: center;
             position: relative;
@@ -572,7 +573,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
             z-index: 1;
         }
         .slide-item.with-image.slide-brand-strategy {
@@ -843,12 +843,6 @@
             grid-row: span 1;
         }
     }
-    .slide-item.with-image.slide-bg {
-    background-image: url("https://e0.pxfuel.com/wallpapers/158/534/desktop-wallpaper-forex-market-ea-forex-copier-soehoe-v2-8-technical-analysis.jpg");
-    background-size: cover;
-    background-position: center;
-    position: relative;
-}
 .slide-item.with-image.slide-social-bg {
     background-image: url('https://chinmedia.vn/wp-content/uploads/cach-dieu-chinh-facebook.jpg');
     background-size: cover;
@@ -892,7 +886,7 @@
     position: relative;
 }
 .slide-item.with-image.slide-graphic-bg {
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5k-JSKGdxcX4j6HJ7AJdBI72GwWdqdBU2EL9IQDljpVn5bkSccMI73H5mg6QOMZUBrYU&usqp=CAU");
+    background-image: url("https://algorithmman.com/wp-content/uploads/2024/04/programming-languages.png");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -905,6 +899,20 @@
 }
 .slide-item.with-image.slide-email-bg {
     background-image: url("https://img.freepik.com/premium-vector/star-digital-business-brand-content-concept_109722-2728.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.slide-item.with-image.slide-service-bg {
+    background-image: url("https://techtheworld.net/wp-content/uploads/2024/02/OIG3-860x860.jpeg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.slide-item.with-image.slide-tech-bg {
+    background-image: url("https://www.shutterstock.com/image-photo/business-technology-internet-network-concept-260nw-584239843.jpg");
     background-size: cover;
     background-position: center;
     position: relative;
@@ -982,7 +990,7 @@
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-2 with-image slide-content-bg" onclick="redirectTo('/contact/?service=12')">
+                    <div class="slide-item medium slide-2 with-image slide-service-bg" onclick="redirectTo('/contact/?service=12')">
                         <div class="slide-content">
                             <div class="slide-title"></div>
                         </div>
@@ -1051,7 +1059,7 @@
                     </div>
                     
                     <!-- Row 4 -->
-                    <div class="slide-item medium slide-7 with-image slide-influencer-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-7 with-image slide-service-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
                             <div class="slide-title"></div>
                         </div>
@@ -1068,7 +1076,7 @@
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-9" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-9 with-image slide-tech-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
                             <div class="slide-icon"></div>
                             <div class="slide-title"></div>
@@ -1120,7 +1128,7 @@
                         </div>
                     </div>
                     
-                    <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services/short-form-videos')">
+                    <div class="slide-item tall slide-3 with-image slide-tech-bg" onclick="redirectTo('/services/short-form-videos')">
                         <div class="slide-content">
                             <div class="slide-title"></div>
                             <div class="slide-description"></div>
@@ -1140,13 +1148,13 @@
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-6 with-image slide-story-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-6 with-image slide-service-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
                             <div class="slide-title"></div>
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-7 with-image slide-influencer-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-7 with-image slide-service-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
                             <div class="slide-title"></div>
                         </div>
@@ -1163,7 +1171,7 @@
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-9" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-9 with-image slide-tech-bg" onclick="redirectTo('/services')">
                         <div class="slide-content">
                             <div class="slide-icon"></div>
                             <div class="slide-title"></div>
