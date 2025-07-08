@@ -9,15 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
     <style>
         :root {
-            --primary-blue: #0B32A4;
-            --secondary-blue: #0E42CE;
-            --accent-orange: #FFA300;
-            --cream: #F8F9FA;
+            --deepBlue: #0B32A4;
+            --brightBlue: #0E42CE;
+            --vibrantOrange: #FFA300;
             --white: #ffffff;
-            --dark-text: #1a1a1a;
-            --gray-light: #f1f3f4;
-            --gray-medium: #6c757d;
-            --gray-dark: #495057;
+            --grey: #6c757d;
         }
 
         * {
@@ -27,9 +23,9 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: Montserrat;
             line-height: 1.6;
-            color: var(--dark-text);
+            color: var(--grey);
             background-color: var(--white);
         }
 
@@ -41,10 +37,20 @@
 
         /* Hero Section with Mobile Responsiveness */
         .hero {
-            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
             padding: 80px 0;
             position: relative;
             overflow: hidden;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.2;
+            z-index: 1;
         }
         
         @media (max-width: 768px) {
@@ -72,7 +78,7 @@
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
         }
 
         .section-badge {
@@ -80,14 +86,14 @@
             align-items: center;
             gap: 8px;
             background: var(--white);
-            border: 2px solid var(--accent-orange);
+            border: 2px solid var(--vibrantOrange);
             border-radius: 50px;
             padding: 8px 20px;
             font-size: 14px;
             font-weight: 600;
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(255, 163, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(255, 163, 0, 0.3);
         }
         
         @media (max-width: 768px) {
@@ -109,7 +115,7 @@
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            color: var(--dark-text);
+            color: var(--white);
             margin-bottom: 24px;
             line-height: 1.2;
         }
@@ -129,7 +135,7 @@
         }
 
         .hero h1 .highlight {
-            color: var(--primary-blue);
+            color: var(--vibrantOrange);
             position: relative;
         }
 
@@ -140,13 +146,13 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: var(--accent-orange);
+            background: var(--white);
             border-radius: 2px;
         }
 
         .hero p {
             font-size: 1.25rem;
-            color: var(--gray-dark);
+            color: var(--white);
             max-width: 600px;
             margin-bottom: 40px;
         }
@@ -167,13 +173,13 @@
         .about-header h2 {
             font-size: 3.5rem;
             font-weight: 800;
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             margin-bottom: 30px;
             text-align: center;
         }
 
         .about-header p {
-            color: var(--gray-dark);
+            color: var(--grey);
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 40px;
@@ -186,9 +192,9 @@
         .learn-more-btn {
             display: inline-block;
             padding: 12px 30px;
-            background: var(--accent-orange);
+            background: var(--vibrantOrange);
             color: var(--white);
-            border: 2px solid var(--accent-orange);
+            border: 2px solid var(--vibrantOrange);
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
@@ -202,8 +208,8 @@
         }
 
         .learn-more-btn:hover {
-            background: var(--primary-blue);
-            border-color: var(--primary-blue);
+            background: var(--deepBlue);
+            border-color: var(--deepBlue);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(11, 50, 164, 0.3);
         }
@@ -213,7 +219,7 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 25px 50px rgba(11, 50, 164, 0.15);
-            border: 3px solid var(--accent-orange);
+            border: 3px solid var(--vibrantOrange);
         }
 
         .ceo-image img {
@@ -226,7 +232,7 @@
         /* Why Choose Us Section */
         .why-choose-section {
             padding: 100px 0;
-            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            background: var(--white);
         }
 
         .section-header {
@@ -237,7 +243,7 @@
         .section-header h2 {
             font-size: 3rem;
             font-weight: 800;
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             margin-bottom: 20px;
         }
 
@@ -260,19 +266,19 @@
 
         .stat-card:hover {
             transform: translateY(-10px);
-            border-color: var(--accent-orange);
+            border-color: var(--vibrantOrange);
             box-shadow: 0 20px 40px rgba(11, 50, 164, 0.15);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 800;
-            color: var(--secondary-blue);
+            color: var(--brightBlue);
             margin-bottom: 10px;
         }
 
         .stat-label {
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             font-weight: 600;
             font-size: 1.1rem;
             margin-bottom: 10px;
@@ -292,13 +298,13 @@
         .team-header h2 {
             font-size: 3rem;
             font-weight: 800;
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             margin-bottom: 20px;
         }
 
         .team-subtitle {
             font-size: 1.1rem;
-            color: var(--gray-dark);
+            color: var(--grey);
             max-width: 600px;
             margin: 0 auto;
         }
@@ -321,14 +327,14 @@
 
         .team-card:hover {
             transform: translateY(-10px);
-            border-color: var(--accent-orange);
+            border-color: var(--vibrantOrange);
             box-shadow: 0 25px 50px rgba(11, 50, 164, 0.15);
         }
 
         .team-avatar {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            background: var(--deepBlue);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -348,7 +354,7 @@
             left: -5px;
             right: -5px;
             bottom: -5px;
-            border: 2px solid var(--accent-orange);
+            border: 2px solid var(--vibrantOrange);
             border-radius: 50%;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -361,18 +367,18 @@
         .team-name {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             margin-bottom: 8px;
         }
 
         .team-role {
-            color: var(--secondary-blue);
+            color: var(--brightBlue);
             font-weight: 600;
             margin-bottom: 15px;
         }
 
         .team-bio {
-            color: var(--gray-dark);
+            color: var(--grey);
             font-size: 14px;
             line-height: 1.6;
             margin-bottom: 25px;
@@ -387,28 +393,28 @@
         .social-link {
             width: 40px;
             height: 40px;
-            background: var(--cream);
+            background: var(--white);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             text-decoration: none;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 2px solid var(--deepBlue);
         }
 
         .social-link:hover {
-            background: var(--accent-orange);
+            background: var(--vibrantOrange);
             color: var(--white);
             transform: scale(1.1);
-            border-color: var(--accent-orange);
+            border-color: var(--vibrantOrange);
         }
 
         /* CTA Section */
         .cta-section {
             padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            background: var(--deepBlue);
             color: var(--white);
             text-align: center;
             position: relative;
@@ -466,14 +472,14 @@
         }
 
         .btn-primary {
-            background: var(--accent-orange);
+            background: var(--vibrantOrange);
             color: var(--white);
-            border: 2px solid var(--accent-orange);
+            border: 2px solid var(--vibrantOrange);
         }
 
         .btn-primary:hover {
             background: var(--white);
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             border-color: var(--white);
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(255, 163, 0, 0.3);
@@ -487,7 +493,7 @@
 
         .btn-secondary:hover {
             background: var(--white);
-            color: var(--primary-blue);
+            color: var(--deepBlue);
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
         }
@@ -560,15 +566,7 @@
         }
 
         /* Enhanced visual effects */
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--accent-orange), var(--secondary-blue));
-        }
+        /* Bottom line removed as requested */
 
         .section-badge span:first-child {
             font-size: 16px;
@@ -576,182 +574,274 @@
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero bg-[#0B32A4]">
-        <div class="container">
-            <div class="hero-content">
-                <div class="section-badge">
-                    <span>🇨🇦</span>
-                    <span>About CEO & Company</span>
-                </div>
-                <h1>
-                    <span class="highlight">Empowering Canadian</span><br>
-                    Businesses to<br>
-                    <span class="highlight">Thrive Digitally</span>
-                </h1>
-                <p>
-                    Founded in Toronto, Social Dots Inc. brings together strategic thinking, cutting-edge technology, and deep Canadian market expertise to help businesses navigate and excel in the digital landscape.
-                </p>
+<!-- Hero Section -->
+<section class="relative overflow-hidden min-h-[80vh]" style="background-color:rgb(224, 226, 231);">
+    <!-- Modern Background -->
+    <div class="absolute inset-0">
+        <img 
+            src="https://www.shutterstock.com/image-photo/using-laptop-show-icon-address-600nw-2521386695.jpg" 
+            alt="Business Analytics" 
+            class="w-full h-full object-cover opacity-20"
+        />
+        <div class="absolute inset-0"></div>
+    </div>
+    
+    <!-- Enhanced Floating Elements -->
+    <div class="absolute top-1/4 left-1/6 w-96 h-96 bg-[#FFA300]/10 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-120 h-120 bg-[#FFA300]/15 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-36 lg:py-44">
+        <div class="text-center space-y-10 fade-in" style="--delay: 0.1s;">
+            <!-- Section Badge -->
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium text-sm md:text-base mx-auto fade-in" style="--delay: 0.2s;">
+                <span class="mr-2">✦</span>
+                <span>About Our Company</span>
+                <span class="ml-2">✦</span>
+            </div>
+
+            <!-- Hero Headline -->
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight fade-in leading-tight" style="--delay: 0.3s;">
+                <span class="text-[#0B32A4]">About <span class="text-[#FFA300]">CEO</span> & </span><br>
+                <span class="text-[#0B32A4]">Our <span class="text-[#FFA300]">Company</span></span>
+            </h1>
+
+            <!-- Hero Subheading -->
+            <p class="mx-auto max-w-3xl text-xl md:text-2xl text-[#0B32A4] leading-relaxed fade-in" style="--delay: 0.4s;">
+                Founded in Toronto, Social Dots Inc. brings together strategic thinking, cutting-edge technology, and deep Canadian market expertise to help businesses navigate and excel in the digital landscape.
+            </p>
+            
+            <!-- CTA Button -->
+            <div class="mt-8 fade-in" style="--delay: 0.5s;">
+                <a href="#about-ceo" class="inline-flex items-center px-8 py-4 rounded-full bg-[#FFA300] text-white font-semibold text-lg transition-all duration-300 hover:bg-[#FFA300]/90 hover:scale-105 hover:shadow-lg hover:shadow-[#FFA300]/20">
+                    Learn More
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- About Us Section -->
-    <section class="about-section">
+    <section id="about-ceo" class="about-section py-24 bg-white">
         <div class="container">
-            <div class="about-header">
-                <h2>About CEO</h2>
-                <p>
-                    15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach and spiritual guide for purpose-driven entrepreneurs. Integrates strategic clarity with learning design, having worked with business and technical teams across top Canadian and US companies.
-                </p>
-                <a href="#" class="learn-more-btn">Ali Shafique</a>
-            </div>
-            <div class="ceo-image">
-                <img src="https://media.istockphoto.com/id/2212478710/vector/faceless-male-avatar-in-hoodie-illustration.jpg?s=612x612&w=0&k=20&c=Wlwpp5BUnzbzXxaCT0a7WqP_JvknA-JtOhBoKDpQMHE=" />
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 order-2 md:order-1">
+                    <div class="about-header text-left">
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#FFA300]/10 text-[#FFA300] font-medium text-sm mb-6">
+                            <span class="mr-2">✦</span>
+                            <span>Meet Our CEO</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-[#0B32A4] mb-6">About CEO</h2>
+                        <p class="text-lg text-grey leading-relaxed mb-8">
+                            15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach and spiritual guide for purpose-driven entrepreneurs. Integrates strategic clarity with learning design, having worked with business and technical teams across top Canadian and US companies.
+                        </p>
+                        <a href="#" class="inline-flex items-center px-8 py-4 rounded-full bg-[#0B32A4] text-white font-semibold transition-all duration-300 hover:bg-[#0E42CE] hover:shadow-lg">
+                            Ali Shafique
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 order-1 md:order-2">
+                    <div class="relative">
+                        <div class="absolute -top-6 -left-6 w-full h-full border-2 border-[#FFA300] rounded-2xl"></div>
+                        <div class="ceo-image relative z-10 overflow-hidden rounded-2xl shadow-2xl transform transition-transform duration-500 hover:scale-105">
+                            <img src="https://media.istockphoto.com/id/2212478710/vector/faceless-male-avatar-in-hoodie-illustration.jpg?s=612x612&w=0&k=20&c=Wlwpp5BUnzbzXxaCT0a7WqP_JvknA-JtOhBoKDpQMHE=" class="w-full h-auto" />
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-[#0B32A4] rounded-full flex items-center justify-center text-white font-bold text-xl">CEO</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us Section -->
-    <section class="why-choose-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose Us</h2>
+    <section id="why-choose-us" class="py-24 bg-[#F8FAFC]">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#0B32A4]/10 text-[#0B32A4] font-medium text-sm mb-6">
+                    <span class="mr-2">✦</span>
+                    <span>Our Achievements</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-[#0B32A4] mb-6">Why Choose Us</h2>
+                <p class="max-w-3xl mx-auto text-lg text-grey leading-relaxed">
+                    We combine strategic thinking with technical expertise to deliver exceptional results for our clients across Canada.
+                </p>
             </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">10k</div>
-                    <div class="stat-label">Why Us</div>
-                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
-                        Over 10,000 successful implementations across Canada
-                    </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#0B32A4] text-white mb-6 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">10k+</div>
+                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Implementations</div>
+                        <p class="text-grey">
+                            Over 10,000 successful implementations across Canada, helping businesses transform digitally.
+                        </p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Projects</div>
-                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
-                        Successfully delivered projects with 95% client satisfaction
-                    </p>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#FFA300] text-white mb-6 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">50+</div>
+                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Projects</div>
+                        <p class="text-grey">
+                            Successfully delivered projects with 95% client satisfaction rate and ongoing partnerships.
+                        </p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Years</div>
-                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
-                        Decade of experience in Canadian digital market
-                    </p>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#0E42CE] text-white mb-6 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">10+</div>
+                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Years</div>
+                        <p class="text-grey">
+                            A decade of experience in the Canadian digital market, understanding local business needs.
+                        </p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">30k</div>
-                    <div class="stat-label">Revenue Growth</div>
-                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
-                        Average revenue increase for our clients
-                    </p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">30+</div>
-                    <div class="stat-label">Awards</div>
-                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
-                        Industry recognition and client testimonials
-                    </p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">7</div>
-                    <div class="stat-label">Specialists</div>
-                    <p style="font-size: 12px; color: var(--gray-dark); margin-top: 10px;">
-                        Expert team members dedicated to your success
-                    </p>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#0B32A4] text-white mb-6 mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">30k+</div>
+                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Revenue Growth</div>
+                        <p class="text-grey">
+                            Average revenue increase for our clients through strategic digital transformation.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- Team Section -->
-    <section class="team-section">
-        <div class="container">
-            <div class="team-header">
-                <div class="section-badge">
-                    <i data-lucide="users" style="width: 16px; height: 16px;"></i>
+    <section id="team" class="py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#0B32A4]/10 text-[#0B32A4] font-medium text-sm mb-6">
+                    <span class="mr-2">✦</span>
                     <span>Our Amazing Team</span>
                 </div>
-                <h2>Our Team</h2>
-                <p class="team-subtitle">
+                <h2 class="text-4xl md:text-5xl font-bold text-[#0B32A4] mb-6">Meet Our Team</h2>
+                <p class="max-w-3xl mx-auto text-lg text-grey leading-relaxed">
                     Our diverse team combines deep Canadian market knowledge with international expertise and cutting-edge technical skills.
                 </p>
             </div>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-avatar">AS</div>
-                    <h3 class="team-name">Ali Shafique</h3>
-                    <p class="team-role">Founder & CEO</p>
-                    <p class="team-bio">15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach.</p>
-                    <div class="team-social">
-                        <a href="https://linkedin.com/in/alishafique" class="social-link">
-                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
-                        </a>
-                        <a href="mailto:ali@socialdots.ca" class="social-link">
-                            <i data-lucide="mail" style="width: 20px; height: 20px;"></i>
-                        </a>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                    <div class="relative h-64 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] flex items-center justify-center">
+                        <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center text-[#0B32A4] text-4xl font-bold">
+                            AS
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0B32A4] to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-[#0B32A4] mb-2">Ali Shafique</h3>
+                        <p class="text-[#FFA300] font-semibold mb-4">Founder & CEO</p>
+                        <p class="text-grey mb-6">15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach.</p>
+                        <div class="flex space-x-4">
+                            <a href="https://linkedin.com/in/alishafique" class="w-10 h-10 rounded-full bg-[#0B32A4] flex items-center justify-center text-white transition-all hover:bg-[#0E42CE]">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="mailto:ali@socialdots.ca" class="w-10 h-10 rounded-full bg-[#FFA300] flex items-center justify-center text-white transition-all hover:bg-[#FFA300]/80">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <!-- <div class="team-card">
-                    <div class="team-avatar">HA</div>
-                    <h3 class="team-name">Hooria Amiri</h3>
-                    <p class="team-role">Video Editor & Content Creator</p>
-                    <p class="team-bio">Skilled video editor and content creator specializing in engaging visual content that aligns with brand messaging.</p>
-                    <div class="team-social">
-                        <a href="#" class="social-link">
-                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
-                        </a>
+                
+                <!-- Commented team members with enhanced styling -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 opacity-60">
+                    <div class="relative h-64 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] flex items-center justify-center">
+                        <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center text-[#0B32A4] text-4xl font-bold">
+                            ?
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0B32A4] to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-[#0B32A4] mb-2">Join Our Team</h3>
+                        <p class="text-[#FFA300] font-semibold mb-4">Open Position</p>
+                        <p class="text-grey mb-6">We're looking for talented individuals to join our growing team. If you're passionate about digital transformation, we want to hear from you.</p>
+                        <div class="flex space-x-4">
+                            <a href="/contact" class="w-10 h-10 rounded-full bg-[#0B32A4] flex items-center justify-center text-white transition-all hover:bg-[#0E42CE]">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">AH</div>
-                    <h3 class="team-name">Ali Hayyan</h3>
-                    <p class="team-role">Content & SEO Specialist</p>
-                    <p class="team-bio">Expert in content strategy and SEO optimization, focused on creating compelling content that drives organic growth.</p>
-                    <div class="team-social">
-                        <a href="#" class="social-link">
-                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
-                        </a>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 opacity-60">
+                    <div class="relative h-64 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] flex items-center justify-center">
+                        <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center text-[#0B32A4] text-4xl font-bold">
+                            ?
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0B32A4] to-transparent"></div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-[#0B32A4] mb-2">Your Name Here</h3>
+                        <p class="text-[#FFA300] font-semibold mb-4">Future Team Member</p>
+                        <p class="text-grey mb-6">Become part of our innovative team and help shape the future of digital transformation in the Canadian market.</p>
+                        <div class="flex space-x-4">
+                            <a href="/careers" class="w-10 h-10 rounded-full bg-[#0B32A4] flex items-center justify-center text-white transition-all hover:bg-[#0E42CE]">
+                                <i data-lucide="briefcase" class="w-5 h-5"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="team-card">
-                    <div class="team-avatar">TG</div>
-                    <h3 class="team-name">The Ghana</h3>
-                    <p class="team-role">Digital Strategist & Social Media Manager</p>
-                    <p class="team-bio">Digital strategist specializing in social media management and comprehensive digital marketing strategies.</p>
-                    <div class="team-social">
-                        <a href="#" class="social-link">
-                            <i data-lucide="linkedin" style="width: 20px; height: 20px;"></i>
-                        </a>
-                    </div>
-                </div> -->
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Ready to Work Together?</h2>
-            <p>
-                Let's discuss how our strategic approach and Canadian expertise can help your business thrive in the digital landscape.
-            </p>
-            <div class="cta-buttons">
-                <a href="/contact/" class="btn btn-primary">
-                    <i data-lucide="calendar" style="width: 20px; height: 20px;"></i>
-                    Schedule a Meeting
+    <section class = "bg-white"style="padding-top: 5rem; padding-bottom: 5rem; position: relative; overflow: hidden;">
+    <!-- Background Elements -->
+    <div style="position: absolute; top: -10rem; right: -10rem; width: 30rem; height: 30rem; border-radius: 9999px; background-color: var(--vibrantOrange); opacity: 0.05; animation: float 20s ease-in-out infinite;"></div>
+    <div style="position: absolute; bottom: -15rem; left: -5rem; width: 25rem; height: 25rem; border-radius: 9999px; background-color: var(--grey); opacity: 0.05; animation: floatReverse 25s ease-in-out infinite;"></div>
+    
+    <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; position: relative;">
+        <div style="text-align: center; max-width: 48rem; margin-left: auto; margin-right: auto; animation: fadeIn 0.8s ease-out forwards;">
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--deepBlue); margin-bottom: 1rem;">Ready to transform your digital presence?</h2>
+            <p style="color: var(--grey); opacity: 0.9; font-size: 1.125rem; margin-bottom: 2rem;">Let's discuss how we can help your business thrive in the digital landscape.</p>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.2s;">
+                <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/yourusername/30min'});return false;" class="btn-gold" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0.75rem; padding-bottom: 0.75rem; background-color: var(--vibrantOrange); color: #183B4E; font-weight: 500; border-radius: 0.375rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                    <span style="position: relative; z-index: 10;">Book a free strategy call</span>
                 </a>
-                <a href="/services/" class="btn btn-secondary">
-                    <i data-lucide="arrow-right" style="width: 20px; height: 20px;"></i>
-                    Explore Our Services
+                <a href="tel:+1234567890" class="btn-ghost" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0.75rem; padding-bottom: 0.75rem; background-color: transparent; color: var(--grey); font-weight: 500; border-radius: 0.375rem; border: 1px solid rgba(243, 243, 224, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
+                    <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    <span style="position: relative; z-index: 10;">Call us now</span>
                 </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <script>
         // Initialize Lucide icons

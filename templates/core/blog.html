@@ -57,7 +57,7 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--primary-blue) 100%);
+    background: #FFA300;
     color: var(--cream);
     border: none;
     padding: 12px 24px;
@@ -71,7 +71,7 @@
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(255, 163, 0, 0.3);
+    box-shadow: 0 8px 24px #FFA300;
     color: var(--cream);
     text-decoration: none;
 }
@@ -187,33 +187,34 @@
 </style>
 
 <!-- Blog Hero Section -->
-<section class="relative overflow-hidden hero-gradient">
-    <!-- Animated Background Elements -->
-    <div class="absolute inset-0 animated-bg opacity-10"></div>
+<section class="relative overflow-hidden min-h-[70vh]" style="background-color:rgb(128, 119, 119);">
+    <!-- Modern Background -->
+    <div class="absolute inset-0">
+        <img 
+            src="https://cdn.wallpapersafari.com/51/76/3TFfqI.jpg" 
+            alt="Business Analytics" 
+            class="w-full h-full object-cover opacity-40"
+        />
+        <div class="absolute inset-0 bg-[#0B32A4]/30"></div>
+    </div>
     
-    <!-- Floating Geometric Shapes -->
-    <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full blur-3xl float-animation" style="background: rgba(221, 168, 83, 0.15);"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl float-animation" style="background: rgba(243, 243, 224, 0.1); animation-delay: -3s;"></div>
+    <!-- Enhanced Floating Elements -->
+    <div class="absolute top-1/4 left-1/6 w-72 h-72 bg-[#0B32A4]/15 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
+    <div class="absolute bottom-1/3 right-1/6 w-96 h-96 bg-[#FFA300]/10 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div class="text-center space-y-8">
-            <!-- Hero Badge -->
-            <div class="inline-flex items-center space-x-2 badge-highlight backdrop-blur-sm rounded-full px-4 py-2 text-sm">
-                <i data-lucide="book-open" class="w-4 h-4"></i>
-                <span>Insights & Knowledge</span>
-            </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center space-y-8 fade-in" style="--delay: 0.1s;">
 
             <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                <span class="text-gold">Strategic Insights</span><br>
-                <span style="color: var(--cream);">for Digital</span><br>
-                <span class="text-gold">Excellence</span>
+            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
+                <span class="text-[#0B32A4]">Strategic Insights</span><br>
+                <span class="text-[#FFA300]">for Digital Excellence</span>
             </h1>
 
             <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl leading-relaxed" style="color: rgba(243, 243, 224, 0.9);">
-                Explore the latest trends, strategies, and insights in AI integration, digital marketing, and business transformation. 
-                Learn from our experience helping Canadian businesses thrive in the digital landscape.
+            <p class="font-bold mx-auto max-w-3xl text-xl text-[#0B32A4] leading-relaxed fade-in" style="--delay: 0.4s;">
+                Explore the latest 
+                <span class="font-bold text-[#FFA300]">trends, strategies, and insights in AI integration, digital marketing, and business transformation. </span>, Learn from our experience helping Canadian businesses thrive in the digital landscape.
             </p>
 
             <!-- Search Form -->
@@ -226,7 +227,7 @@
                         placeholder="Search articles..." 
                         class="w-full px-6 py-4 pl-12 search-input backdrop-blur-sm rounded-lg transition-all"
                     >
-                    <i data-lucide="search" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-secondary"></i>
+                    <i data-lucide="search" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#FFA300]"></i>
                     <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 btn-primary px-4 py-2 text-sm">
                         Search
                     </button>
@@ -235,6 +236,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- Blog Content Section -->
 <section class="py-20 bg-page">
