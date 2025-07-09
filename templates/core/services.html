@@ -219,7 +219,7 @@
                     <!-- Service Features -->
                     {% if service.features %}
                     <ul class="space-y-2 mb-6">
-                        {% for feature in service.features|slice:":3" %}
+                        {% for feature in service.features %}
                         <li class="flex items-center space-x-2 text-sm text-gray-500 opacity-80 group-hover:opacity-100 transition-opacity duration-300" style="transition-delay: calc({{ forloop.counter0 }} * 0.1s);">
                             <i data-lucide="check" class="w-4 h-4 text-[#FFA300] group-hover:scale-110 transition-transform duration-300"></i>
                             <span>{{ feature }}</span>
