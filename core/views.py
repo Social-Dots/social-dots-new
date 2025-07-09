@@ -93,21 +93,62 @@ def home(request):
     return render(request, 'core/home.html', context)
 
 
+# def services(request):
+#     # Only get services and their pricing options
+#     services_list = Service.objects.filter(is_active=True).prefetch_related('pricing_options')
+    
+#     # Add pricing options for each service
+#     for service in services_list:
+#         # Get pricing options from ServicePricingOption model
+#         db_pricing_options = service.pricing_options.all().order_by('order', 'price')
+        
+#         if db_pricing_options.exists():
+#             # Use database pricing options
+#             service.pricing_options_list = db_pricing_options
+#             print(f"Service '{service.title}': Found {db_pricing_options.count()} pricing options")
+#         else:
+#             # Only use fallback if no database options exist
+#             base_price = service.price or Decimal('100.00')
+#             service.pricing_options_list = [
+#                 {
+#                     'name': 'Standard', 
+#                     'price': base_price, 
+#                     'period': 'one_time',
+#                     'description': 'Basic package'
+#                 },
+#                 {
+#                     'name': 'Premium', 
+#                     'price': base_price + Decimal('30.00'), 
+#                     'period': 'one_time',
+#                     'description': 'Enhanced package'
+#                 },
+#                 {
+#                     'name': 'Enterprise', 
+#                     'price': base_price + Decimal('60.00'), 
+#                     'period': 'one_time',
+#                     'description': 'Full-featured package'
+#                 }
+#             ]
+#             print(f"Service '{service.title}': Using fallback pricing options")
+    
+#     context = {
+#         'services_list': services_list,
+#     }
+    
+#     return render(request, 'core/services.html', context)
 def services(request):
-    # Only get services and their pricing options
+    # Only get active services and their related pricing options
     services_list = Service.objects.filter(is_active=True).prefetch_related('pricing_options')
     
-    # Add pricing options for each service
     for service in services_list:
-        # Get pricing options from ServicePricingOption model
+        # Get pricing options from related model
         db_pricing_options = service.pricing_options.all().order_by('order', 'price')
         
         if db_pricing_options.exists():
-            # Use database pricing options
             service.pricing_options_list = db_pricing_options
             print(f"Service '{service.title}': Found {db_pricing_options.count()} pricing options")
         else:
-            # Only use fallback if no database options exist
+            # Fallback pricing options if none are set in DB
             base_price = service.price or Decimal('100.00')
             service.pricing_options_list = [
                 {
@@ -130,13 +171,24 @@ def services(request):
                 }
             ]
             print(f"Service '{service.title}': Using fallback pricing options")
-    
+
+        # ✅ Safely parse features field into a list for template use
+        raw_features = getattr(service, 'features', [])
+        if isinstance(raw_features, list):
+            service.features_list = raw_features
+        else:
+            try:
+                service.features_list = json.loads(raw_features)
+                if not isinstance(service.features_list, list):
+                    service.features_list = []
+            except Exception:
+                service.features_list = []
+
     context = {
         'services_list': services_list,
     }
-    
-    return render(request, 'core/services.html', context)
 
+    return render(request, 'core/services.html', context)
 
 def service_detail(request, slug):
     service = get_object_or_404(Service, slug=slug, is_active=True)
