@@ -1,0 +1,307 @@
+{% load static %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .trust-section {
+            padding: 2rem 0;
+            background-color: #000000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .trust-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .trust-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .trust-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-text {
+            font-size: 1.125rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .trust-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #2196f3, #1976d2);
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        .logos-container {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            white-space: nowrap;
+        }
+
+        .logo-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .logos-track {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            animation-duration: 30s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            padding: 1rem 0;
+        }
+
+        .logos-track-left {
+            animation-name: scrollLeft;
+        }
+
+        .logos-track-right {
+            animation-name: scrollRight;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        
+        /* Add subtle glow effect on hover */
+        .logo-item-container:hover {
+            box-shadow: 0 8px 25px rgba(221, 168, 83, 0.25), 0 0 15px rgba(221, 168, 83, 0.15);
+        }
+        
+        .logo-placeholder:hover {
+            box-shadow: 0 8px 25px rgba(221, 168, 83, 0.25), 0 0 15px rgba(221, 168, 83, 0.15);
+        }
+
+        .logo-item-container {
+            flex-shrink: 0;
+            height: 60px;
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(243, 243, 224, 0.08);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin: 0 0.5rem;
+            border: 1px solid rgba(243, 243, 224, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-item-container:hover {
+            background-color: rgba(243, 243, 224, 0.12);
+            border-color: rgba(221, 168, 83, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-item {
+            flex-shrink: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1) opacity(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .logo-item-container:hover .logo-item {
+            filter: brightness(0) invert(1) opacity(1);
+        }
+
+        /* Pause animation on hover */
+        .logo-row:hover .logos-track {
+            animation-play-state: paused;
+        }
+
+        /* Logo placeholders with company names */
+        .logo-placeholder {
+            height: 70px;
+            min-width: 150px;
+            background: rgba(243, 243, 224, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(243, 243, 224, 0.7);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-align: center;
+            padding: 0 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(243, 243, 224, 0.1);
+            margin: 0 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-placeholder:hover {
+            color: rgba(243, 243, 224, 1);
+            transform: translateY(-5px);
+            background: rgba(221, 168, 83, 0.15);
+            border-color: rgba(221, 168, 83, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Different colors for variety */
+        .logo-placeholder:nth-child(2n) {
+            background: rgba(39, 84, 138, 0.1);
+        }
+
+        .logo-placeholder:nth-child(3n) {
+            background: rgba(24, 59, 78, 0.1);
+        }
+
+        .logo-placeholder:nth-child(4n) {
+            background: rgba(221, 168, 83, 0.1);
+        }
+
+        .logo-placeholder:nth-child(5n) {
+            background: rgba(243, 243, 224, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .trust-section {
+                padding: 2rem 0;
+            }
+            
+            .trust-number {
+                font-size: 2rem;
+            }
+            
+            .logos-track {
+                gap: 2rem;
+            }
+            
+            .logo-placeholder {
+                min-width: 100px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="py-12 h-[220px] bg-gradient-to-r from-darkNavy to-navy border-y border-gold/20 overflow-hidden relative">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-[radial-gradient(#DDA853_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]">
+            </div>
+        </div>
+        <div class="mx-auto relative">
+            <div class="items-center justify-center">
+                <h3 class="m-1 text-2xl font-bold text-center text-white">Social Media Platforms We Support</h3>
+
+                <div class=" bg-gradient-to-r from-gold/80 to-gold rounded-full"></div>
+            </div>
+            
+            <div class="logos-container">
+                <!-- First Row - Moving Left -->
+                <div class="logo-row">
+                    <div class="logos-track logos-track-left">
+                        {% load static %}
+                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/youtube.svg' %}" alt="YouTube" class="logo-item" />
+                        </a>
+                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/instagram.svg' %}" alt="Instagram" class="logo-item" />
+                        </a>
+                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/facebook.svg' %}" alt="Facebook" class="logo-item" />
+                        </a>
+                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container">
+                            <img src="{% static 'images/trust-logos/tiktok.svg' %}" alt="TikTok" class="logo-item" />
+                        </a>
+                        <a href="https://x.com/SocialDotsCa" class="logo-item-container">
+                            <img src="{% static 'images/trust-logos/twitter.svg' %}" alt="X / Twitter" class="logo-item" />
+                        </a>
+                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container">
+                            <img src="{% static 'images/trust-logos/threads.svg' %}" alt="Threads" class="logo-item" />
+                        </a>
+                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/linkedin.svg' %}" alt="LinkedIn" class="logo-item" />
+                        </a>
+                        <!-- Duplicate for seamless loop -->
+                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/youtube.svg' %}" alt="YouTube" class="logo-item" />
+                        </a>
+                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/instagram.svg' %}" alt="Instagram" class="logo-item" />
+                        </a>
+                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/facebook.svg' %}" alt="Facebook" class="logo-item" />
+                        </a>
+                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container">
+                            <img src="{% static 'images/trust-logos/tiktok.svg' %}" alt="TikTok" class="logo-item" />
+                        </a>
+                        <a href="https://x.com/SocialDotsCa" class="logo-item-container">
+                            <img src="{% static 'images/trust-logos/twitter.svg' %}" alt="X / Twitter" class="logo-item" />
+                        </a>
+                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container">
+                            <img src="{% static 'images/trust-logos/threads.svg' %}" alt="Threads" class="logo-item" />
+                        </a>
+                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container" target="_blank" rel="noopener noreferrer">
+                            <img src="{% static 'images/trust-logos/linkedin.svg' %}" alt="LinkedIn" class="logo-item" />
+                        </a>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Optional: Add click handlers for logos
+        document.querySelectorAll('.logo-item-container').forEach(logo => {
+            logo.addEventListener('mouseenter', function() {
+                const altText = this.querySelector('img').alt;
+                console.log(`Hovering on ${altText}`);
+                // Add your hover logic here if needed
+            });
+        });
+
+        // Optional: Pause all animations on section hover
+        const trustSection = document.querySelector('.trust-section');
+        const allTracks = document.querySelectorAll('.logos-track');
+
+        trustSection.addEventListener('mouseenter', () => {
+            allTracks.forEach(track => {
+                track.style.animationPlayState = 'paused';
+            });
+        });
+
+        trustSection.addEventListener('mouseleave', () => {
+            allTracks.forEach(track => {
+                track.style.animationPlayState = 'running';
+            });
+        });
+    </script>

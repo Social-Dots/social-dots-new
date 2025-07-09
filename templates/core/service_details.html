@@ -179,25 +179,40 @@
         
         <!-- Enhanced Service Title with Badge and Typography -->
         <div class="mb-12">
-            <!-- Service Badge -->
-            <div class="inline-block mb-4 animate-fade-in-up">
-                <span class="bg-[#0E42CE]/10 text-[#0E42CE] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md">
-                    Premium Service
-                </span>
+            <div class="flex justify-between items-start">
+                <div class="flex-1">
+                    <!-- Service Badge -->
+                    <div class="inline-block mb-4 animate-fade-in-up">
+                        <span class="bg-[#0E42CE]/10 text-[#0E42CE] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md">
+                            Premium Service
+                        </span>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] leading-tight tracking-tight animate-fade-in-up animation-delay-100">
+                        {{ service.title }}
+                    </h1>
+                    
+                    <!-- Enhanced Subtitle/tagline with decorative element -->
+                    {% if service.tagline %}
+                    <div class="relative pl-6 border-l-4 border-[#FFA300] animate-fade-in-up animation-delay-200">
+                        <p class="text-xl md:text-2xl text-gray-600 font-light leading-relaxed max-w-3xl">
+                            {{ service.tagline }}
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Add to Cart Button -->
+                <div class="ml-4 mt-4 flex-shrink-0 animate-fade-in-up">
+                    <button onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '{{ service.price }}')" 
+                        class="flex items-center justify-center py-3 px-6 bg-gradient-to-r from-[#FFA300] to-[#FF8C00] hover:from-[#FF8C00] hover:to-[#FF7A00] text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                        </svg>
+                        Add to Cart
+                    </button>
+                </div>
             </div>
-            
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] leading-tight tracking-tight animate-fade-in-up animation-delay-100">
-                {{ service.title }}
-            </h1>
-            
-            <!-- Enhanced Subtitle/tagline with decorative element -->
-            {% if service.tagline %}
-            <div class="relative pl-6 border-l-4 border-[#FFA300] animate-fade-in-up animation-delay-200">
-                <p class="text-xl md:text-2xl text-gray-600 font-light leading-relaxed max-w-3xl">
-                    {{ service.tagline }}
-                </p>
-            </div>
-            {% endif %}
         </div>
         
         <!-- Enhanced Meta Information with Icons -->
@@ -336,10 +351,23 @@
                                 </ul>
                                 {% endif %}
                                 
-                                <a href="{% url 'contact' %}?service={{ service.id }}&option={{ option.id }}" 
-                                   class="block w-full text-center py-3 px-4 {% if option.is_popular %}bg-gradient-to-r from-[#FFA300] to-[#FF8C00] hover:from-[#FF8C00] hover:to-[#FF7A00]{% else %}bg-gradient-to-r from-[#0E42CE] to-[#0B32A4] hover:from-[#0B32A4] hover:to-[#092A8E]{% endif %} text-white font-medium rounded-lg transition-all duration-300 transform group-hover:scale-[1.02] shadow-md hover:shadow-lg">
-                                    Select Plan
-                                </a>
+                                <div class="flex space-x-2">
+                                    <button onclick="purchaseServiceOption('{{ service.id }}', '{{ service.title }}', '{{ option.id }}', '{{ option.name }}', '{{ option.price }}', '{{ option.period }}')" 
+                                       class="flex-1 flex items-center justify-center py-3 px-4 {% if option.is_popular %}bg-gradient-to-r from-[#FFA300] to-[#FF8C00] hover:from-[#FF8C00] hover:to-[#FF7A00]{% else %}bg-gradient-to-r from-[#0E42CE] to-[#0B32A4] hover:from-[#0B32A4] hover:to-[#092A8E]{% endif %} text-white font-medium rounded-lg transition-all duration-300 transform group-hover:scale-[1.02] shadow-md hover:shadow-lg">
+                                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                                        </svg>
+                                        Add to Cart
+                                    </button>
+                                    <a href="{% url 'contact' %}?service={{ service.id }}&option={{ option.id }}" 
+                                       class="flex-1 flex items-center justify-center py-3 px-4 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-300 transform group-hover:scale-[1.02] shadow-sm hover:shadow-md">
+                                        <svg class="w-5 h-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                        </svg>
+                                        Contact Us
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         {% endfor %}
@@ -700,5 +728,158 @@
     </div>
 </section>
 {% endif %}
+
+<!-- Add to Cart Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if cart object exists
+        console.log('Checking cart object:', window.cart);
+        
+        // Create cart object if it doesn't exist
+        if (typeof window.cart === 'undefined') {
+            console.log('Cart object not found, creating fallback cart');
+            window.cart = {
+                items: [],
+                init: function() {
+                    // Load cart from localStorage
+                    const savedCart = localStorage.getItem('cart');
+                    if (savedCart) {
+                        try {
+                            this.items = JSON.parse(savedCart);
+                        } catch (e) {
+                            console.error('Error parsing saved cart:', e);
+                            this.items = [];
+                        }
+                    }
+                },
+                addItem: function(item) {
+                    console.log('Adding item to cart:', item);
+                    
+                    // Check if item already exists in cart
+                    const existingItem = this.items.find(i => i.id === item.id && i.priceType === item.priceType);
+                    
+                    if (existingItem) {
+                        // Increment quantity if item already exists
+                        existingItem.quantity += 1;
+                    } else {
+                        // Add new item to cart
+                        this.items.push(item);
+                    }
+                    
+                    // Save cart to localStorage
+                    this.saveCart();
+                    
+                    // Show notification
+                    this.showNotification(`${item.name} added to cart`, 'success');
+                    
+                    return true;
+                },
+                removeItem: function(itemId, priceType) {
+                    this.items = this.items.filter(item => !(item.id === itemId && item.priceType === priceType));
+                    this.saveCart();
+                },
+                updateQuantity: function(itemId, priceType, quantity) {
+                    const item = this.items.find(i => i.id === itemId && i.priceType === priceType);
+                    if (item) {
+                        item.quantity = quantity;
+                        this.saveCart();
+                    }
+                },
+                saveCart: function() {
+                    localStorage.setItem('cart', JSON.stringify(this.items));
+                    this.updateCartCount();
+                },
+                updateCartCount: function() {
+                    // Update cart count in UI if element exists
+                    const cartCountElement = document.getElementById('cart-count');
+                    if (cartCountElement) {
+                        const itemCount = this.items.reduce((total, item) => total + item.quantity, 0);
+                        cartCountElement.textContent = itemCount;
+                        cartCountElement.classList.toggle('hidden', itemCount === 0);
+                    }
+                },
+                showNotification: function(message, type = 'info') {
+                    // Simple alert fallback
+                    alert(message);
+                }
+            };
+            
+            // Initialize cart
+            window.cart.init();
+        }
+    });
+    
+    // Function to purchase a service option
+    function purchaseServiceOption(serviceId, serviceName, optionId, optionName, optionPrice, optionPeriod) {
+        console.log('purchaseServiceOption called with:', { serviceId, serviceName, optionId, optionName, optionPrice, optionPeriod });
+        
+        // Get the latest cart reference
+        const currentCart = window.cart;
+        
+        // Double-check cart is available
+        if (!currentCart || typeof currentCart.addItem !== 'function') {
+            console.error('Cart object is not available or addItem is not a function');
+            alert('Error: Cart functionality is not available. Please try again later.');
+            return;
+        }
+        
+        try {
+            // Create the item object
+            const item = {
+                id: `service_option_${optionId}`,
+                name: `${serviceName} - ${optionName}`,
+                price: parseFloat(optionPrice),
+                priceType: optionPeriod || 'one-time',
+                maintenance: 0,
+                quantity: 1,
+                itemType: 'service_option'
+            };
+            
+            // Add the item to cart
+            currentCart.addItem(item);
+            console.log('Service option added to cart successfully');
+            
+        } catch (error) {
+            console.error('Error adding service option to cart:', error);
+            alert('Error adding service to cart: ' + error.message);
+        }
+    }
+    
+    // Function to purchase a regular service (without options)
+    function purchaseService(serviceId, serviceName, defaultPrice) {
+        console.log('purchaseService called with:', { serviceId, serviceName, defaultPrice });
+        
+        // Get the latest cart reference
+        const currentCart = window.cart;
+        
+        // Double-check cart is available
+        if (!currentCart || typeof currentCart.addItem !== 'function') {
+            console.error('Cart object is not available or addItem is not a function');
+            alert('Error: Cart functionality is not available. Please try again later.');
+            return;
+        }
+        
+        try {
+            // Create the item object
+            const item = {
+                id: `service_${serviceId}`,
+                name: serviceName,
+                price: parseFloat(defaultPrice) || 0,
+                priceType: 'one-time',
+                maintenance: 0,
+                quantity: 1,
+                itemType: 'service'
+            };
+            
+            // Add the item to cart
+            currentCart.addItem(item);
+            console.log('Service added to cart successfully');
+            
+        } catch (error) {
+            console.error('Error adding service to cart:', error);
+            alert('Error adding service to cart: ' + error.message);
+        }
+    }
+</script>
 
 {% endblock %}
