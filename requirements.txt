@@ -41,11 +41,6 @@ python-dateutil==2.8.2
 pytz==2023.3
 
 # ckEditor
-<<<<<<< HEAD
 django-ckeditor==6.7.0
 cloudinary==1.38.0
 django-cloudinary-storage==0.3.0
-=======
-django-ckeditor==6.7.0cloudinary
-django-cloudinary-storage
->>>>>>> 1a3b4b7 (you will be finding a little update in requirements.txt, and in home.html updated the section of example of our work, andi n service page, we were having an error which was breaking the code, resolved that)
