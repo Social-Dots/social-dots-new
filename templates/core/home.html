@@ -1248,7 +1248,7 @@
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="md:text-4xl font-bold mb-4 text-deepBlue" style="font-size: 4rem;" >Examples of <span class="text-vibrantOrange">our work</span></h2>
+              <h2 class="md:text-4xl font-bold mb-4 text-deepBlue" style="font-size: 4rem;" >Examples of <span class="text-vibrantOrange">our work</span></h2>
             <!-- <p class="text-lg text-grey max-w-3xl mx-auto">Get your design & marketing work done without the hassle of unreliable freelancers, costly agencies. Pay a fixed, monthly, and predictable rate, with no contracts or surprises.</p> -->
             <p class="text-lg text-grey max-w-3xl mx-auto">While we're a new agency, our expertise shines through our founder's personal brand and initial client projects.</p>
             <div class="w-24 h-1 bg-vibrantOrange mx-auto mt-6 rounded-full"></div>
@@ -1298,15 +1298,14 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% if portfolios %}
                 {% for portfolio in portfolios %}
-                    <a href="{% url 'portfolio_detail' portfolio.slug %}" class="block">
-                    <div class="relative overflow-hidden rounded-xl group border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300">
+                    <div class="relative overflow-hidden rounded-lg border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer" onclick="showPortfolioModal('{{ portfolio.id }}')">
                         <!-- Instagram-style card with user info at top -->
                         <div class="bg-white p-3 z-10 flex items-center border-b border-gray-100">
-                            <div class="w-8 h-8 rounded-full bg-vibrantOrange/20 flex items-center justify-center mr-2">
-                                <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="Profile" class="w-8 h-8 rounded-full object-cover" />
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                                <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="Feedbird" class="w-8 h-8 rounded-full object-cover" />
                             </div>
                             <div class="flex-1">
-                                <div class="text-sm font-semibold text-deepBlue">Socialdots</div>
+                                <div class="text-sm font-semibold text-gray-900">Social Dots</div>
                             </div>
                             <div class="text-gray-500">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -1317,85 +1316,264 @@
                         
                         <!-- Portfolio image -->
                         <div class="aspect-w-1 aspect-h-1 w-full">
-                            <img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                        </div>
-                        
-                        <!-- Content overlay on hover -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                            <h3 class="text-xl font-bold text-white mb-2">{{ portfolio.title }}</h3>
-                            <p class="text-white/80 text-sm mb-4">{{ portfolio.description|truncatechars:100 }}</p>
-                            
-                            {% if portfolio.content_type == 'video' and portfolio.video_url %}
-                                <a href="{% url 'portfolio_detail' portfolio.slug %}" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    Watch Video
-                                </a>
-                            {% elif portfolio.content_type == 'blog' and portfolio.blog_link %}
-                                <a href="{% url 'portfolio_detail' portfolio.slug %}" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-                                    </svg>
-                                    Read Blog
-                                </a>
-                            {% elif portfolio.content_type == 'email' %}
-                                <a href="{% url 'portfolio_detail' portfolio.slug %}" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                    </svg>
-                                    View Email
-                                </a>
-                            {% else %}
-                                <a href="{% url 'portfolio_detail' portfolio.slug %}" class="inline-flex items-center text-white bg-vibrantOrange/90 hover:bg-vibrantOrange px-4 py-2 rounded-full text-sm font-medium transition-all">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                    </svg>
-                                    View Details
-                                </a>
-                            {% endif %}
+                            <img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}" class="w-full h-full object-cover" />
                         </div>
                         
                         <!-- Instagram-style action buttons -->
                         <div class="bg-white p-3 border-t border-gray-100">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-4">
-                                    <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                    <button class="text-gray-700 hover:text-red-500 transition-colors" onclick="event.stopPropagation()">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                         </svg>
                                     </button>
-                                    <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                    <button class="text-gray-700 hover:text-blue-500 transition-colors" onclick="event.stopPropagation()">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                         </svg>
                                     </button>
-                                    <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                    <button class="text-gray-700 hover:text-blue-500 transition-colors" onclick="event.stopPropagation()">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                                         </svg>
                                     </button>
                                 </div>
-                                <button class="text-deepBlue hover:text-vibrantOrange transition-colors">
+                                <button class="text-gray-700 hover:text-blue-500 transition-colors" onclick="event.stopPropagation()">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                                     </svg>
                                 </button>
                             </div>
                         </div>
+                        
+                        <!-- Portfolio details -->
+                        <div class="p-3 bg-white">
+                            <div class="text-sm text-gray-500 mb-2">{{ portfolio.category.name }}</div>
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">{{ portfolio.title }}</h3>
+                            <p class="text-sm text-gray-600 mb-3">{{ portfolio.description|truncatechars:80 }}</p>
+                            
+                            <a href="{% url 'portfolio_detail' portfolio.slug %}" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors" 
+                               onclick="showPortfolioModal('{{ portfolio.id }}'); return false;">
+                                {% if portfolio.content_type == 'video' %}
+                                    <span>Watch Video</span>
+                                {% elif portfolio.content_type == 'blog' %}
+                                    <span>Read Blog</span>
+                                {% elif portfolio.content_type == 'email' %}
+                                    <span>View Email</span>
+                                {% else %}
+                                    <span>View Details</span>
+                                {% endif %}
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
-                    </a>
                 {% endfor %}
             {% else %}
                 <div class="col-span-3 text-center py-10">
-                    <p class="text-lg text-brightBlue">No portfolio items found for this category.</p>
+                    <p class="text-lg text-gray-600">No portfolio items found for this category.</p>
                 </div>
             {% endif %}
         </div>
+        
+        <!-- Load More Button -->
+        <div class="text-center mt-10">
+            <button class="px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors">
+                Load more
+            </button>
+        </div>
+    </div>
+    
+    <!-- Portfolio Modal -->
+    <div id="portfolioModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="fixed inset-0 bg-black opacity-75" onclick="closePortfolioModal()"></div>
+            
+            <div class="relative bg-white rounded-lg max-w-4xl w-full max-h-90vh overflow-y-auto">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-4 border-b">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="Feedbird" class="w-10 h-10 rounded-full object-cover" />
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Social Dots</div>
+                            <div class="text-xs text-gray-500">Sponsored</div>
+                        </div>
+                    </div>
+                    <button onclick="closePortfolioModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Modal Content -->
+                <div id="portfolioModalContent" class="p-4">
+                    <!-- Content will be loaded dynamically -->
+                    <div id="portfolioLoading" class="animate-pulse">
+                        <div class="flex items-center justify-center rounded-lg bg-gray-100 h-80 mb-4">
+                            <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-blue-500 transition ease-in-out duration-150">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Loading content...
+                            </div>
+                        </div>
+                        <div class="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                    </div>
+                    <div id="portfolioContent" class="hidden">
+                        <!-- Actual content will be inserted here by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Modal Footer -->
+                <div class="p-4 border-t">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <button class="text-gray-700 hover:text-red-500 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </button>
+                            <button class="text-gray-700 hover:text-blue-500 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                            </button>
+                            <button class="text-gray-700 hover:text-blue-500 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <a href="#" id="portfolioDetailLink" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
+                            View Full Details
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+<!-- Portfolio Modal Script -->
+<script>
+    function showPortfolioModal(portfolioId) {
+        // Show the modal with loading animation
+        const modal = document.getElementById('portfolioModal');
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+        
+        // Show loading state and hide content
+        const loadingElement = document.getElementById('portfolioLoading');
+        const contentElement = document.getElementById('portfolioContent');
+        
+        if (loadingElement && contentElement) {
+            loadingElement.classList.remove('hidden');
+            contentElement.classList.add('hidden');
+        }
+        
+        // Update the detail link
+        const detailLink = document.getElementById('portfolioDetailLink');
+        detailLink.href = `/portfolio/${portfolioId}/`;
+        // Also update the text based on content type
+        const portfolioCard = document.querySelector(`[onclick="showPortfolioModal('${portfolioId}')"]`);
+        if (portfolioCard) {
+            const linkText = portfolioCard.querySelector('a span')?.textContent || 'View Full Details';
+            detailLink.innerHTML = `
+                ${linkText}
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            `;
+        }
+        
+        // Find the portfolio data from the page
+        // In a real implementation, you would fetch this via AJAX
+        // For demonstration, we'll simulate loading content after a short delay
+        setTimeout(() => {
+            // Find the clicked portfolio card
+            const portfolioCard = document.querySelector(`[onclick="showPortfolioModal('${portfolioId}')"]`);
+            
+            if (portfolioCard) {
+                const image = portfolioCard.querySelector('.aspect-w-1 img');
+                const title = portfolioCard.querySelector('h3')?.textContent || 'Portfolio Item';
+                const description = portfolioCard.querySelector('p')?.textContent || 'No description available';
+                const category = portfolioCard.querySelector('.text-sm.text-gray-500')?.textContent || '';
+                
+                // Update modal content
+                if (contentElement) {
+                    contentElement.innerHTML = `
+                        <img src="${image?.src || ''}" class="w-full rounded-lg mb-4" alt="${title}">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">${title}</h2>
+                        <div class="text-sm text-gray-500 mb-3">${category}</div>
+                        <p class="text-gray-600 mb-4">${description}</p>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-blue-800 mb-2">About this project</h3>
+                            <p class="text-blue-700">This is an example of our work for a client in the ${category} industry.</p>
+                        </div>
+                    `;
+                    
+                    // Hide loading and show content
+                     loadingElement.classList.add('hidden');
+                     contentElement.classList.remove('hidden');
+                 }
+             } else {
+                 // Handle case where portfolio card is not found
+                 if (contentElement) {
+                     contentElement.innerHTML = `
+                         <div class="text-center py-10">
+                             <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                             </svg>
+                             <h3 class="text-lg font-medium text-gray-900 mb-2">Content Not Found</h3>
+                             <p class="text-gray-500">We couldn't find the portfolio item you're looking for.</p>
+                         </div>
+                     `;
+                     
+                     // Hide loading and show content
+                     loadingElement.classList.add('hidden');
+                     contentElement.classList.remove('hidden');
+                 }
+             }
+            } else {
+                // Fallback content if portfolio card not found
+                modalContent.innerHTML = `
+                    <div class="text-center py-8">
+                        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <h2 class="text-xl font-semibold text-gray-700">Portfolio Details</h2>
+                        <p class="text-gray-500 mt-2">Click on "View Full Details" to see the complete portfolio item.</p>
+                    </div>
+                `;
+            }
+        }, 800); // Simulate loading delay
+    }
+    
+    function closePortfolioModal() {
+        document.getElementById('portfolioModal').classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
+    
+    // Close modal when clicking Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closePortfolioModal();
+        }
+    });
+</script>
 
 <!-- Process Flow Section -->
 <section style="bg-white; padding-top: 6rem; padding-bottom: 6rem; position: relative; overflow: hidden;">
