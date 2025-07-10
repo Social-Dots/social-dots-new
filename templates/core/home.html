@@ -1281,16 +1281,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% if portfolios %}
                 {% for portfolio in portfolios %}
-                    <div class="relative overflow-hidden rounded-lg border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer" onclick="showPortfolioModal('{{ portfolio.id }}')">
+                    <div class="relative overflow-hidden rounded-lg border border-gray-200 shadow-sm hover:shadow-xl hover:border-orange-300 transition-all duration-300 cursor-pointer group" onclick="showPortfolioModal('{{ portfolio.id }}')">
                         <!-- Instagram-style card with user info at top -->
-                        <div class="bg-white p-3 z-10 flex items-center border-b border-gray-100">
-                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
+                        <div class="bg-white p-3 z-10 flex items-center border-b border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 group-hover:bg-orange-100 transition-colors duration-300">
                                 <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="Feedbird" class="w-8 h-8 rounded-full object-cover" />
                             </div>
                             <div class="flex-1">
-                                <div class="text-sm font-semibold text-gray-900">Social Dots</div>
+                                <div class="text-sm font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">Social Dots</div>
                             </div>
-                            <div class="text-gray-500">
+                            <div class="text-gray-500 group-hover:text-orange-500 transition-colors duration-300">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                                 </svg>
@@ -1298,33 +1298,33 @@
                         </div>
                         
                         <!-- Portfolio image -->
-                        <div class="aspect-w-1 aspect-h-1 w-full">
+                        <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
                             <a href= "{% url 'portfolio_detail' portfolio.slug %}">
-                                <img href= "{% url 'portfolio_detail' portfolio.slug %}" src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}" class="w-full h-full object-cover" />
+                                <img href= "{% url 'portfolio_detail' portfolio.slug %}" src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                             </a>
                         </div>
                         
                         <!-- Instagram-style action buttons -->
-                        <div class="bg-white p-3 border-t border-gray-100">
+                        <div class="bg-white p-3 border-t border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center space-x-4">
-                                    <button class="text-gray-700 hover:text-red-500 transition-colors" onclick="event.stopPropagation()">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                    <button class="text-red-500 hover:text-red-600 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
+                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
                                         </svg>
                                     </button>
-                                    <button class="text-gray-700 hover:text-blue-500 transition-colors" onclick="event.stopPropagation()">
+                                    <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
                                     </button>
-                                    <button class="text-gray-700 hover:text-blue-500 transition-colors" onclick="event.stopPropagation()">
+                                    <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                                         </svg>
                                     </button>
                                 </div>
-                                <button class="text-gray-700 hover:text-blue-500 transition-colors" onclick="event.stopPropagation()">
+                                <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                                     </svg>
@@ -1693,120 +1693,216 @@
 </section>
 
 <!-- Featured Services -->
-<section class="py-20 bg-white">
+<section class="py-20 bg-gradient-to-b from-white to-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
-        <div class="text-center space-y-4 mb-16">
-            <div class="inline-flex items-center space-x-2 bg-muted/50 backdrop-blur-sm border border-border rounded-full px-4 py-2 text-sm" style="background-color: rgba(255, 163, 0, 0.1); border-color: rgba(255, 163, 0, 0.3);">
-                <i data-lucide="zap" class="w-4 h-4 text-yellow-500" style="color: var(--vibrantOrange);"></i>
-                <span class="text-muted-foreground" style="color:#FFA300;">Core Services</span>
+        <div class="text-center mb-16">
+            <div class="inline-block mb-3">
+                <span class="bg-vibrantOrange bg-clip-text text-transparent text-lg font-bold tracking-wide">WHAT WE DO</span>
             </div>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight" style="color:#0E42CE;">
-                <span style="color: var(--vibrantOrange);">Strategic Solutions</span> that Connect<br>
-                Business Goals with Smart Execution
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-orange-500">Solutions</span> <span class="text-blue-700">That We Deliver</span>
             </h2>
-            <p class="text-xl text-muted-foreground max-w-3xl mx-auto" style="color:rgb(27, 27, 26); opacity: 0.8;">
-                Beyond isolated tactics—we deliver comprehensive, integrated strategies that align with your values and drive sustainable growth.
+            <div class="w-24 h-1 bg-orange-500 mx-auto mb-6"></div>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Simple strategies. Remarkable results. We build what your business needs.  
             </p>
         </div>
 
         <!-- Services Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for service in featured_services %}
-            <div class="card-modern p-8 group bg-deepBlue/5 border border-vibrantOrange hover:border-vibrantOrange hover:bg-deepBlue/10 transition-all duration-300 rounded-lg shadow-md">
-                <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-brightBlue p-3 rounded-lg">
-                        <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-7 h-7 text-white"></i>
+            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <!-- Service Icon (Floating) -->
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+                
+                <div class="p-6 relative z-10">
+                    <!-- Icon and Title -->
+                    <div class="flex items-start mb-4">
+                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
+                            <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{{ service.title }}</h3>
+                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
+                                From $99
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold" style="color: #FFA300;">{{ service.title }}</h3>
-                </div>
-                
-                <div style="background-color: #FFA300; color: #1e293b;" class="text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">
-                starting from $99
-                </div>
-                
-                <p class="text-grey mb-6 leading-relaxed">
-                    {{ service.short_description|default:service.description|truncatewords:20 }}
-                </p>
-
-                {% if service.features %}
-                <ul class="space-y-2 mb-6 ">
-                    {% for feature in service.features%}
-                    <li class="flex items-center space-x-2 text-sm text-grey ">
-                        <i data-lucide="check" class="w-4 h-4 text-vibrantOrange"></i>
-                        <span>{{ feature }}</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-                
-                <div class="flex justify-between items-center mt-4">
-                    <a href="/services/{{ service.slug }}/" class="inline-flex items-center px-4 py-2 text-sm border-2 border-white-400 rounded-md font-medium text-vibrantOrange hover:text-vibrantOrange transition-colors">
-                        Learn More
-                        <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-                    </a>
                     
-                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-vibrantOrange hover:bg-vibrantOrange transition-colors duration-300 rounded-md">
-                        Buy Now
-                    </a>
+                    <!-- Description -->
+                    <p class="text-gray-600 mb-6">
+                        {{ service.short_description|default:service.description|truncatewords:15 }}
+                    </p>
+
+                    <!-- Features (Simplified) -->
+                    {% if service.features %}
+                    <ul class="space-y-2 mb-6">
+                        {% for feature in features_list %}
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>{{ feature }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+                        <a href="/services/{{ service.slug }}/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        
+                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
+                            Get Started
+                        </a>
+                    </div>
                 </div>
             </div>
             {% empty %}
             <!-- Fallback services if none exist -->
-            <div class="card-modern p-8 group bg-deepBlue/5 border border-deepBlue/10 hover:border-vibrantOrange hover:bg-deepBlue/10 transition-all duration-300 rounded-lg shadow-md">
-                <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-vibrantOrange/20 p-3 rounded-lg">
-                        <i data-lucide="target" class="w-7 h-7 text-darkNavy"></i>
+            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+                
+                <div class="p-6 relative z-10">
+                    <div class="flex items-start mb-4">
+                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
+                            <i data-lucide="target" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Digital Strategy</h3>
+                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
+                                From $99
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold" style="color: var(--deepBlue);">Digital Strategy & Consulting</h3>
-                </div>
-                <div style="background-color: #FFA300; color: #1e293b;" class="text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
-                <p style="color: var(--grey);" class="mb-6">Comprehensive digital strategy development that connects business goals with smart execution.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <a href="/services/" class="inline-flex items-center text-sm font-medium text-deepBlue hover:text-vibrantOrange transition-colors">
-                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-vibrantOrange hover:bg-deepBlue transition-colors duration-300 rounded-md">
-                        Buy Now
-                    </a>
+                    
+                    <p class="text-gray-600 mb-6">
+                        Smart strategies that connect your business goals with effective execution.
+                    </p>
+
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Market Analysis</span>
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Competitive Research</span>
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Growth Planning</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+                        <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        
+                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
+                            Get Started
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="card-modern p-8 group bg-deepBlue/5 border border-deepBlue/10 hover:border-vibrantOrange hover:bg-deepBlue/10 transition-all duration-300 rounded-lg shadow-md">
-                <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-vibrantOrange/20 p-3 rounded-lg">
-                        <i data-lucide="database" class="w-7 h-7" style="color: var(--deepBlue);"></i>
+            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+                
+                <div class="p-6 relative z-10">
+                    <div class="flex items-start mb-4">
+                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
+                            <i data-lucide="database" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">CRM Solutions</h3>
+                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
+                                From $99
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold" style="color: var(--deepBlue);">Salesforce + CRM Optimization</h3>
-                </div>
-                <div style="background-color: #FFA300; color: #1e293b;" class="text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
-                <p style="color: var(--grey);" class="mb-6">Expert Salesforce configuration, customization, and optimization for your business needs.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <a href="/services/" class="inline-flex items-center text-sm font-medium text-deepBlue hover:text-vibrantOrange transition-colors">
-                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-vibrantOrange hover:bg-deepBlue transition-colors duration-300 rounded-md">
-                        Buy Now
-                    </a>
+                    
+                    <p class="text-gray-600 mb-6">
+                        Streamlined Salesforce and CRM solutions tailored to your business needs.
+                    </p>
+
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Custom Configuration</span>
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Data Migration</span>
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Workflow Automation</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+                        <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        
+                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
+                            Get Started
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="card-modern p-8 group bg-deepBlue/5 border border-deepBlue/10 hover:border-vibrantOrange hover:bg-deepBlue/10 transition-all duration-300 rounded-lg shadow-md">
-                <div class="flex items-center space-x-4 mb-6">
-                    <div class="icon-container group-hover:scale-110 transition-all duration-300 bg-vibrantOrange/20 p-3 rounded-lg">
-                        <i data-lucide="brain-circuit" class="w-7 h-7" style="color: var(--deepBlue);"></i>
+            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+                
+                <div class="p-6 relative z-10">
+                    <div class="flex items-start mb-4">
+                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
+                            <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">AI Solutions</h3>
+                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
+                                From $99
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-semibold" style="color: var(--deepBlue);">AI-Driven Campaign Optimization</h3>
-                </div>
-                <div style="background-color: #FFA300; color: #1e293b;" class="text-xs font-medium px-2.5 py-0.5 rounded-full inline-block mb-4">starting from $200</div>
-                <p style="color: var(--grey);" class="mb-6">Strategic AI integration for campaign optimization and measurable business benefits.</p>
-                <div class="flex justify-between items-center mt-4">
-                    <a href="/services/" class="inline-flex items-center text-sm font-medium text-deepBlue hover:text-vibrantOrange transition-colors">
-                        Learn More <i data-lucide="arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                    <a href="/services/" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-vibrantOrange hover:bg-deepBlue transition-colors duration-300 rounded-md">
-                        Buy Now
-                    </a>
+                    
+                    <p class="text-gray-600 mb-6">
+                        Smart AI integration for measurable business growth and campaign optimization.
+                    </p>
+
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Predictive Analytics</span>
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Automated Insights</span>
+                        </li>
+                        <li class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span>Smart Optimization</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+                        <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                        
+                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
+                            Get Started
+                        </a>
+                    </div>
                 </div>
             </div>
             {% endfor %}
