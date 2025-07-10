@@ -1770,9 +1770,12 @@
                             <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </a>
                         
-                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
-                            Get Started
-                        </a>
+                        <button onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '99')" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                            </svg>
+                            Add to Cart
+                        </button>
                     </div>
                 </div>
             </div>
@@ -2115,6 +2118,45 @@
     }
     function redirectTo(path) {
         window.location.href = path;
+    }
+    
+    // Function to purchase a service and add it to cart
+    function purchaseService(serviceId, serviceName, defaultPrice) {
+        console.log('purchaseService called with:', { serviceId, serviceName, defaultPrice });
+        
+        // Get the latest cart reference
+        const currentCart = window.cart;
+        
+        // Double-check cart is available
+        if (!currentCart || typeof currentCart.addItem !== 'function') {
+            console.error('Cart object is not available or addItem is not a function');
+            alert('Error: Cart functionality is not available. Please try again later.');
+            return;
+        }
+        
+        try {
+            // Create the item object
+            const item = {
+                id: `service_${serviceId}`,
+                name: serviceName,
+                price: parseFloat(defaultPrice) || 0,
+                priceType: 'one-time',
+                maintenance: 0,
+                quantity: 1,
+                itemType: 'service'
+            };
+            
+            // Add the item to cart
+            currentCart.addItem(item);
+            currentCart.saveCart();
+            currentCart.updateCartCount();
+            currentCart.showNotification(`${serviceName} added to cart successfully!`);
+            console.log('Service added to cart successfully');
+            
+        } catch (error) {
+            console.error('Error adding service to cart:', error);
+            alert('Error adding service to cart: ' + error.message);
+        }
     }
 </script>
 {% endblock %}
