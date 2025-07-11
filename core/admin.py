@@ -101,6 +101,23 @@ class ProjectAdmin(ImportExportModelAdmin):
     list_display = ['title', 'client_name', 'status', 'is_featured', 'start_date', 'end_date']
     list_filter = ['status', 'is_featured', 'start_date']
     search_fields = ['title', 'client_name', 'description']
+    prepopulated_fields = {'slug': ('title',)}
+    ordering = ['-created_at']
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('title', 'slug', 'client_name', 'description')
+        }),
+        ('Media', {
+            'fields': ('image', 'gallery')
+        }),
+        ('Project Details', {
+            'fields': ('technologies', 'project_url', 'github_url', 'status', 'start_date', 'end_date')
+        }),
+        ('Display Settings', {
+            'fields': ('is_featured', 'order')
+        }),
+    )
 
 @admin.register(BlogPost)
 class BlogPostAdmin(ImportExportModelAdmin):

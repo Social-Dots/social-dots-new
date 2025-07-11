@@ -226,8 +226,9 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     client_name = models.CharField(max_length=100, blank=True)
-    description = models.TextField()
+    description = RichTextUploadingField()
     image = models.ImageField(upload_to='project_images/', blank=True, null=True)
+    cloudinary_image_id = models.CharField(max_length=255, blank=True, null=True)
     gallery = models.JSONField(default=list, blank=True, help_text="List of image URLs")
     technologies = models.JSONField(default=list, blank=True)
     project_url = models.URLField(blank=True)
@@ -248,18 +249,20 @@ class Project(models.Model):
             self.slug = slugify(self.title)
         
         # Handle image upload to Cloudinary if image field has a file
-        if self.image and not self.cloudinary_image_id and hasattr(self.image, 'file'):
-            from .cloudinary_utils import upload_image
-            try:
-                # Upload the image to Cloudinary
-                result = upload_image(self.image, folder=f'portfolio_images/{self.slug}')
-                # Store the Cloudinary public ID
-                self.cloudinary_image_id = result['public_id']
-            except Exception as e:
-                # Log the error but continue saving the model
-                import logging
-                logger = logging.getLogger(__name__)
-                logger.error(f"Error uploading image to Cloudinary: {e}")
+        if self.image and not self.cloudinary_image_id and hasattr(self.image, 'file') and not self.image.name.endswith('/'): 
+            # Check if the image is not empty and not a directory
+            if hasattr(self.image, 'size') and self.image.size > 0:
+                from .cloudinary_utils import upload_image
+                try:
+                    # Upload the image to Cloudinary
+                    result = upload_image(self.image, folder=f'project_images/{self.slug}')
+                    # Store the Cloudinary public ID
+                    self.cloudinary_image_id = result['public_id']
+                except Exception as e:
+                    # Log the error but continue saving the model
+                    import logging
+                    logger = logging.getLogger(__name__)
+                    logger.error(f"Error uploading image to Cloudinary: {e}")
         
         super().save(*args, **kwargs)
 

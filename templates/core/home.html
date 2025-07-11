@@ -71,11 +71,88 @@
 <!-- Hero Section  -->
 {% load static %}
     <style>
+    /* Ultra-wide screen support for inline styled sections */
+    @media (min-width: 2560px) {
+        .ultra-wide-container {
+            max-width: 2000px !important;
+        }
+        
+        section.py-20 > div {
+            max-width: 2000px !important;
+        }
+        
+        .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4.gap-8 {
+            grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        }
+        
+        .grid.grid-cols-1 {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            max-width: 2000px;
+            margin: 0 auto;
+        }
+        
+        /* Call to action section */
+        .cta-section h2 {
+            font-size: 3rem !important;
+        }
+        
+        .cta-section p {
+            font-size: 1.5rem !important;
+            max-width: 60% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        
+        /* Button sizing */
+        .cta-button {
+            padding: 1.25rem 2.5rem !important;
+            font-size: 1.25rem !important;
+        }
+        
+        /* General spacing */
+        .px-4 {
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
+        }
+    }
         :root {
             /* New color palette */
             --deepBlue: #0B32A4;
             --brightBlue: #0E42CE;
             --vibrantOrange: #FFA300;
+        }
+        
+        /* Ultra-wide screen support */
+        @media (min-width: 2560px) {
+            .hero-container {
+                max-width: 2000px;
+                margin: 0 auto;
+                grid-template-columns: 1fr 700px;
+                gap: 6rem;
+            }
+            
+            .hero-content {
+                max-width: 1000px;
+            }
+            
+            .hero-title {
+                font-size: 4.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+                max-width: 80%;
+            }
+            
+            .hero-slider {
+                width: 700px;
+                height: 700px;
+                margin: 0 auto;
+            }
+            
+            .slider-track {
+                grid-template-rows: repeat(6, 140px);
+            }
         }
         
         * {
@@ -101,6 +178,7 @@
             overflow: hidden;
             position: relative;
             width: 100%;
+            justify-content: center;
         }
         
         .hero-section::before {
@@ -821,6 +899,62 @@
             grid-template-rows: repeat(10, 80px);
         }
     }
+    
+    /* Ultra-wide screen support for portfolio and other sections */
+    @media (min-width: 2560px) {
+        .max-w-7xl {
+            max-width: 2000px !important;
+        }
+        
+        .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-6 {
+            grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+            max-width: 2000px;
+            margin: 0 auto;
+        }
+        
+        .py-20 {
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+        
+        .text-3xl.md\:text-5xl {
+            font-size: 4rem;
+        }
+        
+        /* Portfolio section */
+        .portfolio-section h2 {
+            font-size: 4.5rem !important;
+        }
+        
+        .portfolio-section p {
+            font-size: 1.25rem !important;
+            max-width: 60% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        
+        #portfolio-tabs button {
+            padding: 0.75rem 1.5rem !important;
+            font-size: 1rem !important;
+        }
+        
+        /* Process flow section */
+        .process-step {
+            padding: 2.5rem !important;
+        }
+        
+        /* Testimonials section */
+        .testimonial-card {
+            max-width: 450px !important;
+        }
+        
+        /* Featured services grid */
+        .featured-services-grid {
+            max-width: 2000px;
+            margin: 0 auto;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)) !important;
+        }
+    }
 
     /* Additional mobile-specific styles for the slider */
     @media (max-width: 768px) {
@@ -1244,8 +1378,8 @@
 {% include 'core/trust-logos-strip.html' %}
 
 <!-- What We Do Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-20 bg-white portfolio-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
         <div class="text-center mb-16">
               <h2 class="md:text-4xl font-bold mb-4 text-deepBlue" style="font-size: 4rem;" >Examples of <span class="text-vibrantOrange">our work</span></h2>
             <!-- <p class="text-lg text-grey max-w-3xl mx-auto">Get your design & marketing work done without the hassle of unreliable freelancers, costly agencies. Pay a fixed, monthly, and predictable rate, with no contracts or surprises.</p> -->
@@ -1313,10 +1447,13 @@
                             </div>
                         </div>
                         
-                        <!-- Portfolio image -->
-                        <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden">
-                            <a href= "{% url 'portfolio_detail' portfolio.slug %}">
+                        <!-- Portfolio image with centered title overlay -->
+                        <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden relative">
+                            <a href= "{% url 'portfolio_detail' portfolio.slug %}">                            
                                 <img href= "{% url 'portfolio_detail' portfolio.slug %}" src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <h3 class="text-white text-xl font-bold px-4 py-2 text-center">{{ portfolio.title }}</h3>
+                                </div>
                             </a>
                         </div>
                         
@@ -2086,12 +2223,12 @@
 {% comment %} {% include 'core/service-pricing-cards.html' %} {% endcomment %}
 
 <!-- Call to Action Section -->
-<section class = "bg-white"style="padding-top: 5rem; padding-bottom: 5rem; position: relative; overflow: hidden;">
+<section class="bg-white cta-section" style="padding-top: 5rem; padding-bottom: 5rem; position: relative; overflow: hidden;">
     <!-- Background Elements -->
     <div style="position: absolute; top: -10rem; right: -10rem; width: 30rem; height: 30rem; border-radius: 9999px; background-color: var(--vibrantOrange); opacity: 0.05; animation: float 20s ease-in-out infinite;"></div>
     <div style="position: absolute; bottom: -15rem; left: -5rem; width: 25rem; height: 25rem; border-radius: 9999px; background-color: var(--grey); opacity: 0.05; animation: floatReverse 25s ease-in-out infinite;"></div>
     
-    <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; position: relative;">
+    <div class="ultra-wide-container" style="max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; position: relative;">
         <div style="text-align: center; max-width: 48rem; margin-left: auto; margin-right: auto; animation: fadeIn 0.8s ease-out forwards;">
             <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--deepBlue); margin-bottom: 1rem;">Ready to transform your digital presence?</h2>
             <p style="color: var(--grey); opacity: 0.9; font-size: 1.125rem; margin-bottom: 2rem;">Let's discuss how we can help your business thrive in the digital landscape.</p>
