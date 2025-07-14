@@ -1,21 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}About Us - {{ site_config.site_name }} - Strategic AI Integration Experts{% endblock %}
+{% block title %}Portfolio - {{ site_config.site_name }} - Our Success Stories and Case Studies{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-    <title>About Us - Social Dots Inc. - Strategic AI Integration Experts</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
     <style>
-        :root {
-            --deepBlue: #0B32A4;
-            --brightBlue: #0E42CE;
-            --vibrantOrange: #FFA300;
-            --white: #ffffff;
-            --grey: #6c757d;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -23,10 +11,10 @@
         }
 
         body {
-            font-family: Montserrat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: var(--grey);
-            background-color: var(--white);
+            color: #333;
+            overflow-x: hidden;
         }
 
         .container {
@@ -35,204 +23,119 @@
             padding: 0 20px;
         }
 
-        /* Hero Section with Mobile Responsiveness */
-        .hero {
-            padding: 80px 0;
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
         }
-        
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.2;
-            z-index: 1;
-        }
-        
-        @media (max-width: 768px) {
-            .hero {
-                padding: 60px 0;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero {
-                padding: 40px 0;
-            }
-        }
 
-        .hero::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
+            left: 0;
             right: 0;
-            width: 50%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23FFA300" opacity="0.1"/></svg>') repeat;
-            background-size: 40px 40px;
+            bottom: 0;
+            background:  url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80');
+            opacity: 0.3;
+            /* animation: float 20s ease-in-out infinite; */
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .hero-content {
-            position: relative;
-            z-index: 3;
-        }
-
-        .section-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--white);
-            border: 2px solid var(--vibrantOrange);
-            border-radius: 50px;
-            padding: 8px 20px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--deepBlue);
-            margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(255, 163, 0, 0.3);
-        }
-        
-        @media (max-width: 768px) {
-            .section-badge {
-                padding: 6px 16px;
-                font-size: 12px;
-                margin-bottom: 24px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .section-badge {
-                padding: 5px 14px;
-                font-size: 11px;
-                margin-bottom: 20px;
-            }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 24px;
-            line-height: 1.2;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: clamp(2rem, 4vw, 3rem);
-                margin-bottom: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: clamp(1.75rem, 3vw, 2.5rem);
-                margin-bottom: 16px;
-            }
-        }
-
-        .hero h1 .highlight {
-            color: var(--vibrantOrange);
+            text-align: center;
+            z-index: 2;
             position: relative;
         }
 
-        .hero h1 .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--white);
-            border-radius: 2px;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--white);
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-
-        /* About Section */
-        .about-section {
-            padding: 80px 0;
-            background: var(--white);
-        }
-
-        .about-section .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-header h2 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--deepBlue);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .about-header p {
-            color: var(--grey);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            text-align: center;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .learn-more-btn {
+        .hero-badge {
             display: inline-block;
-            padding: 12px 30px;
-            background: var(--vibrantOrange);
-            color: var(--white);
-            border: 2px solid var(--vibrantOrange);
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: white;
+            font-size: 14px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: slideDown 1s ease-out 0.5s both;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out 0.7s both;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(45deg, #f59e0b, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #f59e0b, #f97316);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 1px;
             transition: all 0.3s ease;
-            margin: 0 auto;
-            display: block;
-            width: fit-content;
-            box-shadow: 0 4px 15px rgba(255, 163, 0, 0.3);
-        }
-
-        .learn-more-btn:hover {
-            background: var(--deepBlue);
-            border-color: var(--deepBlue);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(11, 50, 164, 0.3);
-        }
-
-        .ceo-image {
+            animation: slideUp 1s ease-out 1.1s both;
             position: relative;
-            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(11, 50, 164, 0.15);
-            border: 3px solid var(--vibrantOrange);
         }
 
-        .ceo-image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
+     .hero-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-image:  linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background-size: cover;
+    background-position: center;
+    transition: left 0.5s;
+    z-index: -1;
+}
+
+        .hero-cta:hover::before {
+            left: 100%;
         }
 
-        /* Why Choose Us Section */
-        .why-choose-section {
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        /* CEO Section */
+        .ceo-section {
             padding: 100px 0;
-            background: var(--white);
+            background: #f8fafc;
+            position: relative;
         }
 
         .section-header {
@@ -240,183 +143,294 @@
             margin-bottom: 80px;
         }
 
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--deepBlue);
+        .section-badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
             margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .ceo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .ceo-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ceo-info h3 {
+            font-size: 2rem;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .ceo-description {
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .ceo-avatar {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f59e0b, #2563eb);
+            padding: 4px;
+            animation: pulse 2s infinite;
+        }
+
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .avatar-inner::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            transform: translate(-50%, -60%);
+        }
+
+        .avatar-inner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 120px;
+            height: 100px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ceo-btn {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .ceo-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 100px 0;
+            background: white;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
-            margin-bottom: 60px;
+            margin-top: 60px;
         }
 
         .stat-card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(11, 50, 164, 0.1);
+            padding: 40px 20px;
+            border-radius: 20px;
+            background: #f8fafc;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #f59e0b, #2563eb);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
         }
 
         .stat-card:hover {
             transform: translateY(-10px);
-            border-color: var(--vibrantOrange);
-            box-shadow: 0 20px 40px rgba(11, 50, 164, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+        }
+
+        .stat-card:nth-child(1) .stat-icon { background: #2563eb; }
+        .stat-card:nth-child(2) .stat-icon { background: #f59e0b; }
+        .stat-card:nth-child(3) .stat-icon { background: #2563eb; }
+        .stat-card:nth-child(4) .stat-icon { background: #f59e0b; }
 
         .stat-number {
             font-size: 3rem;
-            font-weight: 800;
-            color: var(--brightBlue);
+            font-weight: 700;
+            color: #1e293b;
             margin-bottom: 10px;
         }
 
         .stat-label {
-            color: var(--deepBlue);
+            font-size: 1.2rem;
             font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            color: #2563eb;
+            margin-bottom: 15px;
+        }
+
+        .stat-description {
+            color: #64748b;
+            line-height: 1.6;
         }
 
         /* Team Section */
         .team-section {
             padding: 100px 0;
-            background: var(--white);
-        }
-
-        .team-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .team-header h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--deepBlue);
-            margin-bottom: 20px;
-        }
-
-        .team-subtitle {
-            font-size: 1.1rem;
-            color: var(--grey);
-            max-width: 600px;
-            margin: 0 auto;
+            background: #f8fafc;
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
+            margin-top: 60px;
         }
 
         .team-card {
-            background: var(--white);
-            padding: 40px 30px;
+            background: white;
             border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(11, 50, 164, 0.1);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            position: relative;
         }
 
         .team-card:hover {
             transform: translateY(-10px);
-            border-color: var(--vibrantOrange);
-            box-shadow: 0 25px 50px rgba(11, 50, 164, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .team-avatar {
-            width: 100px;
-            height: 100px;
-            background: var(--deepBlue);
-            border-radius: 50%;
+            height: 200px;
+            background: linear-gradient(45deg, #2563eb, #f59e0b);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--white);
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
             position: relative;
-            box-shadow: 0 8px 20px rgba(11, 50, 164, 0.3);
+            overflow: hidden;
         }
 
-        .team-avatar::after {
+        .team-avatar::before {
             content: '';
             position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 2px solid var(--vibrantOrange);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: sparkle 3s ease-in-out infinite;
         }
 
-        .team-card:hover .team-avatar::after {
-            opacity: 1;
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        .team-card:nth-child(2) .team-avatar,
+        .team-card:nth-child(3) .team-avatar {
+            background: #e2e8f0;
+            color: #64748b;
+            font-size: 4rem;
+        }
+
+        .team-info {
+            padding: 30px;
         }
 
         .team-name {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--deepBlue);
-            margin-bottom: 8px;
+            color: #1e293b;
+            margin-bottom: 5px;
         }
 
         .team-role {
-            color: var(--brightBlue);
+            color: #f59e0b;
             font-weight: 600;
             margin-bottom: 15px;
         }
 
-        .team-bio {
-            color: var(--grey);
-            font-size: 14px;
+        .team-description {
+            color: #64748b;
             line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .team-social {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            background: var(--white);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--deepBlue);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 2px solid var(--deepBlue);
-        }
-
-        .social-link:hover {
-            background: var(--vibrantOrange);
-            color: var(--white);
-            transform: scale(1.1);
-            border-color: var(--vibrantOrange);
         }
 
         /* CTA Section */
         .cta-section {
             padding: 100px 0;
-            background: var(--deepBlue);
-            color: var(--white);
-            text-align: center;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
             position: relative;
             overflow: hidden;
         }
@@ -426,27 +440,34 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23FFA300" opacity="0.1"/></svg>') repeat;
-            background-size: 60px 60px;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M0,500 Q250,400 500,500 T1000,500 V1000 H0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: wave 10s ease-in-out infinite;
         }
 
-        .cta-section .container {
+        @keyframes wave {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-50px); }
+        }
+
+        .cta-content {
+            text-align: center;
             position: relative;
             z-index: 2;
         }
 
-        .cta-section h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 30px;
+        .cta-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
         }
 
-        .cta-section p {
-            font-size: 1.25rem;
-            margin-bottom: 50px;
-            opacity: 0.9;
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -459,54 +480,72 @@
             flex-wrap: wrap;
         }
 
-        .btn {
+        .cta-btn-primary {
+            background: linear-gradient(45deg, #f59e0b, #f97316);
+            color: white;
             padding: 15px 35px;
             border-radius: 50px;
-            font-weight: 600;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-primary {
-            background: var(--vibrantOrange);
-            color: var(--white);
-            border: 2px solid var(--vibrantOrange);
+        .cta-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .btn-primary:hover {
-            background: var(--white);
-            color: var(--deepBlue);
-            border-color: var(--white);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 163, 0, 0.3);
+        .cta-btn-primary:hover,
+        .cta-btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
+        /* Animations */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .btn-secondary:hover {
-            background: var(--white);
-            color: var(--deepBlue);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .about-section .container {
+            .hero-section {
+                min-height: 80vh;
+                padding: 40px 0;
+            }
+
+            .ceo-card {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                text-align: center;
             }
 
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
             }
 
             .team-grid {
@@ -518,335 +557,258 @@
                 align-items: center;
             }
 
-            .hero h1,
-            .section-header h2,
-            .team-header h2,
-            .cta-section h2,
-            .about-header h2 {
-                font-size: 2.5rem;
+            .container {
+                padding: 0 15px;
             }
         }
 
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
+        /* Intersection Observer Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .hero-content,
-        .vision-content,
-        .section-header,
-        .team-header {
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .stat-card:hover .stat-number {
-            animation: pulse 0.6s ease;
-        }
-
-        /* Enhanced visual effects */
-        /* Bottom line removed as requested */
-
-        .section-badge span:first-child {
-            font-size: 16px;
+        .counter {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e293b;
         }
     </style>
-</head>
-<body>
-<!-- Hero Section -->
-<section class="relative overflow-hidden min-h-[80vh]" style="background-color:rgb(224, 226, 231);">
-    <!-- Modern Background -->
-    <div class="absolute inset-0">
-        <img 
-            src="https://www.shutterstock.com/image-photo/using-laptop-show-icon-address-600nw-2521386695.jpg" 
-            alt="Business Analytics" 
-            class="w-full h-full object-cover opacity-20"
-        />
-        <div class="absolute inset-0"></div>
-    </div>
-    
-    <!-- Enhanced Floating Elements -->
-    <div class="absolute top-1/4 left-1/6 w-96 h-96 bg-[#FFA300]/10 rounded-full blur-3xl animate-float" style="animation-duration: 20s;"></div>
-    <div class="absolute bottom-1/3 right-1/6 w-120 h-120 bg-[#FFA300]/15 rounded-full blur-3xl animate-floatReverse" style="animation-duration: 25s;"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 md:py-36 lg:py-44">
-        <div class="text-center space-y-10 fade-in" style="--delay: 0.1s;">
-            <!-- Section Badge -->
-            <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium text-sm md:text-base mx-auto fade-in" style="--delay: 0.2s;">
-                <span class="mr-2">✦</span>
-                <span>About Our Company</span>
-                <span class="ml-2">✦</span>
-            </div>
-
-            <!-- Hero Headline -->
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight fade-in leading-tight" style="--delay: 0.3s;">
-                <span class="text-[#0B32A4]">About <span class="text-[#FFA300]">CEO</span> & </span><br>
-                <span class="text-[#0B32A4]">Our <span class="text-[#FFA300]">Company</span></span>
-            </h1>
-
-            <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl md:text-2xl text-[#0B32A4] leading-relaxed fade-in" style="--delay: 0.4s;">
+    <!-- Hero Section -->
+    <section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">✨ About Our Company ✨</div>
+            <h1 class="hero-title">About <span class="highlight">CEO</span> &<br>Our <span class="highlight">Company</span></h1>
+            <p class="hero-description">
                 Founded in Toronto, Social Dots Inc. brings together strategic thinking, cutting-edge technology, and deep Canadian market expertise to help businesses navigate and excel in the digital landscape.
             </p>
-            
-            <!-- CTA Button -->
-            <div class="mt-8 fade-in" style="--delay: 0.5s;">
-                <a href="#about-ceo" class="inline-flex items-center px-8 py-4 rounded-full bg-[#FFA300] text-white font-semibold text-lg transition-all duration-300 hover:bg-[#FFA300]/90 hover:scale-105 hover:shadow-lg hover:shadow-[#FFA300]/20">
-                    Learn More
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                </a>
+            <a href="#learn-more" class="hero-cta">Learn More ↓</a>
+        </div>
+    </div>
+</section>
+
+<!-- CEO Section -->
+<section class="ceo-section" id="learn-more">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <div class="section-badge">⭐ Meet Our CEO</div>
+            <h2 class="section-title">About CEO</h2>
+        </div>
+
+        <div class="ceo-card animate-on-scroll">
+            <div class="ceo-info">
+                <h3>Ali Shafique</h3>
+                <p class="ceo-description">
+                    15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach and spiritual guide for purpose-driven entrepreneurs. Integrates strategic clarity with learning design, having worked with business and technical teams across top Canadian and US companies.
+                </p>
+                <a href="#" class="ceo-btn">Ali Shafique →</a>
+            </div>
+            <div class="ceo-avatar">
+                <div class="avatar-container">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFnKUOtxRp7BA/profile-displayphoto-shrink_800_800/B56Zb2LMVYGgAc-/0/1747886851794?e=1757548800&v=beta&t=tEcmZQhzJVamv9zVnUFOgh0h5eLkSDvrR2oK7JSJVpU" alt="Ali Shafique" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover;">
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-
-    <!-- About Us Section -->
-    <section id="about-ceo" class="about-section py-24 bg-white">
-        <div class="container">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 order-2 md:order-1">
-                    <div class="about-header text-left">
-                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#FFA300]/10 text-[#FFA300] font-medium text-sm mb-6">
-                            <span class="mr-2">✦</span>
-                            <span>Meet Our CEO</span>
-                        </div>
-                        <h2 class="text-4xl md:text-5xl font-bold text-[#0B32A4] mb-6">About CEO</h2>
-                        <p class="text-lg text-grey leading-relaxed mb-8">
-                            15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach and spiritual guide for purpose-driven entrepreneurs. Integrates strategic clarity with learning design, having worked with business and technical teams across top Canadian and US companies.
-                        </p>
-                        <a href="#" class="inline-flex items-center px-8 py-4 rounded-full bg-[#0B32A4] text-white font-semibold transition-all duration-300 hover:bg-[#0E42CE] hover:shadow-lg">
-                            Ali Shafique
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 order-1 md:order-2">
-                    <div class="relative">
-                        <div class="absolute -top-6 -left-6 w-full h-full border-2 border-[#FFA300] rounded-2xl"></div>
-                        <div class="ceo-image relative z-10 overflow-hidden rounded-2xl shadow-2xl transform transition-transform duration-500 hover:scale-105">
-                            <img src="https://media.istockphoto.com/id/2212478710/vector/faceless-male-avatar-in-hoodie-illustration.jpg?s=612x612&w=0&k=20&c=Wlwpp5BUnzbzXxaCT0a7WqP_JvknA-JtOhBoKDpQMHE=" class="w-full h-auto" />
-                        </div>
-                        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-[#0B32A4] rounded-full flex items-center justify-center text-white font-bold text-xl">CEO</div>
-                    </div>
-                </div>
-            </div>
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <div class="section-badge">🏆 Our Achievements</div>
+            <h2 class="section-title">Why Choose Us</h2>
+            <p style="color: #64748b; max-width: 600px; margin: 0 auto;">
+                We combine strategic thinking with technical expertise to deliver exceptional results for our clients across Canada.
+            </p>
         </div>
-    </section>
 
-    <!-- Why Choose Us Section -->
-    <section id="why-choose-us" class="py-24 bg-[#F8FAFC]">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#0B32A4]/10 text-[#0B32A4] font-medium text-sm mb-6">
-                    <span class="mr-2">✦</span>
-                    <span>Our Achievements</span>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-bold text-[#0B32A4] mb-6">Why Choose Us</h2>
-                <p class="max-w-3xl mx-auto text-lg text-grey leading-relaxed">
-                    We combine strategic thinking with technical expertise to deliver exceptional results for our clients across Canada.
+        <div class="stats-grid">
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-number counter" data-target="200">0</div>
+                <div class="stat-label">Implementations</div>
+                <p class="stat-description">
+                    Over 100 successful implementations across Canada, helping businesses transform digitally.
                 </p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#0B32A4] text-white mb-6 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">10k+</div>
-                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Implementations</div>
-                        <p class="text-grey">
-                            Over 10,000 successful implementations across Canada, helping businesses transform digitally.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#FFA300] text-white mb-6 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">50+</div>
-                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Projects</div>
-                        <p class="text-grey">
-                            Successfully delivered projects with 95% client satisfaction rate and ongoing partnerships.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#0E42CE] text-white mb-6 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">10+</div>
-                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Years</div>
-                        <p class="text-grey">
-                            A decade of experience in the Canadian digital market, understanding local business needs.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-[#0B32A4] text-white mb-6 mx-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                        </svg>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-[#0B32A4] mb-2">30k+</div>
-                        <div class="text-xl font-semibold text-[#0E42CE] mb-4">Revenue Growth</div>
-                        <p class="text-grey">
-                            Average revenue increase for our clients through strategic digital transformation.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-
-    <!-- Team Section -->
-    <section id="team" class="py-24 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#0B32A4]/10 text-[#0B32A4] font-medium text-sm mb-6">
-                    <span class="mr-2">✦</span>
-                    <span>Our Amazing Team</span>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-bold text-[#0B32A4] mb-6">Meet Our Team</h2>
-                <p class="max-w-3xl mx-auto text-lg text-grey leading-relaxed">
-                    Our diverse team combines deep Canadian market knowledge with international expertise and cutting-edge technical skills.
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-icon">✅</div>
+                <div class="stat-number counter" data-target="50">0</div>
+                <div class="stat-label">Projects</div>
+                <p class="stat-description">
+                    Successfully delivered projects with 95% client satisfaction rate and ongoing partnerships.
                 </p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                    <div class="relative h-64 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] flex items-center justify-center">
-                        <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center text-[#0B32A4] text-4xl font-bold">
-                            AS
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0B32A4] to-transparent"></div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold text-[#0B32A4] mb-2">Ali Shafique</h3>
-                        <p class="text-[#FFA300] font-semibold mb-4">Founder & CEO</p>
-                        <p class="text-grey mb-6">15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach.</p>
-                        <div class="flex space-x-4">
-                            <a href="https://linkedin.com/in/alishafique" class="w-10 h-10 rounded-full bg-[#0B32A4] flex items-center justify-center text-white transition-all hover:bg-[#0E42CE]">
-                                <i data-lucide="linkedin" class="w-5 h-5"></i>
-                            </a>
-                            <a href="mailto:ali@socialdots.ca" class="w-10 h-10 rounded-full bg-[#FFA300] flex items-center justify-center text-white transition-all hover:bg-[#FFA300]/80">
-                                <i data-lucide="mail" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Commented team members with enhanced styling -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 opacity-60">
-                    <div class="relative h-64 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] flex items-center justify-center">
-                        <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center text-[#0B32A4] text-4xl font-bold">
-                            ?
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0B32A4] to-transparent"></div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold text-[#0B32A4] mb-2">Join Our Team</h3>
-                        <p class="text-[#FFA300] font-semibold mb-4">Open Position</p>
-                        <p class="text-grey mb-6">We're looking for talented individuals to join our growing team. If you're passionate about digital transformation, we want to hear from you.</p>
-                        <div class="flex space-x-4">
-                            <a href="/contact" class="w-10 h-10 rounded-full bg-[#0B32A4] flex items-center justify-center text-white transition-all hover:bg-[#0E42CE]">
-                                <i data-lucide="send" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:-translate-y-2 opacity-60">
-                    <div class="relative h-64 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] flex items-center justify-center">
-                        <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center text-[#0B32A4] text-4xl font-bold">
-                            ?
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0B32A4] to-transparent"></div>
-                    </div>
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold text-[#0B32A4] mb-2">Your Name Here</h3>
-                        <p class="text-[#FFA300] font-semibold mb-4">Future Team Member</p>
-                        <p class="text-grey mb-6">Become part of our innovative team and help shape the future of digital transformation in the Canadian market.</p>
-                        <div class="flex space-x-4">
-                            <a href="/careers" class="w-10 h-10 rounded-full bg-[#0B32A4] flex items-center justify-center text-white transition-all hover:bg-[#0E42CE]">
-                                <i data-lucide="briefcase" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-icon">⏰</div>
+                <div class="stat-number counter" data-target="15">0</div>
+                <div class="stat-label">Years</div>
+                <p class="stat-description">
+                    A decade and half of experience in the Canadian digital market, understanding local business needs.
+                </p>
+            </div>
+
+            <div class="stat-card animate-on-scroll">
+                <div class="stat-icon">📈</div>
+                <div class="stat-number counter" data-target="30">0</div>
+                <div class="stat-label">Revenue Growth</div>
+                <p class="stat-description">
+                    Average revenue increase for our clients through strategic digital transformation.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class = "bg-white"style="padding-top: 5rem; padding-bottom: 5rem; position: relative; overflow: hidden;">
-    <!-- Background Elements -->
-    <div style="position: absolute; top: -10rem; right: -10rem; width: 30rem; height: 30rem; border-radius: 9999px; background-color: var(--vibrantOrange); opacity: 0.05; animation: float 20s ease-in-out infinite;"></div>
-    <div style="position: absolute; bottom: -15rem; left: -5rem; width: 25rem; height: 25rem; border-radius: 9999px; background-color: var(--grey); opacity: 0.05; animation: floatReverse 25s ease-in-out infinite;"></div>
-    
-    <div style="max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; position: relative;">
-        <div style="text-align: center; max-width: 48rem; margin-left: auto; margin-right: auto; animation: fadeIn 0.8s ease-out forwards;">
-            <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--deepBlue); margin-bottom: 1rem;">Ready to transform your digital presence?</h2>
-            <p style="color: var(--grey); opacity: 0.9; font-size: 1.125rem; margin-bottom: 2rem;">Let's discuss how we can help your business thrive in the digital landscape.</p>
-            
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.2s;">
-                <a href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/yourusername/30min'});return false;" class="btn-gold" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0.75rem; padding-bottom: 0.75rem; background-color: var(--vibrantOrange); color: #183B4E; font-weight: 500; border-radius: 0.375rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.3s ease; position: relative; overflow: hidden;">
-                    <span style="position: relative; z-index: 10;">Book a free strategy call</span>
-                </a>
-                <a href="tel:+1234567890" class="btn-ghost" style="display: inline-flex; align-items: center; justify-content: center; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0.75rem; padding-bottom: 0.75rem; background-color: transparent; color: var(--grey); font-weight: 500; border-radius: 0.375rem; border: 1px solid rgba(243, 243, 224, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden;">
-                    <svg style="width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--vibrantOrange);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                    <span style="position: relative; z-index: 10;">Call us now</span>
-                </a>
+<!-- Team Section -->
+<section class="team-section">
+    <div class="container">
+        <div class="section-header animate-on-scroll">
+            <div class="section-badge">👥 Our Amazing Team</div>
+            <h2 class="section-title">Meet Our Team</h2>
+            <p style="color: #64748b; max-width: 600px; margin: 0 auto;">
+                Our diverse team combines deep Canadian market knowledge with international expertise and cutting-edge technical skills.
+            </p>
+        </div>
+
+        <div class="team-grid">
+            {% for member in team_members %}
+            <div class="team-card animate-on-scroll">
+                <div class="team-avatar">{{ member.name|slice:":1"|upper }}</div>
+                <div class="team-info">
+                    <h3 class="team-name">{{ member.name }}</h3>
+                    <div class="team-role">{{ member.position }}</div>
+                    <p class="team-description">{{ member.bio|default:"No bio available." }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content animate-on-scroll">
+            <h2 class="cta-title">Ready to transform your digital presence?</h2>
+            <p class="cta-description">
+                Let's discuss how we can help your business thrive in the digital landscape.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn-primary">Book a free strategy call</a>
+                <a href="#" class="cta-btn-secondary">📞 Call us now</a>
             </div>
         </div>
     </div>
 </section>
 
     <script>
-        // Initialize Lucide icons
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + (target >= 1000 ? 'k+' : '+');
+            }, 16);
         }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.dataset.target);
+                        animateCounter(counter, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-section');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add mouse movement effect to cards
+        document.querySelectorAll('.team-card, .ceo-card, .stat-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+            });
+        });
     </script>
 {% endblock %}
