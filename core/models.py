@@ -231,6 +231,16 @@ class Project(models.Model):
     cloudinary_image_id = models.CharField(max_length=255, blank=True, null=True)
     gallery = models.JSONField(default=list, blank=True, help_text="List of image URLs")
     technologies = models.JSONField(default=list, blank=True)
+    portfolio_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('website', 'Website Portfolio'),
+            ('ai', 'AI Automation'),
+            ('social', 'Social Media Content'),
+            ('other', 'Other')
+        ],
+        default='other'
+    )
     project_url = models.URLField(blank=True)
     github_url = models.URLField(blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='completed')
@@ -454,6 +464,12 @@ class Portfolio(models.Model):
         ('email', 'Email'),
         ('technology', 'Technology')
     ], default='post')
+    portfolio_type = models.CharField(max_length=20, choices=[
+        ('website', 'Website Portfolio'),
+        ('ai', 'AI Automation'),
+        ('social', 'Social Media Content'),
+        ('other', 'Other')
+    ], default='other')
     video_url = models.URLField(blank=True, help_text="YouTube video URL")
     blog_link = models.URLField(blank=True, help_text="Link to blog post")
     technology_used = models.JSONField(default=list, blank=True, help_text="List of technologies used")

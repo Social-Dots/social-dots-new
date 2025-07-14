@@ -13,13 +13,14 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-producti
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-DEBUG = True # Set to True for development, False for production
+DEBUG = False # Set to True for development, False for production
 
 # DEBUG = False
 print("DEBUG:", DEBUG)
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 

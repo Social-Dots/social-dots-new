@@ -217,6 +217,25 @@ def portfolio(request):
     if tech_filter:
         projects_list = projects_list.filter(technologies__contains=[tech_filter])
     
+    # Filter by portfolio type if provided
+    portfolio_type = request.GET.get('type')
+    if portfolio_type and portfolio_type != 'all':
+        # Check if we're using the Project model or Portfolio model
+        if hasattr(Project, 'portfolio_type'):
+            # If Project model has portfolio_type field, use it directly
+            projects_list = projects_list.filter(portfolio_type=portfolio_type)
+        else:
+            # Otherwise, use the technology-based filtering as a fallback
+            if portfolio_type == 'website':
+                # Filter for website portfolio projects
+                projects_list = projects_list.filter(technologies__overlap=['WordPress', 'HTML', 'CSS', 'JavaScript', 'React', 'Angular', 'Vue', 'Django', 'Flask', 'PHP'])
+            elif portfolio_type == 'ai':
+                # Filter for AI automation projects
+                projects_list = projects_list.filter(technologies__overlap=['AI', 'Machine Learning', 'Python', 'TensorFlow', 'PyTorch', 'NLP', 'Computer Vision', 'Data Science', 'Automation'])
+            elif portfolio_type == 'social':
+                # Filter for social media content projects
+                projects_list = projects_list.filter(technologies__overlap=['Social Media', 'Content Creation', 'Marketing', 'Graphic Design', 'Video Editing', 'Instagram', 'Facebook', 'Twitter', 'LinkedIn'])
+    
     # Pagination
     paginator = Paginator(projects_list, 12)
     page_number = request.GET.get('page')
@@ -231,7 +250,12 @@ def portfolio(request):
         'projects': projects,
         'all_technologies': sorted(list(all_technologies)),
         'current_tech': tech_filter,
+        'current_type': portfolio_type,
     }
+    
+    # Check if this is an AJAX request
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return render(request, 'core/portfolio.html', context)
     
     return render(request, 'core/portfolio.html', context)
 
