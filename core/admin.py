@@ -303,7 +303,7 @@ class PortfolioAdmin(ImportExportModelAdmin):
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'slug', 'description', 'image')
+            'fields': ('title', 'slug', 'description', 'image', 'bio')
         }),
         ('Categorization', {
             'fields': ('category', 'content_type')

@@ -1448,15 +1448,30 @@
                         </div>
                         
                         <!-- Portfolio image with centered title overlay -->
-                        <div class="aspect-w-1 aspect-h-1 w-full overflow-hidden relative">
-                            <a href= "{% url 'portfolio_detail' portfolio.slug %}">                            
-                                <img href= "{% url 'portfolio_detail' portfolio.slug %}" src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                                <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <h3 class="text-white text-xl font-bold px-4 py-2 text-center">{{ portfolio.title }}</h3>
-                                </div>
-                            </a>
-                        </div>
+                        <div class="relative group perspective">
+                          <a href="{% url 'portfolio_detail' portfolio.slug %}" class="block transform-style-preserve-3d transition-transform duration-500 group-hover:rotate-x-2 group-hover:scale-[1.01]">
+                            
+                            <!-- Main Image -->
+                            <img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}"
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl" />
                         
+                            <!-- Title Overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              <h3 class="text-white text-2xl font-bold px-4 py-2 text-center drop-shadow-md">{{ portfolio.title }}</h3>
+                            </div>
+                        
+                            {% if portfolio.bio %}
+                            <!-- Animated Bio Glass Reveal -->
+                            <div class="absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 translate-y-8 group-hover:translate-y-0 transition-all duration-700 ease-out delay-200">
+                              <div class="m-4 p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl shadow-black/10 text-white text-sm font-light leading-relaxed hover:shadow-orange-200 transition-shadow duration-500">
+                                {{ portfolio.bio }}
+                              </div>
+                            </div>
+                            {% endif %}
+                          </a>
+                        </div>
+
+
                         <!-- Instagram-style action buttons -->
                         <div class="bg-white p-3 border-t border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
                             <div class="flex items-center justify-between">
