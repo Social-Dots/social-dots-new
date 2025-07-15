@@ -18,7 +18,7 @@ DEBUG = False # Set to True for development, False for production
 # DEBUG = False
 print("DEBUG:", DEBUG)
 
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 ALLOWED_HOSTS = ['*']
 
