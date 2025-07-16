@@ -335,6 +335,22 @@ def blog_detail(request, slug):
 def about(request):
     team_members = TeamMember.objects.filter(is_active=True)
     testimonials = Testimonial.objects.filter(is_active=True)[:6]
+    # for member in team_members:
+    #     print({
+    #         "id": member.id,
+    #         "name": member.name,
+    #         "position": member.position,
+    #         "bio": member.bio,
+    #         "image": member.image,
+    #         "email": member.email,
+    #         "phone": member.phone,
+    #         "linkedin": member.linkedin,
+    #        "twitter": member.twitter,
+    #       "is_active": member.is_active,
+    #         "order": member.order,
+    #      "created_at": member.created_at,
+    #       "updated_at": member.updated_at,
+    #     })
     
     context = {
         'team_members': team_members,

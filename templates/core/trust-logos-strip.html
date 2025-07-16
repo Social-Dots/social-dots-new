@@ -1,1027 +1,257 @@
 {% load static %}
-    <head>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<head>
+  <style>
+    :root {
+      --blue-glow: #0d40cc4d;
+      --yellow-glow: #ffa3004d;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .trust-section {
-            padding: 2rem 0;
-            background-color: #000000;
-            overflow: hidden;
-            position: relative;
-        }
+    body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: radial-gradient(ellipse at top left, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        .trust-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
+    .slider-container {
+      background: linear-gradient(135deg, var(--blue-glow), var(--yellow-glow));
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: 30px auto;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
 
-        .trust-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+    .slider-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-        .trust-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
+    .trust-text {
+      flex: 1;
+      min-width: 220px;
+    }
 
-        .trust-text {
-            font-size: 1.125rem;
-            color: #888;
-            margin-bottom: 1rem;
-        }
+    .trust-text h2 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(to right, #0d40cc, #ffa300);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
 
-        .trust-divider {
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(45deg, #2196f3, #1976d2);
-            border-radius: 2px;
-            margin: 0 auto;
-        }
+    .trust-subtext {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.85);
+    }
 
-        .logos-container {
-            position: relative;
-            margin-top: 2rem;
-            width: 100%;
-            overflow: hidden;
-        }
+    .logos-wrapper {
+      flex: 2;
+      overflow: hidden;
+      position: relative;
+    }
 
-        .logo-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 100%;
-            position: relative;
-        }
+    .logos-track {
+      display: flex;
+      width: max-content;
+      animation: scrollLoop 60s linear infinite;
+      gap: 60px;
+    }
 
-        .logo-row:last-child {
-            margin-bottom: 0;
-        }
+    @keyframes scrollLoop {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 
-        .logos-track {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            animation-duration: 30s;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-            padding: 1rem 0;
-            width: max-content; /* Ensure the track takes the full width of all items */
-        }
+    .logos-track:hover {
+      animation-play-state: paused;
+    }
 
-        .logos-track-left {
-            animation-name: scrollLeft;
-        }
+    .logo-item {
+      flex-shrink: 0;
+      opacity: 0.8;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    }
 
-        .logos-track-right {
-            animation-name: scrollRight;
-        }
+    .logo-item:hover {
+      transform: scale(1.05);
+      opacity: 1;
+    }
 
-        .logos-track {
-            --logo-sets: 4; /* Default value, will be updated by JS */
-        }
-        
-        @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-100% / var(--logo-sets, 4))); } /* Dynamic calculation based on screen size */
-        }
+    .logo-item svg {
+      height: 32px;
+      width: auto;
+    }
 
-        @keyframes scrollRight {
-            0% { transform: translateX(calc(-100% / var(--logo-sets, 4))); } /* Dynamic calculation based on screen size */
-            100% { transform: translateX(0); }
-        }
-        
-        /* Add subtle glow effect on hover */
-        .logo-item-container:hover {
-            box-shadow: 0 8px 25px rgba(221, 168, 83, 0.25), 0 0 15px rgba(221, 168, 83, 0.15);
-        }
-        
-        .logo-placeholder:hover {
-            box-shadow: 0 8px 25px rgba(221, 168, 83, 0.25), 0 0 15px rgba(221, 168, 83, 0.15);
-        }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .slider-content {
+        flex-direction: column;
+        text-align: center;
+      }
 
-        .logo-item-container {
-            flex-shrink: 0;
-            height: 50px;
-            width: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            padding: 0.5rem;
-            margin: 0 0.4rem;
-            border: 1px solid rgba(243, 243, 224, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .logo-item-container:hover {
-            background-color: rgba(255, 255, 255, 1);
-            border-color: rgba(221, 168, 83, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
+      .trust-text h2 {
+        font-size: 20px;
+      }
 
-        .logo-item {
-            flex-shrink: 0;
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-            opacity: 0.8;
-            transition: all 0.3s ease;
-        }
+      .logo-item svg {
+        height: 26px;
+      }
 
-        .logo-item-container:hover .logo-item {
-            opacity: 1;
-        }
-
-        /* Pause animation on hover */
-        .logo-row:hover .logos-track {
-            animation-play-state: paused;
-        }
-
-        /* Social Media Brand Colors */
-        .youtube-logo {
-            background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
-        }
-
-        .instagram-logo {
-            background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
-        }
-
-        .facebook-logo {
-            background: linear-gradient(135deg, #1877F2 0%, #42A5F5 100%);
-        }
-
-        .tiktok-logo {
-            background: linear-gradient(135deg, #000000 0%, #FF0050 50%, #00F2EA 100%);
-        }
-
-        .twitter-logo {
-            background: linear-gradient(135deg, #000000 0%, #1DA1F2 100%);
-        }
-
-        .threads-logo {
-            background: linear-gradient(135deg, #000000 0%, #1B1B1B 100%);
-        }
-
-        .linkedin-logo {
-            background: linear-gradient(135deg, #0A66C2 0%, #004182 100%);
-        }
-
-        /* Logo placeholders with company names */
-        .logo-placeholder {
-            height: 70px;
-            min-width: 150px;
-            background: rgba(243, 243, 224, 0.05);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(243, 243, 224, 0.7);
-            font-weight: 600;
-            font-size: 0.875rem;
-            text-align: center;
-            padding: 0 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 1px solid rgba(243, 243, 224, 0.1);
-            margin: 0 0.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo-placeholder:hover {
-            color: rgba(243, 243, 224, 1);
-            transform: translateY(-5px);
-            background: rgba(221, 168, 83, 0.15);
-            border-color: rgba(221, 168, 83, 0.3);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Different colors for variety */
-        .logo-placeholder:nth-child(2n) {
-            background: rgba(39, 84, 138, 0.1);
-        }
-
-        .logo-placeholder:nth-child(3n) {
-            background: rgba(24, 59, 78, 0.1);
-        }
-
-        .logo-placeholder:nth-child(4n) {
-            background: rgba(221, 168, 83, 0.1);
-        }
-
-        .logo-placeholder:nth-child(5n) {
-            background: rgba(243, 243, 224, 0.08);
-        }
-
-        @media (max-width: 768px) {
-            .trust-section {
-                padding: 2rem 0;
-            }
-            
-            .trust-number {
-                font-size: 2rem;
-            }
-            
-            .logos-track {
-                gap: 2rem;
-            }
-            
-            .logo-placeholder {
-                min-width: 100px;
-                font-size: 0.75rem;
-            }
-        }
-        
-        /* Media query for large screens (1080p and above) */
-        @media (min-width: 1920px) {
-            .trust-container {
-                max-width: 1800px;
-            }
-            
-            .logo-item-container {
-                height: 60px;
-                width: 120px;
-            }
-            
-            .logos-track {
-                gap: 2rem;
-            }
-            
-            .logo-placeholder {
-                height: 80px;
-                min-width: 180px;
-                font-size: 1rem;
-            }
-            
-            svg {
-                transform: scale(1.2);
-            }
-        }
-        
-        /* Media query for 1440p screens (2560px) */
-        @media (min-width: 2560px) and (max-width: 3839px) {
-            .trust-container {
-                max-width: 2100px;
-            }
-            
-            .logo-item-container {
-                height: 70px;
-                width: 140px;
-            }
-            
-            .logos-track {
-                gap: 2.5rem;
-            }
-            
-            .logo-placeholder {
-                height: 90px;
-                min-width: 200px;
-                font-size: 1.15rem;
-            }
-            
-            svg {
-                transform: scale(1.35);
-            }
-        }
-        
-        /* Media query for 4K screens */
-        @media (min-width: 3840px) {
-            .trust-container {
-                max-width: 2400px;
-            }
-            
-            .logo-item-container {
-                height: 80px;
-                width: 160px;
-            }
-            
-            .logos-track {
-                gap: 3rem;
-            }
-            
-            .logo-placeholder {
-                height: 100px;
-                min-width: 220px;
-                font-size: 1.25rem;
-            }
-            
-            svg {
-                transform: scale(1.5);
-            }
-        }
-    </style>
+      .logos-track {
+        gap: 40px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <section class="py-8 h-[180px] bg-gradient-to-r from-darkNavy to-navy border-y border-gold/20 overflow-hidden relative">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute inset-0 bg-[radial-gradient(#DDA853_1px,transparent_1px)] [background-size:20px_20px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]">
-            </div>
-        </div>
-        <div class="mx-auto relative">
-            <div class="items-center justify-center">
-                <h3 class="m-1 text-2xl font-bold text-center text-white">Social Media Platforms We Support</h3>
-                <div class="bg-gradient-to-r from-gold/80 to-gold rounded-full"></div>
-            </div>
-            
-            <div class="logos-container">
-                <!-- First Row - Moving Left -->
-                <div class="logo-row" style="overflow: hidden; width: 100%;">
-                    <div class="logos-track logos-track-left">
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        
-                        <!-- Duplicate for seamless loop -->
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Second Row - Moving Right (in opposite direction) -->
-                <div class="logo-row" style="overflow: hidden; width: 100%; margin-top: 1rem;">
-                    <div class="logos-track logos-track-right">
-                        <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" class="logo-item-container linkedin-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M37.04 0H2.96C1.33 0 0 1.33 0 2.96v34.08C0 38.67 1.33 40 2.96 40h34.08c1.63 0 2.96-1.33 2.96-2.96V2.96C40 1.33 38.67 0 37.04 0zM12.4 33.6H6.8V15.2h5.6v18.4zM9.6 12.8c-1.8 0-3.2-1.4-3.2-3.2s1.4-3.2 3.2-3.2 3.2 1.4 3.2 3.2-1.4 3.2-3.2 3.2zm24 20.8h-5.6V24.8c0-2.1 0-4.8-2.9-4.8-2.9 0-3.3 2.3-3.3 4.6v9h-5.6V15.2h5.4v2.5h.1c.8-1.4 2.6-2.9 5.4-2.9 5.8 0 6.8 3.8 6.8 8.7v10.1h-.3z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.threads.net/@ali.shafique" class="logo-item-container threads-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M26.4 15.8c-.3-.1-.7-.2-1.1-.3-2.1-.4-4.2-.2-6.2.6-2.3 1-4.2 2.7-5.3 4.9-1.1 2.2-1.3 4.7-.5 7.1.8 2.4 2.6 4.3 4.9 5.3 2.3 1 4.8 1.1 7.1.3 2.4-.8 4.3-2.6 5.3-4.9 1-2.3 1.1-4.8.3-7.1-.5-1.4-1.3-2.7-2.4-3.7l-2.1-2.2z" fill="white"/>
-                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm6.4 29.2c-1.4 2.8-3.7 4.9-6.4 6.1-2.7 1.2-5.8 1.4-8.6.6-2.8-1.2-5.1-3.4-6.4-6.1-1.3-2.7-1.4-5.8-.6-8.6.8-2.8 2.6-5.1 5.1-6.4 2.5-1.3 5.4-1.4 8.1-.6 2.8.8 5.1 2.6 6.4 5.1 1.3 2.5 1.4 5.4.6 8.1-.2.6-.7 1.2-1.2 1.8z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://x.com/SocialDotsCa" class="logo-item-container twitter-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M23.6 18.4L37.8 1.6h-3.4L22.1 16 13.8 1.6H3.2l15.3 22.3L3.2 41.6h3.4L17.5 25.8l8.9 15.8h10.6L23.6 18.4zM19.2 23.7L17.8 21.7L6.8 4.2h4.1L19.6 18.3l1.4 2L35.3 39.3h-4.1L19.2 23.7z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.tiktok.com/@alishafique_/" class="logo-item-container tiktok-logo">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M28.3 0H21.7v27.2c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.6 0 1.2.1 1.8.3V14.8c-.6-.1-1.2-.1-1.8-.1-7.2 0-13 5.8-13 13s5.8 13 13 13 13-5.8 13-13V13.3c2.8 2 6.3 3.2 10 3.2V9.9c-4.1 0-7.7-2.3-9.4-5.8-1.3-2.7-1.3-5.4-1.3-8.1z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/socialdots.ca" class="logo-item-container facebook-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M40 20C40 8.95 31.05 0 20 0S0 8.95 0 20c0 9.99 7.32 18.27 16.88 19.75v-13.96H11.8V20h5.08v-4.4c0-5.02 2.99-7.79 7.56-7.79 2.19 0 4.49.39 4.49.39v4.94h-2.53c-2.49 0-3.27 1.55-3.27 3.14V20h5.56l-.89 5.79h-4.67v13.96C32.68 38.27 40 29.99 40 20z" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/socialdots.ca?igsh=MW8zMmI4bmk1eWNvYw%3D%3D&utm_source=qr" class="logo-item-container instagram-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 3.6c5.3 0 5.9 0 8 .1 1.9.1 3 .4 3.7.7.9.4 1.6.8 2.3 1.5.7.7 1.1 1.4 1.5 2.3.3.7.6 1.8.7 3.7.1 2.1.1 2.7.1 8s0 5.9-.1 8c-.1 1.9-.4 3-.7 3.7-.4.9-.8 1.6-1.5 2.3-.7.7-1.4 1.1-2.3 1.5-.7.3-1.8.6-3.7.7-2.1.1-2.7.1-8 .1s-5.9 0-8-.1c-1.9-.1-3-.4-3.7-.7-.9-.4-1.6-.8-2.3-1.5-.7-.7-1.1-1.4-1.5-2.3-.3-.7-.6-1.8-.7-3.7-.1-2.1-.1-2.7-.1-8s0-5.9.1-8c.1-1.9.4-3 .7-3.7.4-.9.8-1.6 1.5-2.3.7-.7 1.4-1.1 2.3-1.5.7-.3 1.8-.6 3.7-.7 2.1-.1 2.7-.1 8-.1zm0-3.6C14.6 0 13.9 0 11.7.1 9.5.2 8 .5 6.7 1c-1.4.5-2.6 1.3-3.7 2.4C1.8 4.5 1 5.7.5 7.1 0 8.4-.3 9.9-.2 12.1c.1 2.2.1 2.9.1 8.9s0 6.7-.1 8.9c-.1 2.2.2 3.7.7 5 .5 1.4 1.3 2.6 2.4 3.7 1.1 1.1 2.3 1.9 3.7 2.4 1.3.5 2.8.8 5 .7 2.2-.1 2.9-.1 8.9-.1s6.7 0 8.9.1c2.2.1 3.7-.2 5-.7 1.4-.5 2.6-1.3 3.7-2.4 1.1-1.1 1.9-2.3 2.4-3.7.5-1.3.8-2.8.7-5-.1-2.2-.1-2.9-.1-8.9s0-6.7.1-8.9c.1-2.2-.2-3.7-.7-5-.5-1.4-1.3-2.6-2.4-3.7-1.1-1.1-2.3-1.9-3.7-2.4-1.3-.5-2.8-.8-5-.7C26.1 0 25.4 0 20 0z" fill="white"/>
-                                <path d="M20 9.7c-5.7 0-10.3 4.6-10.3 10.3S14.3 30.3 20 30.3 30.3 25.7 30.3 20 25.7 9.7 20 9.7zm0 17c-3.7 0-6.7-3-6.7-6.7s3-6.7 6.7-6.7 6.7 3 6.7 6.7-3 6.7-6.7 6.7z" fill="white"/>
-                                <circle cx="31.1" cy="8.9" r="2.4" fill="white"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@ali.shafique" class="logo-item-container youtube-logo" target="_blank" rel="noopener noreferrer">
-                            <svg width="32" height="22" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.2 4.4c-.5-1.8-1.8-3.2-3.6-3.6C32.4 0 20 0 20 0S7.6 0 4.4.8c-1.8.4-3.1 1.8-3.6 3.6C0 7.6 0 14 0 14s0 6.4.8 9.6c.5 1.8 1.8 3.2 3.6 3.6C7.6 28 20 28 20 28s12.4 0 15.6-.8c1.8-.4 3.1-1.8 3.6-3.6C40 20.4 40 14 40 14s0-6.4-.8-9.6z" fill="white"/>
-                                <path d="M16 20V8l10.5 6L16 20z" fill="#FF0000"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="slider-container">
+    <div class="slider-content">
+      <div class="trust-text">
+        <h2>We Help Brands Shine on Social</h2>
+        <div class="trust-subtext">Trusted by businesses across top platforms</div>
+      </div>
 
-    <script>
-        // Function to update CSS variables based on screen size
-        function updateCSSVariables() {
-            const logoTracks = document.querySelectorAll('.logos-track');
-            if (!logoTracks.length) return;
-            
-            // Set the --logo-sets CSS variable based on screen width
-            let logoSets = 4; // Default value
-            
-            if (window.innerWidth >= 3840) { // 4K screens
-                logoSets = 8;
-            } else if (window.innerWidth >= 2560) { // 1440p screens
-                logoSets = 7;
-            } else if (window.innerWidth >= 1920) { // 1080p screens
-                logoSets = 6;
-            } else if (window.innerWidth >= 1280) { // HD screens
-                logoSets = 5;
-            }
-            
-            // Update the CSS variable for all tracks
-            logoTracks.forEach(track => {
-                track.style.setProperty('--logo-sets', logoSets);
-            });
-        }
-        
-        // Clone the logos to create a seamless infinite scroll effect
-        function setupInfiniteScroll() {
-            const logoTracks = document.querySelectorAll('.logos-track');
-            if (!logoTracks.length) return;
-            
-            // Determine number of clones based on screen width
-            let cloneCount = 4; // Default for standard screens
-            let speedFactor = 1; // Default speed factor
-            
-            // Adjust clone count and speed for different screen sizes
-            if (window.innerWidth >= 3840) { // 4K screens
-                cloneCount = 8;
-                speedFactor = 1.5; // Slower animation for 4K
-            } else if (window.innerWidth >= 2560) { // 1440p screens
-                cloneCount = 6;
-                speedFactor = 1.3; // Adjusted for 1440p screens
-            } else if (window.innerWidth >= 1920) { // 1080p screens
-                cloneCount = 5;
-                speedFactor = 1.2;
-            } else if (window.innerWidth >= 1280) { // HD screens
-                cloneCount = 4;
-            }
-            
-            logoTracks.forEach(logoTrack => {
-                // Get all original items in this track
-                const originalItems = logoTrack.querySelectorAll('.logo-item-container');
-                if (!originalItems.length) return;
-                
-                // Store original items in an array
-                const items = Array.from(originalItems);
-                
-                // Clear the track
-                logoTrack.innerHTML = '';
-                
-                // Add original items back
-                items.forEach(item => {
-                    logoTrack.appendChild(item.cloneNode(true));
-                });
-                
-                // Clone items multiple times to ensure enough content for smooth scrolling
-                // Number of clones is determined by screen size
-                for (let i = 0; i < cloneCount; i++) {
-                    items.forEach(item => {
-                        logoTrack.appendChild(item.cloneNode(true));
-                    });
-                }
-                
-                // Adjust animation duration based on screen size
-                const baseAnimationDuration = 30; // seconds
-                logoTrack.style.animationDuration = `${baseAnimationDuration * speedFactor}s`;
-                
-                // Calculate the total width of items to ensure proper animation
-                const totalWidth = items.reduce((width, item) => {
-                    return width + item.offsetWidth;
-                }, 0);
-                
-                // Adjust animation based on total width if needed
-                // This ensures the animation speed is consistent regardless of screen size
-            });
-        }
-        
-        // Setup hover handlers for logos after they've been cloned
-        function setupLogoHoverHandlers() {
-            // Get all logo containers after they've been cloned
-            document.querySelectorAll('.logo-item-container').forEach(logo => {
-                // Remove any existing event listeners to prevent duplicates
-                const newLogo = logo.cloneNode(true);
-                logo.parentNode.replaceChild(newLogo, logo);
-                
-                // Add mouseenter event listener
-                newLogo.addEventListener('mouseenter', function() {
-                    const altText = this.querySelector('img')?.alt || 
-                                    this.querySelector('svg')?.getAttribute('aria-label') || 
-                                    this.getAttribute('href')?.split('/')?.pop() || 
-                                    'Social Media';
-                    // Apply hover effect (already handled by CSS)
-                });
-            });
-        }
-        
-        // Setup pause animations on hover
-        function setupAnimationPause() {
-            const section = document.querySelector('section');
-            const allTracks = document.querySelectorAll('.logos-track');
-            
-            if (section && allTracks.length > 0) {
-                section.addEventListener('mouseenter', () => {
-                    allTracks.forEach(track => {
-                        track.style.animationPlayState = 'paused';
-                    });
-                });
-                
-                section.addEventListener('mouseleave', () => {
-                    allTracks.forEach(track => {
-                        track.style.animationPlayState = 'running';
-                    });
-                });
-            }
-        }
-        
-        // Debounce function to limit how often a function is called during window resize
-        function debounce(func, wait) {
-            let timeout;
-            return function() {
-                const context = this;
-                const args = arguments;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), wait);
-            };
-        }
-        
-        // Handle window resize
-        function handleResize() {
-            // Reinitialize the infinite scroll
-            setupInfiniteScroll();
-            // Update CSS variables
-            updateCSSVariables();
-        }
-        
-        // Add event listener for window resize with debounce
-        window.addEventListener('resize', debounce(handleResize, 250));
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            setupInfiniteScroll();
-            setupLogoHoverHandlers();
-            setupAnimationPause();
-            updateCSSVariables(); // Initialize CSS variables
-        });
-    </script>
+      <div class="logos-wrapper">
+        <div class="logos-track">
+          <!-- One full set -->
+          <div class="logo-item">
+            <svg width="100" height="40" viewBox="0 0 100 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#4285f4"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Google</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <rect x="5" y="12" width="20" height="16" rx="4" fill="#ff0000"/>
+              <path d="M12 18 L18 21 L12 24 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">YouTube</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="130" height="40" viewBox="0 0 130 40" fill="white">
+              <rect x="5" y="10" width="20" height="20" rx="5" fill="#1877f2"/>
+              <text x="12" y="25" font-family="Arial" font-size="14" font-weight="bold" fill="white">f</text>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Facebook</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="100" height="40" viewBox="0 0 100 40" fill="white">
+              <rect x="5" y="8" width="20" height="24" rx="6" fill="#ff0050"/>
+              <path d="M15 14 C18 14 20 16 20 18 C20 20 18 22 15 22 C12 22 10 20 10 18 C10 16 12 14 15 14 Z M13 18 C13 16.5 14 15.5 15 15.5 C16 15.5 17 16.5 17 18 C17 19.5 16 20.5 15 20.5 C14 20.5 13 19.5 13 18 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">TikTok</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#000"/>
+              <circle cx="15" cy="20" r="8" fill="white"/>
+              <text x="11" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="black">@</text>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Threads</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <rect x="5" y="10" width="20" height="20" rx="2" fill="#0077b5"/>
+              <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="white">in</text>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">LinkedIn</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="100" height="40" viewBox="0 0 100 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#1da1f2"/>
+              <path d="M20 16 C19.5 16.2 19 16.3 18.5 16.4 C19 16.1 19.4 15.6 19.6 15 C19.1 15.3 18.5 15.5 17.9 15.6 C17.4 15.1 16.7 14.8 16 14.8 C14.3 14.8 13 16.1 13 17.8 C13 18 13 18.2 13.1 18.4 C10.7 18.3 8.6 17.1 7.2 15.2 C7 15.6 6.8 16.1 6.8 16.7 C6.8 17.7 7.3 18.6 8.1 19.1 C7.7 19.1 7.3 19 7 18.8 C7 20.3 8 21.6 9.4 21.9 C9.2 21.9 8.9 22 8.6 22 C8.4 22 8.2 22 8 21.9 C8.4 23.2 9.5 24.1 10.8 24.1 C9.8 24.9 8.5 25.4 7.1 25.4 C6.9 25.4 6.7 25.4 6.5 25.3 C7.8 26.1 9.3 26.6 11 26.6 C16 26.6 18.8 22 18.8 18.1 C18.8 18 18.8 17.9 18.8 17.8 C19.4 17.4 19.9 16.9 20.3 16.4 C19.8 16.6 19.4 16.3 20 16 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Twitter</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#5865f2"/>
+              <path d="M18 16 C17.2 15.6 16.4 15.3 15.5 15.1 C15.4 15.3 15.3 15.5 15.2 15.7 C14.3 15.6 13.4 15.6 12.5 15.7 C12.4 15.5 12.3 15.3 12.2 15.1 C11.3 15.3 10.5 15.6 9.7 16 C8.5 18.2 8.2 20.4 8.4 22.5 C9.4 23.3 10.5 23.8 11.7 24 C12 23.6 12.3 23.2 12.5 22.7 C12.1 22.6 11.7 22.4 11.3 22.2 C11.4 22.1 11.5 22 11.6 21.9 C13.2 22.6 14.9 22.6 16.5 21.9 C16.6 22 16.7 22.1 16.8 22.2 C16.4 22.4 16 22.6 15.6 22.7 C15.8 23.2 16.1 23.6 16.4 24 C17.6 23.8 18.7 23.3 19.7 22.5 C19.9 20.1 19.3 17.9 18 16 Z M13 21.2 C12.5 21.2 12.1 20.7 12.1 20.1 C12.1 19.5 12.5 19 13 19 C13.5 19 13.9 19.5 13.9 20.1 C13.9 20.7 13.5 21.2 13 21.2 Z M15.1 21.2 C14.6 21.2 14.2 20.7 14.2 20.1 C14.2 19.5 14.6 19 15.1 19 C15.6 19 16 19.5 16 20.1 C16 20.7 15.6 21.2 15.1 21.2 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Discord</text>
+            </svg>
+          </div>
+
+          <!-- Duplicate for seamless scroll -->
+          <div class="logo-item">
+            <svg width="100" height="40" viewBox="0 0 100 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#4285f4"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Google</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <rect x="5" y="12" width="20" height="16" rx="4" fill="#ff0000"/>
+              <path d="M12 18 L18 21 L12 24 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">YouTube</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="130" height="40" viewBox="0 0 130 40" fill="white">
+              <rect x="5" y="10" width="20" height="20" rx="5" fill="#1877f2"/>
+              <text x="12" y="25" font-family="Arial" font-size="14" font-weight="bold" fill="white">f</text>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Facebook</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="100" height="40" viewBox="0 0 100 40" fill="white">
+              <rect x="5" y="8" width="20" height="24" rx="6" fill="#ff0050"/>
+              <path d="M15 14 C18 14 20 16 20 18 C20 20 18 22 15 22 C12 22 10 20 10 18 C10 16 12 14 15 14 Z M13 18 C13 16.5 14 15.5 15 15.5 C16 15.5 17 16.5 17 18 C17 19.5 16 20.5 15 20.5 C14 20.5 13 19.5 13 18 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">TikTok</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#000"/>
+              <circle cx="15" cy="20" r="8" fill="white"/>
+              <text x="11" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="black">@</text>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Threads</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <rect x="5" y="10" width="20" height="20" rx="2" fill="#0077b5"/>
+              <text x="10" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="white">in</text>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">LinkedIn</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="100" height="40" viewBox="0 0 100 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#1da1f2"/>
+              <path d="M20 16 C19.5 16.2 19 16.3 18.5 16.4 C19 16.1 19.4 15.6 19.6 15 C19.1 15.3 18.5 15.5 17.9 15.6 C17.4 15.1 16.7 14.8 16 14.8 C14.3 14.8 13 16.1 13 17.8 C13 18 13 18.2 13.1 18.4 C10.7 18.3 8.6 17.1 7.2 15.2 C7 15.6 6.8 16.1 6.8 16.7 C6.8 17.7 7.3 18.6 8.1 19.1 C7.7 19.1 7.3 19 7 18.8 C7 20.3 8 21.6 9.4 21.9 C9.2 21.9 8.9 22 8.6 22 C8.4 22 8.2 22 8 21.9 C8.4 23.2 9.5 24.1 10.8 24.1 C9.8 24.9 8.5 25.4 7.1 25.4 C6.9 25.4 6.7 25.4 6.5 25.3 C7.8 26.1 9.3 26.6 11 26.6 C16 26.6 18.8 22 18.8 18.1 C18.8 18 18.8 17.9 18.8 17.8 C19.4 17.4 19.9 16.9 20.3 16.4 C19.8 16.6 19.4 16.3 20 16 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Twitter</text>
+            </svg>
+          </div>
+          <div class="logo-item">
+            <svg width="110" height="40" viewBox="0 0 110 40" fill="white">
+              <circle cx="15" cy="20" r="12" fill="#5865f2"/>
+              <path d="M18 16 C17.2 15.6 16.4 15.3 15.5 15.1 C15.4 15.3 15.3 15.5 15.2 15.7 C14.3 15.6 13.4 15.6 12.5 15.7 C12.4 15.5 12.3 15.3 12.2 15.1 C11.3 15.3 10.5 15.6 9.7 16 C8.5 18.2 8.2 20.4 8.4 22.5 C9.4 23.3 10.5 23.8 11.7 24 C12 23.6 12.3 23.2 12.5 22.7 C12.1 22.6 11.7 22.4 11.3 22.2 C11.4 22.1 11.5 22 11.6 21.9 C13.2 22.6 14.9 22.6 16.5 21.9 C16.6 22 16.7 22.1 16.8 22.2 C16.4 22.4 16 22.6 15.6 22.7 C15.8 23.2 16.1 23.6 16.4 24 C17.6 23.8 18.7 23.3 19.7 22.5 C19.9 20.1 19.3 17.9 18 16 Z M13 21.2 C12.5 21.2 12.1 20.7 12.1 20.1 C12.1 19.5 12.5 19 13 19 C13.5 19 13.9 19.5 13.9 20.1 C13.9 20.7 13.5 21.2 13 21.2 Z M15.1 21.2 C14.6 21.2 14.2 20.7 14.2 20.1 C14.2 19.5 14.6 19 15.1 19 C15.6 19 16 19.5 16 20.1 C16 20.7 15.6 21.2 15.1 21.2 Z" fill="white"/>
+              <text x="35" y="25" font-family="Arial" font-size="16" font-weight="bold" fill="white">Discord</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
