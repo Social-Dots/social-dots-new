@@ -1,9 +1,12 @@
+/**
+ * Portfolio Animations and Effects
+ * This file contains all the animations and interactive elements for the portfolio page
+*/
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Portfolio animations initialized');
     
-
     // Initialize all animations
     initParticleBackground();
     initParallaxEffects();
@@ -361,10 +364,7 @@ function initMicroInteractions() {
         });
     });
 }
-
-
-
-
+}
 
 /**
  * Initialize scroll progress indicator for the portfolio section
