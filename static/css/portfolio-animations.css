@@ -1,0 +1,312 @@
+/**
+ * Portfolio Animations and Effects
+ * This file contains all the CSS animations and effects for the portfolio page
+ */
+
+/* ===== Particle Background ===== */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ===== Parallax Effects ===== */
+.parallax {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* ===== Gradient Text Animation ===== */
+.gradient-text {
+    background: linear-gradient(90deg, #0B32A4, #0E42CE, #FFA300, #0B32A4);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    will-change: background-position;
+}
+
+/* ===== 3D Card Flip Effects ===== */
+.portfolio-item {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.portfolio-item .card-front,
+.portfolio-item .card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.portfolio-item .card-back {
+    transform: rotateY(180deg);
+}
+
+.portfolio-item.flipped .card-front {
+    transform: rotateY(180deg);
+}
+
+.portfolio-item.flipped .card-back {
+    transform: rotateY(0);
+}
+
+/* ===== Magnetic Hover Effect ===== */
+.magnetic {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform;
+}
+
+/* ===== Micro-interactions ===== */
+.btn, .filter-btn, .nav-link, .portfolio-item {
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover, .filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Scroll Progress Indicator ===== */
+.scroll-progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.scroll-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #0B32A4, #FFA300);
+    width: 0%;
+    transition: width 0.1s ease-out;
+}
+
+/* ===== GSAP Animations ===== */
+.gsap-fade-in {
+    opacity: 0;
+}
+
+.gsap-stagger-item {
+    opacity: 0;
+}
+
+/* ===== Lazy Loading with Placeholder Animations ===== */
+.lazy-image {
+    transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.lazy-image.loading {
+    opacity: 0.5;
+    filter: blur(5px);
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+    filter: blur(0);
+}
+
+.shimmer {
+    position: relative;
+    overflow: hidden;
+    background-color: #f6f7f8;
+}
+
+.shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.6) 50%, 
+        rgba(255, 255, 255, 0) 100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    to {
+        left: 150%;
+    }
+}
+
+/* ===== SVG Path Animations ===== */
+.animated-svg path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+}
+
+/* ===== Video Preview ===== */
+.video-preview {
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== Mobile Optimizations ===== */
+.touch-device .btn, 
+.touch-device .filter-btn, 
+.touch-device .nav-link, 
+.touch-device .portfolio-item {
+    transition: none;
+}
+
+.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    margin-bottom: -1rem;
+}
+
+/* ===== Background Effects ===== */
+.noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.gradient-overlay {
+    background: linear-gradient(90deg, 
+        rgba(11, 50, 164, 0.1), 
+        rgba(14, 66, 206, 0.1), 
+        rgba(255, 163, 0, 0.1), 
+        rgba(11, 50, 164, 0.1));
+    background-size: 200% 100%;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+}
+
+/* ===== Floating Action Button ===== */
+.floating-action-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0B32A4, #0E42CE);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(11, 50, 164, 0.3);
+    z-index: 100;
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.floating-action-button.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.floating-action-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(11, 50, 164, 0.4);
+}
+
+/* ===== Animated Borders ===== */
+.animated-border {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.animated-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #0B32A4, #0E42CE, #FFA300, #0B32A4) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background-size: 300% 100%;
+    animation: borderAnimation 4s linear infinite;
+}
+
+@keyframes borderAnimation {
+    0% { background-position: 0% 0; }
+    100% { background-position: 300% 0; }
+}
+
+/* ===== Fluid Typography ===== */
+:root {
+    --fluid-min-width: 320;
+    --fluid-max-width: 1200;
+    --fluid-min-size: 16;
+    --fluid-max-size: 18;
+    --fluid-min-ratio: 1.2;
+    --fluid-max-ratio: 1.25;
+}
+
+@media screen and (min-width: 320px) {
+    :root {
+        --fluid-size: calc(var(--fluid-min-size) * 1px + (var(--fluid-max-size) - var(--fluid-min-size)) * (100vw - var(--fluid-min-width) * 1px) / (var(--fluid-max-width) - var(--fluid-min-width)));
+        font-size: var(--fluid-size);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        font-size: calc(var(--fluid-max-size) * 1px);
+    }
+}
+
+/* ===== Smooth Page Transitions ===== */
+.page-transition-container {
+    position: relative;
+}
+
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0B32A4;
+    z-index: 9999;
+    transform: translateY(100%);
+    pointer-events: none;
+}
+
+.page-transition-active .page-transition-overlay {
+    animation: pageTransition 0.6s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes pageTransition {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0%); }
+}
+
+.page-transition-exit .page-transition-overlay {
+    transform: translateY(0%);
+    animation: pageTransitionExit 0.6s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes pageTransitionExit {
+    0% { transform: translateY(0%); }
+    100% { transform: translateY(-100%); }
+}

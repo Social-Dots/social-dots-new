@@ -2,18 +2,435 @@
 
 {% block title %}Portfolio - {{ site_config.site_name }} - Our Success Stories and Case Studies{% endblock %}
 
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all category filter buttons
+        const filterButtons = document.querySelectorAll('.category-pill');
+        const portfolioGrid = document.querySelector('#portfolio-grid');
+        const searchInput = document.getElementById('portfolio-search');
+        const sortSelect = document.getElementById('portfolio-sort');
+        const activeFiltersContainer = document.querySelector('.active-filters');
+        
+        // Function to update active button state
+        function updateActiveButton(clickedButton) {
+            // Remove active class and styling from all buttons
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('bg-gradient-to-r', 'from-[#0B32A4]', 'to-[#0E42CE]', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+                
+                // Reset icon color
+                const icon = btn.querySelector('i');
+                if (icon && btn.id !== 'filter-all') {
+                    icon.classList.add('text-[#0B32A4]');
+                }
+            });
+            
+            // Add active class and styling to clicked button
+            clickedButton.classList.add('active');
+            clickedButton.classList.add('bg-gradient-to-r', 'from-[#0B32A4]', 'to-[#0E42CE]', 'text-white');
+            clickedButton.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+            
+            // Reset icon color for active button
+            const clickedIcon = clickedButton.querySelector('i');
+            if (clickedIcon) {
+                clickedIcon.classList.remove('text-[#0B32A4]');
+            }
+            
+            // Update active filters display
+            updateActiveFilters();
+        }
+        
+        // Function to update active filters display
+        function updateActiveFilters() {
+            const activeCategory = document.querySelector('.category-pill.active').dataset.category;
+            const currentSearchTerm = searchInput.value.trim();
+            
+            // Clear current filters
+            activeFiltersContainer.innerHTML = '';
+            
+            // Add category filter pill if not 'all'
+            if (activeCategory !== 'all') {
+                const categoryPill = document.createElement('div');
+                categoryPill.className = 'px-3 py-1 bg-[#0B32A4]/10 text-[#0B32A4] rounded-full text-sm flex items-center gap-1';
+                categoryPill.innerHTML = `
+                    <span>Category: ${activeCategory}</span>
+                    <button class="ml-1 hover:bg-[#0B32A4]/20 rounded-full p-1" data-clear="category">
+                        <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                `;
+                activeFiltersContainer.appendChild(categoryPill);
+            }
+            
+            // Add search term pill if exists
+            if (currentSearchTerm) {
+                const searchPill = document.createElement('div');
+                searchPill.className = 'px-3 py-1 bg-[#0B32A4]/10 text-[#0B32A4] rounded-full text-sm flex items-center gap-1';
+                searchPill.innerHTML = `
+                    <span>Search: ${currentSearchTerm}</span>
+                    <button class="ml-1 hover:bg-[#0B32A4]/20 rounded-full p-1" data-clear="search">
+                        <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                `;
+                activeFiltersContainer.appendChild(searchPill);
+            }
+            
+            // Show/hide container based on if there are any filters
+            if (activeCategory !== 'all' || currentSearchTerm) {
+                activeFiltersContainer.classList.remove('hidden');
+                activeFiltersContainer.classList.add('flex');
+            } else {
+                activeFiltersContainer.classList.add('hidden');
+                activeFiltersContainer.classList.remove('flex');
+            }
+            
+            // Initialize Lucide icons in the filter pills
+            lucide.createIcons({
+                icons: {
+                    'x': lucide.icons['x']
+                },
+                attrs: {
+                    class: "w-3 h-3"
+                }
+            }, activeFiltersContainer);
+            
+            // Add event listeners to clear buttons
+            const clearButtons = activeFiltersContainer.querySelectorAll('[data-clear]');
+            clearButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const clearType = this.dataset.clear;
+                    if (clearType === 'category') {
+                        // Reset to 'All Projects'
+                        const allButton = document.getElementById('filter-all');
+                        updateActiveButton(allButton);
+                    } else if (clearType === 'search') {
+                        // Clear search input
+                        searchInput.value = '';
+                        filterPortfolioItems();
+                        updateActiveFilters();
+                    }
+                });
+            });
+        }
+        
+        // Function to filter portfolio items based on category and search term
+        function filterPortfolioItems() {
+            const activeCategory = document.querySelector('.category-pill.active').dataset.category;
+            const currentSearchTerm = searchInput.value.trim().toLowerCase();
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            let visibleCount = 0;
+            
+            portfolioItems.forEach(item => {
+                const itemCategory = item.dataset.category;
+                const itemTitle = item.querySelector('.project-title').textContent.toLowerCase();
+                const itemDescription = item.querySelector('.project-description')?.textContent.toLowerCase() || '';
+                
+                // Check if item matches both category and search term
+                const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
+                const matchesSearch = !currentSearchTerm || 
+                                      itemTitle.includes(currentSearchTerm) || 
+                                      itemDescription.includes(currentSearchTerm);
+                
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show no results message if needed
+            const noResultsEl = document.getElementById('no-results-message');
+            if (visibleCount === 0) {
+                if (!noResultsEl) {
+                    const noResults = document.createElement('div');
+                    noResults.id = 'no-results-message';
+                    noResults.className = 'text-center py-20 w-full';
+                    noResults.innerHTML = `
+                        <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="search-x" class="w-10 h-10 text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0B32A4] mb-2">No Projects Found</h3>
+                        <p class="text-gray-600 mb-4">Try adjusting your search or filter criteria</p>
+                        <button id="reset-filters" class="px-6 py-2 bg-[#0B32A4] text-white rounded-full hover:bg-[#0E42CE]">
+                            Reset Filters
+                        </button>
+                    `;
+                    portfolioGrid.querySelector('.max-w-7xl').appendChild(noResults);
+                    
+                    // Initialize Lucide icons
+                    lucide.createIcons({
+                        icons: {
+                            'search-x': lucide.icons['search-x']
+                        }
+                    }, noResults);
+                    
+                    // Add event listener to reset button
+                    document.getElementById('reset-filters').addEventListener('click', resetAllFilters);
+                }
+            } else if (noResultsEl) {
+                noResultsEl.remove();
+            }
+            
+            // Update active filters display
+            updateActiveFilters();
+        }
+        
+        // Function to sort portfolio items
+        function sortPortfolioItems() {
+            const currentSort = sortSelect.value;
+            const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item:not([style*="display: none"])'));
+            
+            portfolioItems.sort((a, b) => {
+                if (currentSort === 'newest') {
+                    // Sort by date (newest first)
+                    const dateA = new Date(a.dataset.date || '2000-01-01');
+                    const dateB = new Date(b.dataset.date || '2000-01-01');
+                    return dateB - dateA;
+                } else if (currentSort === 'oldest') {
+                    // Sort by date (oldest first)
+                    const dateA = new Date(a.dataset.date || '2000-01-01');
+                    const dateB = new Date(b.dataset.date || '2000-01-01');
+                    return dateA - dateB;
+                } else if (currentSort === 'name-asc') {
+                    // Sort alphabetically (A-Z)
+                    const titleA = a.querySelector('.project-title').textContent;
+                    const titleB = b.querySelector('.project-title').textContent;
+                    return titleA.localeCompare(titleB);
+                } else if (currentSort === 'name-desc') {
+                    // Sort alphabetically (Z-A)
+                    const titleA = a.querySelector('.project-title').textContent;
+                    const titleB = b.querySelector('.project-title').textContent;
+                    return titleB.localeCompare(titleA);
+                }
+                return 0;
+            });
+            
+            // Reorder items in the DOM
+            const fragment = document.createDocumentFragment();
+            portfolioItems.forEach(item => {
+                fragment.appendChild(item);
+            });
+            
+            const container = portfolioGrid.querySelector('.max-w-7xl');
+            // Preserve the no results message if it exists
+            const noResultsEl = document.getElementById('no-results-message');
+            if (noResultsEl) {
+                noResultsEl.remove();
+            }
+            
+            // Clear and repopulate the grid
+            Array.from(container.querySelectorAll('.portfolio-item')).forEach(item => item.remove());
+            container.prepend(fragment);
+            
+            // Re-add the no results message if it existed
+            if (noResultsEl) {
+                container.appendChild(noResultsEl);
+            }
+        }
+        
+        // Function to reset all filters
+        function resetAllFilters() {
+            // Reset category to 'All Projects'
+            const allButton = document.getElementById('filter-all');
+            updateActiveButton(allButton);
+            
+            // Clear search input
+            searchInput.value = '';
+            
+            // Reset sort to 'newest'
+            sortSelect.value = 'newest';
+            
+            // Apply filters and sort
+            filterPortfolioItems();
+            sortPortfolioItems();
+        }
+        
+        // Function to fetch and update portfolio content with AJAX
+        function fetchPortfolioContent(portfolioType) {
+            // Show loading indicator
+            const gridContent = portfolioGrid.querySelector('.max-w-7xl');
+            
+            // Create and show loading indicator
+            const loadingIndicator = document.createElement('div');
+            loadingIndicator.className = 'text-center py-20';
+            loadingIndicator.innerHTML = `
+                <div class="w-16 h-16 border-4 border-[#0B32A4] border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <p class="mt-4 text-[#0B32A4] font-medium">Loading projects...</p>
+            `;
+            
+            // Fade out current content
+            gridContent.style.opacity = '0.3';
+            gridContent.style.transition = 'opacity 0.3s';
+            
+            // Prepare URL with appropriate filter parameter
+            let url = '/portfolio/';
+            if (portfolioType && portfolioType !== 'all') {
+                url += `?type=${portfolioType}`;
+            }
+            
+            // Fetch the filtered content
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.text())
+            .then(html => {
+                // Extract only the portfolio grid section from the response
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newContent = doc.querySelector('#portfolio-grid .max-w-7xl').innerHTML;
+                
+                // Update the page content with animation
+                setTimeout(() => {
+                    gridContent.innerHTML = newContent;
+                    gridContent.style.opacity = '1';
+                    
+                    // Reinitialize Lucide icons for new content
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                    
+                    // Reinitialize 3D tilt effect for new cards
+                    if (typeof VanillaTilt !== 'undefined') {
+                        VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+                            max: 10,
+                            speed: 400,
+                            glare: true,
+                            'max-glare': 0.3,
+                            scale: 1.05
+                        });
+                    }
+                    
+                    // Update URL without page reload
+                    const newUrl = new URL(window.location);
+                    if (portfolioType && portfolioType !== 'all') {
+                        newUrl.searchParams.set('type', portfolioType);
+                    } else {
+                        newUrl.searchParams.delete('type');
+                    }
+                    window.history.pushState({}, '', newUrl);
+                }, 300);
+            })
+            .catch(error => {
+                console.error('Error fetching portfolio content:', error);
+                gridContent.style.opacity = '1';
+                gridContent.innerHTML = `
+                    <div class="text-center py-20">
+                        <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="alert-triangle" class="w-10 h-10 text-red-500"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#0B32A4] mb-2">Error Loading Projects</h3>
+                        <p class="text-gray-600 mb-4">There was a problem loading the projects. Please try again.</p>
+                        <button onclick="window.location.reload()" class="px-6 py-2 bg-[#0B32A4] text-white rounded-full hover:bg-[#0E42CE]">
+                            Reload Page
+                        </button>
+                    </div>
+                `;
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+        }
+        
+        // Add click event listeners to filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Skip if this button is already active
+                if (this.classList.contains('active')) return;
+                
+                // Update active button styling
+                updateActiveButton(this);
+                
+                // Get portfolio type from data attribute
+                const portfolioType = this.getAttribute('data-category');
+                
+                // Fetch filtered content
+                fetchPortfolioContent(portfolioType);
+            });
+        });
+        
+        // Set initial active state based on URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const typeParam = urlParams.get('type');
+        
+        if (typeParam) {
+            const buttonMap = {
+                'website': document.getElementById('filter-website'),
+                'ai': document.getElementById('filter-ai'),
+                'social': document.getElementById('filter-social'),
+                'social-media': document.getElementById('filter-social-media')
+            };
+            
+            const buttonToActivate = buttonMap[typeParam] || document.getElementById('filter-all');
+            if (buttonToActivate) {
+                updateActiveButton(buttonToActivate);
+            }
+        }
+    });
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Filter animations */
+    .filter-fade-in {
+        animation: filterFadeIn 0.5s ease forwards;
+    }
+    
+    @keyframes filterFadeIn {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Active filter tags */
+    .active-filter-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        background-color: #f3f4f6;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        color: #374151;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .active-filter-tag button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        transition: all 0.2s;
+    }
+    
+    .active-filter-tag button:hover {
+        color: #ef4444;
+    }
+    
+    /* Category pill active state */
+    .category-pill.active {
+        background-color: #0B32A4;
+        color: white;
+        box-shadow: 0 4px 6px -1px rgba(11, 50, 164, 0.2);
+    }
+</style>
+{% endblock %}
+
 {% block content %}
+<!-- Scroll Progress Indicator -->
+<div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-[#0B32A4] to-[#FFA300] z-50 w-0"></div>
 <!-- Portfolio Hero Section -->
-<section class="relative overflow-hidden min-h-[80vh]" style="background-color:rgb(217, 219, 144);">
-    <!-- Modern Background with Parallax Effect -->
-    <div class="absolute inset-0 transform transition-transform duration-1000 hover:scale-105">
-        <img 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
-            alt="Business Analytics" 
-            class="w-full h-full object-cover opacity-40"
-            loading="eager"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-[#0B32A4]/40 to-[#FFA300]/30"></div>
+<section id="portfolio-hero" class="relative overflow-hidden min-h-[60vh]" style="background-color:rgb(217, 219, 144);">
+    <!-- Particles.js Background -->
+    <div id="particles-js" class="absolute inset-0 z-0"></div>
+    
+    <!-- Modern Background with Fixed Position (Not Parallax) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0B32A4]/40 to-[#FFA300]/30">
+        <!-- Solid background instead of floating image -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0B32A4]/10 to-[#FFA300]/10"></div>
     </div>
     
     <!-- Enhanced Floating Elements with More Variety -->
@@ -22,8 +439,8 @@
     <div class="absolute top-1/2 right-1/4 w-48 h-48 bg-[#FFA300]/20 rounded-full blur-2xl animate-float" style="animation-duration: 15s;"></div>
     <div class="absolute bottom-1/4 left-1/3 w-64 h-64 bg-[#0B32A4]/10 rounded-full blur-2xl animate-floatReverse" style="animation-duration: 18s;"></div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="text-center space-y-8 fade-in" style="--delay: 0.1s;">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center space-y-6 fade-in" style="--delay: 0.1s;">
             <!-- Decorative Element -->
             <div class="inline-block mx-auto">
                 <div class="flex items-center justify-center space-x-2 mb-4">
@@ -33,128 +450,101 @@
                 </div>
             </div>
 
-            <!-- Hero Headline with Enhanced Typography -->
-            <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
-                <span class="text-[#0B32A4] drop-shadow-sm">Delivering Impactful Solutions</span><br>
-                <span class="text-[#FFA300] drop-shadow-sm">Across The Industries.</span>
+            <!-- Hero Headline with Enhanced Typography and Animated Gradient Text -->
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight fade-in" style="--delay: 0.3s;">
+                <span class="gradient-text text-transparent bg-clip-text drop-shadow-sm">Delivering Impactful Solutions</span><br>
+                <span class="gradient-text text-transparent bg-clip-text drop-shadow-sm" style="background-image: linear-gradient(90deg, #FFA300, #FF8C00, #FFA300, #FF8C00);">Across The Industries.</span>
             </h1>
 
             <!-- Hero Subheading with Enhanced Typography -->
-            <p class="mx-auto max-w-3xl text-xl text-[#0B32A4] leading-relaxed fade-in" style="--delay: 0.4s;">
+            <p class="mx-auto max-w-3xl text-lg text-[#0B32A4] leading-relaxed fade-in" style="--delay: 0.4s;">
                 <span class="font-semibold text-[#FFA300]">From AI to Design, Web to Social — </span>explore our portfolio of work that drives real business growth and transforms digital experiences.
             </p>
             
             <!-- Call to Action Button -->
-            <div class="pt-4 fade-in" style="--delay: 0.5s;">
-                <a href="#portfolio-grid" class="inline-flex items-center gap-2 bg-[#0B32A4] text-white px-6 py-3 rounded-full hover:bg-[#0E42CE] transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px] group">
-                    <span>Explore Projects</span>
-                    <i data-lucide="arrow-down" class="w-4 h-4 group-hover:animate-bounce"></i>
-                </a>
+            <div class="relative max-w-2xl mx-auto mb-8 group card-3d transform hover:scale-[1.02] transition-all duration-300">
+            <div class="absolute inset-0 bg-[#0B32A4]/10 rounded-xl blur opacity-70 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative bg-white backdrop-blur-lg shadow-lg rounded-xl overflow-hidden flex items-center p-1">
+                <div class="flex-1 relative">
+                    <input type="text" id="portfolio-search" placeholder="Search by project name, technology, or type..." class="w-full pl-12 pr-4 py-4 bg-transparent border-none focus:ring-0 focus:outline-none text-gray-800 placeholder-gray-400">
+                    <i data-lucide="search" class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 transform -translate-y-1/2"></i>
+                </div>
+                <div class="relative">
+                    <select id="portfolio-sort" class="h-full appearance-none bg-transparent border-l border-gray-200 text-gray-700 py-4 pl-4 pr-10 focus:outline-none focus:ring-0 text-sm">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"></i>
+                </div>
             </div>
+            <!-- Container for active filters -->
+            <div class="active-filters hidden flex flex-wrap gap-2 mt-4 justify-center"></div>
+        </div>
         </div>
     </div>
 </section>
 
-<!-- Portfolio Filter Bar -->
-<section id="portfolio-filter" class="py-6 bg-white border-b border-gray-200 sticky top-0 z-10 shadow-md backdrop-blur-sm bg-white/90">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <!-- Filter Title (Mobile Only) -->
-            <div class="sm:hidden w-full text-center mb-2">
-                <h3 class="text-lg font-semibold text-[#0B32A4]">Filter Projects</h3>
-            </div>
-            
-            <!-- Main Filter Buttons -->
-            <div class="flex flex-wrap justify-center sm:justify-start gap-3 w-full sm:w-auto">
-                <button id="filter-all" class="filter-btn px-5 py-2.5 rounded-full font-medium transition-all duration-300 bg-[#0B32A4] text-white hover:shadow-md active transform hover:translate-y-[-2px]">
-                    <i data-lucide="layout-grid" class="w-4 h-4 mr-2 inline-block"></i>
+<!-- Modern Portfolio Filter & Search Interface -->
+<section id="portfolio-filter" class="py-12 bg-white relative overflow-hidden">
+    <!-- Subtle Background Elements -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#0B32A4]/5 to-[#FFA300]/5 opacity-30"></div>
+    <div class="noise-bg absolute inset-0 opacity-15"></div>
+    
+    <!-- Enhanced Floating Decorative Elements -->
+    <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#0B32A4]/5 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-[#FFA300]/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/4 w-32 h-32 bg-[#FFA300]/5 rounded-full blur-2xl"></div>
+    <div class="absolute bottom-1/3 right-1/3 w-24 h-24 bg-[#0B32A4]/5 rounded-full blur-2xl"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Search & Filter Header -->
+        <div class="flex flex-col items-center justify-center mb-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#0B32A4] mb-4">Explore Our Portfolio</h2>
+            <p class="text-gray-600 max-w-2xl text-lg">Browse through our collection of successful projects and solutions</p>
+        </div>
+        
+        <!-- Modern Category Pills -->
+        <div class="flex justify-center mb-10">
+            <div class="inline-flex flex-wrap justify-center gap-3 p-2 bg-white backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100">
+                <button id="filter-all" class="category-pill active px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] text-white hover:shadow-lg flex items-center gap-2" data-category="all">
+                    <i data-lucide="layout-grid" class="w-5 h-5"></i>
                     <span>All Projects</span>
                 </button>
-                <button id="filter-website" class="filter-btn px-5 py-2.5 rounded-full font-medium transition-all duration-300 bg-white text-[#0B32A4] border border-[#0B32A4] hover:bg-[#0B32A4] hover:text-white hover:shadow-md transform hover:translate-y-[-2px]">
-                    <i data-lucide="globe" class="w-4 h-4 mr-2 inline-block"></i>
-                    <span>Websites</span>
+                
+                <button id="filter-website" class="category-pill px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md flex items-center gap-2 border border-gray-200" data-category="website">
+                    <i data-lucide="globe" class="w-5 h-5 text-[#0B32A4]"></i>
+                    <span>Web Development</span>
                 </button>
-                <button id="filter-ai" class="filter-btn px-5 py-2.5 rounded-full font-medium transition-all duration-300 bg-white text-[#0B32A4] border border-[#0B32A4] hover:bg-[#0B32A4] hover:text-white hover:shadow-md transform hover:translate-y-[-2px]">
-                    <i data-lucide="brain-circuit" class="w-4 h-4 mr-2 inline-block"></i>
+                
+                <button id="filter-ai" class="category-pill px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md flex items-center gap-2 border border-gray-200" data-category="ai">
+                    <i data-lucide="brain-circuit" class="w-5 h-5 text-[#0B32A4]"></i>
                     <span>AI Solutions</span>
                 </button>
-                <button id="filter-social" class="filter-btn px-5 py-2.5 rounded-full font-medium transition-all duration-300 bg-white text-[#0B32A4] border border-[#0B32A4] hover:bg-[#0B32A4] hover:text-white hover:shadow-md transform hover:translate-y-[-2px]">
-                    <i data-lucide="message-square" class="w-4 h-4 mr-2 inline-block"></i>
+                
+                <button id="filter-social-media" class="category-pill px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md flex items-center gap-2 border border-gray-200" data-category="social-media">
+                    <i data-lucide="share-2" class="w-5 h-5 text-[#0B32A4]"></i>
                     <span>Social Media</span>
                 </button>
             </div>
-            
-            <!-- Search and Sort (Desktop Only) -->
-            <div class="hidden md:flex items-center space-x-4">
-                <!-- Search Input -->
-                <div class="relative">
-                    <input type="text" placeholder="Search projects..." class="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:border-[#0B32A4] focus:ring-1 focus:ring-[#0B32A4] focus:outline-none transition-all duration-300 w-48 text-sm">
-                    <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2"></i>
-                </div>
-                
-                <!-- Sort Dropdown -->
-                <div class="relative inline-block text-left">
-                    <button type="button" class="inline-flex items-center justify-center gap-x-1.5 px-4 py-2 text-sm font-medium text-gray-700 rounded-full border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-[#0B32A4]" id="sort-menu-button" aria-expanded="false" aria-haspopup="true">
-                        <i data-lucide="arrow-down-up" class="w-4 h-4 mr-1"></i>
-                        <span>Sort by</span>
-                        <i data-lucide="chevron-down" class="w-3 h-3"></i>
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
-</section>
-
-<!-- Portfolio Grid Section -->
-<section id="portfolio-grid" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {% comment %} <div class="text-center mb-16 fade-in" style="--delay: 0.1s;">
-            <!-- Decorative Element -->
-            <div class="inline-block mx-auto mb-4">
-                <div class="flex items-center justify-center space-x-2">
-                    <div class="h-1 w-12 bg-[#FFA300] rounded-full"></div>
-                    <div class="text-sm font-semibold text-[#0B32A4] uppercase tracking-wider">Showcase</div>
-                    <div class="h-1 w-12 bg-[#FFA300] rounded-full"></div>
-                </div>
-            </div>
-            
-            <h2 class="text-3xl md:text-5xl font-bold text-[#0B32A4] mb-6 relative inline-block">
-                Our Featured Projects
-                <span class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-[#FFA300] rounded-full"></span>
-            </h2>
-            
-            <p class="text-gray-600 max-w-3xl mx-auto mt-8 text-lg">
-                Explore our portfolio of successful projects that have helped businesses achieve their digital transformation goals and drive measurable growth
-            </p>
-            
-            <!-- Project Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-4xl mx-auto">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:border-[#0B32A4]/20">
-                    <div class="text-3xl md:text-4xl font-bold text-[#0B32A4] mb-2">50+</div>
-                    <div class="text-gray-600 text-sm">Completed Projects</div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:border-[#0B32A4]/20">
-                    <div class="text-3xl md:text-4xl font-bold text-[#FFA300] mb-2">98%</div>
-                    <div class="text-gray-600 text-sm">Client Satisfaction</div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:border-[#0B32A4]/20">
-                    <div class="text-3xl md:text-4xl font-bold text-[#0B32A4] mb-2">15+</div>
-                    <div class="text-gray-600 text-sm">Industries Served</div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:border-[#0B32A4]/20">
-                    <div class="text-3xl md:text-4xl font-bold text-[#FFA300] mb-2">5+</div>
-                    <div class="text-gray-600 text-sm">Years Experience</div>
-                </div>
-            </div>
-        </div> {% endcomment %}
-        
+    
+    <!-- Projects Grid Container -->
+    <div id="portfolio-grid" class="max-w-7lg mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
         {% if projects %}
-        <!-- Projects Grid with Enhanced Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <!-- Projects Grid with Enhanced Cards and 3D Effects -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-16">
             {% for project in projects %}
-            <div class="group rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 fade-in bg-white border border-gray-100 hover:border-[#0B32A4]/20 overflow-hidden transform hover:-translate-y-2" style="--delay: calc(0.1s * {{ forloop.counter }});">                
+            <div class="portfolio-item group rounded-xl shadow-md hover:shadow-lg transition-all duration-500 fade-in bg-white border border-gray-100 hover:border-[#0B32A4]/20 overflow-hidden transform hover:-translate-y-1 relative" style="--delay: calc(0.1s * {{ forloop.counter }});" data-tilt data-tilt-max="10" data-tilt-scale="1.03" data-tilt-speed="400" data-tilt-perspective="1000" data-category="{% if 'web' in project.title.lower %}website{% elif 'mobile' in project.title.lower %}mobile{% elif 'ai' in project.title.lower %}ai{% elif 'social' in project.title.lower %}social{% else %}all{% endif %}" data-date="{{ project.created_at|date:'Y-m-d' }}">
+                <!-- 3D Card Effect Elements -->
+                <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none transform translate-x-4 translate-y-4"></div>
+                
                 <!-- Project Image with Enhanced Styling -->
-                <div class="relative h-64 overflow-hidden">
+                <div class="relative h-52 overflow-hidden">
                     {% if project.image %}
                     <!-- Project has image -->
                     <img 
@@ -163,14 +553,13 @@
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
                     >
-                    <!-- Enhanced gradient overlay with more depth -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-40 group-hover:opacity-60 transition-opacity duration-300"></div>
+                    <!-- 3D Depth Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-300"></div>
                     {% else %}
-                    <!-- Project has no image - show styled fallback with enhanced design -->
+                    <!-- Project has no image - show styled 3D fallback -->
                     <div class="h-full w-full bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] flex items-center justify-center p-6 relative overflow-hidden">
-                        <!-- Decorative elements for no-image cards -->
-                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white/10 rounded-full"></div>
-                        <div class="absolute top-6 -left-6 w-16 h-16 bg-white/5 rounded-full"></div>
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-white rounded-full transform group-hover:translate-y-2 transition-transform duration-300 opacity-10"></div>
+                        <div class="absolute top-6 -left-6 w-16 h-16 bg-white rounded-full transform group-hover:translate-y-1 transition-transform duration-300 opacity-5"></div>
                         
                         <div class="text-white text-center relative z-10">
                             <i data-lucide="{% if 'web' in project.title.lower %}globe{% elif 'mobile' in project.title.lower %}smartphone{% elif 'ai' in project.title.lower %}brain-circuit{% elif 'crm' in project.title.lower or 'salesforce' in project.title.lower %}database{% else %}monitor{% endif %}" class="w-20 h-20 mb-4 mx-auto p-4 bg-white/10 rounded-2xl group-hover:scale-110 transition-transform duration-300"></i>
@@ -186,39 +575,40 @@
                     
                     <!-- Enhanced portfolio type badge with animation -->
                     {% if project.portfolio_type and project.image %}
-                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-[#0B32A4] text-xs font-medium px-3 py-1 rounded-full shadow-md group-hover:bg-[#0B32A4] group-hover:text-white transition-all duration-300">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0B32A4] text-xs font-medium px-3 py-1 rounded-full shadow-md group-hover:bg-[#0B32A4] group-hover:text-white transition-all duration-300">
                         {{ project.get_portfolio_type_display }}
                     </div>
                     {% endif %}
                     
-                    <!-- Enhanced view button overlay with animation -->
+                    <!-- 3D View Button Overlay with Animation -->
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0B32A4]/80 to-transparent opacity-80"></div>
-                        <a href="{% url 'project_detail' project.slug %}" class="relative z-10 bg-[#FFA300] text-white px-6 py-2.5 rounded-full flex items-center gap-2 hover:bg-white hover:text-[#FFA300] transition-all duration-300 shadow-xl transform hover:scale-105">
-                            <i data-lucide="eye" class="w-4 h-4"></i>
-                            <span class="font-medium">View Details</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0B32A4]/80 to-transparent opacity-90"></div>
+                        <a href="{% url 'project_detail' project.slug %}" class="relative z-10 bg-[#FFA300] text-white px-8 py-3 rounded-full flex items-center gap-2 hover:bg-white hover:text-[#FFA300] transition-all duration-300 shadow-xl transform hover:scale-105">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                            <span class="font-medium">View Project</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- Enhanced Project Content with Better Typography and Layout -->
-                <div class="p-6">
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-[#0B32A4] group-hover:text-[#FFA300] transition-colors">
-                            <a href="{% url 'project_detail' project.slug %}" class="hover:underline decoration-2 underline-offset-4 decoration-[#FFA300]/50">
-                                {{ project.title }}
+                <!-- Enhanced Project Content -->
+                <div class="p-4 relative">
+                    <div class="space-y-4 relative z-10">
+                        <h3 class="text-lg font-bold text-[#0B32A4] group-hover:text-[#FFA300] transition-colors project-title">
+                            <a href="{% url 'project_detail' project.slug %}" class="relative inline-block">
+                                <span class="relative z-10">{{ project.title }}</span>
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FFA300] transition-all duration-300 group-hover:w-full"></span>
                             </a>
                         </h3>
-                        <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed">
+                        <p class="text-gray-600 text-xs line-clamp-2 leading-relaxed project-description">
                             {{ project.description|striptags|truncatewords:15 }}
                         </p>
                         
-                        <!-- Project Meta with Enhanced Layout and Visual Appeal -->
-                        <div class="grid grid-cols-2 gap-4 pt-4">
+                        <!-- Project Meta with Enhanced Layout -->
+                        <div class="grid grid-cols-2 gap-3 pt-3">
                             {% if project.client_name %}
-                            <div class="flex items-start space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-[#FFA300]/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#FFA300]/20 transition-colors duration-300">
-                                    <i data-lucide="building" class="w-4 h-4 text-[#FFA300]"></i>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-7 h-7 rounded-full bg-[#FFA300]/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#FFA300]/20 transition-colors duration-300">
+                                    <i data-lucide="building" class="w-3 h-3 text-[#FFA300]"></i>
                                 </div>
                                 <div>
                                     <span class="text-gray-500 text-xs block">Client</span>
@@ -228,9 +618,9 @@
                             {% endif %}
 
                             {% if project.end_date %}
-                            <div class="flex items-start space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-[#FFA300]/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#FFA300]/20 transition-colors duration-300">
-                                    <i data-lucide="calendar" class="w-4 h-4 text-[#FFA300]"></i>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-7 h-7 rounded-full bg-[#FFA300]/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#FFA300]/20 transition-colors duration-300">
+                                    <i data-lucide="calendar" class="w-3 h-3 text-[#FFA300]"></i>
                                 </div>
                                 <div>
                                     <span class="text-gray-500 text-xs block">Completed</span>
@@ -241,15 +631,15 @@
                         </div>
 
                         {% if project.technologies %}
-                        <div class="flex flex-wrap gap-1.5 pt-4 border-t border-gray-100 mt-4">
-                            {% for tech in project.technologies|slice:":3" %}
-                            <span class="px-2.5 py-1 bg-[#0B32A4]/5 border border-[#0B32A4]/10 text-[#0B32A4] text-xs rounded-md font-medium hover:bg-[#0B32A4]/10 transition-colors group-hover:border-[#0B32A4]/30">
+                        <div class="flex flex-wrap gap-1.5 pt-3 border-t border-gray-100 mt-3">
+                            {% for tech in project.technologies|slice:":4" %}
+                            <span class="px-2 py-1 bg-[#0B32A4]/5 border border-[#0B32A4]/10 text-[#0B32A4] text-xs rounded-md font-medium hover:bg-[#0B32A4]/10 transition-colors group-hover:border-[#0B32A4]/30">
                                 {{ tech }}
                             </span>
                             {% endfor %}
-                            {% if project.technologies|length > 3 %}
-                            <span class="px-2.5 py-1 bg-[#FFA300]/5 border border-[#FFA300]/10 text-[#FFA300] text-xs rounded-md font-medium hover:bg-[#FFA300]/10 transition-colors group-hover:border-[#FFA300]/30">
-                                +{{ project.technologies|length|add:"-3" }}
+                            {% if project.technologies|length > 4 %}
+                            <span class="px-2 py-1 bg-[#FFA300]/5 border border-[#FFA300]/10 text-[#FFA300] text-xs rounded-md font-medium hover:bg-[#FFA300]/10 transition-colors group-hover:border-[#FFA300]/30">
+                                +{{ project.technologies|length|add:"-4" }}
                             </span>
                             {% endif %}
                         </div>
@@ -260,36 +650,33 @@
             {% endfor %}
         </div>
 
-        <!-- Enhanced Pagination with Modern Design -->
+        <!-- Enhanced Pagination -->
         {% if projects.has_other_pages %}
         <div class="mt-16 mb-8 fade-in" style="--delay: 0.3s;">
-            <!-- Pagination Heading -->
             <div class="text-center mb-6">
                 <h3 class="text-lg font-medium text-gray-500">Page {{ projects.number }} of {{ projects.paginator.num_pages }}</h3>
             </div>
             
-            <!-- Pagination Controls -->
             <div class="flex flex-wrap justify-center items-center gap-3">
                 {% if projects.has_previous %}
                     <a href="?page={{ projects.previous_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}{% if portfolio_type %}&portfolio_type={{ portfolio_type }}{% endif %}" 
-                       class="px-5 py-2.5 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#0B32A4] text-[#0B32A4] hover:bg-[#0B32A4] hover:text-white group">
+                       class="px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#0B32A4] text-[#0B32A4] hover:bg-[#0B32A4] hover:text-white group">
                         <i data-lucide="chevron-left" class="w-4 h-4 group-hover:animate-pulse"></i>
                         <span class="font-medium">Previous</span>
                     </a>
                 {% else %}
-                    <span class="px-5 py-2.5 rounded-full flex items-center gap-2 border border-gray-200 text-gray-300 cursor-not-allowed">
+                    <span class="px-6 py-3 rounded-full flex items-center gap-2 border border-gray-200 text-gray-300 cursor-not-allowed">
                         <i data-lucide="chevron-left" class="w-4 h-4"></i>
                         <span class="font-medium">Previous</span>
                     </span>
                 {% endif %}
                 
-                <!-- Page Numbers with Enhanced Visual Design -->
                 <div class="flex items-center bg-gray-50 rounded-full shadow-sm p-1.5">
                     {% with ''|center:projects.paginator.num_pages as range %}
                     {% for _ in range %}
                         {% with forloop.counter as i %}
                             {% if projects.number == i %}
-                                <span class="w-10 h-10 flex items-center justify-center rounded-full bg-[#0B32A4] text-white font-medium shadow-md mx-0.5 transform scale-110">
+                                <span class="w-11 h-11 flex items-center justify-center rounded-full bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] text-white font-medium shadow-md mx-0.5 transform scale-110">
                                     {{ i }}
                                 </span>
                             {% elif i > projects.number|add:"-3" and i < projects.number|add:"3" %}
@@ -314,23 +701,23 @@
 
                 {% if projects.has_next %}
                     <a href="?page={{ projects.next_page_number }}{% if current_tech %}&tech={{ current_tech }}{% endif %}{% if portfolio_type %}&portfolio_type={{ portfolio_type }}{% endif %}" 
-                       class="px-5 py-2.5 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#0B32A4] text-[#0B32A4] hover:bg-[#0B32A4] hover:text-white group">
+                       class="px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md border border-[#0B32A4] text-[#0B32A4] hover:bg-[#0B32A4] hover:text-white group">
                         <span class="font-medium">Next</span>
                         <i data-lucide="chevron-right" class="w-4 h-4 group-hover:animate-pulse"></i>
                     </a>
                 {% else %}
-                    <span class="px-5 py-2.5 rounded-full flex items-center gap-2 border border-gray-200 text-gray-300 cursor-not-allowed">
+                    <span class="px-6 py-3 rounded-full flex items-center gap-2 border border-gray-200 text-gray-300 cursor-not-allowed">
                         <span class="font-medium">Next</span>
                         <i data-lucide="chevron-right" class="w-4 h-4"></i>
                     </span>
                 {% endif %}
             </div>
             
-            <!-- Jump to Page (Desktop Only) -->
+            <!-- Jump to Page -->
             <div class="hidden md:flex items-center justify-center mt-6">
                 <span class="text-sm text-gray-500 mr-3">Jump to page:</span>
                 <div class="relative">
-                    <select class="pl-3 pr-8 py-1.5 rounded-md border border-gray-300 focus:border-[#0B32A4] focus:ring-1 focus:ring-[#0B32A4] focus:outline-none transition-all duration-300 text-sm appearance-none bg-white" 
+                    <select class="pl-4 pr-8 py-2 rounded-full border border-gray-300 focus:border-[#0B32A4] focus:ring-1 focus:ring-[#0B32A4] focus:outline-none transition-all duration-300 text-sm appearance-none bg-white shadow-sm" 
                             onchange="window.location.href = '?page=' + this.value + '{% if current_tech %}&tech={{ current_tech }}{% endif %}{% if portfolio_type %}&portfolio_type={{ portfolio_type }}{% endif %}'">
                         {% for i in projects.paginator.page_range %}
                             <option value="{{ i }}" {% if projects.number == i %}selected{% endif %}>{{ i }}</option>
@@ -344,11 +731,11 @@
         </div>
         {% endif %}
 
+        </div>
         {% else %}
-        <!-- Enhanced Empty State with Visual Appeal -->
+        <!-- Enhanced Empty State -->
         <div class="text-center py-20 fade-in" style="--delay: 0.1s;">
             <div class="relative max-w-4xl mx-auto">
-                <!-- Decorative Elements -->
                 <div class="absolute -top-10 -left-10 w-24 h-24 bg-[#0B32A4]/5 rounded-full blur-xl hidden md:block"></div>
                 <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-[#FFA300]/5 rounded-full blur-xl hidden md:block"></div>
                 
@@ -361,20 +748,19 @@
                     <span class="text-[#FFA300]">Coming Soon</span>
                 </h2>
                 
-                <p class="text-xl text-grey mb-10 max-w-2xl mx-auto fade-in" style="--delay: 0.4s;">
-                    We're currently crafting exceptional projects that will be showcased here soon.
+                <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto fade-in" style="--delay: 0.4s;">
+                    We're currently working on amazing projects that will be showcased here soon.
                     In the meantime, let's discuss how we can help transform your business with our innovative solutions.
                 </p>
                 
-                <!-- Enhanced Sample Project Previews with Animation -->
+                <!-- Sample Project Previews -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 mb-16">
                     <div class="group bg-white p-8 text-center rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in border border-gray-100 hover:border-[#0B32A4]/20 transform hover:-translate-y-2" style="--delay: 0.5s;">
                         <div class="w-20 h-20 bg-[#0B32A4] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md group-hover:bg-[#0E42CE] transition-colors duration-300">
                             <i data-lucide="brain-circuit" class="w-10 h-10 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-[#0B32A4] mb-3 group-hover:text-[#FFA300] transition-colors">AI Integration Project</h3>
-                        <p class="text-grey">Strategic AI implementation for a Toronto-based manufacturing company, resulting in 40% efficiency improvement.</p>
-                        <!-- Progress Indicator -->
+                        <h3 class="text-xl font-bold text-[#0B32A4] mb-3 group-hover:text-[#FFA300] transition-colors">AI Integration</h3>
+                        <p class="text-gray-600">Strategic AI implementation for manufacturing, resulting in 40% efficiency improvement.</p>
                         <div class="mt-6 w-full">
                             <div class="flex justify-between text-xs text-gray-500 mb-1">
                                 <span>Progress</span>
@@ -391,8 +777,7 @@
                             <i data-lucide="database" class="w-10 h-10 text-white"></i>
                         </div>
                         <h3 class="text-xl font-bold text-[#0B32A4] mb-3 group-hover:text-[#FFA300] transition-colors">SEO Optimization</h3>
-                        <p class="text-grey">Complete SEO overhaul for improved lead conversion and management with data-driven strategies.</p>
-                        <!-- Progress Indicator -->
+                        <p class="text-gray-600">Complete SEO overhaul for improved lead conversion and management.</p>
                         <div class="mt-6 w-full">
                             <div class="flex justify-between text-xs text-gray-500 mb-1">
                                 <span>Progress</span>
@@ -408,9 +793,8 @@
                         <div class="w-20 h-20 bg-[#0E42CE] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md group-hover:bg-[#0B32A4] transition-colors duration-300">
                             <i data-lucide="globe" class="w-10 h-10 text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-[#0B32A4] mb-3 group-hover:text-[#FFA300] transition-colors">Digital Transformation</h3>
-                        <p class="text-grey">End-to-end digital strategy implementation for a Vancouver tech startup, scaling from 0 to $1M ARR.</p>
-                        <!-- Progress Indicator -->
+                        <h3 class="text-xl font-bold text-[#0B32A4] mb-3 group-hover:text-[#FFA300] transition-colors">Web Platform</h3>
+                        <p class="text-gray-600">End-to-end web solution for a tech startup, scaling from 0 to $1M ARR.</p>
                         <div class="mt-6 w-full">
                             <div class="flex justify-between text-xs text-gray-500 mb-1">
                                 <span>Progress</span>
@@ -424,11 +808,11 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in" style="--delay: 0.8s;">
-                    <a href="/contact/" class="bg-[#0B32A4] text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:bg-[#0E42CE] group">
+                    <a href="/contact/" class="bg-[#0B32A4] text-white px-8 py-3.5 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:bg-[#0E42CE] group font-medium">
                         <i data-lucide="calendar" class="w-5 h-5 group-hover:animate-pulse"></i>
                         <span>Discuss Your Project</span>
                     </a>
-                    <a href="/services/" class="bg-[#FFA300] text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:bg-[#FFA300]/90 group">
+                    <a href="/services/" class="bg-[#FFA300] text-white px-8 py-3.5 rounded-full flex items-center gap-2 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg hover:bg-[#FFA300]/90 group font-medium">
                         <i data-lucide="list" class="w-5 h-5 group-hover:animate-pulse"></i>
                         <span>View Our Services</span>
                     </a>
@@ -439,8 +823,8 @@
                     <h3 class="text-lg font-semibold text-[#0B32A4] mb-3">Get Notified When We Launch</h3>
                     <p class="text-gray-600 mb-4 text-sm">Subscribe to receive updates about our portfolio launch and new projects.</p>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <input type="email" placeholder="Your email address" class="flex-1 px-4 py-2.5 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0B32A4]/20 focus:border-[#0B32A4]">
-                        <button class="px-5 py-2.5 bg-[#0B32A4] text-white rounded-full font-medium hover:bg-[#0E42CE] transition-colors">
+                        <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#0B32A4]/20 focus:border-[#0B32A4] text-sm">
+                        <button class="px-6 py-3 bg-[#0B32A4] text-white rounded-full font-medium hover:bg-[#0E42CE] transition-colors text-sm">
                             Subscribe
                         </button>
                     </div>
@@ -451,8 +835,17 @@
     </div>
 </section>
 
-<!-- Enhanced Testimonials Section -->
+
+<!-- Enhanced Testimonials Section with SVG Animation -->
 <section class="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <!-- SVG Animation Background -->
+    <div class="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
+        <svg class="svg-animation" width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+            <path class="path-animation" d="M0,500 C150,400 350,300 500,500 C650,700 850,600 1000,500" stroke="#0B32A4" stroke-width="2" fill="none" />
+            <path class="path-animation" d="M0,600 C200,500 300,700 500,600 C700,500 800,700 1000,600" stroke="#FFA300" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+            <path class="path-animation" d="M0,400 C250,300 350,500 500,400 C650,300 750,500 1000,400" stroke="#0E42CE" stroke-width="2" fill="none" />
+        </svg>
+    </div>
     <!-- Decorative Background Elements -->
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div class="absolute -top-20 -right-20 w-64 h-64 bg-[#0B32A4]/5 rounded-full blur-xl"></div>
@@ -655,6 +1048,13 @@
     </div>
 </section>
 
+<!-- Floating Action Button -->
+<div id="floating-action-button" class="fixed bottom-8 right-8 z-40 opacity-0 transition-all duration-500 transform translate-y-10">
+    <button class="w-14 h-14 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] rounded-full shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-all duration-300 hover:scale-110" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
+</div>
+
 <!-- Call to Action Section -->
 <section class="py-20" style="background:rgb(255, 255, 255); position: relative; overflow: hidden;">
     <!-- Background Elements -->
@@ -722,6 +1122,38 @@
         animation: floatReverse 18s ease-in-out infinite;
     }
     
+    /* Gradient text animation */
+    .gradient-text {
+        background-size: 200% auto;
+        background-image: linear-gradient(90deg, #0B32A4, #0E42CE, #FFA300, #0B32A4);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    
+    /* SVG path animation */
+    .path-animation {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: dash 15s linear forwards infinite;
+    }
+    
+    @keyframes dash {
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+    
+    /* 3D Card effect */
+    .card-3d {
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    
+    /* Noise background */
+    .noise-bg {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
     /* Text colors */
     .text-deepBlue {
         color: #0B32A4;
@@ -779,9 +1211,128 @@
         lucide.createIcons();
     }
     
+    // Initialize animations and interactive elements
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize particles.js
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: ['#0B32A4', '#FFA300'] },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#0B32A4', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true, out_mode: 'out' }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: true, mode: 'grab' },
+                        onclick: { enable: true, mode: 'push' },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+        }
+        
+        // Initialize GSAP animations
+        if (typeof gsap !== 'undefined') {
+            // Animate gradient text
+            gsap.to('.gradient-text', {
+                backgroundPosition: '-200% center',
+                repeat: -1,
+                duration: 10,
+                ease: 'linear'
+            });
+            
+            // Scroll animations
+            const scrollTrigger = ScrollTrigger || gsap.ScrollTrigger;
+            if (scrollTrigger) {
+                // Animate elements on scroll
+                gsap.utils.toArray('.card-3d').forEach(card => {
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top bottom-=100',
+                            toggleActions: 'play none none reverse'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: 'power2.out'
+                    });
+                });
+            }
+        }
+        
+        // Initialize 3D tilt effect
+        if (typeof VanillaTilt !== 'undefined') {
+            VanillaTilt.init(document.querySelectorAll('.card-3d'), {
+                max: 10,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.3,
+                scale: 1.05
+            });
+        }
+        
+        // Initialize magnetic hover effect
+        const magneticElements = document.querySelectorAll('.magnetic-element');
+        magneticElements.forEach(elem => {
+            elem.addEventListener('mousemove', function(e) {
+                const position = elem.getBoundingClientRect();
+                const x = e.clientX - position.left - position.width / 2;
+                const y = e.clientY - position.top - position.height / 2;
+                
+                elem.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+            });
+            
+            elem.addEventListener('mouseleave', function() {
+                elem.style.transform = 'translate(0px, 0px) scale(1)';
+            });
+        });
+        
+        // Scroll progress indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const scrollProgress = document.getElementById('scroll-progress');
+            
+            if (scrollProgress) {
+                scrollProgress.style.width = scrollPercent * 100 + '%';
+            }
+            
+            // Show/hide floating action button
+            const floatingBtn = document.getElementById('floating-action-button');
+            if (floatingBtn) {
+                if (scrollTop > 300) {
+                    floatingBtn.style.opacity = '1';
+                    floatingBtn.style.transform = 'translateY(0)';
+                } else {
+                    floatingBtn.style.opacity = '0';
+                    floatingBtn.style.transform = 'translateY(10px)';
+                }
+            }
+        });
+        
+        // Initialize parallax effect
+        const parallaxElements = document.querySelectorAll('.parallax');
+        window.addEventListener('scroll', function() {
+            parallaxElements.forEach(elem => {
+                const speed = elem.getAttribute('data-parallax-speed') || 0.2;
+                const yPos = -(window.scrollY * speed);
+                elem.style.transform = `translate3d(0px, ${yPos}px, 0px)`;
+            });
+        });
+    });
+    
     // Portfolio filtering functionality
     document.addEventListener('DOMContentLoaded', function() {
-        const filterButtons = document.querySelectorAll('.filter-btn');
+        const filterButtons = document.querySelectorAll('.category-pill');
         const portfolioGrid = document.querySelector('#portfolio-grid');
         const loadingIndicator = document.createElement('div');
         
@@ -880,23 +1431,47 @@
                     portfolioType = 'ai';
                 } else if (this.id === 'filter-social') {
                     portfolioType = 'social';
+                } else if (this.id === 'filter-social-media') {
+                    portfolioType = 'social';
                 } else {
                     portfolioType = 'all';
                 }
                 
                 fetchPortfolioContent(portfolioType);
+                
+                // Also apply local filtering and sorting
+                filterPortfolioItems();
+                sortPortfolioItems();
             });
+        });
+        
+        // Event listener for search input
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                filterPortfolioItems();
+            }, 300); // Debounce search for better performance
+        });
+        
+        // Event listener for sort select
+        sortSelect.addEventListener('change', function() {
+            sortPortfolioItems();
         });
         
         // Set initial active state based on URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const typeParam = urlParams.get('type');
+        const searchParam = urlParams.get('search');
+        const sortParam = urlParams.get('sort');
         
+        // Set initial category filter
         if (typeParam) {
             const buttonMap = {
                 'website': document.getElementById('filter-website'),
                 'ai': document.getElementById('filter-ai'),
-                'social': document.getElementById('filter-social')
+                'social': document.getElementById('filter-social'),
+                'social-media': document.getElementById('filter-social-media')
             };
             
             const buttonToActivate = buttonMap[typeParam] || document.getElementById('filter-all');
@@ -904,6 +1479,20 @@
                 updateActiveButton(buttonToActivate);
             }
         }
+        
+        // Set initial search term if provided
+        if (searchParam) {
+            searchInput.value = searchParam;
+        }
+        
+        // Set initial sort option if provided
+        if (sortParam && ['newest', 'oldest', 'name-asc', 'name-desc'].includes(sortParam)) {
+            sortSelect.value = sortParam;
+        }
+        
+        // Initialize filtering and sorting
+        filterPortfolioItems();
+        sortPortfolioItems();
     });
 </script>
 {% endblock %}

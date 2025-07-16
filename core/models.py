@@ -273,6 +273,9 @@ class Project(models.Model):
                     import logging
                     logger = logging.getLogger(__name__)
                     logger.error(f"Error uploading image to Cloudinary: {e}")
+            else:
+                # If the image file is empty, set the image field to None to prevent upload errors
+                self.image = None
         
         super().save(*args, **kwargs)
 
@@ -310,6 +313,26 @@ class BlogPost(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+            
+        # Handle image upload to Cloudinary if image field has a file
+        if self.image and not self.cloudinary_image_id and hasattr(self.image, 'file') and not self.image.name.endswith('/'): 
+            # Check if the image is not empty and not a directory
+            if hasattr(self.image, 'size') and self.image.size > 0:
+                from .cloudinary_utils import upload_image
+                try:
+                    # Upload the image to Cloudinary
+                    result = upload_image(self.image, folder=f'portfolio_images/{self.slug}')
+                    # Store the Cloudinary public ID
+                    self.cloudinary_image_id = result['public_id']
+                except Exception as e:
+                    # Log the error but continue saving the model
+                    import logging
+                    logger = logging.getLogger(__name__)
+                    logger.error(f"Error uploading image to Cloudinary: {e}")
+            else:
+                # If the image file is empty, set the image field to None to prevent upload errors
+                self.image = None
+                
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):

@@ -184,8 +184,25 @@ def services(request):
             except Exception:
                 service.features_list = []
 
+    # Get active pricing plans for packages section
+    pricing_plans = PricingPlan.objects.filter(is_active=True).order_by('order', 'price')
+    
+    # Categorize services
+    packages = []
+    individual_services = []
+    
+    # Categorize services based on title
+    for service in services_list:
+        if 'package' in service.title.lower() or 'foundation' in service.title.lower() or 'growth' in service.title.lower() or 'complete' in service.title.lower():
+            packages.append(service)
+        else:
+            individual_services.append(service)
+    
     context = {
         'services_list': services_list,
+        'pricing_plans': pricing_plans,
+        'packages': packages,
+        'individual_services': individual_services,
     }
 
     return render(request, 'core/services.html', context)

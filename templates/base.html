@@ -611,6 +611,15 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Custom Portfolio Animations -->
+    <link rel="stylesheet" href="{% static 'css/portfolio-animations.css' %}">
+    
     {% block extra_head %}{% endblock %}
 </head>
 <body class="min-h-screen bg-background">
@@ -1432,6 +1441,9 @@
         });
     </script>
 
+    <!-- Custom Portfolio Animations JS -->
+    <script src="{% static 'js/portfolio-animations.js' %}"></script>
+    
     {% block extra_js %}{% endblock %}
 </body>
 </html>

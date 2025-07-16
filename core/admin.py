@@ -106,7 +106,7 @@ class ProjectAdmin(ImportExportModelAdmin):
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'slug', 'client_name', 'description')
+            'fields': ('title', 'slug', 'client_name', 'description', 'portfolio_type')
         }),
         ('Media', {
             'fields': ('image', 'gallery')
