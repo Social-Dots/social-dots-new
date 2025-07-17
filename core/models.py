@@ -501,6 +501,7 @@ class Portfolio(models.Model):
     order = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    bio = models.TextField(blank=True, null=True)
     
     class Meta:
         verbose_name = "Portfolio"

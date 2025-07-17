@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How We Work - Social Dots</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafbfc;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 120px;
+            position: relative;
+        }
+
+        .process-label {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #475569;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .main-title {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Timeline Layout */
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            text-align: right;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .timeline-item:nth-child(1) .step-card {
+            --accent-color: #3b82f6;
+        }
+
+        .timeline-item:nth-child(2) .step-card {
+            --accent-color: #8b5cf6;
+        }
+
+        .timeline-item:nth-child(3) .step-card {
+            --accent-color: #ec4899;
+        }
+
+        .timeline-item:nth-child(4) .step-card {
+            --accent-color: #f59e0b;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid var(--accent-color);
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .step-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 16px;
+        }
+
+        .step-description {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .step-features {
+            list-style: none;
+        }
+
+        .step-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .step-features li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .geometric-shape {
+            position: absolute;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .shape-1 {
+            top: 10%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .shape-2 {
+            top: 30%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+            background: #8b5cf6;
+            transform: rotate(45deg);
+        }
+
+        .shape-3 {
+            bottom: 40%;
+            right: 8%;
+            width: 60px;
+            height: 60px;
+            background: #ec4899;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .shape-4 {
+            bottom: 20%;
+            left: 10%;
+            width: 90px;
+            height: 90px;
+            background: #f59e0b;
+            border-radius: 20px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            margin-top: 100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .stat-item:nth-child(1) .stat-number { color: #3b82f6; }
+        .stat-item:nth-child(2) .stat-number { color: #8b5cf6; }
+        .stat-item:nth-child(3) .stat-number { color: #ec4899; }
+        .stat-item:nth-child(4) .stat-number { color: #f59e0b; }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a202c;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 32, 44, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                margin-left: 60px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                text-align: left;
+            }
+
+            .timeline-content {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .stats-section {
+                padding: 40px 20px;
+            }
+
+            .container {
+                padding: 60px 15px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Geometric Shapes -->
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+        <div class="geometric-shape shape-4"></div>
+
+        <!-- Header -->
+        <div class="header fade-in">
+            <div class="process-label">Our Process</div>
+            <h1 class="main-title">How We Work</h1>
+            <p class="subtitle">A systematic approach to delivering exceptional software solutions through proven methodologies and collaborative partnerships.</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot" style="--accent-color: #3b82f6;"></div>
+                <div class="timeline-content">
+                    <div class="step-card">
+                        <div class="step-number" style="--accent-color: #3b82f6;">1</div>
+                        <h3 class="step-title">Discovery</h3>
+                        <p class="step-description">We begin by understanding your business objectives, target audience, and technical requirements to create a solid foundation for success.</p>
+                        <ul class="step-features">
+                            <li>Business analysis and requirements gathering</li>
+                            <li>Market research and competitor analysis</li>
+                            <li>Technical feasibility assessment</li>
+                            <li>Project scope definition</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot" style="--accent-color: #8b5cf6;"></div>
+                <div class="timeline-content">
+                    <div class="step-card">
+                        <div class="step-number" style="--accent-color: #8b5cf6;">2</div>
+                        <h3 class="step-title">Strategy</h3>
+                        <p class="step-description">We craft a comprehensive strategy that aligns with your business goals, ensuring optimal technology choices and clear development roadmap.</p>
+                        <ul class="step-features">
+                            <li>Technology stack selection</li>
+                            <li>Architecture design and planning</li>
+                            <li>Development timeline creation</li>
+                            <li>Resource allocation and team formation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot" style="--accent-color: #ec4899;"></div>
+                <div class="timeline-content">
+                    <div class="step-card">
+                        <div class="step-number" style="--accent-color: #ec4899;">3</div>
+                        <h3 class="step-title">Implementation</h3>
+                        <p class="step-description">Our skilled development team brings your vision to life using agile methodologies, ensuring quality and timely delivery at every milestone.</p>
+                        <ul class="step-features">
+                            <li>Agile development sprints</li>
+                            <li>Continuous integration and testing</li>
+                            <li>Regular progress reviews</li>
+                            <li>Quality assurance and bug fixing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-in">
+                <div class="timeline-dot" style="--accent-color: #f59e0b;"></div>
+                <div class="timeline-content">
+                    <div class="step-card">
+                        <div class="step-number" style="--accent-color: #f59e0b;">4</div>
+                        <h3 class="step-title">Optimization</h3>
+                        <p class="step-description">We monitor performance, gather feedback, and continuously optimize your solution to ensure maximum efficiency and user satisfaction.</p>
+                        <ul class="step-features">
+                            <li>Performance monitoring and analytics</li>
+                            <li>User feedback collection and analysis</li>
+                            <li>Continuous improvements and updates</li>
+                            <li>Ongoing maintenance and support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section fade-in">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section fade-in">
+            <a href="#" class="cta-button">Start Your Project Today</a>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(el => observer.observe(el));
+        });
+
+        // Add counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current) + (counter.textContent.includes('%') ? '%' : counter.textContent.includes('+') ? '+' : '');
+                }, 20);
+            });
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
+        });
+    </script>
+</body>
+</html>
