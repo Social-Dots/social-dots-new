@@ -407,7 +407,7 @@
                             <div class="space-y-3">
                                 <!-- Pricing Options Dropdown -->
                                 <div class="relative group/dropdown">
-                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-2 sm:py-3 px-3 sm:px-4 border-2 border-gray-300 rounded-lg sm:rounded-xl bg-white/95 text-gray-700 text-sm sm:text-base font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-gray-400 focus:border-gray-400 hover:border-gray-400 hover:shadow-lg transition-all duration-300 backdrop-blur-sm shadow-sm">
+                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-2 sm:py-3 px-3 sm:px-4 border-2 border-gray-300 rounded-lg sm:rounded-xl bg-white/95 text-gray-700 text-sm sm:text-base font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-gray-400 focus:border-gray-400  transition-all duration-300 backdrop-blur-sm shadow-sm">
                                         {% for option in service.pricing_options_list %}
                                             {% if option.id %}
                                                 <!-- For database ServicePricingOption objects -->
@@ -427,10 +427,7 @@
                                         <i data-lucide="chevron-down" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover/dropdown:text-gray-700 group-focus-within/dropdown:text-gray-700 transition-all duration-300"></i>
                                         </div>
                                     </div>
-                                    <!-- Subtle highlight effect on hover -->
-                                    <div class="absolute inset-0 bg-gray-100 opacity-0 group-hover/dropdown:opacity-100 rounded-lg sm:rounded-xl transition-opacity duration-300 pointer-events-none"></div>
-                                    <!-- Subtle glow effect on focus -->
-                                    <div class="absolute -inset-0.5 bg-gray-200 opacity-0 group-focus-within/dropdown:opacity-100 rounded-lg sm:rounded-xl blur-sm transition-opacity duration-300 pointer-events-none"></div>
+
                                 </div>
                                 
                                 <!-- Add to Cart Button -->
