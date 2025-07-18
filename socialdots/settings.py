@@ -22,6 +22,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 ALLOWED_HOSTS = ['*']
 
+#add 
 
 
 INSTALLED_APPS = [

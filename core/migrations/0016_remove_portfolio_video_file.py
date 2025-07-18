@@ -13,3 +13,5 @@ class Migration(migrations.Migration):
         # This migration is a no-op because the video_file field doesn't exist in the database
         # The field was added in migration 0015 but was never applied to the database
     ]
+
+#-------------------------------------
