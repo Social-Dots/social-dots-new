@@ -407,6 +407,8 @@ class Order(models.Model):
     customer_phone = models.CharField(max_length=20, blank=True)
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     pricing_plan = models.ForeignKey(PricingPlan, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
+    service_name = models.CharField(max_length=200)
+    pricing_plan_name = models.CharField(max_length=200)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(max_length=3, default='CAD')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')

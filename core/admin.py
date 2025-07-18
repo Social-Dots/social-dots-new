@@ -242,15 +242,15 @@ class ServiceAdmin(ImportExportModelAdmin):
 @admin.register(Order)
 class OrderAdmin(ImportExportModelAdmin):
     resource_class = OrderResource
-    list_display = ['order_id', 'customer_name', 'customer_email', 'amount', 'status', 'created_at']
-    list_filter = ['status', 'currency', 'created_at']
+    list_display = ['order_id', 'customer_name', 'customer_email', 'service', 'amount', 'status', 'created_at']
+    list_filter = ['status', 'currency', 'service', 'created_at']
     search_fields = ['order_id', 'customer_name', 'customer_email', 'stripe_payment_intent_id']
     readonly_fields = ['order_id', 'created_at', 'updated_at']
     ordering = ['-created_at']
 
     fieldsets = (
         ('Order Information', {
-            'fields': ('order_id', 'service', 'pricing_plan', 'amount', 'currency', 'status')
+            'fields': ('order_id', 'service', 'amount', 'currency', 'status')
         }),
         ('Customer Information', {
             'fields': ('customer_name', 'customer_email', 'customer_phone')
