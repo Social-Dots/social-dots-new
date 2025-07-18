@@ -955,15 +955,25 @@
                 }
             });
 
-            // Add scroll effect to navbar
+            // Add scroll effect to navbar with throttling
             const navbar = document.querySelector('.nav-modern');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
+            let isScrolling = false;
+            
+            function handleScroll() {
+                if (!isScrolling) {
+                    requestAnimationFrame(() => {
+                        if (window.scrollY > 50) {
+                            navbar.classList.add('scrolled');
+                        } else {
+                            navbar.classList.remove('scrolled');
+                        }
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
                 }
-            });
+            }
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
             
             // Set active state for current page
             const currentPath = window.location.pathname;

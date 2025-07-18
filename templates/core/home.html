@@ -542,22 +542,39 @@
             gap: 12px;
             padding: 12px;
             height: 1440px;
-            animation: slideUp 15s linear infinite;
+            animation: slideUp 30s linear infinite;
             pointer-events: auto;
             z-index: 3;
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         
         @keyframes slideUp {
             0% {
-                transform: translateY(0);
+                transform: translateY(0) translateZ(0);
             }
             100% {
-                transform: translateY(-50%);
+                transform: translateY(-50%) translateZ(0);
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .slider-track {
+                animation: none;
             }
         }
 
         .slider-track:hover {
             animation-play-state: paused;
+        }
+        
+        /* Smooth transitions for all slide items */
+        .slide-item {
+            transition: transform 0.3s ease;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translateZ(0);
         }
         
         .slide-content {
@@ -1364,13 +1381,19 @@
         const slider = document.querySelector('.hero-slider');
         const sliderTrack = document.querySelector('.slider-track');
 
-        slider.addEventListener('mouseenter', () => {
-            sliderTrack.style.animationPlayState = 'paused';
-        });
+        if (slider && sliderTrack) {
+            // Force hardware acceleration
+            sliderTrack.style.transform = 'translateZ(0)';
+            sliderTrack.style.backfaceVisibility = 'hidden';
+            
+            slider.addEventListener('mouseenter', () => {
+                sliderTrack.style.animationPlayState = 'paused';
+            });
 
-        slider.addEventListener('mouseleave', () => {
-            sliderTrack.style.animationPlayState = 'running';
-        });
+            slider.addEventListener('mouseleave', () => {
+                sliderTrack.style.animationPlayState = 'running';
+            });
+        }
     </script>
 
 {% include 'core/trust-logos-strip.html' %}
