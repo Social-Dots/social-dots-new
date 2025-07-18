@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0015_remove_service_cloudinary_image_id_and_more'),
+        ('core', '0002_add_bio_field'),
     ]
 
     operations = [
