@@ -472,6 +472,7 @@ class PortfolioCategory(models.Model):
     def __str__(self):
         return self.name
 
+from django.core.validators import FileExtensionValidator
 
 class Portfolio(models.Model):
     title = models.CharField(max_length=200)
@@ -480,6 +481,7 @@ class Portfolio(models.Model):
     image = models.ImageField(upload_to='portfolio_images/', blank=True, null=True)
     cloudinary_image_id = models.CharField(max_length=255, blank=True, null=True, help_text="Cloudinary public ID for the image")
     category = models.ForeignKey(PortfolioCategory, on_delete=models.CASCADE, related_name='portfolios')
+    
     content_type = models.CharField(max_length=20, choices=[
         ('post', 'Post'),
         ('video', 'Video'),
@@ -487,12 +489,14 @@ class Portfolio(models.Model):
         ('email', 'Email'),
         ('technology', 'Technology')
     ], default='post')
+
     portfolio_type = models.CharField(max_length=20, choices=[
         ('website', 'Website Portfolio'),
         ('ai', 'AI Automation'),
         ('social', 'Social Media Content'),
         ('other', 'Other')
     ], default='other')
+
     video_url = models.URLField(blank=True, help_text="YouTube video URL")
     blog_link = models.URLField(blank=True, help_text="Link to blog post")
     technology_used = models.JSONField(default=list, blank=True, help_text="List of technologies used")
@@ -502,20 +506,20 @@ class Portfolio(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     bio = models.TextField(blank=True, null=True)
-    
+
     class Meta:
         verbose_name = "Portfolio"
         verbose_name_plural = "Portfolios"
         ordering = ['order', '-created_at']
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-    
+
     def get_absolute_url(self):
         return reverse('portfolio_detail', kwargs={'slug': self.slug})
-    
+
     def get_cloudinary_url(self, **options):
         """
         Get the Cloudinary URL for the image with optional transformations
@@ -526,7 +530,7 @@ class Portfolio(models.Model):
         elif self.image:
             return self.image.url
         return None
-    
+
     def __str__(self):
         return self.title
 
