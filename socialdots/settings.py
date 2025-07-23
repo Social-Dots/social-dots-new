@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-producti
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-DEBUG = False # Set to True for development, False for production
+DEBUG = True # Set to True for development, False for production
 
 # DEBUG = False
 print("DEBUG:", DEBUG)
@@ -22,7 +22,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 ALLOWED_HOSTS = ['*']
 
-# Application definition
+#add 
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -86,8 +87,18 @@ from urllib.parse import urlparse
 load_dotenv()
 
 # Replace the DATABASES section of your settings.py with this
-tmpPostgres = urlparse(os.getenv("DATABASE_URL", ""))
+database_url = os.getenv("DATABASE_URL", "")
+tmpPostgres = urlparse(database_url)
 
+# Use SQLite for local development (DISABLED - Using NeonDB for all environments)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# PostgreSQL configuration (NeonDB for all environments)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -97,14 +108,7 @@ DATABASES = {
         'HOST': tmpPostgres.hostname,
         'PORT': 5432,
     }
-}
-
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }    
+}    
 
 
 

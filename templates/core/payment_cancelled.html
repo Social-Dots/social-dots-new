@@ -2,14 +2,123 @@
 
 {% block title %}Payment Cancelled - {{ site_config.site_name }}{% endblock %}
 
+{% block head_extra %}
+<style>
+    /* Refined Color Palette */
+    :root {
+        --navy: #0a2342;
+        --vibrant-orange: #ff6b35;
+        --light-grey: #f5f5f5;
+        --medium-grey: #e0e0e0;
+    }
+    
+    /* Pulsating Animation for X Icon */
+    @keyframes pulse-scale {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+    
+    .pulse-icon {
+        animation: pulse-scale 2s infinite ease-in-out;
+    }
+    
+    /* Hover Ripple Effect */
+    .ripple-button {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .ripple-button:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%);
+        transform-origin: 50% 50%;
+    }
+    
+    .ripple-button:hover:after {
+        animation: ripple 1s ease-out;
+    }
+    
+    @keyframes ripple {
+        0% {
+            transform: scale(0, 0);
+            opacity: 0.5;
+        }
+        100% {
+            transform: scale(20, 20);
+            opacity: 0;
+        }
+    }
+    
+    /* Staggered Fade-in Animation */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .stagger-fade-in > * {
+        opacity: 0;
+        animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .stagger-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
+    .stagger-fade-in > *:nth-child(2) { animation-delay: 0.3s; }
+    .stagger-fade-in > *:nth-child(3) { animation-delay: 0.5s; }
+    .stagger-fade-in > *:nth-child(4) { animation-delay: 0.7s; }
+    
+    /* Wave Divider */
+    .wave-divider {
+        height: 60px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff'/%3E%3C/svg%3E");
+        background-size: cover;
+        margin-top: -1px;
+        margin-bottom: -1px;
+    }
+    
+    /* Smooth Hover Transitions */
+    .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Icon Bounce Animation */
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+        40% {transform: translateY(-10px);}
+        60% {transform: translateY(-5px);}
+    }
+    
+    .bounce-on-hover:hover i {
+        animation: bounce 1s ease;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <!-- Payment Cancelled Section -->
-<section class="py-20 bg-background min-h-screen flex items-center">
+<section class="py-20 bg-white min-h-screen flex items-center">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="space-y-8">
             <!-- Cancelled Icon -->
             <div class="flex justify-center">
-                <div class="w-24 h-24 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-xl">
+                <div class="w-24 h-24 bg-[#ff6b35] rounded-full flex items-center justify-center shadow-xl pulse-icon">
                     <i data-lucide="x" class="w-12 h-12 text-white"></i>
                 </div>
             </div>
@@ -17,36 +126,36 @@
             <!-- Cancelled Message -->
             <div class="space-y-4">
                 <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
-                    <span class="text-foreground">Payment</span> <span class="text-orange-600">Cancelled</span>
+                    <span class="text-[#0a2342]">Payment</span> <span class="text-[#ff6b35]">Cancelled</span>
                 </h1>
-                <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     No worries! Your payment was cancelled and no charges have been made to your account. 
                     You can try again whenever you're ready.
                 </p>
             </div>
 
             <!-- Information Card -->
-            <div class="card-modern p-8 max-w-2xl mx-auto">
+            <div class="card-modern p-8 max-w-2xl mx-auto shadow-lg border-t-4 border-[#ff6b35] rounded-xl bg-white hover-lift stagger-fade-in">
                 <div class="space-y-6">
                     <h2 class="text-2xl font-bold">What Happened?</h2>
                     
                     <div class="text-left space-y-4">
                         <div class="flex items-start space-x-3">
-                            <i data-lucide="info" class="w-5 h-5 text-blue-500 mt-1 flex-shrink-0"></i>
+                            <i data-lucide="info" class="w-5 h-5 text-[#0a2342] mt-1 flex-shrink-0"></i>
                             <p class="text-muted-foreground">
                                 Your payment session was cancelled before completion. This could happen if you closed the payment window or chose to return to our site.
                             </p>
                         </div>
                         
                         <div class="flex items-start space-x-3">
-                            <i data-lucide="shield-check" class="w-5 h-5 text-green-500 mt-1 flex-shrink-0"></i>
+                            <i data-lucide="shield-check" class="w-5 h-5 text-[#0a2342] mt-1 flex-shrink-0"></i>
                             <p class="text-muted-foreground">
                                 <strong>Good news:</strong> No charges were made to your payment method. Your information is secure and protected.
                             </p>
                         </div>
                         
                         <div class="flex items-start space-x-3">
-                            <i data-lucide="refresh-cw" class="w-5 h-5 text-purple-500 mt-1 flex-shrink-0"></i>
+                            <i data-lucide="refresh-cw" class="w-5 h-5 text-[#0a2342] mt-1 flex-shrink-0"></i>
                             <p class="text-muted-foreground">
                                 You can retry your purchase at any time. Your cart and selections are still available.
                             </p>
@@ -55,14 +164,17 @@
                 </div>
             </div>
 
+            <!-- Wave Divider -->
+            <div class="wave-divider w-full"></div>
+            
             <!-- Common Reasons -->
-            <div class="bg-muted/20 rounded-xl p-8 max-w-3xl mx-auto">
+            <div class="bg-[#f5f5f5] rounded-xl p-8 max-w-3xl mx-auto shadow-md stagger-fade-in">
                 <h2 class="text-2xl font-bold mb-6">Common Reasons for Cancelled Payments</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                     <div class="space-y-3">
                         <div class="flex items-center space-x-2">
-                            <i data-lucide="clock" class="w-5 h-5 text-blue-500"></i>
+                            <i data-lucide="clock" class="w-5 h-5 text-[#0a2342]"></i>
                             <h3 class="font-semibold">Session Timeout</h3>
                         </div>
                         <p class="text-muted-foreground text-sm">Payment sessions expire after 24 hours for security reasons</p>
@@ -70,7 +182,7 @@
                     
                     <div class="space-y-3">
                         <div class="flex items-center space-x-2">
-                            <i data-lucide="arrow-left" class="w-5 h-5 text-blue-500"></i>
+                            <i data-lucide="arrow-left" class="w-5 h-5 text-[#0a2342]"></i>
                             <h3 class="font-semibold">Browser Navigation</h3>
                         </div>
                         <p class="text-muted-foreground text-sm">Using browser back button or closing the payment window</p>
@@ -78,7 +190,7 @@
                     
                     <div class="space-y-3">
                         <div class="flex items-center space-x-2">
-                            <i data-lucide="wifi-off" class="w-5 h-5 text-blue-500"></i>
+                            <i data-lucide="wifi-off" class="w-5 h-5 text-[#0a2342]"></i>
                             <h3 class="font-semibold">Connection Issues</h3>
                         </div>
                         <p class="text-muted-foreground text-sm">Temporary internet connectivity problems during payment</p>
@@ -86,7 +198,7 @@
                     
                     <div class="space-y-3">
                         <div class="flex items-center space-x-2">
-                            <i data-lucide="user-x" class="w-5 h-5 text-blue-500"></i>
+                            <i data-lucide="user-x" class="w-5 h-5 text-[#0a2342]"></i>
                             <h3 class="font-semibold">Manual Cancellation</h3>
                         </div>
                         <p class="text-muted-foreground text-sm">Choosing to cancel and return to consider options</p>
@@ -94,19 +206,22 @@
                 </div>
             </div>
 
+            <!-- Wave Divider -->
+            <div class="wave-divider w-full transform rotate-180"></div>
+            
             <!-- Next Steps -->
-            <div class="space-y-6">
+            <div class="space-y-6 stagger-fade-in">
                 <h2 class="text-2xl font-bold">Ready to Try Again?</h2>
                 <p class="text-muted-foreground">
                     We're here to help make your next attempt smooth and successful. If you experienced any issues, our team is standing by to assist.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="/pricing/" class="btn-primary">
+                    <a href="/pricing/" class="btn-primary bg-[#0a2342] hover:bg-[#0a2342]/90 transition-all duration-300 px-6 py-3 rounded-lg text-white font-medium ripple-button bounce-on-hover">
                         <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
                         View Pricing & Try Again
                     </a>
-                    <a href="/contact/" class="btn-secondary">
+                    <a href="/contact/" class="btn-secondary bg-[#ff6b35] hover:bg-[#ff6b35]/90 transition-all duration-300 px-6 py-3 rounded-lg text-white font-medium ripple-button bounce-on-hover">
                         <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
                         Get Help with Payment
                     </a>
@@ -114,31 +229,31 @@
             </div>
 
             <!-- Contact Information -->
-            <div class="bg-muted/20 rounded-xl p-6 max-w-2xl mx-auto">
+            <div class="bg-white rounded-xl p-6 max-w-2xl mx-auto shadow-md border-l-4 border-[#0a2342] hover-lift stagger-fade-in">
                 <h3 class="text-lg font-semibold mb-4">Need Assistance?</h3>
                 <p class="text-muted-foreground mb-4">
                     Our Canadian team is here to help with any questions about pricing, services, or payment options.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                    <a href="mailto:{{ site_config.email|default:'hello@socialdots.ca' }}" class="inline-flex items-center px-4 py-2 btn-ghost text-sm">
+                    <a href="mailto:ali@socialdots.ca" class="inline-flex items-center px-4 py-2 bg-[#0a2342] hover:bg-[#0a2342]/90 transition-all duration-300 text-white rounded-lg text-sm ripple-button bounce-on-hover">
                         <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
-                        {{ site_config.email|default:'hello@socialdots.ca' }}
+                        ali@socialdots.ca
                     </a>
-                    <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="inline-flex items-center px-4 py-2 btn-ghost text-sm">
+                    <a href="tel:416-556-6961" class="inline-flex items-center px-4 py-2 bg-[#ff6b35] hover:bg-[#ff6b35]/90 transition-all duration-300 text-white rounded-lg text-sm ripple-button bounce-on-hover">
                         <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
-                        {{ site_config.phone|default:"416-556-6961" }}
+                        416-556-6961
                     </a>
                 </div>
             </div>
 
             <!-- Navigation -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                <a href="/" class="btn-ghost">
+                <a href="/" class="btn-ghost hover:bg-[#f5f5f5] transition-all duration-300 px-5 py-2 rounded-lg font-medium text-[#0a2342] bounce-on-hover">
                     <i data-lucide="home" class="w-5 h-5 mr-2"></i>
                     Return to Homepage
                 </a>
-                <a href="/services/" class="btn-ghost">
+                <a href="/services/" class="btn-ghost hover:bg-[#f5f5f5] transition-all duration-300 px-5 py-2 rounded-lg font-medium text-[#0a2342] bounce-on-hover">
                     <i data-lucide="settings" class="w-5 h-5 mr-2"></i>
                     Browse Services
                 </a>
@@ -152,5 +267,41 @@
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
+    
+    // Add smooth scrolling
+    document.querySelectorAll('a[href^="/"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            // Only apply for same-page links
+            if (this.getAttribute('href').startsWith('/#')) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Reveal animations on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const animatedElements = document.querySelectorAll('.stagger-fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(element => {
+            observer.observe(element);
+        });
+    });
 </script>
 {% endblock %}

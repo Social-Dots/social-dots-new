@@ -1,354 +1,739 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}Contact Us - {{ site_config.site_name }} - Get Started with Strategic AI Integration{% endblock %}
+{% block title %}Contact Us - Strategic AI Integration{% endblock %}
+
+{% block meta_description %}Get in touch with our team for strategic AI integration and digital solutions for your business.{% endblock %}
+
+{% block extra_head %}
+    <style>
+        /* Enhanced animations and effects */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Button gradient animation */
+        .bg-size-200 {
+            background-size: 200% 200%;
+        }
+        
+        .hover\:bg-pos-100:hover {
+            background-position: 100% 100%;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 rgba(255, 163, 0, 0); }
+            50% { box-shadow: 0 0 30px rgba(255, 163, 0, 0.4); }
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .shimmer-text {
+            background: linear-gradient(90deg, #0B32A4, #FFA300, #0B32A4);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+        
+        .floating-element {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(11, 50, 164, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #0B32A4, #0E42CE, #FFA300);
+            z-index: 1;
+        }
+        
+        .form-field {
+            border: 2px solid rgba(11, 50, 164, 0.2);
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            font-weight: 500;
+        }
+        
+        .form-field:focus {
+            outline: none;
+            border-color: #0B32A4;
+            box-shadow: 0 0 0 4px rgba(11, 50, 164, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            transform: translateY(-2px);
+        }
+        
+        .form-field::placeholder {
+            color: rgba(107, 114, 128, 0.7);
+            font-weight: 400;
+        }
+        
+        .form-field:hover:not(:focus) {
+            border-color: rgba(11, 50, 164, 0.3);
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+        
+        /* Add a highlight effect to form fields */
+        .input-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .input-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.8) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transition: all 0.6s;
+            pointer-events: none;
+        }
+        
+        .form-field:focus + .input-success + .input-wrapper::after,
+        .input-wrapper:hover::after {
+            left: 100%;
+        }
+        
+        .magnetic-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .magnetic-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .magnetic-btn:hover::before {
+            left: 100%;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0B32A4 0%, #0E42CE 50%, #FFA300 100%);
+        }
+        
+        .contact-card {
+            transition: all 0.4s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(11, 50, 164, 0.25);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0B32A4, #FFA300);
+            border-radius: 4px;
+        }
+        
+        /* Particle effects */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .particle-1 {
+            width: 8px;
+            height: 8px;
+            background: #FFA300;
+            top: 20%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .particle-2 {
+            width: 12px;
+            height: 12px;
+            background: #0B32A4;
+            top: 60%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        .particle-3 {
+            width: 6px;
+            height: 6px;
+            background: #FFA300;
+            bottom: 30%;
+            left: 20%;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Enhanced form styling */
+        .form-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+        
+        .form-label {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            color: #0B32A4;
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-label i {
+            margin-right: 10px;
+            color: #FFA300;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-success {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #10b981;
+            opacity: 0;
+            transition: all 0.3s ease;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-radius: 50%;
+            padding: 4px;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+        }
+        
+        .form-field {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: #f8fafc;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1.25rem 1.5rem !important;
+            border-radius: 1rem;
+        }
+
+        .form-field:focus {
+            border-color: #0B32A4;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(11, 50, 164, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .form-field:valid + .input-success {
+            opacity: 1;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+            animation: success-pulse 1.5s ease-out;
+        }
+        
+        @keyframes success-pulse {
+            0% { transform: translateY(-50%) scale(0.8); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            70% { transform: translateY(-50%) scale(1.1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: translateY(-50%) scale(1); }
+        }
+        
+        /* Improved mobile responsiveness */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            
+            .form-container {
+                padding: 1.5rem !important;
+            }
+            
+            .contact-info {
+                margin-top: 3rem;
+            }
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
-<!-- Contact Hero Section -->
-<section class="relative overflow-hidden hero-gradient">
     <!-- Animated Background Elements -->
-    <div class="absolute inset-0 animated-bg opacity-10"></div>
-    
-    <!-- Floating Geometric Shapes -->
-    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-[#0B32A4]/10 rounded-full blur-3xl float-animation"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#0E42CE]/10 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
-    
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div class="text-center space-y-8">
-            <!-- Hero Badge -->
-            <div class="inline-flex items-center space-x-2 glass-card px-4 py-2 text-sm" style="background-color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(255, 163, 0, 0.3);">
-                <i data-lucide="phone" class="w-4 h-4 text-[#FFA300]"></i>
-                <span class="text-[#0B32A4]">Let's Start the Conversation</span>
-            </div>
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
 
-            <!-- Hero Headline -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-                <span class="text-[#0B32A4]">Ready to Transform</span><br>
-                <span class="text-gradient-gold">Your Business?</span>
-            </h1>
-
-            <!-- Hero Subheading -->
-            <p class="mx-auto max-w-3xl text-xl text-[#0B32A4]/80 leading-relaxed">
-                Let's discuss how strategic AI integration and comprehensive digital solutions can help your Canadian business thrive. 
-                <span class="font-semibold text-[#0E42CE]">Free consultation available.</span>
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Form Section -->
-<section class="py-20 bg-background">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <!-- Contact Form -->
-            <div class="space-y-8">
-                <div>
-                    <h2 class="text-3xl font-bold text-[#0B32A4] mb-4">Send Us a Message</h2>
-                    <p class="text-lg text-[#0B32A4]/80">
-                        Fill out the form below and we'll get back to you within 24 hours. All consultations are confidential.
-                    </p>
-                </div>
-
-                <!-- Display messages -->
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="p-4 rounded-lg border {% if message.tags == 'success' %}bg-green-50 border-green-200 text-green-800{% elif message.tags == 'error' %}bg-red-50 border-red-200 text-red-800{% else %}bg-blue-50 border-blue-200 text-blue-800{% endif %}">
-                        <div class="flex items-center space-x-2">
-                            <i data-lucide="{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}alert-circle{% else %}info{% endif %}" class="w-5 h-5"></i>
-                            <span>{{ message }}</span>
-                        </div>
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-10"></div>
+        
+        <!-- Floating geometric shapes -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-white opacity-10 rounded-full floating-element" style="animation-delay: 0s;"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-yellow-400 opacity-20 rounded-lg floating-element" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-40 left-20 w-24 h-24 bg-white opacity-10 rounded-full floating-element" style="animation-delay: 4s;"></div>
+        
+        <div class="container mx-auto px-6 lg:px-8 relative z-10">
+            <div class="max-w-7xl mx-auto">
+                <!-- Hero Content -->
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center space-x-2 bg-white bg-opacity-20 px-6 py-3 rounded-full text-white mb-6 animate-fadeInUp" style="animation-delay: 0.2s; opacity: 0;">
+                        <i data-lucide="phone" class="w-5 h-5 text-yellow-400"></i>
+                        <span class="font-medium">Let's Start the Conversation</span>
                     </div>
-                    {% endfor %}
-                {% endif %}
-
-                <form method="post" class="space-y-6">
-                    {% csrf_token %}
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-[#0B32A4] mb-2">
-                                Full Name *
-                            </label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                required
-                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-[#0E42CE] focus:border-transparent transition-colors text-[#0B32A4]"
-                                placeholder="Enter your full name"
-                            >
-                        </div>
-                        
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-[#0B32A4] mb-2">
-                                Email Address *
-                            </label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                required
-                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-[#0E42CE] focus:border-transparent transition-colors text-[#0B32A4]"
-                                placeholder="your.email@company.com"
-                            >
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-[#0B32A4] mb-2">
-                                Phone Number
-                            </label>
-                            <input 
-                                type="tel" 
-                                id="phone" 
-                                name="phone"
-                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-[#0E42CE] focus:border-transparent transition-colors text-[#0B32A4]"
-                                placeholder="(416) 555-0123"
-                            >
-                        </div>
-                        
-                        <div>
-                            <label for="company" class="block text-sm font-medium text-[#0B32A4] mb-2">
-                                Company Name
-                            </label>
-                            <input 
-                                type="text" 
-                                id="company" 
-                                name="company"
-                                class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-[#0E42CE] focus:border-transparent transition-colors text-[#0B32A4]"
-                                placeholder="Your Company Inc."
-                            >
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="service_interest" class="block text-sm font-medium text-[#0B32A4] mb-2">
-                            Service Interest
-                        </label>
-                        <select 
-                            id="service_interest" 
-                            name="service_interest"
-                            class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-[#0E42CE] focus:border-transparent transition-colors text-[#0B32A4]"
-                        >
-                            <option value="">Select a service (optional)</option>
-                            {% for service in services %}
-                            <option value="{{ service.id }}">{{ service.title }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-[#0B32A4] mb-2">
-                            Message *
-                        </label>
-                        <textarea 
-                            id="message" 
-                            name="message" 
-                            rows="6" 
-                            required
-                            class="w-full px-4 py-3 bg-background border border-border rounded-lg focus:ring-2 focus:ring-[#0E42CE] focus:border-transparent transition-colors text-[#0B32A4] resize-none"
-                            placeholder="Tell us about your business goals, current challenges, and how we can help you succeed..."
-                        ></textarea>
-                    </div>
-
-                    <button 
-                        type="submit" 
-                        class="btn-primary w-full py-4 text-lg glow-effect bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] text-white hover:from-[#0E42CE] hover:to-[#0B32A4] relative overflow-hidden transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-[#0B32A4]/30 group"
-                    >
-                        <span class="absolute inset-0 bg-gradient-to-r from-[#FFA300]/30 to-transparent w-[120%] skew-x-[-20deg] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                        <span class="relative flex items-center justify-center font-medium tracking-wide">
-                            <i data-lucide="send" class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
-                            Send Message
-                        </span>
-                    </button>
-
-                    <p class="text-sm text-[#0B32A4]/70 text-center">
-                        By submitting this form, you agree to our privacy policy. We'll never share your information.
-                    </p>
-                </form>
-            </div>
-
-            <!-- Contact Information -->
-            <div class="space-y-8">
-                <div>
-                    <h2 class="text-3xl font-bold text-[#0B32A4] mb-4">Get in Touch</h2>
-                    <p class="text-lg text-[#0B32A4]/80">
-                        We're here to help your Canadian business thrive. Reach out through any of these channels.
+                    <h1 class="hero-title text-5xl md:text-7xl font-bold text-white mb-6 animate-fadeInUp" style="animation-delay: 0.4s; opacity: 0;">
+                        Ready to <span class="shimmer-text">Transform</span><br>
+                        Your Business?
+                    </h1>
+                    
+                    <p class="text-xl text-white text-opacity-90 max-w-3xl mx-auto leading-relaxed animate-fadeInUp" style="animation-delay: 0.6s; opacity: 0;">
+                        Let's discuss how strategic AI integration and comprehensive digital solutions can help your Canadian business thrive. 
+                        <span class="font-semibold text-yellow-400">Free consultation available.</span>
                     </p>
                 </div>
 
-                <!-- Contact Details -->
-                <div class="space-y-6">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="phone" class="w-6 h-6 text-white"></i>
+                <!-- Main Content Grid -->
+                <div class="grid-layout max-w-9xl ">
+                    <!-- Contact Form -->
+                    <div class="form-container bg-white glass-effect rounded-3xl shadow-2xl p-8 lg:p-12 animate-fadeInUp contact-card w-full lg:max-w-6xl mx-auto" style="animation-delay: 0.8s; opacity: 0;">
+                        <!-- Enhanced Form Header -->
+                        <div class="mb-10 relative">
+                            <div class="absolute -top-4 -right-4 bg-yellow-400 text-deepBlue text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10 flex items-center">
+                                <i data-lucide="zap" class="w-3 h-3 mr-1"></i>
+                                <span>24hr Response</span>
+                            </div>
+                            
+                            <div class="flex items-center mb-6">
+                                <div class="w-14 h-14 bg-gradient-to-br from-deepBlue to-brightBlue rounded-2xl flex items-center justify-center mr-5 shadow-lg transform transition-all duration-500 hover:rotate-6 hover:scale-110">
+                                    <i data-lucide="message-square" class="w-7 h-7 text-white"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-3xl font-bold text-gray-800 mb-1">Send Us a Message</h2>
+                                    <div class="h-1 w-20 bg-gradient-to-r from-deepBlue  rounded-full"></div>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-600 text-lg border-l-4  pl-4 py-1 rounded-r-lg">
+                                Fill out the form below and we'll get back to you within 24 hours. All consultations are confidential.
+                            </p>
+                            
+                            <!-- Decorative elements -->
+                            <div class="absolute -left-3 top-1/2 w-2 h-20 bg-deepBlue rounded-full opacity-50"></div>
+                            <div class="absolute -left-1 top-1/3 w-1 h-10 bg-vibrantOrange rounded-full opacity-70"></div>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-[#0B32A4] mb-2">Phone</h3>
-                            <p class="text-[#0B32A4]/80 mb-2">Call us for immediate assistance</p>
-                            <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="text-[#0E42CE] hover:text-[#0B32A4] font-medium">
-                                {{ site_config.phone|default:"416-556-6961" }}
-                            </a>
-                        </div>
+
+                        <form class="space-y-8">
+                            <!-- Name and Email Row -->
+                            <div class="grid grid-cols-1 gap-10">
+                                <div class="form-row">
+                                    <label class="form-label">
+                                        <i data-lucide="user" class="w-5 h-5"></i>
+                                        Full Name <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input 
+                                            type="text" 
+                                            required
+                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            placeholder="Enter your full name"
+                                        >
+                                        <i data-lucide="check" class="input-success w-5 h-5"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <label class="form-label">
+                                        <i data-lucide="mail" class="w-5 h-5"></i>
+                                        Email <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input 
+                                            type="email" 
+                                            required
+                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            placeholder="your.email@company.com"
+                                        >
+                                        <i data-lucide="check" class="input-success w-5 h-5"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phone and Company Row -->
+                            <div class="grid grid-cols-1 gap-10">
+                                <div class="form-row">
+                                    <label class="form-label">
+                                        <i data-lucide="phone" class="w-5 h-5"></i>
+                                        Phone
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input 
+                                            type="tel" 
+                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            placeholder="(416) 555-0123"
+                                        >
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <label class="form-label">
+                                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                                        Company
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input 
+                                            type="text" 
+                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            placeholder="Your Company Inc."
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Service Interest -->
+                            <div class="form-row">
+                                <label class="form-label">
+                                    <i data-lucide="list" class="w-5 h-5"></i>
+                                    Service Interest
+                                </label>
+                                <div class="input-wrapper relative">
+                                    <select class="form-field w-full px-6 py-5 rounded-xl text-gray-800 text-lg font-medium appearance-none cursor-pointer">
+                                        <option value="">Select a service (optional)</option>
+                                        <option value="ai-integration">AI Integration & Strategy</option>
+                                        <option value="web-development">Web Development</option>
+                                        <option value="digital-marketing">Digital Marketing</option>
+                                        <option value="seo-optimization">SEO Optimization</option>
+                                        <option value="social-media">Social Media Management</option>
+                                        <option value="consulting">Business Consulting</option>
+                                        <option value="custom">Custom Solutions</option>
+                                    </select>
+                                    <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="form-row">
+                                <label class="form-label self-start pt-4">
+                                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                                    Message <span class="text-red-500">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <textarea 
+                                        required
+                                        rows="6"
+                                        class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium resize-none"
+                                        placeholder="Tell us about your business goals, current challenges, and how we can help you succeed..."
+                                    ></textarea>
+                                    <i data-lucide="check" class="input-success w-5 h-5 top-6"></i>
+                                </div>
+                            </div>
+
+                            <!-- Enhanced Submit Button -->
+                            <div class="form-row">
+                                <div class="hidden lg:block"></div>
+                                <div class="space-y-4">
+                                    <div class="relative">
+                                        <!-- Decorative elements -->
+                                        <div class="absolute -top-4 -left-4 w-8 h-8 bg-deepBlue opacity-10 rounded-full"></div>
+                                        <div class="absolute -bottom-4 -right-4 w-12 h-12 bg-vibrantOrange opacity-10 rounded-full"></div>
+                                        
+                                        <button 
+                                            type="submit" 
+                                            class="magnetic-btn w-full py-5 text-xl bg-gradient-to-br from-deepBlue via-brightBlue to-deepBlue bg-size-200 hover:bg-pos-100 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden group"
+                                        >
+                                            <!-- Button shine effect -->
+                                            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out"></span>
+                                            
+                                            <span class="flex items-center justify-center relative z-10">
+                                                 <i data-lucide="send" class="w-6 h-6 mr-3 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                                                 Send Message
+                                             </span>
+                                         </button>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-center text-sm text-gray-500">
+                                        <i data-lucide="shield" class="w-4 h-4 mr-2"></i>
+                                        <p>By submitting this form, you agree to our privacy policy. We'll never share your information.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#0E42CE] to-[#FFA300] rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="mail" class="w-6 h-6 text-white"></i>
+                    <!-- Contact Information -->
+                    <div class="contact-info space-y-6 animate-fadeInUp" style="animation-delay: 1s; opacity: 0;">
+                        <!-- Header -->
+                        <div class="bg-white glass-effect rounded-3xl shadow-2xl p-8 contact-card">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                    <i data-lucide="phone-call" class="w-6 h-6 text-white"></i>
+                                </div>
+                                <h2 class="text-3xl font-bold text-gray-800">Get in Touch</h2>
+                            </div>
+                            <p class="text-gray-600 text-lg border-l-4 border-blue-600 pl-4">
+                                We're here to help your Canadian business thrive. Reach out through any of these channels.
+                            </p>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-[#0B32A4] mb-2">Email</h3>
-                            <p class="text-[#0B32A4]/80 mb-2">Send us a detailed message</p>
-                            <a href="mailto:{{ site_config.email|default:'hello@socialdots.ca' }}" class="text-[#0E42CE] hover:text-[#0B32A4] font-medium">
-                                {{ site_config.email|default:"hello@socialdots.ca" }}
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#0B32A4] to-[#FFA300] rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="map-pin" class="w-6 h-6 text-white"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-[#0B32A4] mb-2">Location</h3>
-                            <p class="text-[#0B32A4]/80 mb-2">Based in Toronto, serving Canada</p>
-                            <p class="text-[#0E42CE] font-medium">{{ site_config.address|default:"Toronto, Ontario, Canada" }}</p>
-                        </div>
-                    </div>
+                        <!-- Contact Methods -->
+                        <div class="grid grid-cols-1 gap-6">
+                            <!-- Phone -->
+                            <div class="bg-white glass-effect rounded-2xl shadow-xl p-6 contact-card group">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i data-lucide="phone" class="w-7 h-7 text-white"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center">
+                                            Phone
+                                            <div class="ml-2 w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                                        </h3>
+                                        <p class="text-gray-600 mb-3">Call us for immediate assistance</p>
+                                        <a href="tel:416-556-6961" class="inline-flex items-center text-blue-600 hover:text-yellow-500 font-semibold text-lg transition-colors duration-300">
+                                            <i data-lucide="phone-call" class="w-5 h-5 mr-2"></i>
+                                            416-556-6961
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-[#FFA300] to-[#0E42CE] rounded-lg flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="clock" class="w-6 h-6 text-white"></i>
+                            <!-- Email -->
+                            <div class="bg-white glass-effect rounded-2xl shadow-xl p-6 contact-card group">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i data-lucide="mail" class="w-7 h-7 text-white"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2 flex items-center">
+                                            Email
+                                            <div class="ml-2 w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                                        </h3>
+                                        <p class="text-gray-600 mb-3">Send us a detailed message</p>
+                                        <a href="mailto:hello@socialdots.ca" class="inline-flex items-center text-blue-600 hover:text-yellow-500 font-semibold text-lg transition-colors duration-300">
+                                            <i data-lucide="mail-open" class="w-5 h-5 mr-2"></i>
+                                            hello@socialdots.ca
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="bg-white glass-effect rounded-2xl shadow-xl p-6 contact-card group">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-yellow-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i data-lucide="map-pin" class="w-7 h-7 text-white"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2">Location</h3>
+                                        <p class="text-gray-600 mb-3">Based in Toronto, serving Canada</p>
+                                        <div class="inline-flex items-center text-blue-600 font-semibold text-lg">
+                                            <i data-lucide="map" class="w-5 h-5 mr-2 text-yellow-500"></i>
+                                            Toronto, Ontario, Canada
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Business Hours -->
+                            <div class="bg-white glass-effect rounded-2xl shadow-xl p-6 contact-card group">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-14 h-14 bg-gradient-to-r from-yellow-400 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i data-lucide="clock" class="w-7 h-7 text-white"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2">Business Hours</h3>
+                                        <p class="text-gray-600 mb-3">Eastern Time (Toronto)</p>
+                                        <div class="space-y-2 bg-gray-50 p-4 rounded-lg">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3"></div>
+                                                <p class="text-gray-700 font-medium">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 bg-blue-600 rounded-full mr-3"></div>
+                                                <p class="text-gray-700 font-medium">Saturday: 10:00 AM - 2:00 PM</p>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 bg-gray-300 rounded-full mr-3"></div>
+                                                <p class="text-gray-700 font-medium">Sunday: Closed</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-semibold text-[#0B32A4] mb-2">Business Hours</h3>
-                            <p class="text-[#0B32A4]/80 mb-2">Eastern Time (Toronto)</p>
-                            <div class="space-y-1 text-[#0B32A4]">
-                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                                <p>Saturday: 10:00 AM - 2:00 PM</p>
-                                <p>Sunday: Closed</p>
+
+                        <!-- Quick Actions -->
+                        <div class="bg-white glass-effect rounded-2xl shadow-xl p-8 contact-card">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                                <div class="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center mr-4 shadow-md">
+                                    <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+                                </div>
+                                Quick Actions
+                            </h3>
+                            <div class="grid grid-cols-1 gap-4">
+                                <a href="tel:416-556-6961" class="magnetic-btn w-full py-4 px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group">
+                                    <i data-lucide="phone" class="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                                    Call Now
+                                </a>
+                                <a href="mailto:hello@socialdots.ca" class="magnetic-btn w-full py-4 px-6 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group">
+                                    <i data-lucide="mail" class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300"></i>
+                                    Send Email
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Quick Actions -->
-                <div class="card-modern p-7 border-2 border-[#FFA300]/40 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-[#0B32A4]/20 transition-all duration-300 bg-gradient-to-br from-white to-[#0B32A4]/5">
-                    <h3 class="text-2xl font-bold text-gold mb-6 flex items-center">
-                        <span class="bg-gradient-to-r from-[#FFA300] to-[#FFA300]/80 p-2 rounded-lg mr-3 shadow-md group-hover:shadow-lg transition-shadow duration-300">
-                            <i data-lucide="zap" class="w-6 h-6 text-white"></i>
-                        </span>
-                        Quick Actions
-                    </h3>
-                    <div class="space-y-5">
-                        <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="btn-primary w-full py-4 px-6 text-center text-gold hover:from-[#0E42CE] hover:to-[#0B32A4] relative overflow-hidden group transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#0B32A4]/30 rounded-xl">
-                            <span class="absolute inset-0 bg-gradient-to-r from-[#FFA300]/40 to-transparent w-[120%] skew-x-[-20deg] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                            <span class="relative flex items-center justify-center font-semibold tracking-wide text-lg">
-                                <i data-lucide="phone" class="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
-                                Call Now
-                            </span>
-                        </a>
-                        <a href="/services/" class="btn-secondary w-full py-4 px-6 text-center bg-[#FFA300] text-gold hover:bg-[#FFA300]/90 relative overflow-hidden group transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl hover:shadow-[#FFA300]/30 rounded-xl">
-                            <span class="absolute inset-0 bg-gradient-to-r from-[#0B32A4]/40 to-transparent w-[120%] skew-x-[-20deg] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                            <span class="relative flex items-center justify-center font-semibold tracking-wide text-lg">
-                                <i data-lucide="list" class="w-6 h-6 mr-3 group-hover:translate-y-[-2px] transition-transform duration-300"></i>
-                                View Services
-                            </span>
-                        </a>
-                        <a href="mailto:{{ site_config.email|default:'hello@socialdots.ca' }}" class="btn-ghost w-full py-4 px-6 text-center text-[#0B32A4] border-2 border-[#0B32A4]/50 hover:border-[#0B32A4] hover:bg-[#0B32A4]/10 relative overflow-hidden group transition-all duration-300 rounded-xl">
-                            <span class="absolute inset-0 bg-gradient-to-r from-[#FFA300]/30 to-transparent w-[120%] skew-x-[-20deg] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                            <span class="relative flex items-center justify-center font-semibold tracking-wide text-lg">
-                                <i data-lucide="mail" class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300"></i>
-                                Send Email
-                            </span>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- FAQ Section -->
-<section class="py-16 bg-[#0B32A4]/5">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-[#0B32A4] mb-4">Frequently Asked Questions</h2>
-            <p class="text-[#0B32A4]/80 max-w-2xl mx-auto">Find answers to common questions about our services and how we can help your business grow online.</p>
-        </div>
-        
-        <div class="max-w-3xl mx-auto">
-            <div class="space-y-4">
-                <!-- FAQ Item 1 -->
-                <div class="card-modern p-6 border border-[#FFA300]/30 rounded-lg hover:shadow-lg hover:shadow-[#0B32A4]/20 transition-all duration-300 bg-white">
-                    <h3 class="text-xl font-bold text-[#0B32A4] mb-2 flex items-center">
-                        <span class="text-[#FFA300] mr-2"><i data-lucide="help-circle" class="w-5 h-5"></i></span>
-                        How quickly can you respond to my inquiry?
-                    </h3>
-                    <p class="text-[#0B32A4]/80 ml-7">We typically respond to all inquiries within 24 business hours. For urgent matters, please call us directly for immediate assistance.</p>
-                </div>
-                
-                <!-- FAQ Item 2 -->
-                <div class="card-modern p-6 border border-[#FFA300]/30 rounded-lg hover:shadow-lg hover:shadow-[#0B32A4]/20 transition-all duration-300 bg-white">
-                    <h3 class="text-xl font-bold text-[#0B32A4] mb-2 flex items-center">
-                        <span class="text-[#FFA300] mr-2"><i data-lucide="package" class="w-5 h-5"></i></span>
-                        Do you offer custom service packages?
-                    </h3>
-                    <p class="text-[#0B32A4]/80 ml-7">Yes, we understand that every business has unique needs. We offer customized service packages tailored to your specific goals and budget. Contact us to discuss your requirements.</p>
-                </div>
-                
-                <!-- FAQ Item 3 -->
-                <div class="card-modern p-6 border border-[#FFA300]/30 rounded-lg hover:shadow-lg hover:shadow-[#0B32A4]/20 transition-all duration-300 bg-white">
-                    <h3 class="text-xl font-bold text-[#0B32A4] mb-2 flex items-center">
-                        <span class="text-[#FFA300] mr-2"><i data-lucide="clipboard-list" class="w-5 h-5"></i></span>
-                        What information should I include in my inquiry?
-                    </h3>
-                    <p class="text-[#0B32A4]/80 ml-7">To help us provide the most accurate response, please include details about your business, your current online presence, your goals, and any specific services you're interested in. The more information you provide, the better we can assist you.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="py-16 bg-gradient-to-r from-[#0B32A4] to-[#0E42CE] text-white">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4 drop-shadow-sm">Ready to Transform Your Online Presence?</h2>
-        <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Let's work together to create a digital strategy that drives real results for your business.</p>
-        <div class="flex flex-wrap justify-center gap-4">
-            <a href="tel:{{ site_config.phone|default:'416-556-6961' }}" class="btn-white bg-white text-[#0B32A4] hover:bg-[#FFA300] hover:text-white transition-all duration-300 py-3 px-6 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center">
-                <i data-lucide="phone" class="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform duration-300"></i>
-                Call Now
-            </a>
-            <a href="#contact-form" class="btn-outline-white border-2 border-white text-white hover:bg-[#FFA300] hover:border-[#FFA300] transition-all duration-300 py-3 px-6 rounded-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center">
-                <i data-lucide="message-square" class="w-5 h-5 mr-2 group-hover:translate-y-[-2px] transition-transform duration-300"></i>
-                Send a Message
-            </a>
-        </div>
-    </div>
-</section>
-
-<script>
-    // Initialize Lucide icons for this page
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-
-    // Auto-focus the name field when clicking the CTA
-    document.addEventListener('DOMContentLoaded', function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('service')) {
-            const serviceSelect = document.getElementById('service_interest');
-            if (serviceSelect) {
-                serviceSelect.value = urlParams.get('service');
-            }
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
         }
-        if (urlParams.has('plan')) {
-            const messageField = document.getElementById('message');
-            if (messageField) {
-                messageField.value = `Hi, I'm interested in learning more about your pricing plans, specifically plan ID ${urlParams.get('plan')}. Please provide more details.`;
-            }
-        }
-    });
-</script>
+
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-fadeInUp');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(el => observer.observe(el));
+
+            // Magnetic button effect
+            const magneticBtns = document.querySelectorAll('.magnetic-btn');
+            magneticBtns.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width/2;
+                    const y = e.clientY - rect.top - rect.height/2;
+                    
+                    btn.style.transform = `translate(${x*0.1}px, ${y*0.1}px) translateY(-3px)`;
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0) translateY(0)';
+                });
+            });
+
+            // Form validation enhancement
+            const formFields = document.querySelectorAll('.form-field');
+            formFields.forEach(field => {
+                field.addEventListener('blur', function() {
+                    if (this.value.trim() !== '') {
+                        this.classList.add('has-value');
+                    } else {
+                        this.classList.remove('has-value');
+                    }
+                });
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

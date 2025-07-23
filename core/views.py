@@ -444,8 +444,26 @@ def checkout(request):
             'customer_email': customer_email,
             'customer_phone': customer_phone,
             'amount': total_amount,
-            'notes': f'Cart order with {len(cart_items)} items'
+            'notes': f'Cart order with {len(cart_items)} items',
+            'service_name': 'Custom Service',
+            'pricing_plan_name': 'Custom Plan'
         }
+        
+        # Extract service and pricing plan names from cart items if available
+        if cart_items and len(cart_items) > 0:
+            first_item = cart_items[0]
+            if 'name' in first_item:
+                item_name = first_item.get('name', '')
+                if ' - ' in item_name:
+                    service_part, plan_part = item_name.split(' - ', 1)
+                    order_data['service_name'] = service_part
+                    order_data['pricing_plan_name'] = plan_part
+                else:
+                    order_data['service_name'] = item_name
+        
+        # Add more details to notes
+        order_data['notes'] = f'Cart order with {len(cart_items)} items | Service: {order_data["service_name"]} | Plan: {order_data["pricing_plan_name"]}'
+
         
         order = Order.objects.create(**order_data)
         
