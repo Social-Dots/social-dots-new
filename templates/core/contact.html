@@ -408,81 +408,92 @@
                             <div class="absolute -left-1 top-1/3 w-1 h-10 bg-vibrantOrange rounded-full opacity-70"></div>
                         </div>
 
-                        <form class="space-y-8">
-                            <!-- Name and Email Row -->
-                            <div class="grid grid-cols-1 gap-10">
-                                <div class="form-row">
-                                    <label class="form-label">
-                                        <i data-lucide="user" class="w-5 h-5"></i>
-                                        Full Name <span class="text-red-500">*</span>
+                        <form style="display: grid; gap: 2rem; width: 100%; max-width: 100%;">
+                            <style>
+                                @media (min-width: 768px) {
+                                    .contact-form-grid {
+                                        display: grid;
+                                        grid-template-columns: 1fr 1fr;
+                                        gap: 2rem;
+                                    }
+                                    .contact-form-full {
+                                        grid-column: span 2;
+                                    }
+                                }
+                            </style>
+                            <!-- Single Grid Layout -->
+                            <!-- Name and Email Fields -->
+                            <div class="contact-form-grid">
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                                        <i data-lucide="user" style="width: 1.25rem; height: 1.25rem;"></i>
+                                        Full Name <span style="color: #EF4444;">*</span>
                                     </label>
-                                    <div class="input-wrapper">
+                                    <div style="position: relative; width: 100%;">
                                         <input 
                                             type="text" 
                                             required
-                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            style="width: 100%; padding: 1.25rem 1.5rem; border-radius: 0.75rem; color: #1F2937; font-size: 1.125rem; font-weight: 500; border: 1px solid #E5E7EB; outline: none;"
                                             placeholder="Enter your full name"
                                         >
-                                        <i data-lucide="check" class="input-success w-5 h-5"></i>
                                     </div>
                                 </div>
                                 
-                                <div class="form-row">
-                                    <label class="form-label">
-                                        <i data-lucide="mail" class="w-5 h-5"></i>
-                                        Email <span class="text-red-500">*</span>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                                        <i data-lucide="mail" style="width: 1.25rem; height: 1.25rem;"></i>
+                                        Email <span style="color: #EF4444;">*</span>
                                     </label>
-                                    <div class="input-wrapper">
+                                    <div style="position: relative; width: 100%;">
                                         <input 
                                             type="email" 
                                             required
-                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            style="width: 100%; padding: 1.25rem 1.5rem; border-radius: 0.75rem; color: #1F2937; font-size: 1.125rem; font-weight: 500; border: 1px solid #E5E7EB; outline: none;"
                                             placeholder="your.email@company.com"
                                         >
-                                        <i data-lucide="check" class="input-success w-5 h-5"></i>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Phone and Company Row -->
-                            <div class="grid grid-cols-1 gap-10">
-                                <div class="form-row">
-                                    <label class="form-label">
-                                        <i data-lucide="phone" class="w-5 h-5"></i>
+                            <!-- Phone and Company Fields -->
+                            <div class="contact-form-grid">
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                                        <i data-lucide="phone" style="width: 1.25rem; height: 1.25rem;"></i>
                                         Phone
                                     </label>
-                                    <div class="input-wrapper">
+                                    <div style="position: relative; width: 100%;">
                                         <input 
                                             type="tel" 
-                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            style="width: 100%; padding: 1.25rem 1.5rem; border-radius: 0.75rem; color: #1F2937; font-size: 1.125rem; font-weight: 500; border: 1px solid #E5E7EB; outline: none;"
                                             placeholder="(416) 555-0123"
                                         >
                                     </div>
                                 </div>
                                 
-                                <div class="form-row">
-                                    <label class="form-label">
-                                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                                        <i data-lucide="briefcase" style="width: 1.25rem; height: 1.25rem;"></i>
                                         Company
                                     </label>
-                                    <div class="input-wrapper">
+                                    <div style="position: relative; width: 100%;">
                                         <input 
                                             type="text" 
-                                            class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium"
+                                            style="width: 100%; padding: 1.25rem 1.5rem; border-radius: 0.75rem; color: #1F2937; font-size: 1.125rem; font-weight: 500; border: 1px solid #E5E7EB; outline: none;"
                                             placeholder="Your Company Inc."
                                         >
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Service Interest -->
-                            <div class="form-row">
-                                <label class="form-label">
-                                    <i data-lucide="list" class="w-5 h-5"></i>
+                            <!-- Service Interest Field -->
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                                    <i data-lucide="list" style="width: 1.25rem; height: 1.25rem;"></i>
                                     Service Interest
                                 </label>
-                                <div class="input-wrapper relative">
-                                    <select class="form-field w-full px-6 py-5 rounded-xl text-gray-800 text-lg font-medium appearance-none cursor-pointer">
+                                <div style="position: relative; width: 100%;">
+                                    <select style="width: 100%; padding: 1.25rem 1.5rem; border-radius: 0.75rem; color: #1F2937; font-size: 1.125rem; font-weight: 500; border: 1px solid #E5E7EB; outline: none; appearance: none; cursor: pointer;">
                                         <option value="">Select a service (optional)</option>
                                         <option value="ai-integration">AI Integration & Strategy</option>
                                         <option value="web-development">Web Development</option>
@@ -492,54 +503,43 @@
                                         <option value="consulting">Business Consulting</option>
                                         <option value="custom">Custom Solutions</option>
                                     </select>
-                                    <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"></i>
+                                    <i data-lucide="chevron-down" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); width: 1.25rem; height: 1.25rem; color: #9CA3AF; pointer-events: none;"></i>
                                 </div>
                             </div>
 
-                            <!-- Message -->
-                            <div class="form-row">
-                                <label class="form-label self-start pt-4">
-                                    <i data-lucide="message-square" class="w-5 h-5"></i>
-                                    Message <span class="text-red-500">*</span>
+                            <!-- Message Field -->
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                                    <i data-lucide="message-square" style="width: 1.25rem; height: 1.25rem;"></i>
+                                    Message <span style="color: #EF4444;">*</span>
                                 </label>
-                                <div class="input-wrapper">
+                                <div style="position: relative; width: 100%;">
                                     <textarea 
                                         required
                                         rows="6"
-                                        class="form-field w-full px-6 py-5 rounded-xl text-gray-800 placeholder-gray-400 text-lg font-medium resize-none"
+                                        style="width: 100%; padding: 1.25rem 1.5rem; border-radius: 0.75rem; color: #1F2937; font-size: 1.125rem; font-weight: 500; border: 1px solid #E5E7EB; outline: none; resize: none;"
                                         placeholder="Tell us about your business goals, current challenges, and how we can help you succeed..."
                                     ></textarea>
-                                    <i data-lucide="check" class="input-success w-5 h-5 top-6"></i>
                                 </div>
                             </div>
 
-                            <!-- Enhanced Submit Button -->
-                            <div class="form-row">
-                                <div class="hidden lg:block"></div>
-                                <div class="space-y-4">
-                                    <div class="relative">
-                                        <!-- Decorative elements -->
-                                        <div class="absolute -top-4 -left-4 w-8 h-8 bg-deepBlue opacity-10 rounded-full"></div>
-                                        <div class="absolute -bottom-4 -right-4 w-12 h-12 bg-vibrantOrange opacity-10 rounded-full"></div>
-                                        
-                                        <button 
-                                            type="submit" 
-                                            class="magnetic-btn w-full py-5 text-xl bg-gradient-to-br from-deepBlue via-brightBlue to-deepBlue bg-size-200 hover:bg-pos-100 text-white font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden group"
-                                        >
-                                            <!-- Button shine effect -->
-                                            <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out"></span>
-                                            
-                                            <span class="flex items-center justify-center relative z-10">
-                                                 <i data-lucide="send" class="w-6 h-6 mr-3 transform group-hover:translate-x-1 transition-transform duration-300"></i>
-                                                 Send Message
-                                             </span>
-                                         </button>
-                                    </div>
-                                    
-                                    <div class="flex items-center justify-center text-sm text-gray-500">
-                                        <i data-lucide="shield" class="w-4 h-4 mr-2"></i>
-                                        <p>By submitting this form, you agree to our privacy policy. We'll never share your information.</p>
-                                    </div>
+                            <!-- Submit Button -->
+                            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+                                <button 
+                                    type="submit" 
+                                    style="width: 100%; padding: 1.25rem; font-size: 1.25rem; background: linear-gradient(to bottom right, #1E40AF, #3B82F6, #1E40AF); color: white; font-weight: 700; border-radius: 0.75rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); transition: all 0.3s ease; position: relative; overflow: hidden;"
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'" 
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'"
+                                >
+                                    <span style="display: flex; align-items: center; justify-content: center;">
+                                        <i data-lucide="send" style="width: 1.5rem; height: 1.5rem; margin-right: 0.75rem;"></i>
+                                        Send Message
+                                    </span>
+                                </button>
+                                
+                                <div style="display: flex; align-items: center; justify-content: center; font-size: 0.875rem; color: #6B7280;">
+                                    <i data-lucide="shield" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
+                                    <p>By submitting this form, you agree to our privacy policy. We'll never share your information.</p>
                                 </div>
                             </div>
                         </form>

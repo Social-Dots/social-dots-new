@@ -116,10 +116,43 @@
         }
     }
         :root {
-            /* New color palette */
+            /* Primary Colors */
             --deepBlue: #0B32A4;
             --brightBlue: #0E42CE;
             --vibrantOrange: #FFA300;
+            --gold: #DDA853;
+            --cream: #F3F3E0;
+            --grey: #6B7280;
+            --lightGrey: #F3F4F6;
+            
+            /* Extended Color Palette with Accessible Variants */
+            --vibrantBlue-light: #4A71E6;
+            --vibrantBlue-dark: #0A319B;
+            --vibrantOrange-light: #FFB733;
+            --vibrantOrange-dark: #CC8200;
+            --gold-light: #E6C285;
+            --gold-dark: #B48A42;
+            
+            /* Standardized Elevation/Shadow Levels */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            /* Responsive Spacing Units */
+            --space-unit: clamp(0.5rem, 0.5rem + 0.5vw, 1rem);
+            --space-xs: calc(0.5 * var(--space-unit));
+            --space-sm: calc(1 * var(--space-unit));
+            --space-md: calc(2 * var(--space-unit));
+            --space-lg: calc(3 * var(--space-unit));
+            --space-xl: calc(5 * var(--space-unit));
+            
+            /* Responsive Typography */
+            --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+            --font-size-lg: clamp(1.25rem, 1.2rem + 0.25vw, 1.5rem);
+            --font-size-xl: clamp(1.5rem, 1.4rem + 0.5vw, 2rem);
+            --font-size-2xl: clamp(1.875rem, 1.75rem + 0.625vw, 2.5rem);
+            --font-size-3xl: clamp(2.25rem, 2rem + 1.25vw, 3.5rem);
         }
         
         /* Ultra-wide screen support */
@@ -170,7 +203,7 @@
             min-height: auto;
             display: flex;
             align-items: center;
-            padding: 4rem 2rem;
+            padding: var(--space-lg) var(--space-md);
             background:rgb(255, 255, 255);
             background-size: cover;
             background-position: center;
@@ -193,11 +226,14 @@
         }
 
         .hero-container {
-            max-width: 1200px;
+            width: 100%;
+            max-width: min(90vw, 1200px);
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 500px;
-            gap: 4rem;
+            grid-template-columns: minmax(300px, 1fr) minmax(280px, 500px);
+            gap: clamp(1rem, 4vw, 4rem);
+            position: relative;
+            z-index: 2;
             align-items: center;
             width: 100%;
             position: relative;
@@ -1448,37 +1484,34 @@
             </div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr max-w-7xl mx-auto">
             {% if portfolios %}
                 {% for portfolio in portfolios %}
-                    <div class="relative overflow-hidden rounded-lg border border-gray-200 shadow-sm hover:shadow-xl hover:border-orange-300 transition-all duration-300 cursor-pointer group" onclick="showPortfolioModal('{{ portfolio.id }}')">
+                    <div class="relative overflow-hidden rounded-xl border border-gray-200 shadow-md hover:shadow-xl hover:border-orange-300 transition-all duration-300 cursor-pointer group flex flex-col h-full transform hover:-translate-y-1 hover:scale-[1.01]" onclick="showPortfolioModal('{{ portfolio.id }}'); console.log('Portfolio item clicked, ID: {{ portfolio.id }}');" data-item-id="{{ portfolio.id }}">
                         <!-- Instagram-style card with user info at top -->
-                        <div class="bg-white p-3 z-10 flex items-center border-b border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
-                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2 group-hover:bg-orange-100 transition-colors duration-300">
-                                <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="Feedbird" class="w-8 h-8 rounded-full object-cover" />
+                        <div class="bg-white p-2 md:p-3 z-10 flex items-center border-b border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
+                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-100 flex items-center justify-center mr-3 md:mr-4 group-hover:bg-orange-100 transition-colors duration-300 shadow-md">
+                                <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="social dots" class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover" />
                             </div>
                             <div class="flex-1">
-                                <div class="text-sm font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">Social Dots</div>
+                                <div class="text-base md:text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">Social Dots</div>  
                             </div>
                             <div class="text-gray-500 group-hover:text-orange-500 transition-colors duration-300">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                                 </svg>
                             </div>
                         </div>
                         
                         <!-- Portfolio image with centered title overlay -->
-                        <div class="relative group perspective">
-                          <a href="{% url 'portfolio_detail' portfolio.slug %}" class="block transform-style-preserve-3d transition-transform duration-500 group-hover:rotate-x-2 group-hover:scale-[1.01]">
+                        <div class="relative group perspective flex-grow">
+                          <div class="block transform-style-preserve-3d transition-transform duration-500 group-hover:rotate-x-2 group-hover:scale-[1.01] h-full">
                             
-                            <!-- Main Image -->
-                            <img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}"
-                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-xl" />
-                        
-                            <!-- Title Overlay -->
-                            <!-- <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                              <h3 class="text-white text-2xl font-bold px-4 py-2 text-center drop-shadow-md">{{ portfolio.title }}</h3>
-                            </div> -->
+                            <!-- Full card image container -->
+                            <div class="w-full h-full overflow-hidden"> <!-- Full height container -->
+                              <img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}"
+                                   class="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-105 group-hover:brightness-105" />
+                            </div>
                         
                             {% if portfolio.bio %}
                             <!-- Animated Bio Glass Reveal -->
@@ -1488,40 +1521,35 @@
                               </div>
                             </div>
                             {% endif %}
-                          </a>
+                          </div>
                         </div>
 
 
-                        <!-- Instagram-style action buttons -->
-                        <div class="bg-white p-3 border-t border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
+                        <!-- Instagram-style action buttons with portfolio info -->
+                        <div class="bg-white p-3 md:p-4 border-t border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
+                            
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-4">
-                                    <button class="text-red-500 hover:text-red-600 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
-                                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <button class="text-red-500 hover:text-red-600 transition-all duration-300 transform hover:scale-110 flex items-center" onclick="event.stopPropagation()">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
                                         </svg>
+                                        
                                     </button>
-                                    <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                        </svg>
-                                    </button>
-                                    <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                    <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110 flex items-center" onclick="event.stopPropagation()">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                         </svg>
                                     </button>
                                 </div>
                                 <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                                     </svg>
                                 </button>
                             </div>
+                        
                         </div>
-                        
-                        <!-- Portfolio details -->
-                        
                     </div>
                 {% endfor %}
             {% else %}
@@ -1533,16 +1561,105 @@
         
         <!-- Load More Button -->
         <div class="text-center mt-10">
-            <button class="px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors">
+            <button id="load-more-btn" class="px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors">
                 Load more
             </button>
         </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const loadMoreBtn = document.getElementById('load-more-btn');
+                const portfolioGrid = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+                let currentPage = 1;
+                let loadedItemIds = new Set(); // Track loaded item IDs to avoid duplicates
+                
+                // Initialize with current items
+                if (portfolioGrid) {
+                    Array.from(portfolioGrid.children).forEach(item => {
+                        const itemId = item.getAttribute('data-item-id') || 
+                                      (item.getAttribute('onclick') && item.getAttribute('onclick').match(/showPortfolioModal\('([^']*)'\)/)?.[1]);
+                        if (itemId) {
+                            loadedItemIds.add(itemId);
+                        }
+                    });
+                }
+                
+                if (loadMoreBtn && portfolioGrid) {
+                    loadMoreBtn.addEventListener('click', function() {
+                        // Show loading state
+                        loadMoreBtn.disabled = true;
+                        loadMoreBtn.innerHTML = '<span class="inline-block animate-spin mr-2">↻</span> Loading...';
+                        
+                        // Get current URL parameters
+                        let url = window.location.pathname;
+                        let params = new URLSearchParams(window.location.search);
+                        
+                        // Add parameters for pagination and loaded items
+                        currentPage++;
+                        params.set('page', currentPage);
+                        params.set('offset', loadedItemIds.size); // Add offset parameter
+                        params.set('ajax', 'true');
+                        
+                        // Fetch additional items
+                        fetch(`${url}?${params.toString()}`)
+                            .then(response => response.text())
+                            .then(html => {
+                                // Create a temporary element to parse the HTML
+                                const tempDiv = document.createElement('div');
+                                tempDiv.innerHTML = html;
+                                
+                                // Extract the portfolio grid content
+                                const newPortfolioItems = tempDiv.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+                                let newItemsAdded = 0;
+                                
+                                if (newPortfolioItems && newPortfolioItems.children.length > 0) {
+                                    // Append new items to the existing grid, avoiding duplicates
+                                    Array.from(newPortfolioItems.children).forEach(item => {
+                                        const itemId = item.getAttribute('data-item-id') || 
+                                                      (item.getAttribute('onclick') && item.getAttribute('onclick').match(/showPortfolioModal\('([^']*)'\)/)?.[1]);
+                                        
+                                        // Only add if not already loaded
+                                        if (itemId && !loadedItemIds.has(itemId)) {
+                                            portfolioGrid.appendChild(item);
+                                            loadedItemIds.add(itemId);
+                                            newItemsAdded++;
+                                        }
+                                    });
+                                    
+                                    // Reset button state if new items were added
+                                    if (newItemsAdded > 0) {
+                                        loadMoreBtn.disabled = false;
+                                        loadMoreBtn.innerHTML = 'Load more';
+                                    } else {
+                                        // No new items were added
+                                        loadMoreBtn.disabled = true;
+                                        loadMoreBtn.innerHTML = 'No more items';
+                                        loadMoreBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                                        loadMoreBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                                    }
+                                } else {
+                                    // No more items to load
+                                    loadMoreBtn.disabled = true;
+                                    loadMoreBtn.innerHTML = 'No more items';
+                                    loadMoreBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                                    loadMoreBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching more portfolio items:', error);
+                                loadMoreBtn.disabled = false;
+                                loadMoreBtn.innerHTML = 'Try again';
+                            });
+                    });
+                }
+            });
+        </script>
     </div>
     
     <!-- Portfolio Modal -->
     <div id="portfolioModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="fixed inset-0 bg-black opacity-75" onclick="closePortfolioModal()"></div>
+            <div class="fixed inset-0 bg-black opacity-75" id="modalBackground"></div>
             
             <div class="relative bg-white rounded-lg max-w-4xl w-full max-h-90vh overflow-y-auto">
                 <!-- Modal Header -->
@@ -1568,19 +1685,19 @@
                     <!-- Content will be loaded dynamically -->
                     <div id="portfolioLoading" class="animate-pulse">
                         <div class="flex items-center justify-center rounded-lg bg-gray-100 h-80 mb-4">
-                            <div class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-blue-500 transition ease-in-out duration-150">
-                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <div class="flex flex-col items-center">
+                                <svg class="animate-spin h-12 w-12 text-blue-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                                Loading content...
+                                <div class="text-blue-600 font-medium">Loading portfolio content...</div>
                             </div>
                         </div>
-                        <div class="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
-                        <div class="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                        <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                        <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                        <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                        <div class="h-6 bg-gray-200 rounded-full w-3/4 mb-2 mx-auto"></div>
+                        <div class="h-4 bg-gray-200 rounded-full w-1/2 mb-4 mx-auto"></div>
+                        <div class="h-4 bg-gray-200 rounded-full w-full mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded-full w-full mb-2"></div>
+                        <div class="h-4 bg-gray-200 rounded-full w-3/4"></div>
                     </div>
                     <div id="portfolioContent" class="hidden">
                         <!-- Actual content will be inserted here by JavaScript -->
@@ -1608,7 +1725,7 @@
                             </button>
                         </div>
                         <a href="#" id="portfolioDetailLink" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-colors">
-                            View Full Details
+                            
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                             </svg>
@@ -1620,114 +1737,137 @@
     </div>
 </section>
 
-<!-- Portfolio Modal Script -->
+<!-- Portfolio Modal JavaScript -->
 <script>
+    // Function to show the portfolio modal with the specified portfolio ID
     function showPortfolioModal(portfolioId) {
-        // Show the modal with loading animation
+        // Show the modal
         const modal = document.getElementById('portfolioModal');
-        modal.classList.remove('hidden');
-        document.body.classList.add('overflow-hidden');
-        
-        // Show loading state and hide content
-        const loadingElement = document.getElementById('portfolioLoading');
-        const contentElement = document.getElementById('portfolioContent');
-        
-        if (loadingElement && contentElement) {
-            loadingElement.classList.remove('hidden');
-            contentElement.classList.add('hidden');
-        }
-        
-        // Update the detail link
+        const modalContent = document.getElementById('portfolioContent');
+        const loadingIndicator = document.getElementById('portfolioLoading');
         const detailLink = document.getElementById('portfolioDetailLink');
-        detailLink.href = `/portfolio/${portfolioId}/`;
-        // Also update the text based on content type
-        const portfolioCard = document.querySelector(`[onclick="showPortfolioModal('${portfolioId}')"]`);
-        if (portfolioCard) {
-            const linkText = portfolioCard.querySelector('a span')?.textContent || 'View Full Details';
-            detailLink.innerHTML = `
-                ${linkText}
-                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-            `;
-        }
         
-        // Find the portfolio data from the page
-        // In a real implementation, you would fetch this via AJAX
-        // For demonstration, we'll simulate loading content after a short delay
+        // Show the modal and loading state
+        modal.classList.remove('hidden');
+        loadingIndicator.classList.remove('hidden');
+        modalContent.classList.add('hidden');
+        
+        // Add smooth entrance animation
+        modal.style.opacity = '0';
+        modal.style.transform = 'scale(0.95)';
         setTimeout(() => {
-            // Find the clicked portfolio card
-            const portfolioCard = document.querySelector(`[onclick="showPortfolioModal('${portfolioId}')"]`);
-            
-            if (portfolioCard) {
-                const image = portfolioCard.querySelector('.aspect-w-1 img');
-                const title = portfolioCard.querySelector('h3')?.textContent || 'Portfolio Item';
-                const description = portfolioCard.querySelector('p')?.textContent || 'No description available';
-                const category = portfolioCard.querySelector('.text-sm.text-gray-500')?.textContent || '';
+            modal.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+            modal.style.opacity = '1';
+            modal.style.transform = 'scale(1)';
+        }, 10);
+        
+        // Prevent body scrolling when modal is open
+        document.body.style.overflow = 'hidden';
+        
+        // Fetch portfolio details
+        fetch(`/portfolio/${portfolioId}/`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Hide loading indicator
+                loadingIndicator.classList.add('hidden');
                 
-                // Update modal content
-                if (contentElement) {
-                    contentElement.innerHTML = `
-                        <img src="${image?.src || ''}" class="w-full rounded-lg mb-4" alt="${title}">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2">${title}</h2>
-                        <div class="text-sm text-gray-500 mb-3">${category}</div>
-                        <p class="text-gray-600 mb-4">${description}</p>
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <h3 class="font-semibold text-blue-800 mb-2">About this project</h3>
-                            <p class="text-blue-700">This is an example of our work for a client in the ${category} industry.</p>
+                // Populate modal content
+                modalContent.innerHTML = `
+                    <div class="mb-6">
+                        <div class="flex justify-center">
+                            <img src="${data.image}" alt="${data.title}" class="rounded-lg object-cover mb-4 max-h-[400px] w-[1000px]">
                         </div>
-                    `;
-                    
-                    // Hide loading and show content
-                     loadingElement.classList.add('hidden');
-                     contentElement.classList.remove('hidden');
-                 }
-             } else {
-                 // Handle case where portfolio card is not found
-                 if (contentElement) {
-                     contentElement.innerHTML = `
-                         <div class="text-center py-10">
-                             <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                             </svg>
-                             <h3 class="text-lg font-medium text-gray-900 mb-2">Content Not Found</h3>
-                             <p class="text-gray-500">We couldn't find the portfolio item you're looking for.</p>
-                         </div>
-                     `;
-                     
-                     // Hide loading and show content
-                     loadingElement.classList.add('hidden');
-                     contentElement.classList.remove('hidden');
-                 }
-             }
-            } else {
-                // Fallback content if portfolio card not found
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">${data.title}</h2>
+                        <p class="text-gray-700">${data.description}</p>
+                    </div>
+                    ${data.content ? `<div class="prose max-w-none">${data.content}</div>` : ''}
+                `;
+                
+                // Update detail link
+                detailLink.href = `/portfolio/${data.slug}/`;
+                
+                // Show content
+                modalContent.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error fetching portfolio details:', error);
+                loadingIndicator.classList.add('hidden');
+                modalContent.classList.remove('hidden');
                 modalContent.innerHTML = `
                     <div class="text-center py-8">
                         <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <h2 class="text-xl font-semibold text-gray-700">Portfolio Details</h2>
-                        <p class="text-gray-500 mt-2">Click on "View Full Details" to see the complete portfolio item.</p>
+                        <h3 class="text-lg font-medium text-gray-900">Error Loading Content</h3>
+                        <p class="mt-2 text-gray-500">Unable to load portfolio details. Please try again later.</p>
                     </div>
                 `;
-            }
-        }, 800); // Simulate loading delay
+            });
+            
+        // Close modal when clicking outside content area
+        const modalBackground = document.getElementById('modalBackground');
+        modalBackground.addEventListener('click', closePortfolioModal);
+        
+        // Add keyboard support (ESC to close)
+        document.addEventListener('keydown', handleEscKey);
     }
     
+    // Function to close the portfolio modal
     function closePortfolioModal() {
-        document.getElementById('portfolioModal').classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
+        const modal = document.getElementById('portfolioModal');
+        
+        // Add smooth exit animation
+        modal.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+        modal.style.opacity = '0';
+        modal.style.transform = 'scale(0.95)';
+        
+        // Hide modal after animation completes
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            // Reset styles for next opening
+            modal.style.opacity = '1';
+            modal.style.transform = 'scale(1)';
+            // Re-enable body scrolling
+            document.body.style.overflow = '';
+        }, 300);
+        
+        // Remove keyboard event listener
+        document.removeEventListener('keydown', handleEscKey);
     }
     
-    // Close modal when clicking Escape key
-    document.addEventListener('keydown', function(event) {
+    // Function to handle ESC key press
+    function handleEscKey(event) {
         if (event.key === 'Escape') {
             closePortfolioModal();
         }
+    }
+    
+    // Initialize modal functionality when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ensure modal is hidden on page load
+        const modal = document.getElementById('portfolioModal');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+        
+        // Add click event listeners to all portfolio items
+        const portfolioItems = document.querySelectorAll('[data-item-id]');
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const portfolioId = this.getAttribute('data-item-id');
+                if (portfolioId) {
+                    showPortfolioModal(portfolioId);
+                }
+            });
+        });
     });
 </script>
-
+ 
 <!-- Process Flow Section -->
 {% include 'core/process_section.html' %}
 

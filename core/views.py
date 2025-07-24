@@ -12,6 +12,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.utils import timezone
+from django.template.loader import render_to_string
+from django.views.decorators.http import require_GET
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import (
@@ -25,6 +27,12 @@ from .ai_agent_service import AIAgentService
 from .calendar_service import GoogleCalendarService, book_appointment
 
 logger = logging.getLogger(__name__)
+
+
+@require_GET
+def robots_txt(request):
+    content = render_to_string('robots.txt', {'request': request})
+    return HttpResponse(content, content_type='text/plain')
 
 
 def home(request):
@@ -864,3 +872,49 @@ def portfolio_detail(request, slug):
         
     except Portfolio.DoesNotExist:
         raise Http404("Portfolio not found")
+
+
+def portfolio_detail_api(request, portfolio_id):
+    """API endpoint to get portfolio details by ID for the modal"""
+    print(f"\n\nPortfolio detail API called with ID: {portfolio_id}\n\n")
+    try:
+        portfolio = Portfolio.objects.get(id=portfolio_id, is_active=True)
+        
+        # Prepare portfolio data with Cloudinary URL if available
+        portfolio_data = {
+            'id': portfolio.id,
+            'title': portfolio.title,
+            'slug': portfolio.slug,
+            'description': portfolio.description,
+            'category': {
+                'id': portfolio.category.id,
+                'name': portfolio.category.name,
+                'slug': portfolio.category.slug
+            },
+            'content_type': portfolio.content_type,
+            'video_url': portfolio.video_url,
+            'blog_link': portfolio.blog_link,
+            'technology_used': portfolio.technology_used,
+            'created_at': portfolio.created_at.isoformat() if portfolio.created_at else None,
+        }
+        
+        # Use Cloudinary URL if available, otherwise fall back to regular image URL
+        if portfolio.cloudinary_image_id:
+            portfolio_data['image'] = portfolio.get_cloudinary_url()
+            # Add a transformed version for thumbnails
+            portfolio_data['thumbnail'] = portfolio.get_cloudinary_url(width=400, height=300, crop='fill')
+        elif portfolio.image:
+            portfolio_data['image'] = portfolio.image.url
+            portfolio_data['thumbnail'] = portfolio.image.url
+        else:
+            portfolio_data['image'] = None
+            portfolio_data['thumbnail'] = None
+        
+        # Add bio field if available
+        if portfolio.bio:
+            portfolio_data['content'] = portfolio.bio
+        
+        return JsonResponse(portfolio_data)
+        
+    except Portfolio.DoesNotExist:
+        return JsonResponse({"error": "Portfolio not found"}, status=404)
