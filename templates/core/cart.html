@@ -141,15 +141,6 @@
             </div>
             
             <div class="flex items-center">
-                <div class="flex items-center border rounded-lg overflow-hidden">
-                    <button class="quantity-decrease px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors">
-                        <i data-lucide="minus" class="w-4 h-4"></i>
-                    </button>
-                    <input type="number" class="quantity-input w-12 text-center border-x py-1" value="1" min="1" max="99">
-                    <button class="quantity-increase px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors">
-                        <i data-lucide="plus" class="w-4 h-4"></i>
-                    </button>
-                </div>
                 
                 <button class="remove-item ml-4 text-red-500 hover:text-red-700 transition-colors">
                     <i data-lucide="trash-2" class="w-5 h-5"></i>
@@ -196,17 +187,7 @@
                     this.items = this.items.filter(item => !(item.id === itemId && item.priceType === priceType));
                     this.saveCart();
                 },
-                updateQuantity: function(itemId, priceType, quantity) {
-                    const item = this.items.find(i => i.id === itemId && i.priceType === priceType);
-                    if (item) {
-                        item.quantity = quantity;
-                        if (item.quantity <= 0) {
-                            this.removeItem(itemId, priceType);
-                        } else {
-                            this.saveCart();
-                        }
-                    }
-                },
+                // updateQuantity function removed as quantity modification is not needed
                 saveCart: function() { 
                     console.log('Using fallback saveCart');
                     try {
@@ -305,36 +286,8 @@
                 itemElement.querySelector('.item-price').textContent = formatCurrency(itemPrice);
                 subtotal += itemPrice;
                 
-                // Set quantity
-                const quantityInput = itemElement.querySelector('.quantity-input');
-                quantityInput.value = item.quantity;
-                
                 // Add event listeners
-                const decreaseBtn = itemElement.querySelector('.quantity-decrease');
-                const increaseBtn = itemElement.querySelector('.quantity-increase');
                 const removeBtn = itemElement.querySelector('.remove-item');
-                
-                decreaseBtn.addEventListener('click', () => {
-                    if (item.quantity > 1) {
-                        window.cart.updateQuantity(item.id, item.priceType, item.quantity - 1);
-                        renderCart();
-                    }
-                });
-                
-                increaseBtn.addEventListener('click', () => {
-                    window.cart.updateQuantity(item.id, item.priceType, item.quantity + 1);
-                    renderCart();
-                });
-                
-                quantityInput.addEventListener('change', () => {
-                    const newQuantity = parseInt(quantityInput.value);
-                    if (newQuantity > 0) {
-                        window.cart.updateQuantity(item.id, item.priceType, newQuantity);
-                        renderCart();
-                    } else {
-                        quantityInput.value = item.quantity;
-                    }
-                });
                 
                 removeBtn.addEventListener('click', () => {
                     window.cart.removeItem(item.id, item.priceType);

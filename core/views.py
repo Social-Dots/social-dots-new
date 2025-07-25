@@ -520,7 +520,7 @@ def checkout(request):
 
 def payment_success(request):
     session_id = request.GET.get('session_id')
-    
+    # return render(request, 'core/payment_success.html')
     if not session_id:
         messages.error(request, 'Invalid payment session')
         return redirect('home')

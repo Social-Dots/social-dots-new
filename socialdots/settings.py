@@ -44,7 +44,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # Custom middleware to handle static files in Vercel environment
+    # Custom middleware to handle static files in Vercel envi
+    # 'core.middleware.ContentSecurityPolicyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Custom middleware for Content Security Policy
+    
 ]
 
 ROOT_URLCONF = 'socialdots.urls'
