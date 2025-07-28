@@ -40,7 +40,9 @@
                                 {% if testimonial.client_image %}
                                 <img src="{{ testimonial.client_image }}" alt="{{ testimonial.client_name }}" class="w-16 h-16 rounded-full" />
                                 {% else %}
-                                <img src="{% static 'images/testimonials/avatar1.svg' %}" alt="{{ testimonial.client_name }}" class="w-16 h-16 rounded-full" />
+                                <svg class="w-16 h-16 rounded-full bg-gray-100 p-2" viewBox="0 0 24 24" fill="#183B4E">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                                </svg>
                                 {% endif %}
                             </div>
                             <div>
@@ -81,7 +83,9 @@
                     <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
                         <div class="flex items-center mb-6">
                             <div class="flex-shrink-0 mr-4">
-                                <img src="{% static 'images/testimonials/avatar1.svg' %}" alt="Sample Client" class="w-16 h-16 rounded-full" />
+                                <svg class="w-16 h-16 rounded-full bg-gray-100 p-2" viewBox="0 0 24 24" fill="#183B4E">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                                </svg>
                             </div>
                             <div>
                                 <h4 class="text-lg font-semibold">Sample Client</h4>
