@@ -875,14 +875,18 @@
             </p>
         </div>
 
-        <!-- Testimonial Cards with Enhanced Design -->
+        <!-- Testimonial Cards with Enhanced Design - Dynamic from Database -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Testimonial 1 -->
-            <div class="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in border border-gray-100 hover:border-[#0B32A4]/20 transform hover:-translate-y-2" style="--delay: 0.2s;">
+            {% for testimonial in testimonials %}
+            <div class="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in border border-gray-100 hover:border-[#0B32A4]/20 transform hover:-translate-y-2" style="--delay: {{ forloop.counter0|add:2 }}0ms;">
                 <!-- Rating Stars with Animation -->
                 <div class="flex items-center space-x-1 mb-4">
-                    {% for i in "12345" %}
-                    <i data-lucide="star" class="w-5 h-5 text-[#FFA300] fill-current group-hover:scale-110 transition-transform duration-300" style="transition-delay: calc({{ forloop.counter0 }}s * 0.05);"></i>
+                    {% for i in "12345"|make_list %}
+                        {% if forloop.counter <= testimonial.rating %}
+                        <i data-lucide="star" class="w-5 h-5 text-[#FFA300] fill-current group-hover:scale-110 transition-transform duration-300" style="transition-delay: calc({{ forloop.counter0 }}s * 0.05);"></i>
+                        {% else %}
+                        <i data-lucide="star" class="w-5 h-5 text-gray-300 group-hover:scale-110 transition-transform duration-300" style="transition-delay: calc({{ forloop.counter0 }}s * 0.05);"></i>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 
@@ -894,7 +898,7 @@
                 <!-- Testimonial Text -->
                 <p class="text-grey mb-6 text-lg leading-relaxed">
                     <span class="font-serif italic text-[#0B32A4] text-xl">"</span>
-                    Social Dots transformed our entire sales process with their Salesforce expertise. Our lead conversion increased by <span class="font-semibold text-[#0B32A4]">60%</span> in just 3 months.
+                    {{ testimonial.content }}
                     <span class="font-serif italic text-[#0B32A4] text-xl">"</span>
                 </p>
                 
@@ -904,95 +908,25 @@
                 <!-- Client Info with Enhanced Design -->
                 <div class="flex items-center space-x-4">
                     <div class="w-14 h-14 bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                        <span class="text-white font-bold text-sm">JS</span>
+                        <span class="text-white font-bold text-sm">{{ testimonial.client_name|slice:":2" }}</span>
                     </div>
                     <div>
-                        <h4 class="font-bold text-[#0B32A4] text-lg group-hover:text-[#FFA300] transition-colors">John Smith</h4>
+                        <h4 class="font-bold text-[#0B32A4] text-lg group-hover:text-[#FFA300] transition-colors">{{ testimonial.client_name }}</h4>
                         <p class="text-grey flex items-center">
                             <i data-lucide="briefcase" class="w-4 h-4 mr-1 text-gray-400"></i>
-                            CEO, TechCorp Toronto
+                            {% if testimonial.client_position %}{{ testimonial.client_position }}{% endif %}
+                            {% if testimonial.client_position and testimonial.client_company %}, {% endif %}
+                            {% if testimonial.client_company %}{{ testimonial.client_company }}{% endif %}
                         </p>
                     </div>
                 </div>
             </div>
-
-            <!-- Testimonial 2 -->
-            <div class="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in border border-gray-100 hover:border-[#FFA300]/20 transform hover:-translate-y-2" style="--delay: 0.3s;">
-                <!-- Rating Stars with Animation -->
-                <div class="flex items-center space-x-1 mb-4">
-                    {% for i in "12345" %}
-                    <i data-lucide="star" class="w-5 h-5 text-[#FFA300] fill-current group-hover:scale-110 transition-transform duration-300" style="transition-delay: calc({{ forloop.counter0 }}s * 0.05);"></i>
-                    {% endfor %}
-                </div>
-                
-                <!-- Quote Icon -->
-                <div class="text-[#FFA300]/10 mb-4">
-                    <i data-lucide="quote" class="w-10 h-10"></i>
-                </div>
-                
-                <!-- Testimonial Text -->
-                <p class="text-grey mb-6 text-lg leading-relaxed">
-                    <span class="font-serif italic text-[#FFA300] text-xl">"</span>
-                    The AI integration strategy Ali developed for us was game-changing. We're now processing <span class="font-semibold text-[#FFA300]">3x more data</span> with half the manual effort.
-                    <span class="font-serif italic text-[#FFA300] text-xl">"</span>
-                </p>
-                
-                <!-- Divider -->
-                <div class="h-px w-16 bg-gradient-to-r from-[#FFA300] to-[#0B32A4] mb-6"></div>
-                
-                <!-- Client Info with Enhanced Design -->
-                <div class="flex items-center space-x-4">
-                    <div class="w-14 h-14 bg-gradient-to-br from-[#FFA300] to-[#FF8C00] rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                        <span class="text-white font-bold text-sm">MJ</span>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-[#0B32A4] text-lg group-hover:text-[#FFA300] transition-colors">Marie Johnson</h4>
-                        <p class="text-grey flex items-center">
-                            <i data-lucide="building" class="w-4 h-4 mr-1 text-gray-400"></i>
-                            COO, MapleTech Inc.
-                        </p>
-                    </div>
-                </div>
+            {% empty %}
+            <!-- No testimonials available -->
+            <div class="col-span-3 text-center py-10">
+                <p class="text-grey">No testimonials available. Please add testimonials through the admin panel.</p>
             </div>
-
-            <!-- Testimonial 3 -->
-            <div class="group bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 fade-in border border-gray-100 hover:border-[#0E42CE]/20 transform hover:-translate-y-2" style="--delay: 0.4s;">
-                <!-- Rating Stars with Animation -->
-                <div class="flex items-center space-x-1 mb-4">
-                    {% for i in "12345" %}
-                    <i data-lucide="star" class="w-5 h-5 text-[#FFA300] fill-current group-hover:scale-110 transition-transform duration-300" style="transition-delay: calc({{ forloop.counter0 }}s * 0.05);"></i>
-                    {% endfor %}
-                </div>
-                
-                <!-- Quote Icon -->
-                <div class="text-[#0E42CE]/10 mb-4">
-                    <i data-lucide="quote" class="w-10 h-10"></i>
-                </div>
-                
-                <!-- Testimonial Text -->
-                <p class="text-grey mb-6 text-lg leading-relaxed">
-                    <span class="font-serif italic text-[#0E42CE] text-xl">"</span>
-                    Professional, strategic, and results-driven. Social Dots doesn't just deliver solutions, they deliver <span class="font-semibold text-[#0E42CE]">business transformation</span>.
-                    <span class="font-serif italic text-[#0E42CE] text-xl">"</span>
-                </p>
-                
-                <!-- Divider -->
-                <div class="h-px w-16 bg-gradient-to-r from-[#0E42CE] to-[#0B32A4] mb-6"></div>
-                
-                <!-- Client Info with Enhanced Design -->
-                <div class="flex items-center space-x-4">
-                    <div class="w-14 h-14 bg-gradient-to-br from-[#0E42CE] to-[#0B32A4] rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                        <span class="text-white font-bold text-sm">DL</span>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-[#0B32A4] text-lg group-hover:text-[#FFA300] transition-colors">David Lee</h4>
-                        <p class="text-grey flex items-center">
-                            <i data-lucide="rocket" class="w-4 h-4 mr-1 text-gray-400"></i>
-                            Founder, VancouverStart
-                        </p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         
         <!-- View More Testimonials Button -->

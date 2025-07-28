@@ -6,7 +6,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const portfolioTabs = document.getElementById('portfolio-tabs');
-        const portfolioGrid = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+        const portfolioGrid = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-8');
         
         if (portfolioTabs && portfolioGrid) {
             // Add click event listeners to all tab buttons
@@ -34,7 +34,7 @@
                             tempDiv.innerHTML = html;
                             
                             // Extract the portfolio grid content
-                            const newPortfolioGrid = tempDiv.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+                            const newPortfolioGrid = tempDiv.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-8');
                             
                             if (newPortfolioGrid) {
                                 // Update the portfolio grid with new content
@@ -959,7 +959,7 @@
             max-width: 2000px !important;
         }
         
-        .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-6 {
+        .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-3.gap-8 {
             grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
             max-width: 2000px;
             margin: 0 auto;
@@ -1126,7 +1126,9 @@
                 </h1>
                 
                 <p class="hero-subtitle color-black">
-                    From landing pages to complete digital marketing systems, we help Canadian businesses attract more customers and increase revenue. Proven results with 10+ businesses across Toronto and beyond.
+                    As a leading digital marketing agency in Canada, 
+                    We help Toronto-based businesses and entrepreneurs attract more leads, automate marketing, and increase revenue.
+                    Proven results with over 10 Canadian companies — from affordable landing pages to fully integrated online marketing systems.
                 </p>
 
                 <ul class="hero-features">
@@ -1466,21 +1468,7 @@
                         <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                     </svg>
                     Videos
-                </button>
-                <!-- <button data-content-type="email" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'email' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
-                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                    </svg>
-                    Emails
-                </button>
-                <button data-content-type="blog" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'blog' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
-                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path>
-                        <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
-                    </svg>
-                    Blogs
-                </button> -->
+                </button> 
             </div>
         </div>
         
@@ -1569,7 +1557,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const loadMoreBtn = document.getElementById('load-more-btn');
-                const portfolioGrid = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+                const portfolioGrid = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-8');
                 let currentPage = 1;
                 let loadedItemIds = new Set(); // Track loaded item IDs to avoid duplicates
                 
@@ -1609,7 +1597,7 @@
                                 tempDiv.innerHTML = html;
                                 
                                 // Extract the portfolio grid content
-                                const newPortfolioItems = tempDiv.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+                                const newPortfolioItems = tempDiv.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3.gap-8');
                                 let newItemsAdded = 0;
                                 
                                 if (newPortfolioItems && newPortfolioItems.children.length > 0) {

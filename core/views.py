@@ -273,11 +273,15 @@ def portfolio(request):
     for project in Project.objects.filter(status='completed'):
         all_technologies.update(project.technologies)
     
+    # Get testimonials for the testimonials section
+    testimonials = Testimonial.objects.filter(is_active=True)[:6]
+    
     context = {
         'projects': projects,
         'all_technologies': sorted(list(all_technologies)),
         'current_tech': tech_filter,
         'current_type': portfolio_type,
+        'testimonials': testimonials,
     }
     
     # Check if this is an AJAX request
