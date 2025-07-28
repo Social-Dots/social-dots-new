@@ -47,7 +47,7 @@ class ProjectSitemap(Sitemap):
     changefreq = 'monthly'
 
     def items(self):
-        return Project.objects.filter(is_active=True)
+        return Project.objects.filter(status='completed')
 
     def location(self, obj):
         return reverse('project_detail', args=[obj.slug])
