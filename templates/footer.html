@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Professional Footer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-blue: #0B32A4;
+            --accent-orange: #FFA300;
+            --pure-white: #FFFFFF;
+            --text-gray: #94A3B8;
+            --dark-blue: #0F172A;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .footer-container {
+            background: var(--dark-blue);
+            color: white;
+            position: relative;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+        
+        .brand-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--pure-white);
+            margin-bottom: 1rem;
+        }
+        
+        .brand-section p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .awards-section {
+            margin-top: 2rem;
+        }
+        
+        .award-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+            transition: all 0.3s ease;
+        }
+        
+        .award-item:hover {
+            background: rgba(255, 163, 0, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .award-icon {
+            width: 32px;
+            height: 32px;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .award-text {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .award-label {
+            color: var(--pure-white);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--pure-white);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 0.25rem 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-orange);
+            transform: translateX(5px);
+        }
+        
+        .contact-info {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .contact-info strong {
+            color: var(--pure-white);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-info a {
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .location-item {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-link:hover {
+            background: var(--accent-orange);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22C55E;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-text {
+            color: #22C55E;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+            
+            .brand-section {
+                grid-column: 1 / -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                padding: 3rem 1.5rem 1.5rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .footer-content {
+                padding: 2rem 1rem 1rem;
+            }
+            
+            .footer-grid {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <footer class="footer-container">
+        <div class="footer-content">
+            <div class="footer-grid">
+                
+                <!-- Brand Section -->
+                <div class="brand-section">
+                    <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751909635/svg_zacw0e.svg" 
+                         class="h-12 mb-4" alt="Social Dots Logo" />
+                    
+                    <h2>Social Dots</h2>
+                    <p>Empowering Canadian businesses to thrive in a constantly evolving digital world through strategic AI integration and comprehensive digital solutions.</p>
+                    
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span class="status-text">Available for new projects</span>
+                    </div>
+                    
+                    <!-- Awards Section -->
+                    <div class="awards-section">
+                        <div class="award-item">
+                            <div class="award-icon">
+                                <svg fill="#FFA300" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="award-label">Top Rated Agency</div>
+                                <div class="award-text">5.0 rating on Clutch</div>
+                            </div>
+                        </div>
+                        
+                        <div class="award-item">
+                            <div class="award-icon">
+                                <svg fill="#FFA300" viewBox="0 0 24 24">
+                                    <path d="M9 11H7v9h2v-9zm4 0h-2v9h2v-9zm4 0h-2v9h2v-9zm2.5-9H21v2h-1.5l-.32 11.38c-.08 2.66-2.28 4.62-4.95 4.62H9.77c-2.67 0-4.87-1.96-4.95-4.62L4.5 4H3V2h3.5l.42-1.41c.17-.56.76-.59.93-.59h5.3c.17 0 .76.03.93.59L14.5 2H18z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="award-label">Certified Partner</div>
+                                <div class="award-text">Salesforce & HubSpot</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Services Column -->
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="/services/">Digital Strategy</a></li>
+                        <li><a href="/services/">AI Integration</a></li>
+                        <li><a href="/services/">Salesforce CRM</a></li>
+                        <li><a href="/services/">Marketing Automation</a></li>
+                        <li><a href="/services/">Web Development</a></li>
+                        <li><a href="/services/">Cloud Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Company Column -->
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/portfolio/">Portfolio</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/careers/">Careers</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                        <li><a href="/privacy/">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contacts Column -->
+                <div class="footer-column">
+                    <h3>Contacts</h3>
+                    
+                    <div class="location-item">
+                        <div class="contact-info">
+                            <strong>Toronto Hub</strong>
+                            <div>Toronto, ON, Canada</div>
+                            <a href="tel:416-556-6961">+1 416-556-6961</a>
+                        </div>
+                    </div>
+                    
+                    <div class="location-item">
+                        <div class="contact-info">
+                            <strong>Lahore Hub</strong>
+                            <div>Lahore, Punjab, Pakistan</div>
+                            <a href="tel:416-556-6961">+1 416-556-6961</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info" style="margin-top: 1.5rem;">
+                        <strong>Inquiries</strong>
+                        <a href="mailto:hello@socialdots.ca">hello@socialdots.ca</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2025 Social Dots. All rights reserved.
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/company/socialdotsca/posts/?feedView=all" 
+                       class="social-link" aria-label="LinkedIn">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://x.com/SocialDotsCa" 
+                       class="social-link" aria-label="X (Twitter)">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://github.com/alishafique1/" 
+                       class="social-link" aria-label="GitHub">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="#" class="social-link" aria-label="Behance">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="#" class="social-link" aria-label="Dribbble">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
