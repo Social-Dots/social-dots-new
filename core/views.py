@@ -40,6 +40,7 @@ def home(request):
     featured_services = Service.objects.filter(is_featured=True, is_active=True)[:3]
     featured_projects = Project.objects.filter(is_featured=True)[:6]
     featured_testimonials = Testimonial.objects.filter(is_featured=True, is_active=True)[:3]
+    testimonials = Testimonial.objects.filter(is_active=True)[:6]
     team_members = TeamMember.objects.filter(is_active=True)[:4]
     recent_blog_posts = BlogPost.objects.filter(status='published')[:3]
     
@@ -90,6 +91,7 @@ def home(request):
         'featured_services': featured_services,
         'featured_projects': featured_projects,
         'featured_testimonials': featured_testimonials,
+        'testimonials': testimonials,
         'team_members': team_members,
         'recent_blog_posts': recent_blog_posts,
         'portfolio_categories': portfolio_categories,

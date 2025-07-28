@@ -32,16 +32,60 @@
         <!-- Swiper Container -->
         <div class="swiper testimonials-swiper">
             <div class="swiper-wrapper">
-                <!-- Testimonial 1 -->
+                {% for testimonial in testimonials %}
                 <div class="swiper-slide">
                     <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
                         <div class="flex items-center mb-6">
                             <div class="flex-shrink-0 mr-4">
-                                <img src="{% static 'images/testimonials/avatar1.svg' %}" alt="John Doe" class="w-16 h-16 rounded-full" />
+                                {% if testimonial.client_image %}
+                                <img src="{{ testimonial.client_image }}" alt="{{ testimonial.client_name }}" class="w-16 h-16 rounded-full" />
+                                {% else %}
+                                <img src="{% static 'images/testimonials/avatar1.svg' %}" alt="{{ testimonial.client_name }}" class="w-16 h-16 rounded-full" />
+                                {% endif %}
                             </div>
                             <div>
-                                <h4 class="text-lg font-semibold">John Doe</h4>
-                                <p class="text-sm text-muted-foreground">CEO, TechStart Inc.</p>
+                                <h4 class="text-lg font-semibold">{{ testimonial.client_name }}</h4>
+                                <p class="text-sm text-muted-foreground">
+                                    {% if testimonial.client_position %}{{ testimonial.client_position }}{% endif %}
+                                    {% if testimonial.client_position and testimonial.client_company %}, {% endif %}
+                                    {% if testimonial.client_company %}{{ testimonial.client_company }}{% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex text-gold mb-2">
+                                {% for i in "12345"|make_list %}
+                                    {% if forloop.counter <= testimonial.rating %}
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    {% else %}
+                                    <svg class="w-5 h-5 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <p class="italic text-muted-foreground">"{{ testimonial.content }}"</p>
+                        </div>
+                        
+                        {% comment %} <div class="text-right">
+                            <a href="/about/" class="text-navy text-sm hover:text-gold transition-colors">Read full story →</a>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+                {% empty %}
+                <!-- Fallback testimonial if no testimonials in database -->
+                <div class="swiper-slide">
+                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
+                        <div class="flex items-center mb-6">
+                            <div class="flex-shrink-0 mr-4">
+                                <img src="{% static 'images/testimonials/avatar1.svg' %}" alt="Sample Client" class="w-16 h-16 rounded-full" />
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold">Sample Client</h4>
+                                <p class="text-sm text-muted-foreground">CEO, Sample Company</p>
                             </div>
                         </div>
                         
@@ -63,7 +107,7 @@
                                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                                 </svg>
                             </div>
-                            <p class="italic text-muted-foreground">"Social Dots transformed our digital presence completely. Their AI integration solutions have automated our customer service, saving us countless hours and improving customer satisfaction."</p>
+                            <p class="italic text-muted-foreground">"Add testimonials through the admin panel to display real client feedback here."</p>
                         </div>
                         
                         <div class="text-right">
@@ -71,206 +115,7 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="swiper-slide">
-                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
-                        <div class="flex items-center mb-6">
-                            <div class="flex-shrink-0 mr-4">
-                                <img src="{% static 'images/testimonials/avatar2.svg' %}" alt="Sarah Miller" class="w-16 h-16 rounded-full" />
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold">Sarah Miller</h4>
-                                <p class="text-sm text-muted-foreground">Marketing Director, GrowthCo</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex text-gold mb-2">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                            </div>
-                            <p class="italic text-muted-foreground">"The digital marketing strategy developed by Social Dots increased our conversion rates by 150% in just three months. Their data-driven approach and Canadian market expertise made all the difference."</p>
-                        </div>
-                        
-                        <div class="text-right">
-                            <a href="/about/" class="text-navy text-sm hover:text-gold transition-colors">Read full story →</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="swiper-slide">
-                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
-                        <div class="flex items-center mb-6">
-                            <div class="flex-shrink-0 mr-4">
-                                <img src="{% static 'images/testimonials/avatar3.svg' %}" alt="Alex Kumar" class="w-16 h-16 rounded-full" />
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold">Alex Kumar</h4>
-                                <p class="text-sm text-muted-foreground">Founder, InnovateCo</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex text-gold mb-2">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                            </div>
-                            <p class="italic text-muted-foreground">"Working with Social Dots on our enterprise AI solution was a game-changer. Their team understood our complex requirements and delivered a custom solution that has revolutionized our operations."</p>
-                        </div>
-                        
-                        <div class="text-right">
-                            <a href="/about/" class="text-navy text-sm hover:text-gold transition-colors">Read full story →</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 4 -->
-                <div class="swiper-slide">
-                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
-                        <div class="flex items-center mb-6">
-                            <div class="flex-shrink-0 mr-4">
-                                <img src="{% static 'images/testimonials/avatar1.svg' %}" alt="Michael Chen" class="w-16 h-16 rounded-full" />
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold">Michael Chen</h4>
-                                <p class="text-sm text-muted-foreground">CTO, FutureTech</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex text-gold mb-2">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                            </div>
-                            <p class="italic text-muted-foreground">"The Salesforce CRM implementation by Social Dots has streamlined our entire sales process. Their team's technical expertise and understanding of our business needs resulted in a solution that perfectly fits our workflow."</p>
-                        </div>
-                        
-                        <div class="text-right">
-                            <a href="/about/" class="text-navy text-sm hover:text-gold transition-colors">Read full story →</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 5 -->
-                <div class="swiper-slide">
-                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
-                        <div class="flex items-center mb-6">
-                            <div class="flex-shrink-0 mr-4">
-                                <img src="{% static 'images/testimonials/avatar2.svg' %}" alt="Jennifer Patel" class="w-16 h-16 rounded-full" />
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold">Jennifer Patel</h4>
-                                <p class="text-sm text-muted-foreground">Digital Marketing Manager, RetailPlus</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex text-gold mb-2">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                            </div>
-                            <p class="italic text-muted-foreground">"Social Dots' social media management services have transformed our online presence. Their team's creative content and strategic approach have increased our engagement by 200% and driven significant traffic to our website."</p>
-                        </div>
-                        
-                        <div class="text-right">
-                            <a href="/about/" class="text-navy text-sm hover:text-gold transition-colors">Read full story →</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 6 -->
-                <div class="swiper-slide">
-                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-gold/10 h-full">
-                        <div class="flex items-center mb-6">
-                            <div class="flex-shrink-0 mr-4">
-                                <img src="{% static 'images/testimonials/avatar3.svg' %}" alt="David Wilson" class="w-16 h-16 rounded-full" />
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold">David Wilson</h4>
-                                <p class="text-sm text-muted-foreground">Operations Director, CanadaGrowth</p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-6">
-                            <div class="flex text-gold mb-2">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                </svg>
-                            </div>
-                            <p class="italic text-muted-foreground">"The business intelligence dashboard created by Social Dots has given us unprecedented visibility into our operations. Their team took the time to understand our KPIs and delivered a solution that helps us make data-driven decisions daily."</p>
-                        </div>
-                        
-                        <div class="text-right">
-                            <a href="/about/" class="text-navy text-sm hover:text-gold transition-colors">Read full story →</a>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             
             <!-- Add Swiper navigation -->
@@ -335,15 +180,6 @@
                 }
             });
         </script>
-        
-        <div class="text-center mt-12">
-            <a href="/about/" class="btn-primary inline-flex items-center justify-center px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105">
-                See More Success Stories
-                <svg class="w-5 h-5 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14"></path>
-                    <path d="M12 5l7 7-7 7"></path>
-                </svg>
-            </a>
-        </div>
+    
     </div>
 </section>
