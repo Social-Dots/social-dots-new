@@ -22,8 +22,9 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 ALLOWED_HOSTS = ['*']
 
-#add 
-
+# CSRF settings for Vercel deployment
+CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app', 'https://*.now.sh', 'https://socialdots.ca', 'https://*.socialdots.ca']
+CSRF_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
