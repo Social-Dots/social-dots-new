@@ -744,5 +744,23 @@
             console.error('Calendar elements not found in the DOM');
         }
     });
+    // Clear the cart when payment is successful
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof window.cart !== 'undefined') {
+            // Clear cart items
+            window.cart.items = [];
+            // Save empty cart to localStorage
+            window.cart.saveCart();
+            console.log('Cart cleared after successful payment');
+        } else {
+            // Fallback if cart object is not available
+            try {
+                localStorage.removeItem('cart');
+                console.log('Cart cleared from localStorage after successful payment');
+            } catch (e) {
+                console.error('Error clearing cart:', e);
+            }
+        }
+    });
 </script>
 {% endblock %}
