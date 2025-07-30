@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Our Work Process</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+{% extends "base.html" %}
+
+{% block title %}Our Work Process - {{ site_config.site_name }}{% endblock %}
+
+{% block extra_head %}
   <style>
     html, body {
       height: 100%;
@@ -14,8 +13,10 @@
       scroll-snap-align: start;
     }
   </style>
-</head>
-<body class="bg-[#0F172A] text-white font-sans">
+{% endblock %}
+
+{% block content %}
+<div class="bg-[#0F172A] text-white font-sans">
 
   <header class="text-center py-10">
     <h1 class="text-4xl md:text-6xl font-bold tracking-wide mb-2">Our Work Process</h1>
@@ -47,5 +48,5 @@
     <p class="text-gray-400 mt-2 max-w-lg text-center">We deploy with care, test everything, and make sure it performs like magic.</p>
   </section>
 
-</body>
-</html>
+</div>
+{% endblock %}

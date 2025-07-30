@@ -422,7 +422,7 @@ def cart(request):
     """View for the shopping cart page"""
     return render(request, 'core/cart.html')
 
-
+@csrf_exempt
 @require_http_methods(["POST"])
 def checkout(request):
     try:
