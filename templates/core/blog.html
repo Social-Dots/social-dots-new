@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load markdown_extras %}
 
 {% block title %}Blog - {{ site_config.site_name }} - Insights on AI Integration & Digital Strategy{% endblock %}
 
@@ -285,7 +286,7 @@
 
                                 <!-- Post Excerpt -->
                                 <p class="text-secondary mb-6 leading-relaxed">
-                                    {{ post.excerpt|default:post.content|striptags|truncatewords:30 }}
+                                    {{ post.excerpt|default:post.content|markdown_format|striptags|truncatewords:30 }}
                                 </p>
 
                                 <!-- Post Tags -->
