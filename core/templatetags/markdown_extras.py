@@ -13,17 +13,24 @@ def markdown_format(text):
     if not text:
         return ""
     
-    # Configure markdown with extensions for proper heading conversion
+    # Configure markdown with enhanced extensions for readability
     md = markdown.Markdown(
         extensions=[
             'markdown.extensions.fenced_code',
             'markdown.extensions.tables',
             'markdown.extensions.toc',
             'markdown.extensions.codehilite',
+            'markdown.extensions.nl2br',
+            'markdown.extensions.attr_list',
+            'markdown.extensions.def_list',
+            'markdown.extensions.footnotes',
+            'markdown.extensions.md_in_html',
         ],
         extension_configs={
             'markdown.extensions.codehilite': {
-                'css_class': 'highlight'
+                'css_class': 'highlight',
+                'use_pygments': True,
+                'noclasses': False,
             }
         }
     )
