@@ -202,6 +202,10 @@ FRAPPE_API_SECRET = os.environ.get('FRAPPE_API_SECRET')
 AI_AGENT_WEBHOOK_URL = os.environ.get('AI_AGENT_WEBHOOK_URL')
 AI_AGENT_API_KEY = os.environ.get('AI_AGENT_API_KEY')
 
+# Slack Configuration
+SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
+SLACK_CHANNEL = os.environ.get('SLACK_CHANNEL', '#notifications')
+
 # Google Calendar Configuration
 GOOGLE_CALENDAR_CLIENT_ID = os.environ.get('GOOGLE_CALENDAR_CLIENT_ID')
 GOOGLE_CALENDAR_CLIENT_SECRET = os.environ.get('GOOGLE_CALENDAR_CLIENT_SECRET')

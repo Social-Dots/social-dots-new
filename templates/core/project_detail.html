@@ -9,9 +9,37 @@
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Enhanced Image Section with Shadow and Rounded Corners -->
+            <!-- Enhanced Live Preview Section with Shadow and Rounded Corners -->
             <div class="relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group">
-                {% if project.image %}
+                {% if project.project_url %}
+                <!-- Live Preview with iframe -->
+                <div class="relative h-[500px] bg-gray-100 rounded-xl overflow-hidden">
+                    <iframe 
+                        src="{{ project.project_url }}" 
+                        class="w-full h-full border-0 rounded-xl"
+                        title="Live preview of {{ project.title }}"
+                        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                        loading="lazy">
+                    </iframe>
+                    <div class="absolute top-4 right-4 flex gap-2">
+                        {% if project.portfolio_type %}
+                        <div class="px-4 py-2 bg-[#FFA300] text-white rounded-full text-sm font-medium shadow-md">
+                            {{ project.get_portfolio_type_display }}
+                        </div>
+                        {% endif %}
+                        <a href="{{ project.project_url }}" target="_blank" 
+                           class="px-4 py-2 bg-white/90 backdrop-blur-sm text-[#0B32A4] rounded-full text-sm font-medium shadow-md hover:bg-white transition-colors">
+                            <i data-lucide="external-link" class="w-4 h-4 inline-block mr-1"></i>
+                            Open
+                        </a>
+                    </div>
+                    <div class="absolute bottom-4 left-4 px-3 py-1.5 bg-black/60 backdrop-blur-sm text-white text-xs rounded-full">
+                        <i data-lucide="globe" class="w-3 h-3 inline-block mr-1"></i>
+                        Live Preview
+                    </div>
+                </div>
+                {% elif project.image %}
+                <!-- Fallback to image if no project_url -->
                 <div class="relative h-[500px] overflow-hidden">
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-50"></div>
@@ -22,6 +50,7 @@
                     {% endif %}
                 </div>
                 {% else %}
+                <!-- Fallback to placeholder if no image or project_url -->
                 <div class="w-full h-[500px] bg-gradient-to-br from-[#0B32A4] to-[#0E42CE] flex items-center justify-center">
                     <div class="text-center">
                         <i data-lucide="{% if 'web' in project.title.lower %}globe{% elif 'mobile' in project.title.lower %}smartphone{% elif 'ai' in project.title.lower %}brain-circuit{% elif 'crm' in project.title.lower or 'salesforce' in project.title.lower %}database{% else %}monitor{% endif %}" class="w-32 h-32 text-white mb-6 mx-auto"></i>

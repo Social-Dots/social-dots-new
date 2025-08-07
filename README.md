@@ -26,6 +26,7 @@ A modern, professional website for Social Dots Inc., a Toronto-based digital mar
 - **AI Agents**: WhatsApp notifications and RAG-based chatbots
 - **Google Calendar**: Appointment booking and availability checking
 - **Email**: SMTP integration for notifications
+- **Slack**: Real-time notifications for new leads and orders
 
 ## Project Structure
 
@@ -168,7 +169,11 @@ GOOGLE_CALENDAR_REDIRECT_URI=http://localhost:8000/calendar/callback/
 EMAIL_HOST=smtp.gmail.com
 EMAIL_HOST_USER=your-email@gmail.com
 EMAIL_HOST_PASSWORD=your-password
-```
+
+# Slack
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK
+SLACK_CHANNEL=#sales-alerts
+```}]}
 
 ## API Endpoints
 
@@ -183,6 +188,55 @@ EMAIL_HOST_PASSWORD=your-password
 
 ### Utility
 - `GET /health/` - System health check
+
+## Slack Integration
+
+The application includes automatic Slack notifications for new leads and orders.
+
+### Setup Instructions
+
+1. **Create a Slack Channel**
+   - Go to your Slack workspace
+   - Create a new channel (e.g., `#sales-alerts`)
+   - Invite relevant team members
+
+2. **Create a Slack App**
+   - Visit https://api.slack.com/apps
+   - Click "Create New App" → "From scratch"
+   - Choose your workspace
+   - Go to "Incoming Webhooks"
+   - Enable webhooks and create a new webhook URL
+   - Select your channel (#sales-alerts)
+
+3. **Configure Environment**
+   - Add the webhook URL to your `.env` file:
+   ```
+   SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK
+   SLACK_CHANNEL=#sales-alerts
+   ```
+
+4. **Test Integration**
+   - Create a new lead via the contact form
+   - Create a new order via Stripe checkout
+   - Check your Slack channel for notifications
+
+### Notification Format
+
+**New Lead Notifications** include:
+- Lead name and contact information
+- Service interest and budget
+- Timeline and message
+- Source attribution
+
+**New Order Notifications** include:
+- Order ID and customer details
+- Service and pricing plan
+- Order amount and currency
+- Stripe payment status
+
+### Customization
+
+The notification format can be customized in `core/slack_service.py`. You can modify the message templates, add custom fields, or change the notification channel based on order value or lead source.
 
 ## Recent Updates (June 2025)
 

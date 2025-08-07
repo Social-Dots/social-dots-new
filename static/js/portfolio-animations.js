@@ -364,7 +364,6 @@ function initMicroInteractions() {
         });
     });
 }
-}
 
 /**
  * Initialize scroll progress indicator for the portfolio section

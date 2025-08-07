@@ -547,7 +547,39 @@
                 
                 <!-- Project Image with Enhanced Styling -->
                 <div class="relative h-52 overflow-hidden">
-                    {% if project.image %}
+                    {% if project.project_url %}
+                    <!-- Live Preview with iframe -->
+                    <div class="relative h-full bg-gradient-to-br from-gray-50 to-gray-100 rounded-t-xl overflow-hidden shadow-inner">
+                        <iframe 
+                            src="{{ project.project_url }}" 
+                            class="w-full h-full border-0 rounded-t-xl transition-transform duration-500 group-hover:scale-105"
+                            title="Live preview of {{ project.title }}"
+                            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                            loading="lazy">
+                        </iframe>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        <div class="absolute inset-0 border-2 border-[#0B32A4]/20 rounded-t-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <!-- Enhanced badges with better positioning -->
+                        <div class="absolute top-3 left-3 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 backdrop-blur-sm text-white text-xs font-semibold rounded-full shadow-lg transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                            <i data-lucide="globe" class="w-3 h-3 inline-block mr-1.5"></i>
+                            Live Preview
+                        </div>
+                        <a href="{{ project.project_url }}" target="_blank" rel="noopener noreferrer" 
+                           class="absolute top-3 right-3 px-3 py-1.5 bg-gradient-to-r from-white/95 to-white/80 backdrop-blur-sm text-[#0B32A4] text-xs font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-1.5">
+                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                            Open Site
+                        </a>
+                        
+                        <!-- Hover overlay with enhanced effects -->
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <div class="text-white text-sm">
+                                <div class="font-semibold mb-1">{{ project.title }}</div>
+                                <div class="text-white/80 text-xs">Click to view full project details</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% elif project.image %}
                     <!-- Project has image -->
                     <img 
                         src="{{ project.image.url }}" 
@@ -576,7 +608,7 @@
                     {% endif %}
                     
                     <!-- Enhanced portfolio type badge with animation -->
-                    {% if project.portfolio_type and project.image %}
+                    {% if project.portfolio_type and not project.project_url and project.image %}
                     <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-[#0B32A4] text-xs font-medium px-3 py-1 rounded-full shadow-md group-hover:bg-[#0B32A4] group-hover:text-white transition-all duration-300">
                         {{ project.get_portfolio_type_display }}
                     </div>
@@ -1270,6 +1302,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         const filterButtons = document.querySelectorAll('.category-pill');
         const portfolioGrid = document.querySelector('#portfolio-grid');
+        const searchInputElement = document.getElementById('portfolio-search');
+        const sortSelectElement = document.getElementById('portfolio-sort');
         const loadingIndicator = document.createElement('div');
         
         // Set up loading indicator
@@ -1383,17 +1417,23 @@
         
         // Event listener for search input
         let searchTimeout;
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                filterPortfolioItems();
-            }, 300); // Debounce search for better performance
-        });
+        const searchInputElement = document.getElementById('portfolio-search');
+        if (searchInputElement) {
+            searchInputElement.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    filterPortfolioItems();
+                }, 300); // Debounce search for better performance
+            });
+        }
         
         // Event listener for sort select
-        sortSelect.addEventListener('change', function() {
-            sortPortfolioItems();
-        });
+        const sortSelectElement = document.getElementById('portfolio-sort');
+        if (sortSelectElement) {
+            sortSelectElement.addEventListener('change', function() {
+                sortPortfolioItems();
+            });
+        }
         
         // Set initial active state based on URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -1417,13 +1457,13 @@
         }
         
         // Set initial search term if provided
-        if (searchParam) {
-            searchInput.value = searchParam;
+        if (searchParam && searchInputElement) {
+            searchInputElement.value = searchParam;
         }
         
         // Set initial sort option if provided
-        if (sortParam && ['newest', 'oldest', 'name-asc', 'name-desc'].includes(sortParam)) {
-            sortSelect.value = sortParam;
+        if (sortParam && ['newest', 'oldest', 'name-asc', 'name-desc'].includes(sortParam) && sortSelectElement) {
+            sortSelectElement.value = sortParam;
         }
         
         // Initialize filtering and sorting
