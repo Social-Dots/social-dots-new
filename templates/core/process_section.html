@@ -3,226 +3,778 @@
 <head>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
     
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color:rgb(255,255,255);
-      background-image: 
-        radial-gradient(circle at 25px 25px, rgba(14, 66, 206, 0.05) 2%, transparent 0%),
-        radial-gradient(circle at 75px 75px, rgba(255, 163, 0, 0.05) 2%, transparent 0%);
-      background-size: 100px 100px;
-      overflow-x: hidden;
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      
+      /* Enhanced Typography Scale */
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-base: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-xl: 1.25rem;
+      --font-size-2xl: 1.5rem;
+      --font-size-3xl: 1.875rem;
+      --font-size-4xl: 2.25rem;
+      --font-size-5xl: 3rem;
+      
+      /* Enhanced Color Palette */
+      --text-primary: rgba(26, 32, 44, 0.95);
+      --text-secondary: rgba(26, 32, 44, 0.8);
+      --text-tertiary: rgba(26, 32, 44, 0.6);
+      --text-accent: #3182ce;
+      
+      /* Spacing Scale */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
     }
     
-    .process-card {
-      transform: translateZ(0);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(14, 66, 206, 0.15);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #ffffff;
+      background-attachment: fixed;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: #1a202c;
+      line-height: 1.6;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    
+    /* Modern Container Styles */
+    .agile-container {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
       position: relative;
-      z-index: 1;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .agile-container:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Agile Sprint Cycle Visualization */
+    .sprint-cycle {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 2rem;
+    }
+    
+    .sprint-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .sprint-progress {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #4facfe;
+      animation: sprintRotate 3s linear infinite;
+      transform-origin: center;
+    }
+    
+    .sprint-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: var(--accent-gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+    }
+    
+    @keyframes sprintRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Agile Phase Indicators */
+    .phase-indicator {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      cursor: pointer;
+    }
+    
+    .phase-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       overflow: hidden;
     }
     
-    .process-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(14, 66, 206, 0.08) 0%, rgba(255, 163, 0, 0.08) 100%);
-      z-index: -1;
-      transform: scaleX(0);
-      transform-origin: 0 50%;
-      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-      border-radius: inherit;
-    }
-    
-    .process-card:hover::before {
-      transform: scaleX(1);
-    }
-    
-    .process-card::after {
+    .phase-ring::before {
       content: '';
       position: absolute;
       top: -2px;
       left: -2px;
       right: -2px;
       bottom: -2px;
-      background: linear-gradient(135deg, #0E42CE 0%, #ffa300 100%);
-      z-index: -2;
-      border-radius: inherit;
+      background: var(--accent-gradient);
+      border-radius: 50%;
+      z-index: -1;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.3s ease;
     }
     
-    .process-card:hover::after {
-      opacity: 0.15;
+    .phase-indicator:hover .phase-ring {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
     }
     
-    .process-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 
-        0 25px 50px -12px rgba(14, 66, 206, 0.15),
-        0 35px 70px -15px rgba(255, 163, 0, 0.1);
-      border-color: rgba(14, 66, 206, 0.3);
+    .phase-indicator:hover .phase-ring::before {
+      opacity: 1;
     }
     
-    .step-number {
-      background: linear-gradient(135deg, #0E42CE 0%, #ffa300 100%);
-      box-shadow: 
-        0 8px 20px rgba(14, 66, 206, 0.3),
-        0 4px 10px rgba(255, 163, 0, 0.2);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Iteration Flow Animation */
+    .iteration-flow {
+      position: relative;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    
+    .iteration-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+      animation: iterationFlow 4s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+    }
+    
+    @keyframes iterationFlow {
+      0% { width: 0%; }
+      50% { width: 100%; }
+      100% { width: 0%; }
+    }
+    
+    /* Feedback Loop Visualization */
+    .feedback-loop {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 2rem auto;
+    }
+    
+    .feedback-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px dashed rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      animation: feedbackRotate 8s linear infinite;
+    }
+    
+    .feedback-arrow {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 12px solid #4facfe;
+      animation: feedbackPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes feedbackRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes feedbackPulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+    }
+    
+    /* Collaborative Flow */
+    .collaboration-flow {
+      position: relative;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    
+    .collaboration-wave {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--success-gradient);
+      border-radius: 3px;
+      animation: collaborationWave 3s ease-in-out infinite;
+    }
+    
+    @keyframes collaborationWave {
+      0% { left: -100%; }
+      50% { left: 0%; }
+      100% { left: 100%; }
+    }
+    
+    /* Enhanced Card Design */
+    .agile-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--space-6);
+      padding: var(--space-8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
     
-    .step-number::before {
+    .agile-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(165, 180, 252, 0.8), transparent);
       opacity: 0;
-      transform: scale(0.5);
-      transition: all 0.5s ease;
+      transition: opacity 0.4s ease;
     }
     
-    .step-number:hover::before {
-      opacity: 0.4;
-      transform: scale(2);
-    }
-    
-    .step-number::after {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      background: linear-gradient(135deg, #0E42CE 0%, #ffa300 100%) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    
-    .step-number:hover::after {
+    .agile-card:hover::before {
       opacity: 1;
     }
     
-    .step-number:hover {
-      transform: scale(1.15) rotate(5deg);
-      box-shadow: 
-        0 15px 35px rgba(14, 66, 206, 0.4),
-        0 8px 20px rgba(255, 163, 0, 0.3);
-    }
-    
-    .connecting-line {
-      background: linear-gradient(180deg, #0E42CE 0%, #ffa300 50%, #0E42CE 100%);
-      animation: pulse 3s infinite;
-      position: relative;
-    }
-    
-    .connecting-line::before {
+    .agile-card::after {
       content: '';
       position: absolute;
-      top: 0;
-      left: -4px;
-      right: -4px;
-      bottom: 0;
-      background: linear-gradient(180deg, rgba(14, 66, 206, 0.2) 0%, rgba(255, 163, 0, 0.2) 50%, rgba(14, 66, 206, 0.2) 100%);
-      filter: blur(4px);
-      border-radius: inherit;
-      z-index: -1;
-    }
-    
-    .connecting-line::after {
-      content: '';
-      position: absolute;
-      height: 20px;
-      width: 20px;
-      background: white;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, rgba(165, 180, 252, 0.1) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: all 0.6s ease;
       border-radius: 50%;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: moveDown 10s infinite linear;
-      opacity: 0.7;
-      box-shadow: 0 0 10px rgba(14, 66, 206, 0.5);
-    }
-    
-    /* Process flow zigzag connector */
-    .process-flow-connector {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      height: 100%;
-      z-index: 4;
       pointer-events: none;
     }
     
-    .process-flow-connector svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
+    .agile-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      border-color: rgba(165, 180, 252, 0.4);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.15) 0%, rgba(165, 180, 252, 0.1) 100%);
     }
     
-    .process-flow-connector path {
-      stroke: #0E42CE;
-      stroke-width: 2px;
-      stroke-dasharray: 4 2;
-      fill: none;
-      stroke-linecap: round;
+    .agile-card:hover::after {
+      width: 300px;
+      height: 300px;
     }
     
-    .process-flow-connector .flow-dot {
-      fill: #0E42CE;
-      animation: dotPulse 2s infinite;
+    /* Enhanced Interactive Elements */
+    .interactive-dot {
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+      border-radius: 50%;
+      position: absolute;
+      animation: dotFloat 4s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(96, 165, 250, 0.6), 0 0 40px rgba(167, 139, 250, 0.3);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
     }
     
-    @keyframes dotPulse {
-      0%, 100% { opacity: 0.3; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.2); }
+    .interactive-dot:hover {
+      transform: scale(1.8);
+      box-shadow: 0 0 40px rgba(96, 165, 250, 1), 0 0 80px rgba(167, 139, 250, 0.5);
+      border-color: rgba(255, 255, 255, 0.6);
     }
     
-    @keyframes dashMove {
-      to {
-        stroke-dashoffset: -24;
+    @keyframes dotFloat {
+      0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.8;
+      }
+      25% { 
+        transform: translateY(-8px) rotate(90deg); 
+        opacity: 1;
+      }
+      50% { 
+        transform: translateY(-15px) rotate(180deg); 
+        opacity: 0.9;
+      }
+      75% { 
+        transform: translateY(-8px) rotate(270deg); 
+        opacity: 1;
       }
     }
     
-    @keyframes moveDown {
-      0% { top: 0; opacity: 0; }
-      5% { opacity: 0.7; }
-      95% { opacity: 0.7; }
+    /* Enhanced Button Styles */
+    .agile-button {
+      background: linear-gradient(135deg, var(--primary-gradient) 0%, var(--secondary-gradient) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--space-3);
+      padding: var(--space-3) var(--space-6);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    
+    .agile-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .agile-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .agile-button:hover::before {
+        left: 100%;
+      }
+      
+      /* Micro-interaction Styles */
+      .ripple-effect {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(0);
+        animation: ripple 0.6s ease-out;
+        pointer-events: none;
+      }
+      
+      @keyframes ripple {
+        to {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+      
+      /* Enhanced Progress Bar Animations */
+      .progress-bar {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shimmer 2s infinite;
+      }
+      
+      @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+      
+      /* Hover Effects for Interactive Elements */
+      .metric-value {
+        transition: all 0.3s ease;
+        cursor: default;
+      }
+      
+      .metric-value:hover {
+        transform: scale(1.1);
+        text-shadow: 0 0 10px currentColor;
+      }
+      
+      /* Enhanced Focus States */
+      .agile-card:focus,
+      .interactive-dot:focus {
+        outline: 2px solid rgba(165, 180, 252, 0.8);
+        outline-offset: 4px;
+      }
+      
+      /* Smooth Transitions for All Interactive Elements */
+      .workflow-stage,
+      .sprint-cycle,
+      .feedback-loop,
+      .collaboration-flow {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .workflow-stage:hover .sprint-cycle {
+        transform: scale(1.05);
+      }
+      
+      .workflow-stage:hover .feedback-loop {
+        transform: scale(1.1) rotate(5deg);
+      }
+    
+    /* Enhanced Typography System */
+    .agile-title {
+      font-size: var(--font-size-5xl);
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #c7d2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      margin-bottom: var(--space-6);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      text-shadow: 0 0 40px rgba(165, 180, 252, 0.3);
+    }
+    
+    .agile-subtitle {
+      font-size: var(--font-size-2xl);
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: var(--space-8);
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .section-description {
+      font-size: var(--font-size-lg);
+      color: var(--text-tertiary);
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-12);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+    
+    .workflow-stage h3 {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+    
+    .workflow-stage p {
+      font-size: var(--font-size-base);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    
+    .metric-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: var(--font-size-lg);
+      letter-spacing: -0.01em;
+    }
+    
+    .metric-label {
+      font-size: var(--font-size-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
+    }
+    
+    /* Agile Workflow Animations */
+    .workflow-stage {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .workflow-stage.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .workflow-stage:nth-child(1) { transition-delay: 0.1s; }
+    .workflow-stage:nth-child(2) { transition-delay: 0.2s; }
+    .workflow-stage:nth-child(3) { transition-delay: 0.3s; }
+    .workflow-stage:nth-child(4) { transition-delay: 0.4s; }
+    
+    /* Agile Flow Connector */
+    .agile-connector {
+      position: relative;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    
+    .connector-line {
+      width: 2px;
+      height: 100%;
+      background: var(--accent-gradient);
+      position: relative;
+      border-radius: 1px;
+    }
+    
+    .connector-pulse {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: #4facfe;
+      border-radius: 50%;
+      animation: connectorPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 15px rgba(79, 172, 254, 0.6);
+    }
+    
+    @keyframes connectorPulse {
+      0% { top: 0%; opacity: 1; }
       100% { top: 100%; opacity: 0; }
     }
     
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      animation: particleFloat 6s ease-in-out infinite;
+      pointer-events: none;
     }
     
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease forwards;
+    @keyframes particleFloat {
+      0%, 100% { 
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.3;
+      }
+      33% { 
+        transform: translateY(-30px) translateX(20px) scale(1.2);
+        opacity: 0.8;
+      }
+      66% { 
+        transform: translateY(-60px) translateX(-10px) scale(0.8);
+        opacity: 0.5;
+      }
     }
     
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    /* Responsive Design - Mobile First Approach */
+    
+    /* Mobile Styles (320px - 768px) */
+    @media (max-width: 768px) {
+      .agile-title {
+        font-size: var(--font-size-3xl);
+        margin-bottom: var(--space-4);
+      }
+      
+      .agile-subtitle {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--space-6);
+      }
+      
+      .section-description {
+        font-size: var(--font-size-base);
+        margin-bottom: var(--space-8);
+        padding: 0 var(--space-4);
+      }
+      
+      .agile-card {
+        padding: var(--space-6);
+        margin-bottom: var(--space-6);
+      }
+      
+      .workflow-stages {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+      
+      .sprint-cycle {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .feedback-loop {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .metric-value {
+        font-size: var(--font-size-base);
+      }
+      
+      .metric-label {
+        font-size: 10px;
+      }
+      
+      .interactive-dot {
+        width: 10px;
+        height: 10px;
+      }
+      
+      .particle {
+        width: 3px;
+        height: 3px;
+      }
+    }
+    
+    /* Tablet Styles (768px - 1024px) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .agile-title {
+        font-size: var(--font-size-4xl);
+      }
+      
+      .workflow-stages {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-8);
+      }
+      
+      .agile-card {
+        padding: var(--space-7);
+      }
+      
+      .sprint-cycle {
+        width: 140px;
+        height: 140px;
+      }
+    }
+    
+    /* Desktop Styles (1024px+) */
+    @media (min-width: 1024px) {
+      .workflow-stages {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .agile-card:hover {
+        transform: translateY(-12px) scale(1.02);
+      }
+    }
+    
+    /* Large Desktop Styles (1440px+) */
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 1400px;
+      }
+      
+      .agile-title {
+        font-size: var(--font-size-6xl);
+      }
+      
+      .workflow-stages {
+        gap: var(--space-12);
+      }
+    }
+    
+    /* Media Queries for Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .particle,
+      .interactive-dot,
+      .sprint-progress,
+      .feedback-arrow,
+      .collaboration-wave,
+      .connector-pulse {
+        animation: none;
+      }
+      
+      .agile-card,
+      .workflow-stage {
+        transition: none;
+      }
+      
+      .agile-card:hover {
+        transform: none;
+      }
+    }
+    
+    /* High Contrast Mode */
+    @media (prefers-contrast: high) {
+      .agile-card {
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        background: rgba(0, 0, 0, 0.8);
+      }
+      
+      .agile-title {
+        color: #ffffff;
+        background: none;
+        -webkit-text-fill-color: #ffffff;
+      }
+    }
+    
+    /* Responsive Animations */
+    @media (prefers-reduced-motion: reduce) {
+      .workflow-stage,
+      .connector-pulse,
+      .particle {
+        animation: none;
+        transition: none;
       }
     }
     
@@ -234,28 +786,30 @@
       box-shadow: 0 6px 15px -5px rgba(14, 66, 206, 0.4);
     }
     
-    .process-icon::before {
+    .process-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .process-section::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: rotate(45deg);
-      opacity: 0;
-      transition: opacity 0.5s ease;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+      opacity: 0.3;
+      animation: gridMove 20s linear infinite;
     }
     
-    .process-icon:hover::before {
-      opacity: 1;
-      animation: shine 1.5s ease;
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(10px, 10px); }
     }
     
-    @keyframes shine {
-      from { transform: rotate(45deg) translateX(-100%); }
-      to { transform: rotate(45deg) translateX(100%); }
-    }
+
     
     .process-icon svg {
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -314,18 +868,57 @@
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
+      border: 1px solid rgba(59, 130, 246, 0.3);
     }
     
     .methodology-tag::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
+      left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
-      transform: translateX(-100%);
-      animation: shimmer 3s infinite;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+      transition: left 0.8s ease;
+    }
+    
+    .methodology-tag:hover::before {
+      left: 100%;
+    }
+    
+    .ai-tag {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ai-tag::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .ai-tag:hover::before {
+      left: 100%;
+    }
+    
+    .ai-tag:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
     }
     
     @keyframes shimmer {
@@ -337,6 +930,23 @@
       backdrop-filter: blur(20px);
       border: 1px solid rgba(14, 66, 206, 0.1);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .glass-card:hover::before {
+      left: 100%;
     }
     
     .scroll-indicator {
@@ -458,201 +1068,286 @@
     }
   </style>
 </head>
-<body class="text-gray-800 font-sans">
+<body class="text-white font-sans">
+  <!-- Floating Particles -->
+  <div class="particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+  <div class="particle" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+  <div class="particle" style="top: 60%; left: 15%; animation-delay: 2s;"></div>
+  <div class="particle" style="top: 80%; left: 70%; animation-delay: 3s;"></div>
+  <div class="particle" style="top: 40%; left: 90%; animation-delay: 4s;"></div>
+  <div class="particle" style="top: 70%; left: 5%; animation-delay: 5s;"></div>
 
-  <div class="min-h-screen py-16 px-4 overflow-hidden">
-    <!-- Subtle background shapes -->
-    <div class="hidden lg:block absolute top-20 left-10 w-64 h-64 rounded-full bg-gradient-to-r from-blue-100 to-blue-50 opacity-30 blur-3xl"></div>
-    <div class="hidden lg:block absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gradient-to-r from-yellow-100 to-orange-50 opacity-30 blur-3xl"></div>
-    <div class="hidden lg:block absolute top-1/3 right-0 w-40 h-40 rounded-full bg-gradient-to-r from-blue-100 to-purple-50 opacity-20 blur-2xl"></div>
-    <div class="hidden lg:block absolute bottom-1/3 left-0 w-48 h-48 rounded-full bg-gradient-to-r from-green-50 to-blue-50 opacity-20 blur-2xl"></div>
+  <div class="min-h-screen py-16 px-4 overflow-hidden relative">
+    <!-- Interactive Dots -->
+    <div class="interactive-dot" style="top: 15%; left: 20%;"></div>
+    <div class="interactive-dot" style="top: 25%; right: 15%;"></div>
+    <div class="interactive-dot" style="bottom: 30%; left: 10%;"></div>
+    <div class="interactive-dot" style="bottom: 20%; right: 25%;"></div>
     
-    <!-- Decorative elements -->
-    <div class="absolute top-40 left-10 w-4 h-4 bg-blue-500 rounded-full opacity-30"></div>
-    <div class="absolute top-60 right-20 w-6 h-6 bg-yellow-400 rounded-full opacity-20"></div>
-    <div class="absolute bottom-40 left-1/4 w-5 h-5 bg-purple-400 rounded-full opacity-20"></div>
-    <div class="absolute top-1/2 right-1/4 w-3 h-3 bg-green-400 rounded-full opacity-30"></div>
-    
-    <div class="max-w-6xl mx-auto relative z-10">
+    <div class="max-w-7xl mx-auto relative z-10">
 
-      <!-- Header Section -->
-      <div class="text-center mb-24 fade-in">
-        <span class="inline-block py-1.5 px-4 rounded-full bg-blue-50 text-blue-600 font-medium text-sm mb-5 methodology-tag shadow-sm">OUR METHODOLOGY</span>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold title-gradient mb-8 tracking-tight" data-text="Our Work Process">
-          Our Work Process
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          We craft every experience with precision, clarity and creative boldness through our proven methodology.
-        </p>
-        
-        <!-- Decorative elements -->
-        <div class="relative mt-6 mb-12">
-          <div class="h-1 w-24 bg-gradient-to-r from-blue-500 to-yellow-500 rounded-full mx-auto"></div>
-          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-white blur-sm opacity-70"></div>
+      <!-- Modern Header Section -->
+      <div class="text-center mb-20 workflow-stage">
+        <div class="inline-flex items-center px-6 py-3 rounded-full bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 mb-8">
+          <svg class="w-5 h-5 mr-3 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span class="text-xl font-semibold tracking-wider uppercase">Our Process of Work</span>
         </div>
         
-        <!-- Scroll indicator -->
-        <div class="mt-12 scroll-indicator">
-          <svg class="w-8 h-8 mx-auto text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
+        <h1 class="text-4xl font-bold agile-title mb-6">
+           Agile Workflow
+        </h1>
+        
+        <p class="agile-subtitle max-w-4xl mx-auto">
+          Experience our comprehensive agile development process through interactive visualizations
+        </p>
+        
+        <p class="section-description">
+          Discover how continuous improvement, cross-functional collaboration, and iterative delivery 
+          create exceptional software solutions that adapt to changing requirements and deliver value consistently.
+        </p>
+        
+        <!-- Central Sprint Cycle -->
+        <div class="sprint-cycle mt-12">
+          <div class="sprint-ring"></div>
+          <div class="sprint-progress"></div>
+          <div class="sprint-center">Sprint</div>
+        </div>
+        
+        <!-- Iteration Flow Indicator -->
+        <div class="iteration-flow max-w-md mx-auto">
+          <div class="iteration-progress"></div>
         </div>
       </div>
 
-      <!-- Process Steps -->
+      <!-- Agile Workflow Stages -->
       <div class="relative">
-        <!-- Connecting Line -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-2 connecting-line rounded-full hidden lg:block"></div>
+        <!-- Central Feedback Loop -->
+        <div class="feedback-loop mx-auto mb-16">
+          <div class="feedback-circle"></div>
+          <div class="feedback-arrow"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <span class="text-sm font-semibold text-white bg-black bg-opacity-30 px-3 py-1 rounded-full backdrop-blur-sm">
+              Continuous Feedback
+            </span>
+          </div>
+        </div>
 
-        <div class="space-y-24">
+        <div class="workflow-stages grid lg:grid-cols-2 gap-12 lg:gap-16">
 
-          <!-- Step 1 -->
-          <div class="relative fade-in" style="animation-delay: 0.2s;">
-            <div class="flex flex-col lg:flex-row items-center">
-              <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0">
-                <div class="process-card glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl">
-                  <div class="flex items-center mb-6">
-                    <div class="process-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mr-5">
-                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                      </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800">Discovery & Research</h3>
+          <!-- Planning & Backlog Stage -->
+          <div class="workflow-stage">
+            <div class="agile-card">
+              <div class="phase-indicator">
+                <div class="phase-ring">1</div>
+              </div>
+              
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold mb-4">Planning & Backlog</h3>
+                <p class="text-white text-opacity-80 leading-relaxed">
+                  Collaborative planning sessions where we define user stories, prioritize features, 
+                  and create a dynamic product backlog that adapts to changing requirements.
+                </p>
+              </div>
+              
+              <!-- Interactive Planning Elements -->
+              <div class="space-y-4 mb-6">
+                <div class="flex items-center justify-between p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                  <span class="text-sm font-medium">User Stories</span>
+                  <div class="w-20 h-2 bg-white bg-opacity-20 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full" style="width: 85%; animation: iterationFlow 3s ease-in-out infinite;"></div>
                   </div>
-                  <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                    We begin with deep dives into your goals, industry landscape, and user behaviors to form a strong foundation for success.
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Market Analysis</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">User Research</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Competitive Audit</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                  <span class="text-sm font-medium">Acceptance Criteria</span>
+                  <div class="w-20 h-2 bg-white bg-opacity-20 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-purple-400 to-pink-500 rounded-full" style="width: 70%; animation: iterationFlow 3s ease-in-out infinite 0.5s;"></div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                  <span class="text-sm font-medium">Sprint Goals</span>
+                  <div class="w-20 h-2 bg-white bg-opacity-20 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full" style="width: 90%; animation: iterationFlow 3s ease-in-out infinite 1s;"></div>
                   </div>
                 </div>
               </div>
-              <div class="lg:w-1/2 lg:pl-16 flex justify-center lg:justify-start relative">
-                <!-- Zigzag line pointing to step number -->
-                <div class="zigzag-line right hidden lg:block" style="top: 50%; transform: translateY(-50%)">
-                  <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,10 L15,3 L30,17 L45,3 L60,17 L75,3 L90,17 L100,10" fill="none" stroke="#0E42CE" stroke-width="2" stroke-dasharray="4 2" />
-                    <circle class="dot" cx="95" cy="10" r="4" fill="#0E42CE" />
-                  </svg>
+              
+              <div class="collaboration-flow">
+                <div class="collaboration-wave"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Development & Sprint Stage -->
+          <div class="workflow-stage">
+            <div class="agile-card">
+              <div class="phase-indicator">
+                <div class="phase-ring">2</div>
+              </div>
+              
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold mb-4">Development & Sprint</h3>
+                <p class="text-white text-opacity-80 leading-relaxed">
+                  Iterative development cycles with continuous integration, daily standups, 
+                  and rapid prototyping to deliver working software incrementally.
+                </p>
+              </div>
+              
+              <!-- Sprint Progress Visualization -->
+              <div class="sprint-cycle mb-6">
+                <div class="sprint-ring">
+                  <div class="sprint-progress"></div>
+                  <div class="sprint-center">
+                    <span class="text-xs font-bold">Sprint 3</span>
+                    <div class="text-xs opacity-80">Day 7/14</div>
+                  </div>
                 </div>
-                <div class="step-number w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-4xl">
-                  1
+              </div>
+              
+              <!-- Development Metrics -->
+              <div class="grid grid-cols-3 gap-3 mb-6">
+                <div class="text-center p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                  <div class="metric-value text-green-400">87%</div>
+                  <div class="metric-label text-green-300">Code Coverage</div>
+                </div>
+                <div class="text-center p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                  <div class="metric-value text-blue-400">142/145</div>
+                  <div class="metric-label text-blue-300">Tests Passing</div>
+                </div>
+                <div class="text-center p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                  <div class="metric-value text-purple-400">23 pts</div>
+                  <div class="metric-label text-purple-300">Velocity</div>
+                </div>
+              </div>
+              
+              <div class="iteration-flow">
+                <div class="iteration-progress"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testing & Review Stage -->
+          <div class="workflow-stage">
+            <div class="agile-card">
+              <div class="phase-indicator">
+                <div class="phase-ring">3</div>
+              </div>
+              
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold mb-4">Testing & Review</h3>
+                <p class="text-white text-opacity-80 leading-relaxed">
+                  Continuous testing, code reviews, and quality assurance with automated 
+                  testing pipelines and collaborative review processes.
+                </p>
+              </div>
+              
+              <!-- Testing Pipeline Visualization -->
+              <div class="space-y-4 mb-6">
+                <div class="flex items-center space-x-3">
+                  <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  <div class="flex-1 h-2 bg-white bg-opacity-20 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" style="width: 100%; animation: iterationFlow 2s ease-in-out infinite;"></div>
+                  </div>
+                  <span class="text-xs font-medium">Unit Tests</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-3 h-3 bg-blue-400 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+                  <div class="flex-1 h-2 bg-white bg-opacity-20 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full" style="width: 85%; animation: iterationFlow 2s ease-in-out infinite 0.3s;"></div>
+                  </div>
+                  <span class="text-xs font-medium">Integration</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="w-3 h-3 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
+                  <div class="flex-1 h-2 bg-white bg-opacity-20 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-purple-400 to-pink-500 rounded-full" style="width: 70%; animation: iterationFlow 2s ease-in-out infinite 0.6s;"></div>
+                  </div>
+                  <span class="text-xs font-medium">E2E Tests</span>
+                </div>
+              </div>
+              
+              <!-- Quality Metrics -->
+               <div class="grid grid-cols-2 gap-4 mb-6">
+                 <div class="text-center p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                   <div class="metric-value text-green-400">98%</div>
+                   <div class="metric-label text-green-300">Test Coverage</div>
+                 </div>
+                 <div class="text-center p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                   <div class="metric-value text-blue-400">A+</div>
+                   <div class="metric-label text-blue-300">Code Quality</div>
+                 </div>
+               </div>
+              
+              <div class="agile-connector">
+                <div class="connector-line">
+                  <div class="connector-pulse"></div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Step 2 -->
-          <div class="relative fade-in" style="animation-delay: 0.4s;">
-            <div class="flex flex-col lg:flex-row-reverse items-center">
-              <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0">
-                <div class="process-card glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl">
-                  <div class="flex items-center mb-6">
-                    <div class="process-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mr-5">
-                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                      </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800">Strategy & Planning</h3>
+          <!-- Deploy & Retrospective Stage -->
+          <div class="workflow-stage">
+            <div class="agile-card">
+              <div class="phase-indicator">
+                <div class="phase-ring">4</div>
+              </div>
+              
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold mb-4">Deploy & Retrospective</h3>
+                <p class="text-white text-opacity-80 leading-relaxed">
+                  Continuous deployment with automated rollbacks, performance monitoring, 
+                  and team retrospectives to improve future iterations.
+                </p>
+              </div>
+              
+              <!-- Deployment Status -->
+              <div class="space-y-4 mb-6">
+                <div class="flex items-center justify-between p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    <span class="text-sm font-medium">Production</span>
                   </div>
-                  <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                    We map the user journey and create strategic blueprints with user-centric roadmaps that drive meaningful engagement.
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">User Journey</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Content Strategy</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Technical Planning</span>
+                  <span class="text-xs bg-green-500 bg-opacity-20 text-green-300 px-2 py-1 rounded-full">Live</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-3 h-3 bg-blue-400 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                    <span class="text-sm font-medium">Staging</span>
                   </div>
+                  <span class="text-xs bg-blue-500 bg-opacity-20 text-blue-300 px-2 py-1 rounded-full">Ready</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-3 h-3 bg-yellow-400 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+                    <span class="text-sm font-medium">Development</span>
+                  </div>
+                  <span class="text-xs bg-yellow-500 bg-opacity-20 text-yellow-300 px-2 py-1 rounded-full">Active</span>
                 </div>
               </div>
-              <div class="lg:w-1/2 lg:pr-16 flex justify-center lg:justify-end relative">
-                <!-- Zigzag line pointing to step number -->
-                <div class="zigzag-line left hidden lg:block" style="top: 50%; transform: translateY(-50%)">
-                  <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,10 L15,3 L30,17 L45,3 L60,17 L75,3 L90,17 L100,10" fill="none" stroke="#0E42CE" stroke-width="2" stroke-dasharray="4 2" />
-                    <circle class="dot" cx="5" cy="10" r="4" fill="#0E42CE" />
-                  </svg>
+              
+              <!-- Performance Metrics -->
+              <div class="grid grid-cols-3 gap-3 mb-6">
+                <div class="text-center p-2 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                  <div class="metric-value text-green-400">99.9%</div>
+                  <div class="metric-label text-green-300">Uptime</div>
                 </div>
-                <div class="step-number w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-4xl">
-                  2
+                <div class="text-center p-2 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                  <div class="metric-value text-blue-400">45ms</div>
+                  <div class="metric-label text-blue-300">Response</div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="relative fade-in" style="animation-delay: 0.6s;">
-            <div class="flex flex-col lg:flex-row items-center">
-              <div class="lg:w-1/2 lg:pr-16 mb-8 lg:mb-0">
-                <div class="process-card glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl">
-                  <div class="flex items-center mb-6">
-                    <div class="process-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mr-5">
-                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                      </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800">Design & Development</h3>
-                  </div>
-                  <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                    Our teams build pixel-perfect designs and robust functionality that elevate your brand and deliver exceptional experiences.
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">UI/UX Design</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Frontend Development</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Backend Systems</span>
-                  </div>
+                <div class="text-center p-2 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-white border-opacity-10">
+                  <div class="metric-value text-purple-400">4.8/5</div>
+                  <div class="metric-label text-purple-300">Rating</div>
                 </div>
               </div>
-              <div class="lg:w-1/2 lg:pl-16 flex justify-center lg:justify-start relative">
-                <!-- Zigzag line pointing to step number -->
-                <div class="zigzag-line right hidden lg:block" style="top: 50%; transform: translateY(-50%)">
-                  <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,10 L15,3 L30,17 L45,3 L60,17 L75,3 L90,17 L100,10" fill="none" stroke="#0E42CE" stroke-width="2" stroke-dasharray="4 2" />
-                    <circle class="dot" cx="95" cy="10" r="4" fill="#0E42CE" />
-                  </svg>
-                </div>
-                <div class="step-number w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-4xl">
-                  3
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="relative fade-in" style="animation-delay: 0.8s;">
-            <div class="flex flex-col lg:flex-row-reverse items-center">
-              <div class="lg:w-1/2 lg:pl-16 mb-8 lg:mb-0">
-                <div class="process-card glass-card rounded-3xl p-8 shadow-xl hover:shadow-2xl">
-                  <div class="flex items-center mb-6">
-                    <div class="process-icon w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl mr-5">
-                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                      </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800">Launch & Iterate</h3>
-                  </div>
-                  <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                    We go live with precision, track success metrics, and continuously optimize to keep delivering outstanding results.
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Quality Assurance</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Performance Monitoring</span>
-                    <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">Continuous Improvement</span>
-                  </div>
-                </div>
-              </div>
-              <div class="lg:w-1/2 lg:pr-16 flex justify-center lg:justify-end relative">
-                <!-- Zigzag line pointing to step number -->
-                <div class="zigzag-line left hidden lg:block" style="top: 50%; transform: translateY(-50%)">
-                  <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0,10 L15,3 L30,17 L45,3 L60,17 L75,3 L90,17 L100,10" fill="none" stroke="#0E42CE" stroke-width="2" stroke-dasharray="4 2" />
-                    <circle class="dot" cx="5" cy="10" r="4" fill="#0E42CE" />
-                  </svg>
-                </div>
-                <div class="step-number w-24 h-24 rounded-full flex items-center justify-center text-white font-bold text-4xl">
-                  4
+              
+              <!-- Continuous Improvement Indicator -->
+              <div class="text-center">
+                <div class="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 bg-opacity-20 rounded-full backdrop-blur-sm">
+                  <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                  <span class="text-xs font-medium">Continuous Improvement</span>
                 </div>
               </div>
             </div>
@@ -672,12 +1367,12 @@
           <div class="relative bg-white rounded-3xl p-10 shadow-xl max-w-3xl mx-auto border border-gray-100">
             <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-yellow-50 opacity-30 rounded-3xl"></div>
             
-            <h3 class="text-3xl font-bold mb-4 title-gradient inline-block" data-text="Ready to Transform Your Ideas?">Ready to Transform Your Ideas?</h3>
-            <p class="text-gray-600 text-lg mb-8 max-w-xl mx-auto">Let's collaborate to bring your vision to life with our proven process and expert team.</p>
+            <h3 class="text-3xl font-bold mb-4 title-gradient inline-block" data-text="Ready to Experience AI-Powered Innovation?">Ready to Experience AI-Powered Innovation?</h3>
+            <p class="text-gray-600 text-lg mb-8 max-w-xl mx-auto">Let our AI agents and expert team transform your vision into intelligent, adaptive solutions that evolve with your business.</p>
             
             <div class="inline-flex items-center px-10 py-5 bg-gradient-to-r from-[#0E42CE] to-[#ffa300] text-white rounded-full font-bold text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 cursor-pointer cta-button group">
-              Start your project now
-              <span class="ml-3 text-2xl group-hover:translate-x-1 transition-transform duration-300">→</span>
+              Launch AI-powered project
+              <span class="ml-3 text-2xl group-hover:translate-x-1 transition-transform duration-300">🚀</span>
             </div>
           </div>
         </div>
@@ -685,5 +1380,244 @@
 
     </div>
   </div>
+
+  <script>
+    // Enhanced Agile Workflow Animation Control
+    document.addEventListener('DOMContentLoaded', function() {
+      // Intersection Observer for workflow stages
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0) scale(1)';
+            entry.target.classList.add('animate-in');
+            
+            // Trigger phase indicator animation
+            const phaseIndicator = entry.target.querySelector('.phase-indicator');
+            if (phaseIndicator) {
+              setTimeout(() => {
+                phaseIndicator.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                  phaseIndicator.style.transform = 'scale(1)';
+                }, 300);
+              }, 200);
+            }
+          }
+        });
+      }, observerOptions);
+      
+      // Observe all workflow stages
+      document.querySelectorAll('.workflow-stage').forEach((stage, index) => {
+        stage.style.opacity = '0';
+        stage.style.transform = 'translateY(50px) scale(0.95)';
+        stage.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+        stage.style.transitionDelay = `${index * 0.2}s`;
+        observer.observe(stage);
+      });
+      
+      // Interactive particles animation
+      const particles = document.querySelectorAll('.particle');
+      particles.forEach((particle, index) => {
+        // Random initial position and animation delay
+        const randomX = Math.random() * 100;
+        const randomY = Math.random() * 100;
+        const randomDelay = Math.random() * 5;
+        
+        particle.style.left = `${randomX}%`;
+        particle.style.top = `${randomY}%`;
+        particle.style.animationDelay = `${randomDelay}s`;
+        
+        // Mouse interaction
+        particle.addEventListener('mouseenter', () => {
+          particle.style.transform = 'scale(1.5)';
+          particle.style.opacity = '0.8';
+        });
+        
+        particle.addEventListener('mouseleave', () => {
+          particle.style.transform = 'scale(1)';
+          particle.style.opacity = '0.3';
+        });
+      });
+      
+      // Interactive dots hover effects
+      const interactiveDots = document.querySelectorAll('.interactive-dot');
+      interactiveDots.forEach(dot => {
+        dot.addEventListener('mouseenter', () => {
+          dot.style.transform = 'scale(1.3)';
+          dot.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.6)';
+        });
+        
+        dot.addEventListener('mouseleave', () => {
+          dot.style.transform = 'scale(1)';
+          dot.style.boxShadow = '0 0 10px rgba(59, 130, 246, 0.3)';
+        });
+      });
+      
+      // Sprint cycle interaction
+      const sprintCycles = document.querySelectorAll('.sprint-cycle');
+      sprintCycles.forEach(cycle => {
+        cycle.addEventListener('click', () => {
+          const progress = cycle.querySelector('.sprint-progress');
+          if (progress) {
+            progress.style.animationDuration = '1s';
+            setTimeout(() => {
+              progress.style.animationDuration = '3s';
+            }, 1000);
+          }
+        });
+      });
+      
+      // Feedback loop interaction
+      const feedbackLoops = document.querySelectorAll('.feedback-loop');
+      feedbackLoops.forEach(loop => {
+        loop.addEventListener('mouseenter', () => {
+          const arrows = loop.querySelectorAll('.feedback-arrow');
+          arrows.forEach(arrow => {
+            arrow.style.animationDuration = '1s';
+          });
+        });
+        
+        loop.addEventListener('mouseleave', () => {
+          const arrows = loop.querySelectorAll('.feedback-arrow');
+          arrows.forEach(arrow => {
+            arrow.style.animationDuration = '2s';
+          });
+        });
+      });
+      
+      // Smooth scroll with offset for fixed header
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            const offsetTop = target.offsetTop - 100;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Parallax effect for background elements
+      let ticking = false;
+      function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        particles.forEach((particle, index) => {
+          const rate = scrolled * (0.1 + index * 0.02);
+          particle.style.transform = `translateY(${rate}px) scale(1)`;
+        });
+        
+        ticking = false;
+      }
+      
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      });
+      
+      // Auto-advance sprint progress demo
+      setInterval(() => {
+        const sprintProgress = document.querySelector('.sprint-progress');
+        if (sprintProgress) {
+          sprintProgress.style.animationDuration = '2s';
+          setTimeout(() => {
+            sprintProgress.style.animationDuration = '3s';
+          }, 2000);
+        }
+      }, 8000);
+      
+      // Enhanced Agile Card Hover Effects with Micro-interactions
+      document.querySelectorAll('.agile-card').forEach(card => {
+        card.addEventListener('mouseenter', function(e) {
+          this.style.transform = 'translateY(-12px) scale(1.02)';
+          this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.25)';
+          
+          // Add ripple effect
+          const ripple = document.createElement('div');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+          ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+          ripple.classList.add('ripple-effect');
+          this.appendChild(ripple);
+          
+          setTimeout(() => ripple.remove(), 600);
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+          this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+        });
+        
+        // Add click animation
+        card.addEventListener('click', function() {
+          this.style.transform = 'translateY(-8px) scale(0.98)';
+          setTimeout(() => {
+            this.style.transform = 'translateY(-12px) scale(1.02)';
+          }, 150);
+        });
+      });
+      
+      // Enhanced Metric Value Animations
+      document.querySelectorAll('.metric-value').forEach(metric => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const value = entry.target.textContent;
+              const isPercentage = value.includes('%');
+              const isRating = value.includes('★') || value.includes('/');
+              const isTime = value.includes('ms');
+              
+              if (isPercentage) {
+                animateNumber(entry.target, 0, parseInt(value), '%');
+              } else if (isTime) {
+                animateNumber(entry.target, 0, parseInt(value), 'ms');
+              } else if (isRating && value.includes('/')) {
+                const rating = parseFloat(value);
+                animateNumber(entry.target, 0, rating, '/5', 1);
+              } else if (!isRating) {
+                const numValue = parseInt(value.replace(/[^0-9]/g, ''));
+                if (numValue) {
+                  animateNumber(entry.target, 0, numValue, value.replace(/[0-9]/g, ''));
+                }
+              }
+            }
+          });
+        });
+        observer.observe(metric);
+      });
+      
+      function animateNumber(element, start, end, suffix = '', decimals = 0) {
+        const duration = 2000;
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+          const current = start + (end - start) * easeOutQuart;
+          
+          element.textContent = current.toFixed(decimals) + suffix;
+          
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          }
+        }
+        
+        requestAnimationFrame(update);
+      }
+    });
+  </script>
 
 </body>

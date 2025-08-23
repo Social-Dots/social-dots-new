@@ -456,10 +456,7 @@
         }
 
         .hero-title .highlight {
-            background: linear-gradient(45deg, var(--brightBlue), var(--deepBlue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--brightBlue);
         }
 
         .hero-subtitle {
@@ -576,11 +573,11 @@
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(6, 120px);
-            gap: 12px;
-            padding: 12px;
-            height: 1440px;
-            animation: slideUp 30s linear infinite;
+            grid-template-rows: repeat(6, 140px);
+            gap: 15px;
+            padding: 15px;
+            height: 1680px;
+            animation: scrollup 20s linear infinite;
             pointer-events: auto;
             z-index: 3;
             will-change: transform;
@@ -588,7 +585,7 @@
             backface-visibility: hidden;
         }
         
-        @keyframes slideUp {
+        @keyframes scrollup {
             0% {
                 transform: translateY(0) translateZ(0);
             }
@@ -606,6 +603,22 @@
         .slider-track:hover {
             animation-play-state: paused;
         }
+
+        /* Modern mask fade for top/bottom edges */
+        .hero-slider {
+            -webkit-mask-image: none;
+                    mask-image: none;
+        }
+
+        /* Subtle floating effect on items for depth */
+        .slide-item {
+            animation: floaty 8s ease-in-out infinite;
+        }
+        @keyframes floaty {
+            0% { transform: translateZ(0) translateY(0); }
+            50% { transform: translateZ(0) translateY(-4px); }
+            100% { transform: translateZ(0) translateY(0); }
+        }
         
         /* Smooth transitions for all slide items */
         .slide-item {
@@ -616,7 +629,7 @@
         }
         
         .slide-content {
-            padding: 1.5rem;
+            padding: 1.8rem;
             text-align: center;
             width: 100%;
             height: 100%;
@@ -627,18 +640,36 @@
         }
         
         .slide-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            line-height: 1.3;
         }
         
         .slide-description {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Responsive text sizing for different card sizes */
+        .slide-item.large .slide-title {
+            font-size: 1.4rem;
+        }
+        
+        .slide-item.large .slide-description {
+            font-size: 1rem;
+        }
+        
+        .slide-item.extra-large .slide-title {
+            font-size: 1.6rem;
+        }
+        
+        .slide-item.extra-large .slide-description {
+            font-size: 1.1rem;
         }
 
         .slide-item {
@@ -668,26 +699,37 @@
         .slide-item.large {
             grid-column: span 2;
             grid-row: span 2;
+            min-height: 295px;
         }
 
         .slide-item.medium {
             grid-column: span 1;
             grid-row: span 1;
+            min-height: 140px;
         }
 
         .slide-item.wide {
             grid-column: span 2;
             grid-row: span 1;
+            min-height: 140px;
         }
 
         .slide-item.tall {
             grid-column: span 1;
             grid-row: span 2;
+            min-height: 295px;
         }
 
         .slide-item.extra-large {
             grid-column: span 2;
             grid-row: span 3;
+            min-height: 450px;
+        }
+
+        .slide-item.compact {
+            grid-column: span 1;
+            grid-row: span 1;
+            min-height: 140px;
         }
         
         /* Card with image background */
@@ -769,51 +811,51 @@
 
         /* Color variations */
         .slide-1 {
-            background: linear-gradient(135deg, var(--deepBlue) 0%, var(--brightBlue) 100%);
+            background: #0B32A4;
         }
 
         .slide-2 {
-            background: linear-gradient(135deg, var(--brightBlue) 0%, var(--deepBlue) 100%);
+            background: #0E42CE;
         }
 
         .slide-3 {
-            background: linear-gradient(135deg, var(--vibrantOrange) 0%, var(--deepBlue) 100%);
+            background: #FFA300;
         }
 
         .slide-4 {
-            background: linear-gradient(135deg, var(--deepBlue) 0%, var(--vibrantOrange) 100%);
+            background: #0B32A4;
         }
 
         .slide-5 {
-            background: linear-gradient(135deg, var(--brightBlue) 0%, var(--vibrantOrange) 100%);
+            background: #0E42CE;
         }
 
         .slide-6 {
-            background: linear-gradient(135deg, var(--vibrantOrange) 0%, var(--brightBlue) 100%);
+            background: #FFA300;
         }
 
         .slide-7 {
-            background: linear-gradient(135deg, var(--deepBlue) 0%, rgba(11, 50, 164, 0.7) 100%);
+            background: #0B32A4;
         }
 
         .slide-8 {
-            background: linear-gradient(135deg, var(--vibrantOrange) 0%, rgba(255, 163, 0, 0.7) 100%);
+            background: #FFA300;
         }
 
         .slide-9 {
-            background: linear-gradient(135deg, var(--brightBlue) 0%, rgba(14, 66, 206, 0.7) 100%);
+            background: #0E42CE;
         }
 
         .slide-10 {
-            background: linear-gradient(135deg, var(--deepBlue) 0%, var(--vibrantOrange) 50%, var(--brightBlue) 100%);
+            background: #0B32A4;
         }
 
         .slide-11 {
-            background: linear-gradient(135deg, var(--vibrantOrange) 0%, rgba(255, 163, 0, 0.5) 100%);
+            background: #FFA300;
         }
 
         .slide-12 {
-            background: linear-gradient(135deg, var(--brightBlue) 0%, var(--deepBlue) 50%, var(--vibrantOrange) 100%);
+            background: #0E42CE;
         }
 
         .social-icons {
@@ -915,27 +957,38 @@
     
     @media (max-width: 480px) {
         .hero-slider {
-            height: 350px;
+            height: 400px;
             max-width: 100%;
         }
         
         .slider-track {
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(10, 90px);
+            grid-template-rows: repeat(10, 100px);
             gap: 8px;
             padding: 8px;
+            height: 1200px;
+        }
+        
+        .slide-item {
+            min-height: 100px;
+        }
+        
+        .slide-content {
+            padding: 1rem;
         }
         
         .slide-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
         
         .slide-title {
             font-size: 0.9rem;
+            margin-bottom: 0.4rem;
         }
         
         .slide-description {
             font-size: 0.7rem;
+            margin-bottom: 0.8rem;
         }
         
         .action-btn {
@@ -946,12 +999,29 @@
     
     @media (max-width: 375px) {
         .hero-slider {
-            height: 300px;
+            height: 350px;
         }
         
         .slider-track {
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(10, 80px);
+            grid-template-rows: repeat(10, 90px);
+            height: 1100px;
+        }
+        
+        .slide-item {
+            min-height: 90px;
+        }
+        
+        .slide-content {
+            padding: 0.8rem;
+        }
+        
+        .slide-title {
+            font-size: 0.8rem;
+        }
+        
+        .slide-description {
+            font-size: 0.65rem;
         }
     }
     
@@ -1015,9 +1085,11 @@
     @media (max-width: 768px) {
         .slider-track {
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(8, 100px);
+            grid-template-rows: repeat(8, 120px);
             width: 100%;
-            padding: 0;
+            padding: 10px;
+            gap: 10px;
+            height: 1200px;
         }
         
         .slide-item.large, 
@@ -1025,91 +1097,216 @@
         .slide-item.extra-large {
             grid-column: span 1;
             grid-row: span 1;
+            min-height: 120px;
         }
         
         .slide-item.tall {
             grid-row: span 1;
+            min-height: 120px;
+        }
+        
+        .slide-content {
+            padding: 1.2rem;
+        }
+        
+        .slide-title {
+            font-size: 1rem;
+        }
+        
+        .slide-description {
+            font-size: 0.8rem;
         }
     }
 .slide-item.with-image.slide-social-bg {
-    background-image: url('https://chinmedia.vn/wp-content/uploads/cach-dieu-chinh-facebook.jpg');
+    background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-video-bg {
-    background-image: url("https://w0.peakpx.com/wallpaper/254/701/HD-wallpaper-editor-on-work-color-grading-edit-pc-programmer-video.jpg");
+    background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-analytics-bg {
-    background-image: url('https://res.cloudinary.com/dsmgydskc/image/upload/v1751911657/DALL_E_2025-02-21_22.41.34_-_A_futuristic_AI-powered_legal_document_scraper_and_labeling_agent._The_image_features_a_digital_workspace_with_multiple_screens_displaying_structured_bdghay.webp');
+    background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-story-bg {
-    background-image: url("https://c0.wallpaperflare.com/preview/983/956/951/digital-marketing-search-engine-optimization-marketing-content.jpg");
+    background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-bg {
-    background-image: url('https://img.freepik.com/premium-vector/star-digital-business-brand-content-concept_109722-2728.jpg');
+    background-image: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-paid-bg {
-    background-image: url("https://img.freepik.com/premium-vector/star-digital-business-brand-content-concept_109722-2728.jpg");
+    background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-community-bg {
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5k-JSKGdxcX4j6HJ7AJdBI72GwWdqdBU2EL9IQDljpVn5bkSccMI73H5mg6QOMZUBrYU&usqp=CAU");
+    background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-graphic-bg {
-    background-image: url("https://algorithmman.com/wp-content/uploads/2024/04/programming-languages.png");
+    background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-seo-bg {
-    background-image: url("https://c0.wallpaperflare.com/preview/983/956/951/digital-marketing-search-engine-optimization-marketing-content.jpg");
+    background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-email-bg {
-    background-image: url("https://img.freepik.com/premium-vector/star-digital-business-brand-content-concept_109722-2728.jpg");
+    background-image: url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
 .slide-item.with-image.slide-service-bg {
-    background-image: url("https://techtheworld.net/wp-content/uploads/2024/02/OIG3-860x860.jpeg");
+    background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
 .slide-item.with-image.slide-tech-bg {
-    background-image: url("https://www.shutterstock.com/image-photo/business-technology-internet-network-concept-260nw-584239843.jpg");
+    background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 .slide-item.with-image.slide-limited-time-bg {
-    background-image: url("https://www.shutterstock.com/shutterstock/photos/2044409513/display_1500/stock-vector-web-ui-ux-design-web-development-concept-web-design-application-design-coding-and-web-building-2044409513.jpg");
+    background-image: url('https://images.unsplash.com/photo-1563206767-5b18f218e8de?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
+}
+.slide-item.with-image.slide-content-bg {
+    background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.slide-item.with-image.slide-brand-strategy {
+    background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Portfolio section responsive styles */
+@media (max-width: 768px) {
+    .portfolio-section {
+        padding: 3rem 0 !important;
+    }
+    
+    .portfolio-section h2 {
+        font-size: 2.5rem !important;
+        line-height: 1.2 !important;
+    }
+    
+    .portfolio-section .text-xl {
+        font-size: 1.125rem !important;
+    }
+    
+    .portfolio-section .mb-20 {
+        margin-bottom: 3rem !important;
+    }
+    
+    #portfolio-tabs {
+        gap: 0.5rem !important;
+        margin-top: 2rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    #portfolio-tabs button {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .portfolio-section .grid {
+        margin-top: 2rem !important;
+        gap: 1rem !important;
+    }
+    
+    .portfolio-section .absolute {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-section {
+        padding: 2rem 0 !important;
+    }
+    
+    .portfolio-section h2 {
+        font-size: 2rem !important;
+    }
+    
+    .portfolio-section .mb-20 {
+        margin-bottom: 2rem !important;
+    }
+    
+    #portfolio-tabs {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+    }
+    
+    #portfolio-tabs button {
+        width: 100% !important;
+        max-width: 200px !important;
+        justify-content: center !important;
+    }
+    
+    .portfolio-section .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+    
+    #load-more-btn {
+        padding: 0.75rem 2rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .portfolio-section .text-4xl {
+        font-size: 1.875rem !important;
+    }
+    
+    .portfolio-section .lg\:text-6xl {
+        font-size: 2rem !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .portfolio-section h2 {
+        font-size: 1.75rem !important;
+    }
+    
+    .portfolio-section .text-xl {
+        font-size: 1rem !important;
+    }
+    
+    .portfolio-section .px-4 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
 }
 </style>
 </head>
@@ -1181,10 +1378,10 @@
             <div class="hero-slider">
                 <div class="slider-track">
                     <!-- Row 1 -->
-                    <div class="slide-item large slide-1 with-image slide-brand-strategy" onclick="redirectTo('/services')">
+                    <div class="slide-item large slide-1 with-image slide-brand-strategy" onclick="redirectTo('/services/ai-consulting/')">
                         <div class="slide-content">
-                            <div class="slide-title">digital-strategy-consulting</div>
-                            <div class="slide-description"></div>
+                            <div class="slide-title">AI Strategy & Consulting</div>
+                            <div class="slide-description">Transform your business with AI</div>
                             <div class="slide-actions">
                                 <div class="action-btn"></div>
                                 <div class="action-btn"></div>
@@ -1192,89 +1389,94 @@
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-2 with-image slide-service-bg" onclick="redirectTo('/contact/?service=12')">
+                    <div class="slide-item medium slide-2 with-image slide-service-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">services</div>
+                            <div class="slide-title">Agentic AI Systems</div>
                         </div>
                     </div>
                     
-                    <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title"></div>
-                            <div class="slide-description">short-form-videos</div>
+                            <div class="slide-title">Computer Vision</div>
+                            <div class="slide-description">AI-powered visual intelligence</div>
                         </div>
                     </div>
                     <div class="slide-item large slide-9 with-image slide-limited-time-bg" onclick="redirectTo('/services/limited-time-offer/')">
                         <div class="slide-content">
-                            <div class="slide-title">Web Development</div>
+                            <div class="slide-title">Custom AI Development</div>
                         </div>
                     </div>
                     <!-- Row 2 -->
-                    <div class="slide-item medium slide-4 with-image slide-social-bg" onclick="redirectTo('/projects/social-media-growth-engagement')">
+                    <div class="slide-item wide slide-4 with-image slide-social-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">social-media-posts</div>
+                            <div class="slide-title">NLP & Chatbots</div>
+                            <div class="slide-description">Conversational AI solutions</div>
                         </div>
                     </div>
                     
                     <!-- Row 3 -->
-                    <div class="slide-item wide slide-5 with-image slide-analytics-bg" onclick="redirectTo('/services/?service=12')">
+                    <div class="slide-item wide slide-5 with-image slide-analytics-bg" onclick="redirectTo('/services/')">
                        <div class="slide-content">
                            <div class="slide-icon"></div>
-                           <div class="slide-title">salesforce-crm-optimization</div>
+                           <div class="slide-title">Predictive Analytics</div>
                        </div>
                     </div>
                     
-                    <div class="slide-item medium slide-6 with-image slide-story-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item tall slide-6 with-image slide-story-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">services</div>
+                            <div class="slide-title">Machine Learning</div>
+                            <div class="slide-description">Advanced ML algorithms</div>
                         </div>
                     </div>  
 
-                    <div class="slide-item medium slide-2 with-image slide-content-bg" onclick="redirectTo('/contact/?service=12')">
+                    <div class="slide-item wide slide-2 with-image slide-content-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">technology</div>
+                            <div class="slide-title">LLM Integrations</div>
+                            <div class="slide-description">Large language model solutions</div>
                         </div>
                     </div>
                     
-                    <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item tall slide-3 with-image slide-video-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title"></div>
-                            <div class="slide-description">short form videos</div>
+                            <div class="slide-title">AI Ops & Monitoring</div>
+                            <div class="slide-description">MLOps & AI infrastructure</div>
                         </div>
                     </div>
                     
                     <!-- Row 2 -->
-                    <div class="slide-item medium slide-4 with-image slide-social-bg" onclick="redirectTo('/projects/social-media-growth-engagement')">
+                    <div class="slide-item tall slide-4 with-image slide-social-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">social-media-posts</div>
+                            <div class="slide-title">Generative AI</div>
+                            <div class="slide-description">Creative AI applications</div>
                         </div>
                     </div>
                     
                     <!-- Row 3 -->
-                    <div class="slide-item wide slide-5 with-image slide-analytics-bg" onclick="redirectTo('/services/?service=12')">
+                    <div class="slide-item wide slide-5 with-image slide-analytics-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
                             <div class="slide-icon"></div>
-                            <div class="slide-title">salesforce-crm-optimization</div>
+                            <div class="slide-title">AI CRM Agents</div>
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-6 with-image slide-story-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-6 with-image slide-story-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title"></div>
+                            <div class="slide-title">Data Engineering</div>
                         </div>
                     </div>
                     
                     <!-- Row 4 -->
-                    <div class="slide-item medium slide-7 with-image slide-service-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item wide slide-7 with-image slide-service-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title"></div>
+                            <div class="slide-title">Enterprise AI</div>
+                            <div class="slide-description">Scalable AI for business</div>
                         </div>
                     </div>
                     
-                    <div class="slide-item large slide-8 with-image slide-paid-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item large slide-8 with-image slide-paid-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">digital-strategy-consulting</div>
-                            <div class="slide-description"></div>
+                            <div class="slide-title">Agentic Workflows</div>
+                            <div class="slide-description">Intelligent automation systems</div>
                             <div class="slide-actions">
                                 <div class="action-btn"></div>
                                 <div class="action-btn"></div>
@@ -1282,37 +1484,37 @@
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-9 with-image slide-tech-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-9 with-image slide-tech-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
                             <div class="slide-icon"></div>
-                            <div class="slide-title"></div>
+                            <div class="slide-title">AI Research & Development</div>
                         </div>
                     </div>
                     
                     <!-- Row 5 -->
-                    <div class="slide-item wide slide-10 with-image slide-community-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item wide slide-10 with-image slide-community-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title"></div>
+                            <div class="slide-title">AI Model Training</div>
                         </div>
                     </div>
                     
                     <div class="slide-item tall slide-11 with-image slide-graphic-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title"></div>
-                            <div class="slide-description"></div>
+                            <div class="slide-title">Neural Networks</div>
+                            <div class="slide-description">Deep learning solutions</div>
                         </div>
                     </div>
                     
                     <!-- Row 6 -->
-                    <div class="slide-item medium slide-12 with-image slide-seo-bg" onclick="redirectTo('/services')">
+                    <div class="slide-item medium slide-12 with-image slide-seo-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">seo-backlinks</div>
+                            <div class="slide-title">AI-Powered SEO</div>
                         </div>
                     </div>
                     
-                    <div class="slide-item medium slide-1 with-image slide-email-bg" onclick="redirectTo('/services/blog-post')">
+                    <div class="slide-item medium slide-1 with-image slide-email-bg" onclick="redirectTo('/services/')">
                         <div class="slide-content">
-                            <div class="slide-title">email-design</div>
+                            <div class="slide-title">AI Content Generation</div>
                         </div>
                     </div>
                      <div class="slide-item large slide-9 with-image slide-limited-time-bg" onclick="redirectTo('/services/limited-time-offer/')">
@@ -1461,103 +1663,345 @@
     </script>
 
 {% include 'core/trust-logos-strip.html' %}
-<!-- What We Do Section -->
-<section class="py-20 bg-white portfolio-section">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
-        <div class="text-center mb-16">
-              <h2 class="md:text-4xl font-bold mb-4 text-deepBlue" style="font-size: 4rem;" >Examples of <span class="text-vibrantOrange">our work</span></h2>
-            <!-- <p class="text-lg text-grey max-w-3xl mx-auto">Get your design & marketing work done without the hassle of unreliable freelancers, costly agencies. Pay a fixed, monthly, and predictable rate, with no contracts or surprises.</p> -->
-            <p class="text-lg text-grey max-w-3xl mx-auto">While we're a new agency, our expertise shines through our founder's personal brand and initial client projects.</p>
-            <div class="w-24 h-1 bg-vibrantOrange mx-auto mt-6 rounded-full"></div>
-            
-            <!-- Portfolio Category Tabs -->
-            <div class="flex flex-wrap justify-center gap-2 mt-8 mb-8" id="portfolio-tabs">
-                <button data-category="featured" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if not content_type_filter and not selected_category %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
-                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+
+<!-- Enhanced Portfolio Animations CSS -->
+<style>
+    /* Custom keyframes for portfolio animations */
+    @keyframes float-slow {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    @keyframes float-medium {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(-3deg); }
+    }
+    
+    @keyframes float-fast {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(8deg); }
+    }
+    
+    @keyframes float-reverse {
+        0%, 100% { transform: translateY(-10px) rotate(0deg); }
+        50% { transform: translateY(0px) rotate(-5deg); }
+    }
+    
+    @keyframes pulse-slow {
+        0%, 100% { opacity: 0.1; transform: scale(1); }
+        50% { opacity: 0.2; transform: scale(1.05); }
+    }
+    
+    @keyframes shimmer {
+        0% { transform: translateX(-100%) skewX(-15deg); }
+        100% { transform: translateX(200%) skewX(-15deg); }
+    }
+    
+    @keyframes glow-pulse {
+        0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 60px rgba(147, 51, 234, 0.3); }
+    }
+    
+    @keyframes card-entrance {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+    @keyframes gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    
+    /* Animation utility classes */
+    .animate-float-slow {
+        animation: float-slow 6s ease-in-out infinite;
+    }
+    
+    .animate-float-medium {
+        animation: float-medium 4s ease-in-out infinite;
+    }
+    
+    .animate-float-fast {
+        animation: float-fast 3s ease-in-out infinite;
+    }
+    
+    .animate-float-reverse {
+        animation: float-reverse 5s ease-in-out infinite;
+    }
+    
+    .animate-pulse-slow {
+        animation: pulse-slow 4s ease-in-out infinite;
+    }
+    
+    .animate-shimmer {
+        animation: shimmer 2s ease-in-out infinite;
+    }
+    
+    .animate-glow-pulse {
+        animation: glow-pulse 3s ease-in-out infinite;
+    }
+    
+    .animate-card-entrance {
+        animation: card-entrance 0.6s ease-out forwards;
+    }
+    
+    .animate-gradient-shift {
+        background-size: 200% 200%;
+        animation: gradient-shift 3s ease infinite;
+    }
+    
+    /* Animation delays */
+    .animation-delay-100 { animation-delay: 100ms; }
+    .animation-delay-200 { animation-delay: 200ms; }
+    .animation-delay-300 { animation-delay: 300ms; }
+    .animation-delay-400 { animation-delay: 400ms; }
+    .animation-delay-500 { animation-delay: 500ms; }
+    
+    /* Enhanced hover effects */
+    .portfolio-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .portfolio-card:hover {
+        transform: translateY(-8px) scale(1.02);
+    }
+    
+    /* Glassmorphism enhancements */
+    .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+    
+    /* Performance optimizations */
+    .portfolio-section * {
+        will-change: transform;
+    }
+    
+    /* Accessibility - Respect reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-float-slow,
+        .animate-float-medium,
+        .animate-float-fast,
+        .animate-float-reverse,
+        .animate-pulse-slow,
+        .animate-shimmer,
+        .animate-glow-pulse {
+            animation: none;
+        }
+        
+        .portfolio-card:hover {
+            transform: none;
+        }
+    }
+</style>
+
+<!-- Portfolio Showcase Section -->
+<section class="py-24 bg-white portfolio-section relative overflow-hidden">
+    <!-- Enhanced animated background elements -->
+    <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <!-- Floating geometric shapes with animations -->
+        <div class="absolute top-20 right-10 w-32 h-32 bg-blue-400 opacity-20 rounded-full animate-float-slow"></div>
+        <div class="absolute bottom-32 left-16 w-24 h-24 bg-orange-400 opacity-20 rounded-full animate-float-medium"></div>
+        <div class="absolute top-1/2 right-1/4 w-16 h-16 bg-green-400 opacity-20 rounded-full animate-float-fast"></div>
+        <div class="absolute top-1/3 left-1/3 w-20 h-20 bg-purple-400 opacity-15 rounded-full animate-float-reverse"></div>
+        
+        <!-- Subtle grid pattern overlay -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="w-full h-full" style="background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+        </div>
+        
+        <!-- Gradient orbs for depth -->
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-400 opacity-10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-400 opacity-10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 relative z-10">
+        <div class="text-center mb-20">
+            <!-- Modern glassmorphism badge -->
+            <div class="inline-flex items-center px-6 py-3 bg-white/40 backdrop-blur-lg border border-white/30 text-slate-700 rounded-full text-sm font-semibold mb-8 shadow-xl hover:bg-white/50 transition-all duration-500 hover:scale-105 group">
+                <div class="w-5 h-5 mr-3 bg-blue-500 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
+                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    Featured
+                </div>
+                <span class="text-blue-600 font-bold">✨ Portfolio Showcase</span>
+            </div>
+            
+            <!-- Enhanced typography with modern gradients -->
+            <h2 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+                <span class="text-slate-900">Examples of</span>
+                <span class="text-blue-600 block relative">
+                    our work
+                    <div class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-blue-500 rounded-full opacity-60"></div>
+                </span>
+            </h2>
+            
+            <!-- Enhanced description with better typography -->
+            <p class="text-xl md:text-2xl text-slate-600 max-w-5xl mx-auto leading-relaxed mb-12 font-light">
+                While we're a new agency, our 
+                <span class="font-semibold text-blue-600">expertise shines</span> 
+                through our founder's personal brand and initial client projects.
+            </p>
+            
+            <!-- Modern animated divider -->
+            <div class="flex items-center justify-center space-x-3 mb-8">
+                <div class="w-12 h-0.5 bg-blue-500 opacity-50 rounded-full animate-pulse"></div>
+                <div class="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                <div class="w-16 h-1 bg-blue-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                <div class="w-12 h-0.5 bg-purple-500 opacity-50 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+            </div>
+            
+            <!-- Modern Portfolio Category Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 mt-12 mb-16" id="portfolio-tabs">
+                <button data-category="featured" class="group relative px-8 py-4 rounded-2xl text-sm font-semibold transition-all duration-500 overflow-hidden {% if not content_type_filter and not selected_category %}bg-blue-600 text-white shadow-2xl shadow-blue-500/25{% else %}bg-white/60 backdrop-blur-md border border-white/30 text-slate-700 hover:bg-white/80 shadow-lg hover:shadow-xl{% endif %} transform hover:-translate-y-1 hover:scale-105">
+                    <!-- Animated background for active state -->
+                    <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 {% if not content_type_filter and not selected_category %}opacity-100{% endif %}"></div>
+                    <!-- Shimmer effect -->
+                    <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-white opacity-20"></div>
+                    <div class="relative z-10 flex items-center">
+                        <div class="w-5 h-5 mr-2 bg-yellow-400 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
+                            <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                            </svg>
+                        </div>
+                        <span class="{% if not content_type_filter and not selected_category %}text-white{% else %}group-hover:text-white transition-colors duration-500{% endif %}">Featured</span>
+                    </div>
                 </button>
+                
                 {% for category in portfolio_categories %}
-                <button data-category="{{ category.slug }}" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if selected_category == category %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
-                    {{ category.name }}
+                <button data-category="{{ category.slug }}" class="group relative px-8 py-4 rounded-2xl text-sm font-semibold transition-all duration-500 overflow-hidden {% if selected_category == category %}bg-blue-600 text-white shadow-2xl shadow-blue-500/25{% else %}bg-white/60 backdrop-blur-md border border-white/30 text-slate-700 hover:bg-white/80 shadow-lg hover:shadow-xl{% endif %} transform hover:-translate-y-1 hover:scale-105">
+                    <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 {% if selected_category == category %}opacity-100{% endif %}"></div>
+                    <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-white opacity-20"></div>
+                    <span class="relative z-10 {% if selected_category == category %}text-white{% else %}group-hover:text-white transition-colors duration-500{% endif %}">{{ category.name }}</span>
                 </button>
                 {% endfor %}
-                <button data-content-type="post" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'post' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
-                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
-                    </svg>
-                    Posts
+                
+                <button data-content-type="post" class="group relative px-8 py-4 rounded-2xl text-sm font-semibold transition-all duration-500 overflow-hidden {% if content_type_filter == 'post' %}bg-blue-600 text-white shadow-2xl shadow-blue-500/25{% else %}bg-white/60 backdrop-blur-md border border-white/30 text-slate-700 hover:bg-white/80 shadow-lg hover:shadow-xl{% endif %} transform hover:-translate-y-1 hover:scale-105">
+                    <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 {% if content_type_filter == 'post' %}opacity-100{% endif %}"></div>
+                    <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-white opacity-20"></div>
+                    <div class="relative z-10 flex items-center">
+                        <div class="w-5 h-5 mr-2 bg-green-400 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
+                            <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <span class="{% if content_type_filter == 'post' %}text-white{% else %}group-hover:text-white transition-colors duration-500{% endif %}">Posts</span>
+                    </div>
                 </button>
-                <button data-content-type="video" class="px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 {% if content_type_filter == 'video' %}bg-blue-600 text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}">
-                    <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
-                    </svg>
-                    Videos
-                </button> 
+                
+                <button data-content-type="video" class="group relative px-8 py-4 rounded-2xl text-sm font-semibold transition-all duration-500 overflow-hidden {% if content_type_filter == 'video' %}bg-blue-600 text-white shadow-2xl shadow-blue-500/25{% else %}bg-white/60 backdrop-blur-md border border-white/30 text-slate-700 hover:bg-white/80 shadow-lg hover:shadow-xl{% endif %} transform hover:-translate-y-1 hover:scale-105">
+                    <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 {% if content_type_filter == 'video' %}opacity-100{% endif %}"></div>
+                    <div class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-white opacity-20"></div>
+                    <div class="relative z-10 flex items-center">
+                        <div class="w-5 h-5 mr-2 bg-red-400 rounded-full flex items-center justify-center group-hover:rotate-180 transition-transform duration-500">
+                            <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                            </svg>
+                        </div>
+                        <span class="{% if content_type_filter == 'video' %}text-white{% else %}group-hover:text-white transition-colors duration-500{% endif %}">Videos</span>
+                    </div>
+                </button>
             </div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr max-w-7xl mx-auto mt-16">
             {% if portfolios %}
                 {% for portfolio in portfolios %}
-                    <div class="relative overflow-hidden rounded-xl border border-gray-200 shadow-md hover:shadow-xl hover:border-orange-300 transition-all duration-300 cursor-pointer group flex flex-col h-full transform hover:-translate-y-1 hover:scale-[1.01]" onclick="showPortfolioModal('{{ portfolio.id }}'); console.log('Portfolio item clicked, ID: {{ portfolio.id }}');" data-item-id="{{ portfolio.id }}">
-                        <!-- Instagram-style card with user info at top -->
-                        <div class="bg-white p-2 md:p-3 z-10 flex items-center border-b border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
-                            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-blue-100 flex items-center justify-center mr-3 md:mr-4 group-hover:bg-orange-100 transition-colors duration-300 shadow-md">
-                                <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="social dots" class="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover" />
+                    <div class="relative overflow-hidden rounded-3xl border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-700 cursor-pointer group flex flex-col h-full transform hover:-translate-y-3 hover:scale-[1.03] bg-white/80 backdrop-blur-lg hover:bg-white/90 hover:border-white/40" onclick="showPortfolioModal('{{ portfolio.id }}'); console.log('Portfolio item clicked, ID: {{ portfolio.id }}');" data-item-id="{{ portfolio.id }}"
+                        <!-- Modern glassmorphism card header -->
+                        <div class="bg-white/60 backdrop-blur-md p-4 md:p-5 z-10 flex items-center border-b border-white/30 group-hover:border-white/50 transition-all duration-500 group-hover:bg-white/70">
+                            <div class="relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-sm flex items-center justify-center mr-4 group-hover:from-blue-500/30 group-hover:to-purple-500/30 transition-all duration-500 shadow-lg ring-2 ring-white/50 group-hover:ring-white/70 group-hover:scale-110">
+                                <!-- Animated background glow -->
+                                <div class="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-sm"></div>
+                                <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png" alt="social dots" class="relative z-10 w-10 h-10 md:w-12 md:h-12 rounded-full object-cover transition-transform duration-500 group-hover:rotate-6" />
                             </div>
                             <div class="flex-1">
-                                <div class="text-base md:text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">Social Dots</div>  
+                                <div class="text-base md:text-lg font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500 tracking-tight">Social Dots</div>  
+                                <div class="text-xs text-slate-500 group-hover:text-slate-600 transition-colors duration-300 font-medium">Creative Agency</div>
                             </div>
-                            <div class="text-gray-500 group-hover:text-orange-500 transition-colors duration-300">
+                            <div class="text-slate-400 group-hover:text-blue-500 transition-all duration-500 group-hover:scale-110 group-hover:rotate-90">
                                 <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                                 </svg>
                             </div>
                         </div>
                         
-                        <!-- Portfolio image with centered title overlay -->
-                        <div class="relative group perspective flex-grow">
-                          <div class="block transform-style-preserve-3d transition-transform duration-500 group-hover:rotate-x-2 group-hover:scale-[1.01] h-full">
+                        <!-- Enhanced portfolio image with modern effects -->
+                        <div class="relative group perspective flex-grow overflow-hidden">
+                          <!-- Gradient overlay for depth -->
+                          <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"></div>
+                          
+                          <div class="block transform-style-preserve-3d transition-transform duration-700 group-hover:rotate-x-1 group-hover:scale-[1.02] h-full relative">
                             
-                            <!-- Full card image container -->
-                            <div class="w-full h-full overflow-hidden"> <!-- Full height container -->
+                            <!-- Enhanced image container with parallax effect -->
+                            <div class="w-full h-full overflow-hidden relative">
                               <img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}"
-                                   class="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-105 group-hover:brightness-105" />
+                                   class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 group-hover:brightness-110 group-hover:contrast-105" />
+                              
+                              <!-- Animated shimmer overlay -->
+                              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 delay-300"></div>
                             </div>
                         
                             {% if portfolio.bio %}
-                            <!-- Animated Bio Glass Reveal -->
-                            <div class="absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 translate-y-8 group-hover:translate-y-0 transition-all duration-700 ease-out delay-200">
-                              <div class="m-4 p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl shadow-black/10 text-white text-sm font-light leading-relaxed hover:shadow-orange-200 transition-shadow duration-500">
-                                {{ portfolio.bio }}
+                            <!-- Enhanced Bio Glass Reveal with modern styling -->
+                            <div class="absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 translate-y-full group-hover:translate-y-0 transition-all duration-700 ease-out delay-300 z-20">
+                              <div class="m-4 p-5 rounded-2xl bg-white/15 backdrop-blur-xl border border-white/30 shadow-2xl text-white text-sm font-light leading-relaxed hover:bg-white/20 transition-all duration-500">
+                                <div class="flex items-start space-x-3">
+                                  <div class="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mt-2 flex-shrink-0 animate-pulse"></div>
+                                  <p class="flex-1">{{ portfolio.bio }}</p>
+                                </div>
                               </div>
                             </div>
                             {% endif %}
+                            
+                            <!-- Floating category badge -->
+                            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-500 delay-200 z-20">
+                              <span class="px-3 py-1.5 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-semibold rounded-full shadow-lg">
+                                {{ portfolio.category.name|default:"Portfolio" }}
+                              </span>
+                            </div>
                           </div>
                         </div>
 
 
-                        <!-- Instagram-style action buttons with portfolio info -->
-                        <div class="bg-white p-3 md:p-4 border-t border-gray-100 group-hover:border-orange-100 transition-colors duration-300">
+                        <!-- Modern glassmorphism action buttons -->
+                        <div class="bg-white/70 backdrop-blur-md p-4 md:p-5 border-t border-white/30 group-hover:border-white/50 transition-all duration-500 group-hover:bg-white/80">
+                            
+                            <!-- Portfolio title and engagement stats -->
+                            <div class="mb-4">
+                                <h3 class="text-lg font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500 mb-1">{{ portfolio.title }}</h3>
+                                <div class="flex items-center space-x-4 text-sm text-slate-500">
+                                    <span class="flex items-center space-x-1">
+                                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                        <span>Live Project</span>
+                                    </span>
+                                    <span>{{ portfolio.created_at|date:"M Y" }}</span>
+                                </div>
+                            </div>
                             
                             <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 md:space-x-3">
-                                    <button class="text-red-500 hover:text-red-600 transition-all duration-300 transform hover:scale-110 flex items-center" onclick="event.stopPropagation()">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <div class="flex items-center space-x-3">
+                                    <!-- Enhanced like button with ripple effect -->
+                                    <button class="group/btn relative overflow-hidden text-slate-400 hover:text-red-500 transition-all duration-500 transform hover:scale-110 flex items-center p-3 rounded-2xl hover:bg-red-50/80 backdrop-blur-sm border border-transparent hover:border-red-200/50 shadow-sm hover:shadow-lg" onclick="event.stopPropagation()">
+                                        <!-- Ripple effect -->
+                                        <div class="absolute inset-0 bg-red-500/10 rounded-2xl scale-0 group-hover/btn:scale-100 transition-transform duration-300"></div>
+                                        <svg class="relative z-10 w-5 h-5 group-hover/btn:animate-bounce" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
-                                        </svg>
-                                        
-                                    </button>
-                                    <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110 flex items-center" onclick="event.stopPropagation()">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                         </svg>
                                     </button>
                                 </div>
-                                <button class="text-gray-700 hover:text-orange-500 transition-all duration-300 transform hover:scale-110" onclick="event.stopPropagation()">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                
+                                <!-- Enhanced bookmark button -->
+                                <button class="group/btn relative overflow-hidden text-slate-400 hover:text-purple-500 transition-all duration-500 transform hover:scale-110 p-3 rounded-2xl hover:bg-purple-50/80 backdrop-blur-sm border border-transparent hover:border-purple-200/50 shadow-sm hover:shadow-lg" onclick="event.stopPropagation()">
+                                    <div class="absolute inset-0 bg-purple-500/10 rounded-2xl scale-0 group-hover/btn:scale-100 transition-transform duration-300"></div>
+                                    <svg class="relative z-10 w-5 h-5 group-hover/btn:animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                                     </svg>
                                 </button>
@@ -1573,10 +2017,34 @@
             {% endif %}
         </div>
         
-        <!-- Load More Button -->
-        <div class="text-center mt-10">
-            <button id="load-more-btn" class="px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors">
-                Load more
+        <!-- Enhanced Load More Button -->
+        <div class="text-center mt-16">
+            <button id="load-more-btn" class="group relative overflow-hidden px-10 py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white rounded-3xl font-bold hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 transition-all duration-500 shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 hover:scale-105 border border-white/20 backdrop-blur-sm">
+                <!-- Animated background overlay -->
+                <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                
+                <!-- Floating particles -->
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="absolute top-2 left-4 w-1 h-1 bg-white rounded-full animate-ping animation-delay-100"></div>
+                    <div class="absolute top-4 right-6 w-1 h-1 bg-white rounded-full animate-ping animation-delay-300"></div>
+                    <div class="absolute bottom-3 left-8 w-1 h-1 bg-white rounded-full animate-ping animation-delay-500"></div>
+                </div>
+                
+                <span class="relative z-10 flex items-center justify-center">
+                    <span class="mr-3 group-hover:animate-pulse">Load more projects</span>
+                    <div class="relative">
+                        <svg class="w-5 h-5 transform group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                        <!-- Animated arrow shadow -->
+                        <svg class="absolute inset-0 w-5 h-5 text-white/30 transform translate-y-0.5 group-hover:translate-y-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </span>
+                
+                <!-- Ripple effect on click -->
+                <div class="absolute inset-0 rounded-3xl bg-white/20 scale-0 group-active:scale-100 transition-transform duration-200"></div>
             </button>
         </div>
         
@@ -1751,6 +2219,1398 @@
     </div>
 </section>
 
+<!-- Enhanced Services Section Animations -->
+<style>
+/* AI-Driven Service Card Animations */
+@keyframes service-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(0.5deg); }
+    50% { transform: translateY(-4px) rotate(0deg); }
+    75% { transform: translateY(-12px) rotate(-0.5deg); }
+}
+
+@keyframes service-glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 0 0 60px rgba(59, 130, 246, 0.2); }
+}
+
+@keyframes service-shimmer {
+    0% { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+@keyframes service-orb-float {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+    25% { transform: translate(10px, -15px) scale(1.1); opacity: 0.5; }
+    50% { transform: translate(-5px, -25px) scale(0.9); opacity: 0.4; }
+    75% { transform: translate(-15px, -10px) scale(1.05); opacity: 0.6; }
+}
+
+@keyframes service-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes service-icon-bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    25% { transform: translateY(-5px) rotate(2deg) scale(1.05); }
+    50% { transform: translateY(-8px) rotate(0deg) scale(1.1); }
+    75% { transform: translateY(-3px) rotate(-2deg) scale(1.05); }
+}
+
+@keyframes service-ripple {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes service-card-entrance {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.8) rotateX(15deg);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(20px) scale(0.95) rotateX(5deg);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotateX(0deg);
+        filter: blur(0px);
+    }
+}
+
+@keyframes service-text-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+}
+
+@keyframes service-price-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Service Card Classes */
+.service-card {
+    animation: service-card-entrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    will-change: transform, opacity;
+    contain: layout style paint;
+}
+
+.service-card:hover {
+    animation: service-float 6s ease-in-out infinite;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.8s ease;
+    z-index: 1;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+/* Enhanced Glassmorphism Effects */
+.service-card .relative {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.service-card:hover .relative {
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+}
+
+/* Floating Orbs Animation */
+.service-card .absolute.w-20,
+.service-card .absolute.w-16 {
+    animation: service-orb-float 8s ease-in-out infinite;
+}
+
+.service-card .absolute.w-20 {
+    animation-delay: 0s;
+}
+
+.service-card .absolute.w-16 {
+    animation-delay: 2s;
+}
+
+/* Icon Animation */
+.service-card:hover .relative.p-4 {
+    animation: service-icon-bounce 2s ease-in-out infinite;
+}
+
+/* Price Badge Animation */
+.service-card .inline-flex.items-center {
+    animation: service-price-pulse 3s ease-in-out infinite;
+}
+
+/* Button Ripple Effect */
+.group\/btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.group\/btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.group\/btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Solid Text Color */
+.service-card h3 {
+    color: #1e293b;
+}
+
+/* Feature List Animations */
+.service-card ul li {
+    animation: service-text-reveal 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.service-card ul li:nth-child(1) { animation-delay: 0.2s; }
+.service-card ul li:nth-child(2) { animation-delay: 0.4s; }
+.service-card ul li:nth-child(3) { animation-delay: 0.6s; }
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .service-card {
+        animation-duration: 0.8s;
+    }
+    
+    .service-card:hover {
+        animation: none;
+        transform: translateY(-5px) scale(1.02);
+    }
+    
+    .service-card .absolute.w-20,
+    .service-card .absolute.w-16 {
+        animation-duration: 6s;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .service-card:hover,
+    .service-card .absolute.w-20,
+    .service-card .absolute.w-16,
+    .service-card:hover .relative.p-4,
+    .service-card .inline-flex.items-center,
+    .service-card h3,
+    .service-card ul li {
+        animation: none;
+    }
+    
+    .service-card {
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+    
+    .service-card ul li {
+        opacity: 1;
+    }
+}
+
+/* High Performance Mode */
+@media (max-resolution: 1dppx) {
+    .service-card .relative {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .service-card .absolute.w-20,
+    .service-card .absolute.w-16 {
+        display: none;
+    }
+}
+
+/* Focus Accessibility */
+.service-card:focus-within {
+    outline: 2px solid #60a5fa;
+    outline-offset: 4px;
+}
+
+.group\/link:focus,
+.group\/btn:focus {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+/* Screen Reader Support */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Enhanced Visual Hierarchy */
+.services-section {
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.services-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f8fafc;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Enhanced Section Header */
+.services-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 10;
+}
+
+.services-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: #3b82f6;
+    border: 1px solid #2563eb;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.services-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+.services-description {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #64748b;
+    max-width: 42rem;
+    margin: 0 auto 3rem;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Enhanced Grid Layout */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Enhanced Service Card Typography */
+.service-card h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+    color: #1e293b;
+}
+
+.service-card p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.service-card ul li {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #475569;
+    font-weight: 500;
+    padding: 0.5rem 0;
+}
+
+/* Enhanced Price Badge */
+.service-price {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+}
+
+/* Enhanced Button Typography */
+.service-button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    padding: 0.875rem 1.75rem;
+}
+
+.service-link {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+/* Color Scheme Enhancements */
+.service-card-web {
+    --primary-color: #3b82f6;
+    --secondary-color: #1e40af;
+    --accent-color: #3b82f6;
+}
+
+.service-card-crm {
+    --primary-color: #f97316;
+    --secondary-color: #ea580c;
+    --accent-color: #f97316;
+}
+
+.service-card-ai {
+    --primary-color: #a855f7;
+    --secondary-color: #9333ea;
+    --accent-color: #a855f7;
+}
+
+/* Improved Spacing */
+.service-card .relative.p-8 {
+    padding: 2.5rem;
+}
+
+.service-card .flex.items-start.mb-6 {
+    margin-bottom: 2rem;
+}
+
+.service-card .space-y-3 {
+    margin-bottom: 2.5rem;
+}
+
+.service-card .pt-6 {
+    padding-top: 2rem;
+    margin-top: auto;
+}
+
+/* Enhanced Icon Styling */
+.service-icon {
+    width: 2rem;
+    height: 2rem;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Improved Feature List Styling */
+.service-feature {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-feature:hover {
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: 0.5rem;
+}
+
+.service-feature-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.875rem;
+    flex-shrink: 0;
+}
+
+/* Typography Scale for Mobile */
+@media (max-width: 768px) {
+    .services-title {
+        font-size: 2.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .services-description {
+        font-size: 1.125rem;
+        margin-bottom: 2rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .service-card p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 0.75rem;
+    }
+    
+    .service-card .relative.p-8 {
+        padding: 2rem;
+    }
+}
+
+/* Typography Scale for Large Screens */
+@media (min-width: 1280px) {
+    .services-title {
+        font-size: 4.5rem;
+    }
+    
+    .services-description {
+        font-size: 1.375rem;
+    }
+    
+    .service-card h3 {
+        font-size: 2rem;
+    }
+    
+    .service-card p {
+        font-size: 1.25rem;
+    }
+}
+
+/* Advanced Micro-Interactions */
+.service-card {
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.6s ease;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.service-card:hover::after {
+    opacity: 1;
+}
+
+.service-card:hover::after {
+    left: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.service-card:active {
+    transform: translateY(-4px) scale(1.01);
+    transition: all 0.1s ease;
+}
+
+/* Enhanced Button Micro-Interactions */
+.service-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.service-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    pointer-events: none;
+}
+
+.service-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.service-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 10px 25px -5px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.service-button:active {
+    transform: translateY(0);
+    transition: all 0.1s ease;
+}
+
+/* Enhanced Link Micro-Interactions */
+.service-link {
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.service-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.service-link:hover::after {
+    width: 100%;
+}
+
+.service-link:hover {
+    transform: translateX(4px);
+    color: var(--accent-color);
+}
+
+/* Icon Micro-Interactions */
+.service-icon {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
+/* Price Badge Micro-Interactions */
+.service-price {
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.service-card:hover .service-price {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Feature List Micro-Interactions */
+.service-feature {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-feature::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    transition: left 0.5s ease;
+    opacity: 0;
+}
+
+.service-feature:hover::before {
+    opacity: 1;
+}
+
+.service-feature:hover::before {
+    left: 100%;
+}
+
+.service-feature:hover {
+    background: #f1f5f9;
+    padding-left: 1rem;
+    transform: translateX(8px);
+    border-radius: 0.75rem;
+}
+
+.service-feature-icon {
+    transition: all 0.3s ease;
+}
+
+.service-feature:hover .service-feature-icon {
+    transform: scale(1.2) rotate(10deg);
+    filter: brightness(1.2);
+}
+
+/* Floating Orb Micro-Interactions */
+.floating-orb {
+    transition: all 0.4s ease;
+}
+
+.service-card:hover .floating-orb:nth-child(1) {
+    transform: translate(10px, -10px) scale(1.1);
+}
+
+.service-card:hover .floating-orb:nth-child(2) {
+    transform: translate(-8px, 12px) scale(1.05);
+}
+
+.service-card:hover .floating-orb:nth-child(3) {
+    transform: translate(15px, 8px) scale(1.15);
+}
+
+/* Ripple Effect for Cards */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.service-card-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    animation: ripple 0.6s linear;
+}
+
+/* Magnetic Effect for Buttons */
+.service-button {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-button:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Parallax Effect for Background Elements */
+.service-card:hover .floating-orb {
+    animation-play-state: paused;
+}
+
+/* Enhanced Focus States for Accessibility */
+.service-card:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+    transform: translateY(-4px);
+}
+
+.service-button:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    transform: translateY(-2px);
+}
+
+.service-link:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Stagger Animation for Card Elements */
+.service-card .service-icon {
+    animation-delay: 0.1s;
+}
+
+.service-card h3 {
+    animation-delay: 0.2s;
+}
+
+.service-card p {
+    animation-delay: 0.3s;
+}
+
+.service-card .service-price {
+    animation-delay: 0.4s;
+}
+
+.service-card ul {
+    animation-delay: 0.5s;
+}
+
+.service-card .service-button {
+    animation-delay: 0.6s;
+}
+
+.service-card .service-link {
+    animation-delay: 0.7s;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .service-button,
+    .service-link,
+    .service-icon,
+    .service-price,
+    .service-feature,
+    .floating-orb {
+        transition: none;
+        animation: none;
+    }
+    
+    .service-card:hover {
+        transform: none;
+    }
+    
+    .service-button:hover {
+        transform: none;
+    }
+    
+    .service-link:hover {
+        transform: none;
+    }
+}
+
+/* Comprehensive Responsive Design */
+
+/* Extra Small Devices (320px - 480px) */
+@media (max-width: 480px) {
+    .services-section {
+        padding: 2rem 0.5rem;
+    }
+    
+    .services-header {
+        margin-bottom: 2.5rem;
+    }
+    
+    .services-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .services-title {
+        font-size: 1.875rem;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+    
+    .services-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        padding: 0 0.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0;
+    }
+    
+    .service-card {
+        margin: 0 0.25rem;
+    }
+    
+    .service-card .relative.p-8 {
+        padding: 1.5rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .service-card p {
+        font-size: 0.875rem;
+        margin-bottom: 1.25rem;
+        line-height: 1.5;
+    }
+    
+    .service-price {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+    
+    .service-button {
+        font-size: 0.875rem;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .service-link {
+        font-size: 0.875rem;
+    }
+    
+    .service-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    .floating-orb {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Disable complex animations on small screens */
+    .service-card:hover {
+        transform: translateY(-4px) scale(1.01);
+    }
+    
+    .service-card::after {
+        display: none;
+    }
+}
+
+/* Small Devices (481px - 640px) */
+@media (min-width: 481px) and (max-width: 640px) {
+    .services-section {
+        padding: 3rem 1rem;
+    }
+    
+    .services-header {
+        margin-bottom: 3rem;
+    }
+    
+    .services-title {
+        font-size: 2.25rem;
+    }
+    
+    .services-description {
+        font-size: 1.125rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .service-card .relative.p-8 {
+        padding: 2rem;
+    }
+}
+
+/* Medium Devices (641px - 768px) */
+@media (min-width: 641px) and (max-width: 768px) {
+    .services-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 600px;
+    }
+    
+    .service-card .relative.p-8 {
+        padding: 2.25rem;
+    }
+}
+
+/* Large Tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .services-section {
+        padding: 5rem 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 900px;
+    }
+    
+    .service-card .relative.p-8 {
+        padding: 2.5rem;
+    }
+}
+
+/* Desktop (1025px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .services-section {
+        padding: 6rem 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+    }
+}
+
+/* Large Desktop (1281px+) */
+@media (min-width: 1281px) {
+    .services-section {
+        padding: 8rem 2rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        max-width: 1400px;
+    }
+    
+    .service-card .relative.p-8 {
+        padding: 3rem;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .service-card:hover {
+        transform: none;
+        box-shadow: 
+            0 20px 40px -12px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.1);
+    }
+    
+    .service-button:hover {
+        transform: none;
+    }
+    
+    .service-link:hover {
+        transform: none;
+    }
+    
+    .service-feature:hover {
+        transform: none;
+        padding-left: 0.75rem;
+    }
+    
+    /* Increase touch targets */
+    .service-button {
+        min-height: 44px;
+        padding: 1rem 2rem;
+    }
+    
+    .service-link {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .service-icon {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Landscape Orientation on Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .services-section {
+        padding: 2rem 1rem;
+    }
+    
+    .services-header {
+        margin-bottom: 2rem;
+    }
+    
+    .services-title {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .services-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .service-card .relative.p-8 {
+        padding: 1.5rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .services-section {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .service-card {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+        margin-bottom: 1rem;
+    }
+    
+    .floating-orb,
+    .service-card::before,
+    .service-card::after {
+        display: none !important;
+    }
+    
+    .service-button,
+    .service-link {
+        color: #0066cc !important;
+        text-decoration: underline !important;
+    }
+}
+
+/* Container Queries (Future-proofing) */
+@container (max-width: 400px) {
+    .service-card .relative.p-8 {
+        padding: 1.25rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.125rem;
+    }
+}
+
+/* Reduced Data Mode */
+@media (prefers-reduced-data: reduce) {
+    .floating-orb {
+        display: none;
+    }
+    
+    .service-card::before,
+    .service-card::after,
+    .service-button::before,
+    .service-feature::before {
+        display: none;
+    }
+    
+    .services-section::before {
+        background: none;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .service-card {
+        border: 2px solid currentColor;
+        background: Canvas;
+        color: CanvasText;
+    }
+    
+    .service-button {
+        border: 2px solid ButtonText;
+        background: ButtonFace;
+        color: ButtonText;
+    }
+    
+    .service-link {
+        color: LinkText;
+        text-decoration: underline;
+    }
+    
+    .services-title,
+    .service-card h3 {
+        color: CanvasText;
+    }
+}
+
+/* Performance Optimizations */
+.services-section {
+    contain: layout style paint;
+    will-change: auto;
+}
+
+.service-card {
+    contain: layout style paint;
+    will-change: transform, box-shadow;
+    transform: translateZ(0); /* Force hardware acceleration */
+    backface-visibility: hidden;
+}
+
+.service-card:hover {
+    will-change: transform, box-shadow;
+}
+
+.service-card:not(:hover) {
+    will-change: auto;
+}
+
+.floating-orb {
+    contain: layout style paint;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.service-button {
+    contain: layout style;
+    will-change: transform;
+}
+
+.service-icon {
+    contain: layout style;
+    will-change: transform, filter;
+}
+
+/* GPU Acceleration for Animations */
+@keyframes service-float {
+    0%, 100% { transform: translateZ(0) translateY(0px); }
+    50% { transform: translateZ(0) translateY(-10px); }
+}
+
+@keyframes service-orb-float {
+    0%, 100% { transform: translateZ(0) translate(0, 0); }
+    33% { transform: translateZ(0) translate(10px, -10px); }
+    66% { transform: translateZ(0) translate(-5px, 10px); }
+}
+
+/* Intersection Observer Performance */
+.service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.service-card.animate-card-entrance {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced Accessibility */
+.services-section {
+    scroll-margin-top: 2rem;
+}
+
+.service-card {
+    role: article;
+    tabindex: 0;
+}
+
+.service-card:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 4px;
+    border-radius: 1rem;
+}
+
+.service-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-button:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+.service-link:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* Screen Reader Enhancements */
+.services-section .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.service-card .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ARIA Live Regions */
+.service-status {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Skip Links */
+.skip-to-services {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.skip-to-services:focus {
+    top: 6px;
+}
+
+/* High Performance Mode for Low-End Devices */
+@media (max-width: 768px) and (max-resolution: 150dpi) {
+    .floating-orb {
+        display: none;
+    }
+    
+    .service-card::before,
+    .service-card::after,
+    .service-button::before,
+    .service-feature::before {
+        display: none;
+    }
+    
+    .services-section::before {
+        background: rgba(15, 23, 42, 0.95);
+    }
+    
+    .service-card {
+        backdrop-filter: none;
+        background: rgba(15, 23, 42, 0.8);
+    }
+    
+    .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Memory Management */
+.service-card:not(:hover) .floating-orb {
+    animation-play-state: paused;
+}
+
+/* Lazy Loading Support */
+.service-card[data-lazy="true"] {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.service-card[data-lazy="false"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Critical CSS Optimization */
+.services-section-critical {
+    background: #0f172a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Preload Hints */
+.service-card {
+    content-visibility: auto;
+    contain-intrinsic-size: 400px 600px;
+}
+
+/* Animation Performance Monitoring */
+@supports (animation-timeline: scroll()) {
+    .service-card {
+        animation-timeline: scroll();
+        animation-range: entry 0% cover 30%;
+    }
+}
+
+/* Color Scheme Support */
+@media (prefers-color-scheme: light) {
+    .services-section {
+        background: #ffffff;
+    }
+    
+    .service-card {
+        background: #ffffff;
+        color: #1e293b;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .services-title {
+        color: #1e293b;
+    }
+}
+
+/* Force Layer Creation for Smooth Animations */
+.service-card,
+.service-button,
+.floating-orb,
+.service-icon {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Optimize Repaints */
+.service-card:hover {
+    isolation: isolate;
+}
+
+/* Battery Optimization */
+@media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .floating-orb,
+    .service-button,
+    .service-icon {
+        will-change: auto;
+        transform: none;
+        animation: none;
+        transition: none;
+    }
+}
+</style>
+
 <!-- Portfolio Modal JavaScript -->
 <script>
     // Function to show the portfolio modal with the specified portfolio ID
@@ -1886,218 +3746,375 @@
 {% include 'core/process_section.html' %}
 
 <!-- Featured Services -->
-<section class="py-20 bg-gradient-to-b from-white to-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center mb-16">
-            <div class="inline-block mb-3">
-                <span class="bg-vibrantOrange bg-clip-text text-transparent text-lg font-bold tracking-wide">WHAT WE DO</span>
+<section class="relative py-32 overflow-hidden">
+    
+    <!-- Floating Elements -->
+    <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl animate-float">
+    </div>
+    <div class="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-orange-400/20 to-pink-600/20 rounded-full blur-xl animate-float" style="animation-delay: 2s;">
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Enhanced Section Header -->
+        <div class="text-center mb-20">
+            <!-- Animated Badge -->
+            <div class="inline-block mb-6 relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-blue-500/20 rounded-full blur-lg animate-pulse">
+                </div>
+                <span class="relative inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold tracking-wider text-sm">
+                    <svg class="w-4 h-4 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+                    </svg>
+                    WHAT WE DO
+                </span>
             </div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">
-                <span class="text-orange-500">Solutions</span> <span class="text-blue-700">That We Deliver</span>
+            
+            <!-- Enhanced Title -->
+            <h2 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                <span class="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent animate-gradient-x">Solutions</span>
+                <br class="md:hidden">
+                <span class="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-gradient-x" style="animation-delay: 0.5s;">That We Deliver</span>
             </h2>
-            <div class="w-24 h-1 bg-orange-500 mx-auto mb-6"></div>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Simple strategies. Remarkable results. We build what your business needs.  
+            
+            <!-- Animated Divider -->
+            <div class="flex items-center justify-center mb-8">
+                <div class="h-px bg-gradient-to-r from-transparent via-orange-500 to-transparent w-24 animate-pulse">
+                </div>
+                <div class="mx-4 w-3 h-3 bg-gradient-to-r from-orange-500 to-blue-500 rounded-full animate-spin" style="animation-duration: 3s;">
+                </div>
+                <div class="h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent w-24 animate-pulse">
+                </div>
+            </div>
+            
+            <!-- Enhanced Description -->
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
+                <span class="text-white font-medium">Simple strategies.</span> 
+                <span class="bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent font-medium">Remarkable results.</span> 
+                <span class="text-gray-300">We build what your business needs.</span>
             </p>
         </div>
 
-        <!-- Services Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Enhanced Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {% for service in featured_services %}
-            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <!-- Service Icon (Floating) -->
-                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
-                
-                <div class="p-6 relative z-10">
-                    <!-- Icon and Title -->
-                    <div class="flex items-start mb-4">
-                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
-                            <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{{ service.title }}</h3>
-                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
-                                From $99
-                            </div>
-                        </div>
+            <div class="group relative service-card animate-card-entrance" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;">
+                <!-- Glassmorphism Card -->
+                <div class="relative h-full overflow-hidden rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-orange-500/25 transition-all duration-700 transform hover:-translate-y-2 hover:scale-105">
+                    <!-- Animated Background -->
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
                     
-                    <!-- Description -->
-                    <p class="text-gray-600 mb-6">
-                        {{ service.short_description|default:service.description|truncatewords:15 }}
-                    </p>
-
-                    <!-- Features (Simplified) -->
-                    {% if service.features %}
-                    <ul class="space-y-2 mb-6">
-                        {% for feature in features_list %}
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>{{ feature }}</span>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
+                    <!-- Floating Orbs -->
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-orange-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700">
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" style="animation-delay: 1s;">
+                    </div>
                     
-                    <!-- Action Buttons -->
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/{{ service.slug }}/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
-                            Learn More
-                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
+                    <!-- Card Content -->
+                    <div class="relative p-8 h-full flex flex-col">
+                        <!-- Enhanced Icon and Title Section -->
+                        <div class="flex items-start mb-6">
+                            <!-- Animated Icon Container -->
+                            <div class="relative mr-5">
+                                <div class="absolute inset-0 bg-orange-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500">
+                                </div>
+                                <div class="relative p-4 rounded-2xl bg-orange-500 text-white transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-lg">
+                                    <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-7 h-7"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Title and Price -->
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-orange-300 transition-colors duration-500">{{ service.title }}</h3>
+                                <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-orange-500 opacity-20 border border-orange-400/30 backdrop-blur-sm">
+                                    <span class="text-orange-300 text-sm font-bold">From $99</span>
+                                    <div class="ml-2 w-2 h-2 bg-orange-400 rounded-full animate-pulse">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <button onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '99')" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                            </svg>
-                            Add to Cart
-                        </button>
+                        <!-- Enhanced Description -->
+                        <p class="text-gray-300 mb-8 text-lg leading-relaxed flex-grow">
+                            {{ service.short_description|default:service.description|truncatewords:15 }}
+                        </p>
+
+                        <!-- Enhanced Features -->
+                        {% if service.features %}
+                        <ul class="space-y-3 mb-8">
+                            {% for feature in features_list %}
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-sm group-hover/item:bg-orange-400/30 transition-colors duration-300">
+                                    </div>
+                                    <svg class="relative w-5 h-5 text-orange-400 group-hover/item:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">{{ feature }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        
+                        <!-- Enhanced Action Buttons -->
+                        <div class="flex items-center justify-between pt-6 border-t border-white/10">
+                            <a href="/services/{{ service.slug }}/" class="group/link inline-flex items-center text-blue-300 hover:text-white font-medium transition-all duration-300">
+                                <span class="relative">
+                                    Learn More
+                                    <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover/link:w-full transition-all duration-300">
+                                    </div>
+                                </span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                            
+                            <button onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '99')" class="group/btn relative overflow-hidden px-6 py-3 rounded-xl bg-orange-500 text-white font-bold shadow-lg hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300">
+                                <div class="absolute inset-0 bg-orange-400 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300">
+                                </div>
+                                <div class="relative flex items-center">
+                                    <svg class="w-4 h-4 mr-2 group-hover/btn:animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                                    </svg>
+                                    Add to Cart
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
             {% empty %}
-            <!-- Fallback services if none exist -->
-            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
-                
-                <div class="p-6 relative z-10">
-                    <div class="flex items-start mb-4">
-                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
-                            <i data-lucide="target" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">Digital Strategy</h3>
-                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
-                                From $99
+            <!-- Fallback Digital Strategy Service -->
+            <div class="group relative service-card animate-card-entrance" style="animation-delay: 0.2s;">
+                <div class="relative h-full overflow-hidden rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-orange-500/25 transition-all duration-700 transform hover:-translate-y-2 hover:scale-105">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-orange-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                    
+                    <div class="relative p-8 h-full flex flex-col">
+                        <div class="flex items-start mb-6">
+                            <div class="relative mr-5">
+                                <div class="absolute inset-0 bg-orange-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+                                <div class="relative p-4 rounded-2xl bg-orange-500 text-white transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-lg">
+                                    <i data-lucide="target" class="w-7 h-7"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-orange-300 transition-colors duration-500">Digital Strategy</h3>
+                                <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-orange-500 opacity-20 border border-orange-400/30 backdrop-blur-sm">
+                                    <span class="text-orange-300 text-sm font-bold">From $99</span>
+                                    <div class="ml-2 w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <p class="text-gray-600 mb-6">
-                        Smart strategies that connect your business goals with effective execution.
-                    </p>
-
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Market Analysis</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Competitive Research</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Growth Planning</span>
-                        </li>
-                    </ul>
-                    
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
-                            Learn More
-                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
                         
-                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
-                            Get Started
-                        </a>
+                        <p class="text-gray-300 mb-8 text-lg leading-relaxed flex-grow">
+                            Smart strategies that connect your business goals with effective execution.
+                        </p>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-sm group-hover/item:bg-orange-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-orange-400 group-hover/item:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Market Analysis</span>
+                            </li>
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-sm group-hover/item:bg-orange-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-orange-400 group-hover/item:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Competitive Research</span>
+                            </li>
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-sm group-hover/item:bg-orange-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-orange-400 group-hover/item:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Growth Planning</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="flex items-center justify-between pt-6 border-t border-white/10">
+                            <a href="/services/" class="group/link inline-flex items-center text-blue-300 hover:text-white font-medium transition-all duration-300">
+                                <span class="relative">
+                                    Learn More
+                                    <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover/link:w-full transition-all duration-300"></div>
+                                </span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                            
+                            <a href="/services/" class="group/btn relative overflow-hidden px-6 py-3 rounded-xl bg-orange-500 text-white font-bold shadow-lg hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300">
+                                <div class="absolute inset-0 bg-orange-400 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                <div class="relative">Get Started</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
-                
-                <div class="p-6 relative z-10">
-                    <div class="flex items-start mb-4">
-                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
-                            <i data-lucide="database" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">CRM Solutions</h3>
-                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
-                                From $99
+            <!-- Fallback CRM Solutions Service -->
+            <div class="group relative service-card animate-card-entrance" style="animation-delay: 0.4s;">
+                <div class="relative h-full overflow-hidden rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-orange-500/25 transition-all duration-700 transform hover:-translate-y-2 hover:scale-105">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-orange-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                    
+                    <div class="relative p-8 h-full flex flex-col">
+                        <div class="flex items-start mb-6">
+                            <div class="relative mr-5">
+                                <div class="absolute inset-0 bg-orange-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+                                <div class="relative p-4 rounded-2xl bg-orange-500 text-white transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-lg">
+                                    <i data-lucide="database" class="w-7 h-7"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-orange-300 transition-colors duration-500">CRM Solutions</h3>
+                                <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-orange-500 opacity-20 border border-orange-400/30 backdrop-blur-sm">
+                                    <span class="text-orange-300 text-sm font-bold">From $99</span>
+                                    <div class="ml-2 w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <p class="text-gray-600 mb-6">
-                        Streamlined Salesforce and CRM solutions tailored to your business needs.
-                    </p>
-
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Custom Configuration</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Data Migration</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Workflow Automation</span>
-                        </li>
-                    </ul>
-                    
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
-                            Learn More
-                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
                         
-                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
-                            Get Started
-                        </a>
+                        <p class="text-gray-300 mb-8 text-lg leading-relaxed flex-grow">
+                            Streamlined Salesforce and CRM solutions tailored to your business needs.
+                        </p>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-sm group-hover/item:bg-orange-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-orange-400 group-hover/item:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Custom Configuration</span>
+                            </li>
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-sm group-hover/item:bg-orange-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-orange-400 group-hover/item:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Data Migration</span>
+                            </li>
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-sm group-hover/item:bg-orange-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-orange-400 group-hover/item:text-orange-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Workflow Automation</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="flex items-center justify-between pt-6 border-t border-white/10">
+                            <a href="/services/" class="group/link inline-flex items-center text-blue-300 hover:text-white font-medium transition-all duration-300">
+                                <span class="relative">
+                                    Learn More
+                                    <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-orange-400 group-hover/link:w-full transition-all duration-300"></div>
+                                </span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                            
+                            <a href="/services/" class="group/btn relative overflow-hidden px-6 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold shadow-lg hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300">
+                                <div class="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                <div class="relative">Get Started</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
-                
-                <div class="p-6 relative z-10">
-                    <div class="flex items-start mb-4">
-                        <div class="p-3 rounded-lg bg-blue-600 text-white mr-4 transform group-hover:rotate-6 transition-transform duration-300">
-                            <i data-lucide="brain-circuit" class="w-6 h-6"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">AI Solutions</h3>
-                            <div class="inline-block mt-1 text-xs font-semibold px-2 py-1 rounded-full bg-orange-100 text-orange-600">
-                                From $99
+            <!-- Fallback AI Solutions Service -->
+            <div class="group relative service-card animate-card-entrance" style="animation-delay: 0.6s;">
+                <div class="relative h-full overflow-hidden rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-purple-500/25 transition-all duration-700 transform hover:-translate-y-2 hover:scale-105">
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-purple-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+                    
+                    <div class="relative p-8 h-full flex flex-col">
+                        <div class="flex items-start mb-6">
+                            <div class="relative mr-5">
+                                <div class="absolute inset-0 bg-purple-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+                                <div class="relative p-4 rounded-2xl bg-purple-500 text-white transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-lg">
+                                    <i data-lucide="brain-circuit" class="w-7 h-7"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors duration-500">AI Solutions</h3>
+                                <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-purple-500 opacity-20 border border-purple-400/30 backdrop-blur-sm">
+                                    <span class="text-purple-300 text-sm font-bold">From $99</span>
+                                    <div class="ml-2 w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <p class="text-gray-600 mb-6">
-                        Smart AI integration for measurable business growth and campaign optimization.
-                    </p>
-
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Predictive Analytics</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Automated Insights</span>
-                        </li>
-                        <li class="flex items-center text-sm text-gray-600">
-                            <svg class="w-4 h-4 text-orange-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                            <span>Smart Optimization</span>
-                        </li>
-                    </ul>
-                    
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
-                        <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium text-sm inline-flex items-center group/link">
-                            Learn More
-                            <svg class="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
                         
-                        <a href="/services/" class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-300 shadow-sm hover:shadow">
-                            Get Started
-                        </a>
+                        <p class="text-gray-300 mb-8 text-lg leading-relaxed flex-grow">
+                            Smart AI integration for measurable business growth and campaign optimization.
+                        </p>
+
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-purple-500/20 rounded-full blur-sm group-hover/item:bg-purple-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-purple-400 group-hover/item:text-purple-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Predictive Analytics</span>
+                            </li>
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-purple-500/20 rounded-full blur-sm group-hover/item:bg-purple-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-purple-400 group-hover/item:text-purple-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Automated Insights</span>
+                            </li>
+                            <li class="flex items-center text-gray-300 group/item">
+                                <div class="relative mr-3">
+                                    <div class="absolute inset-0 bg-purple-500/20 rounded-full blur-sm group-hover/item:bg-purple-400/30 transition-colors duration-300"></div>
+                                    <svg class="relative w-5 h-5 text-purple-400 group-hover/item:text-purple-300 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span class="group-hover/item:text-white transition-colors duration-300">Smart Optimization</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="flex items-center justify-between pt-6 border-t border-white/10">
+                            <a href="/services/" class="group/link inline-flex items-center text-blue-300 hover:text-white font-medium transition-all duration-300">
+                                <span class="relative">
+                                    Learn More
+                                    <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 group-hover/link:w-full transition-all duration-300"></div>
+                                </span>
+                                <svg class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                            
+                            <a href="/services/" class="group/btn relative overflow-hidden px-6 py-3 rounded-xl bg-purple-500 text-white font-bold shadow-lg hover:shadow-purple-500/50 transform hover:scale-105 transition-all duration-300">
+                                <div class="absolute inset-0 bg-purple-400 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                                <div class="relative">Get Started</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
