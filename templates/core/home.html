@@ -243,6 +243,24 @@
             padding: 0 1rem;
         }
         
+        .hero-content-modern {
+            transform: translateX(-2rem);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Responsive adjustments for hero content positioning */
+        @media (max-width: 768px) {
+            .hero-content-modern {
+                transform: translateX(-1rem);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content-modern {
+                transform: translateX(-0.5rem);
+            }
+        }
+        
         /* Improved mobile responsiveness for hero section */
         @media (max-width: 1024px) {
             .hero-container {
@@ -1130,7 +1148,7 @@
     position: relative;
 }
 .slide-item.with-image.slide-analytics-bg {
-    background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80');
+    background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -1186,7 +1204,7 @@
 }
 
 .slide-item.with-image.slide-tech-bg {
-    background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&q=80');
+    background-image: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -1322,7 +1340,7 @@
                         Trusted by AI-Driven Businesses
                     </div>
                     
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                    <h1 class="text-3xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">
                             AI-Powered Web Development
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">& SaaS Services in Canada</span>
                     </h1>
@@ -3959,7 +3977,7 @@
 {% include 'core/process_section.html' %}
 
 <!-- Featured Services -->
-<section class="relative py-32 overflow-hidden bg-white">
+<section class="relative py-32 overflow-hidden bg-white" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);">
     
     <!-- Floating Elements -->
     <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl animate-float">
@@ -3974,7 +3992,7 @@
             <div class="inline-block mb-6 relative">
                 <div class="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-blue-500/20 rounded-full blur-lg animate-pulse">
                 </div>
-                <span class="relative inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold tracking-wider text-sm">
+                <span class="relative inline-flex items-center px-6 py-3 rounded-full bg-gray-900/90 backdrop-blur-md border border-gray-300/20 text-white font-bold tracking-wider text-sm">
                     <svg class="w-4 h-4 mr-2 text-orange-400" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
                     </svg>
@@ -4000,94 +4018,68 @@
             </div>
             
             <!-- Enhanced Description -->
-            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
-                <span class="text-white font-medium">Simple strategies.</span> 
+            <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-light">
+                <span class="text-gray-900 font-medium">Simple strategies.</span> 
                 <span class="bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent font-medium">Remarkable results.</span> 
-                <span class="text-gray-300">We build what your business needs.</span>
+                <span class="text-gray-700">We build what your business needs.</span>
             </p>
         </div>
 
         <!-- Enhanced Services Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             {% for service in featured_services %}
-            <div class="group relative service-card ai-enhanced animate-card-entrance ai-hologram" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;">
-                <!-- Enhanced Card -->
-                <div class="relative h-full overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-700 transform hover:-translate-y-3 hover:scale-105 ai-data-flow">
-                    <!-- Animated Background -->
-                    <div class="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ai-matrix-rain">
-                    </div>
-                    
-                    <!-- Floating Orbs -->
-                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-orange-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700 ai-neural-pulse">
-                    </div>
-                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700 ai-quantum-shift" style="animation-delay: 1s;">
-                    </div>
-                    
-                    <!-- Card Content -->
+            <div class="group relative service-card scroll-fade-in" style="animation-delay: {{ forloop.counter0|add:1|floatformat:1 }}s;">
+                <div class="relative h-full overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div class="relative p-8 h-full flex flex-col">
-                        <!-- Enhanced Icon and Title Section -->
+                        <!-- Icon and Title Section -->
                         <div class="flex items-start mb-6">
-                            <!-- Animated Icon Container -->
-                            <div class="relative mr-5 ai-badge">
-                                <div class="absolute inset-0 bg-orange-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500 ai-neural-pulse">
-                                </div>
-                                <div class="relative p-4 rounded-2xl bg-orange-500 text-white transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-lg ai-hologram">
-                                    <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-7 h-7 ai-smart-icon"></i>
+                            <!-- Icon Container -->
+                            <div class="relative mr-5">
+                                <div class="p-4 rounded-xl bg-orange-500 text-white shadow-md">
+                                    <i data-lucide="{% if 'strategy' in service.title.lower %}target{% elif 'salesforce' in service.title.lower %}database{% elif 'ai' in service.title.lower %}brain-circuit{% else %}settings{% endif %}" class="w-6 h-6"></i>
                                 </div>
                             </div>
                             
                             <!-- Title and Price -->
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors duration-500 ai-smart-text">{{ service.title }}</h3>
-                                <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-orange-100 border border-orange-200 ai-badge">
-                                    <span class="text-orange-700 text-sm font-bold ai-smart-text">From $99</span>
-                                    <div class="ml-2 w-2 h-2 bg-orange-500 rounded-full ai-neural-pulse">
-                                    </div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ service.title }}</h3>
+                                <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-orange-100 border border-orange-200">
+                                    <span class="text-orange-700 text-sm font-bold">From $99</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Enhanced Description -->
-                        <p class="text-gray-600 mb-8 text-lg leading-relaxed flex-grow">
+                        <!-- Description -->
+                        <p class="text-gray-600 mb-8 text-base leading-relaxed flex-grow">
                             {{ service.short_description|default:service.description|truncatewords:15 }}
                         </p>
 
-                        <!-- Enhanced Features -->
+                        <!-- Features -->
                         {% if service.features %}
                         <ul class="space-y-3 mb-8">
                             {% for feature in features_list %}
-                            <li class="flex items-center text-gray-700 group/item">
-                                <div class="relative mr-3">
-                                    <div class="absolute inset-0 bg-orange-100 rounded-full blur-sm group-hover/item:bg-orange-200 transition-colors duration-300">
-                                    </div>
-                                    <svg class="relative w-5 h-5 text-orange-600 group-hover/item:text-orange-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
+                            <li class="flex items-center text-gray-700">
+                                <div class="mr-3 p-1 rounded-full bg-green-100">
+                                    <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
                                 </div>
-                                <span class="group-hover/item:text-gray-900 transition-colors duration-300">{{ feature }}</span>
+                                <span class="text-sm font-medium">{{ feature }}</span>
                             </li>
                             {% endfor %}
                         </ul>
                         {% endif %}
                         
-                        <!-- Enhanced Action Buttons -->
+                        <!-- Action Buttons -->
                         <div class="flex items-center justify-between pt-6 border-t border-gray-200">
-                            <a href="/services/{{ service.slug }}/" class="group/link inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-all duration-300">
-                                <span class="relative">
-                                    Learn More
-                                    <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover/link:w-full transition-all duration-300">
-                                    </div>
-                                </span>
-                                <svg class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <a href="/services/{{ service.slug }}/" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200">
+                                <span>Learn More</span>
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                 </svg>
                             </a>
                             
-                            <button onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '99')" class="group/btn relative overflow-hidden px-6 py-3 rounded-xl bg-orange-500 text-white font-bold shadow-lg hover:shadow-orange-500/50 transform hover:scale-105 transition-all duration-300">
-                                <div class="absolute inset-0 bg-orange-400 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300">
-                                </div>
-                                <div class="relative flex items-center">
-                                    <svg class="w-4 h-4 mr-2 group-hover/btn:animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                            <button onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '99')" class="px-6 py-3 rounded-xl bg-orange-500 text-white font-bold shadow-md hover:bg-orange-600 transition-colors duration-200">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
                                     </svg>
                                     Add to Cart
@@ -4099,60 +4091,45 @@
             </div>
             {% empty %}
             <!-- Fallback Digital Strategy Service -->
-            <div class="group relative service-card animate-card-entrance" style="animation-delay: 0.2s;">
-                <div class="relative h-full overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-700 transform hover:-translate-y-3 hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-orange-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                    
+            <div class="group relative service-card scroll-fade-in" style="animation-delay: 0.2s;">
+                <div class="relative h-full overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div class="relative p-8 h-full flex flex-col">
                         <div class="flex items-start mb-6">
                             <div class="relative mr-5">
-                                <div class="absolute inset-0 bg-orange-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
-                                <div class="relative p-4 rounded-2xl bg-orange-500 text-white transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-lg">
-                                    <i data-lucide="target" class="w-7 h-7"></i>
+                                <div class="p-4 rounded-xl bg-orange-500 text-white shadow-md">
+                                    <i data-lucide="target" class="w-6 h-6"></i>
                                 </div>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors duration-500">Digital Strategy</h3>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Digital Strategy</h3>
                                 <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-orange-100 border border-orange-200">
                                     <span class="text-orange-700 text-sm font-bold">From $99</span>
-                                    <div class="ml-2 w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
                                 </div>
                             </div>
                         </div>
                         
-                        <p class="text-gray-600 mb-8 text-lg leading-relaxed flex-grow">
+                        <p class="text-gray-600 mb-8 text-base leading-relaxed flex-grow">
                             Smart strategies that connect your business goals with effective execution.
                         </p>
 
                         <ul class="space-y-3 mb-8">
-                            <li class="flex items-center text-gray-700 group/item">
-                                <div class="relative mr-3">
-                                    <div class="absolute inset-0 bg-orange-100 rounded-full blur-sm group-hover/item:bg-orange-200 transition-colors duration-300"></div>
-                                    <svg class="relative w-5 h-5 text-orange-600 group-hover/item:text-orange-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
+                            <li class="flex items-center text-gray-700">
+                                <div class="mr-3 p-1 rounded-full bg-green-100">
+                                    <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
                                 </div>
-                                <span class="group-hover/item:text-gray-900 transition-colors duration-300">Market Analysis</span>
+                                <span class="text-sm font-medium">Market Analysis</span>
                             </li>
-                            <li class="flex items-center text-gray-700 group/item">
-                                <div class="relative mr-3">
-                                    <div class="absolute inset-0 bg-orange-100 rounded-full blur-sm group-hover/item:bg-orange-200 transition-colors duration-300"></div>
-                                    <svg class="relative w-5 h-5 text-orange-600 group-hover/item:text-orange-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
+                            <li class="flex items-center text-gray-700">
+                                <div class="mr-3 p-1 rounded-full bg-green-100">
+                                    <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
                                 </div>
-                                <span class="group-hover/item:text-gray-900 transition-colors duration-300">Competitive Research</span>
+                                <span class="text-sm font-medium">Competitive Research</span>
                             </li>
-                            <li class="flex items-center text-gray-700 group/item">
-                                <div class="relative mr-3">
-                                    <div class="absolute inset-0 bg-orange-100 rounded-full blur-sm group-hover/item:bg-orange-200 transition-colors duration-300"></div>
-                                    <svg class="relative w-5 h-5 text-orange-600 group-hover/item:text-orange-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
+                            <li class="flex items-center text-gray-700">
+                                <div class="mr-3 p-1 rounded-full bg-green-100">
+                                    <i data-lucide="check" class="w-4 h-4 text-green-600"></i>
                                 </div>
-                                <span class="group-hover/item:text-gray-900 transition-colors duration-300">Growth Planning</span>
+                                <span class="text-sm font-medium">Growth Planning</span>
                             </li>
                         </ul>
                         
@@ -4177,12 +4154,8 @@
             </div>
 
             <!-- Fallback CRM Solutions Service -->
-            <div class="group relative service-card animate-card-entrance" style="animation-delay: 0.4s;">
-                <div class="relative h-full overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-700 transform hover:-translate-y-3 hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-br from-orange-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-orange-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                    
+            <div class="group relative service-card scroll-fade-in" style="animation-delay: 0.4s;">
+                <div class="relative h-full overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div class="relative p-8 h-full flex flex-col">
                         <div class="flex items-start mb-6">
                             <div class="relative mr-5">
@@ -4255,25 +4228,17 @@
             </div>
 
             <!-- Fallback AI Solutions Service -->
-            <div class="group relative service-card animate-card-entrance" style="animation-delay: 0.6s;">
-                <div class="relative h-full overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-700 transform hover:-translate-y-3 hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-purple-400 opacity-20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-blue-400 opacity-20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
-                    
-                    <div class="relative p-8 h-full flex flex-col">
+            <div class="group relative service-card scroll-fade-in" style="animation-delay: 0.6s;">
+                <div class="relative h-full rounded-3xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div class="p-8 h-full flex flex-col">
                         <div class="flex items-start mb-6">
-                            <div class="relative mr-5">
-                                <div class="absolute inset-0 bg-purple-500 rounded-2xl blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
-                                <div class="relative p-4 rounded-2xl bg-purple-500 text-white transform group-hover:rotate-12 group-hover:scale-110 transition-all duration-500 shadow-lg">
-                                    <i data-lucide="brain-circuit" class="w-7 h-7"></i>
-                                </div>
+                            <div class="p-4 rounded-2xl bg-purple-500 text-white mr-5">
+                                <i data-lucide="brain-circuit" class="w-7 h-7"></i>
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-500">AI Solutions</h3>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-2">AI Solutions</h3>
                                 <div class="inline-flex items-center px-3 py-1.5 rounded-full bg-purple-100 border border-purple-200">
                                     <span class="text-purple-700 text-sm font-bold">From $99</span>
-                                    <div class="ml-2 w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
                                 </div>
                             </div>
                         </div>
@@ -4283,49 +4248,36 @@
                         </p>
 
                         <ul class="space-y-3 mb-8">
-                            <li class="flex items-center text-gray-700 group/item">
-                                <div class="relative mr-3">
-                                    <div class="absolute inset-0 bg-purple-100 rounded-full blur-sm group-hover/item:bg-purple-200 transition-colors duration-300"></div>
-                                    <svg class="relative w-5 h-5 text-purple-600 group-hover/item:text-purple-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <span class="group-hover/item:text-gray-900 transition-colors duration-300">Predictive Analytics</span>
+                            <li class="flex items-center text-gray-700">
+                                <svg class="w-5 h-5 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Predictive Analytics</span>
                             </li>
-                            <li class="flex items-center text-gray-700 group/item">
-                                <div class="relative mr-3">
-                                    <div class="absolute inset-0 bg-purple-100 rounded-full blur-sm group-hover/item:bg-purple-200 transition-colors duration-300"></div>
-                                    <svg class="relative w-5 h-5 text-purple-600 group-hover/item:text-purple-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <span class="group-hover/item:text-gray-900 transition-colors duration-300">Automated Insights</span>
+                            <li class="flex items-center text-gray-700">
+                                <svg class="w-5 h-5 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Automated Insights</span>
                             </li>
-                            <li class="flex items-center text-gray-700 group/item">
-                                <div class="relative mr-3">
-                                    <div class="absolute inset-0 bg-purple-100 rounded-full blur-sm group-hover/item:bg-purple-200 transition-colors duration-300"></div>
-                                    <svg class="relative w-5 h-5 text-purple-600 group-hover/item:text-purple-700 transition-colors duration-300" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <span class="group-hover/item:text-gray-900 transition-colors duration-300">Smart Optimization</span>
+                            <li class="flex items-center text-gray-700">
+                                <svg class="w-5 h-5 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Smart Optimization</span>
                             </li>
                         </ul>
                         
                         <div class="flex items-center justify-between pt-6 border-t border-gray-200">
-                            <a href="/services/" class="group/link inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-all duration-300">
-                                <span class="relative">
-                                    Learn More
-                                    <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover/link:w-full transition-all duration-300"></div>
-                                </span>
-                                <svg class="w-4 h-4 ml-2 transform group-hover/link:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <a href="/services/" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200">
+                                <span>Learn More</span>
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                 </svg>
                             </a>
                             
-                            <a href="/services/" class="group/btn relative overflow-hidden px-6 py-3 rounded-xl bg-purple-500 text-white font-bold shadow-lg hover:shadow-purple-500/50 transform hover:scale-105 transition-all duration-300">
-                                <div class="absolute inset-0 bg-purple-400 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                                <div class="relative">Get Started</div>
+                            <a href="/services/" class="px-6 py-3 rounded-xl bg-purple-500 text-white font-bold shadow-lg hover:bg-purple-600 transition-colors duration-200">
+                                Get Started
                             </a>
                         </div>
                     </div>
@@ -4518,6 +4470,20 @@
     </div>
 </section>
 
+<style>
+    /* Scroll-triggered animations */
+    .scroll-fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .scroll-fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
 <script>
     // Initialize Lucide icons for this page
     if (typeof lucide !== 'undefined') {
@@ -4526,6 +4492,25 @@
     function redirectTo(path) {
         window.location.href = path;
     }
+    
+    // Scroll fade-in animation observer
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        // Observe all elements with scroll-fade-in class
+        document.querySelectorAll('.scroll-fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    });
     
     // Function to purchase a service and add it to cart
     function purchaseService(serviceId, serviceName, defaultPrice) {
