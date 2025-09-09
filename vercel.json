@@ -1,13 +1,30 @@
 {
+    "version": 2,
     "builds": [{
       "src": "socialdots/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+      "config": { 
+        "maxLambdaSize": "50mb", 
+        "runtime": "python3.9"
+      }
     }],
     "routes": [
+      {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      },
       {
         "src": "/(.*)",
         "dest": "socialdots/wsgi.py"
       }
-    ]
+    ],
+    "env": {
+      "DEBUG": "False",
+      "DJANGO_SETTINGS_MODULE": "socialdots.settings"
+    },
+    "functions": {
+      "socialdots/wsgi.py": {
+        "maxDuration": 30
+      }
+    }
 }
