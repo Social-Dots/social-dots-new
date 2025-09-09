@@ -42,6 +42,7 @@ pytz==2023.3
 
 # Text Processing & Markdown
 markdown==3.5.1
+markdownify>=0.11.6
 
 # ckEditor
 django-ckeditor==6.7.0
