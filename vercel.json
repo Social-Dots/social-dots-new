@@ -1,4 +1,32 @@
 {
+    "builds": [
+      {
+        "src": "vercel_app.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "static/**",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "staticfiles/**",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": "/staticfiles/(.*)",
+        "dest": "/staticfiles/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/vercel_app.py"
+      }
+    ],
     "env": {
       "DEBUG": "False",
       "DJANGO_SETTINGS_MODULE": "socialdots.minimal_settings"
