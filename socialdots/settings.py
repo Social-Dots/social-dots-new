@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'import_export',
     'cloudinary',
     'cloudinary_storage',
-    # Force rebuild - removed markdownify dependencies 2025-09-09
+    'markdownify',
+    # Re-added markdownify to fix Vercel deployment issue 2025-09-09
 ]
 
 MIDDLEWARE = [

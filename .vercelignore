@@ -1,0 +1,10 @@
+# Vercel ignore file - force fresh deployment
+__pycache__/
+*.pyc
+.git/
+venv/
+env/
+.env.local
+db.sqlite3
+media/
+logs/
