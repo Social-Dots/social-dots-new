@@ -282,6 +282,33 @@ class Project(models.Model):
     def get_absolute_url(self):
         return reverse('project_detail', kwargs={'slug': self.slug})
 
+    def get_cloudinary_url(self, **options):
+        """
+        Get the Cloudinary URL for the project image with optional transformations
+        """
+        if self.cloudinary_image_id:
+            from .cloudinary_utils import get_optimized_url
+            url = get_optimized_url(self.cloudinary_image_id, **options)
+            if url:  # Only return if URL is valid
+                return url
+        elif self.image:
+            return self.image.url
+        
+        # Return placeholder for projects without images
+        return self.get_placeholder_image()
+
+    def get_placeholder_image(self):
+        """Get a placeholder image based on project type or technology"""
+        from django.templatetags.static import static
+        
+        # AI/Tech projects get a tech placeholder
+        if self.portfolio_type == 'ai':
+            return static('images/placeholders/ai-placeholder.jpg')
+        elif any('AI' in str(tech) or 'Machine Learning' in str(tech) for tech in self.technologies):
+            return static('images/placeholders/ai-placeholder.jpg')
+        else:
+            return static('images/placeholders/project-placeholder.jpg')
+
     def __str__(self):
         return self.title
 
@@ -508,10 +535,26 @@ class Portfolio(models.Model):
         """
         if self.cloudinary_image_id:
             from .cloudinary_utils import get_optimized_url
-            return get_optimized_url(self.cloudinary_image_id, **options)
+            url = get_optimized_url(self.cloudinary_image_id, **options)
+            if url:  # Only return if URL is valid
+                return url
         elif self.image:
             return self.image.url
-        return None
+        
+        # Return placeholder for projects/portfolio without images
+        return self.get_placeholder_image()
+
+    def get_placeholder_image(self):
+        """Get a placeholder image based on portfolio type or technology"""
+        from django.templatetags.static import static
+        
+        # AI/Tech projects get a tech placeholder
+        if hasattr(self, 'portfolio_type') and self.portfolio_type == 'ai':
+            return static('images/placeholders/ai-placeholder.jpg')
+        elif hasattr(self, 'technologies') and any('AI' in tech or 'Machine Learning' in tech for tech in self.technologies):
+            return static('images/placeholders/ai-placeholder.jpg')
+        else:
+            return static('images/placeholders/project-placeholder.jpg')
 
     def __str__(self):
         return self.title

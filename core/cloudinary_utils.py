@@ -39,8 +39,12 @@ def get_optimized_url(public_id, **options):
         **options: Additional options for the URL
         
     Returns:
-        str: The optimized URL
+        str: The optimized URL or None if public_id is invalid
     """
+    # Return None if public_id is empty, None, or invalid
+    if not public_id or public_id.strip() == '':
+        return None
+        
     default_options = {
         'fetch_format': 'auto',
         'quality': 'auto',
@@ -49,8 +53,12 @@ def get_optimized_url(public_id, **options):
     # Merge default options with provided options
     options = {**default_options, **options}
     
-    url, _ = cloudinary_url(public_id, **options)
-    return url
+    try:
+        url, _ = cloudinary_url(public_id, **options)
+        return url
+    except Exception as e:
+        print(f"Cloudinary URL generation failed for public_id '{public_id}': {e}")
+        return None
 
 def delete_image(public_id):
     """
