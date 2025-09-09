@@ -15,44 +15,40 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-# Emergency routes (high priority)
+# Add emergency routes as backup (lower priority)
 if EMERGENCY_MODE:
     urlpatterns += [
         path('emergency/health/', emergency_health, name='emergency_health'),
         path('emergency/test/', emergency_test, name='emergency_test'), 
         path('emergency/', emergency_home, name='emergency_home'),
-        path('', emergency_home, name='home'),  # Emergency home as default
     ]
 
-# Try to include core URLs with error handling
+# Main website URLs
 try:
-    if not EMERGENCY_MODE:
-        # Import complex dependencies only if not in emergency mode
-        from django.contrib.sitemaps.views import sitemap
-        from core.sitemap import StaticViewSitemap, ServiceSitemap, PortfolioSitemap, ProjectSitemap, BlogSitemap
-        
-        sitemaps = {
-            'static': StaticViewSitemap,
-            'services': ServiceSitemap,
-            'portfolio': PortfolioSitemap,
-            'projects': ProjectSitemap,
-            'blog': BlogSitemap,
-        }
-        
-        urlpatterns += [
-            path('ckeditor/', include('ckeditor_uploader.urls')),
-            path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-            path('', include('core.urls')),
-        ]
-    else:
-        # Add core URLs under /core/ prefix in emergency mode
-        urlpatterns += [
-            path('core/', include('core.urls')),
-        ]
-        
+    # Import sitemaps and add full functionality
+    from django.contrib.sitemaps.views import sitemap
+    from core.sitemap import StaticViewSitemap, ServiceSitemap, PortfolioSitemap, ProjectSitemap, BlogSitemap
+    
+    sitemaps = {
+        'static': StaticViewSitemap,
+        'services': ServiceSitemap,
+        'portfolio': PortfolioSitemap,
+        'projects': ProjectSitemap,
+        'blog': BlogSitemap,
+    }
+    
+    urlpatterns += [
+        path('ckeditor/', include('ckeditor_uploader.urls')),
+        path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+        path('', include('core.urls')),  # Main website URLs
+    ]
+    
 except Exception as e:
-    # If anything fails, emergency mode will handle all routing
-    pass
+    # If core URLs fail, provide emergency fallback
+    if EMERGENCY_MODE:
+        urlpatterns += [
+            path('', emergency_home, name='emergency_fallback'),
+        ]
 
 # Serve media files in both development and production
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
