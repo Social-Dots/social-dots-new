@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'import_export',
     'cloudinary',
     'cloudinary_storage',
+    # Force rebuild - removed markdownify dependencies 2025-09-09
 ]
 
 MIDDLEWARE = [
