@@ -2,6 +2,8 @@ import os
 import sys
 from pathlib import Path
 
+# Force Vercel rebuild - 2025-09-09 - markdownify fix
+
 # Add the project root to Python path
 project_root = Path(__file__).resolve().parent
 sys.path.insert(0, str(project_root))

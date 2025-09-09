@@ -1,0 +1,4 @@
+This file forces Vercel to rebuild the deployment.
+Timestamp: 2025-09-09 15:35
+Commit: 500730e
+Issue: Markdownify deployment fix

@@ -27,7 +27,8 @@
     "env": {
       "DEBUG": "False",
       "DJANGO_SETTINGS_MODULE": "socialdots.settings",
-      "PYTHONPATH": "/var/task"
+      "PYTHONPATH": "/var/task",
+      "VERCEL_FORCE_REBUILD": "2025-09-09"
     },
     "functions": {
       "vercel_app.py": {
