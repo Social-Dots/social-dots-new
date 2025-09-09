@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-minimal-emergency-key
 DEBUG = False
 ALLOWED_HOSTS = ['*']
 
-# Minimal INSTALLED_APPS - only Django core
+# Minimal INSTALLED_APPS - Django core + essential dependencies
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth', 
@@ -20,7 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',  # Only our main app
+    'rest_framework',  # Required by core views
+    'core',  # Our main app
 ]
 
 MIDDLEWARE = [
