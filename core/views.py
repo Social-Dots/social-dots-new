@@ -747,9 +747,22 @@ def health_check(request):
         # Check database connection
         SiteConfiguration.objects.exists()
         
+        # Get content counts
+        blog_count = BlogPost.objects.count()
+        project_count = Project.objects.count()
+        portfolio_count = Portfolio.objects.count()
+        service_count = Service.objects.count()
+        
         # Check external services
         health_status = {
             'database': 'healthy',
+            'content': {
+                'blogs': blog_count,
+                'projects': project_count,
+                'portfolio': portfolio_count,
+                'services': service_count,
+                'has_content': blog_count > 0 or project_count > 0 or portfolio_count > 0
+            },
             'frappe': 'unknown',
             'ai_agent': 'unknown',
             'timestamp': timezone.now().isoformat()
@@ -931,3 +944,82 @@ def portfolio_detail_api(request, portfolio_id):
         
     except Portfolio.DoesNotExist:
         return JsonResponse({"error": "Portfolio not found"}, status=404)
+
+
+@require_http_methods(["POST"])
+def setup_database(request):
+    """Trigger database setup with content loading"""
+    try:
+        from django.core.management import call_command
+        
+        results = {
+            'status': 'success',
+            'operations': [],
+            'timestamp': timezone.now().isoformat()
+        }
+        
+        # Check current content counts
+        initial_blogs = BlogPost.objects.count()
+        initial_projects = Project.objects.count() 
+        initial_portfolio = Portfolio.objects.count()
+        
+        results['initial_counts'] = {
+            'blogs': initial_blogs,
+            'projects': initial_projects,
+            'portfolio': initial_portfolio
+        }
+        
+        # Run migrations
+        call_command('migrate', verbosity=1)
+        results['operations'].append('migrations_complete')
+        
+        # Setup initial data if needed
+        try:
+            site_config = SiteConfiguration.objects.first()
+            if not site_config:
+                call_command('setup_socialdots', verbosity=1)
+                results['operations'].append('site_configuration_created')
+        except Exception as e:
+            results['operations'].append(f'site_config_error: {str(e)}')
+        
+        # Load demo content if needed
+        if initial_blogs == 0 and initial_projects == 0 and initial_portfolio == 0:
+            try:
+                call_command('load_demo_content', verbosity=1)
+                results['operations'].append('demo_content_loaded')
+            except Exception as e:
+                results['operations'].append(f'demo_content_error: {str(e)}')
+            
+            try:
+                call_command('load_demo_pricing', verbosity=1)
+                results['operations'].append('demo_pricing_loaded')
+            except Exception as e:
+                results['operations'].append(f'demo_pricing_error: {str(e)}')
+        else:
+            results['operations'].append('content_already_exists')
+        
+        # Final content counts
+        final_blogs = BlogPost.objects.count()
+        final_projects = Project.objects.count()
+        final_portfolio = Portfolio.objects.count()
+        
+        results['final_counts'] = {
+            'blogs': final_blogs,
+            'projects': final_projects,
+            'portfolio': final_portfolio
+        }
+        
+        results['content_added'] = {
+            'blogs': final_blogs - initial_blogs,
+            'projects': final_projects - initial_projects,
+            'portfolio': final_portfolio - initial_portfolio
+        }
+        
+        return JsonResponse(results)
+        
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'error': str(e),
+            'timestamp': timezone.now().isoformat()
+        }, status=500)

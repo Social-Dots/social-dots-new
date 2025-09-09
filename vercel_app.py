@@ -89,15 +89,34 @@ def setup_vercel_database():
         # Continue anyway - don't break the app
 
 # Run database setup on cold start
-print("🔍 Vercel environment check:")
+print("🔍 Environment check:")
 print(f"VERCEL env var: {os.environ.get('VERCEL')}")
-print(f"Python path: {sys.path}")
+print(f"VERCEL_URL env var: {os.environ.get('VERCEL_URL')}")
+print(f"LAMBDA_TASK_ROOT: {os.environ.get('LAMBDA_TASK_ROOT')}")
+print(f"AWS_LAMBDA_FUNCTION_NAME: {os.environ.get('AWS_LAMBDA_FUNCTION_NAME')}")
 
-if os.environ.get('VERCEL'):
-    print("📦 Running in Vercel environment - setting up database...")
+# Check multiple ways Vercel might be detected
+is_vercel = (
+    os.environ.get('VERCEL') or 
+    os.environ.get('VERCEL_URL') or
+    os.environ.get('LAMBDA_TASK_ROOT') or  # Vercel serverless functions
+    'vercel' in os.environ.get('HOSTNAME', '').lower() or
+    '/var/task' in str(Path(__file__).resolve())  # Vercel lambda path
+)
+
+if is_vercel:
+    print("📦 Detected Vercel/serverless environment - setting up database...")
     setup_vercel_database()
 else:
-    print("🏠 Running in local environment - skipping database setup")
+    print("🏠 Running in local environment")
+    # Even in local, check if we need content for development
+    try:
+        from core.models import BlogPost
+        if BlogPost.objects.count() == 0:
+            print("🔧 No content found in local development - running setup...")
+            setup_vercel_database()
+    except Exception as e:
+        print(f"🔍 Local content check failed: {e}")
 
 # Get the WSGI application
 application = get_wsgi_application()

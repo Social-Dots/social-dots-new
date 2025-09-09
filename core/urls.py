@@ -45,8 +45,9 @@ urlpatterns = [
     path('calendar/callback/', views.calendar_callback, name='calendar_callback'),
     path('book-appointment/', views.book_appointment_view, name='book_appointment'),
     
-    # Health check
+    # Health check and database setup
     path('health/', views.health_check, name='health_check'),
+    path('setup-database/', views.setup_database, name='setup_database'),
     
     # AI Thumbnail Generator React App
     path('ai-thumbnail-generator/', TemplateView.as_view(template_name='index.html'), name='ai_thumbnail_generator'),
