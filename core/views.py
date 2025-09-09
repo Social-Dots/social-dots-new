@@ -946,9 +946,88 @@ def portfolio_detail_api(request, portfolio_id):
         return JsonResponse({"error": "Portfolio not found"}, status=404)
 
 
-@require_http_methods(["POST"])
+@require_http_methods(["GET", "POST"])
 def setup_database(request):
     """Trigger database setup with content loading"""
+    
+    # Handle GET request with a simple interface
+    if request.method == 'GET':
+        return HttpResponse('''
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Database Setup - Social Dots</title>
+            <style>
+                body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; padding: 20px; }
+                .button { background: #2563EB; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+                .button:hover { background: #1E40AF; }
+                .info { background: #f0f9ff; padding: 20px; border-radius: 5px; margin: 20px 0; }
+                .warning { background: #fef3cd; padding: 20px; border-radius: 5px; margin: 20px 0; }
+            </style>
+        </head>
+        <body>
+            <h1>🔧 Database Setup - Social Dots Inc.</h1>
+            <div class="info">
+                <h3>This tool will:</h3>
+                <ul>
+                    <li>Load your actual localhost content and branding</li>
+                    <li>Set up Social Dots Inc. site configuration</li>
+                    <li>Import your blog posts, projects, and team data</li>
+                    <li>Ensure the site matches your localhost development</li>
+                </ul>
+            </div>
+            <div class="warning">
+                <strong>⚠️ Note:</strong> This will replace any existing content with your localhost data.
+            </div>
+            
+            <button class="button" onclick="setupDatabase()">🚀 Setup Database Now</button>
+            
+            <div id="results" style="margin-top: 20px; display: none;">
+                <h3>Results:</h3>
+                <pre id="output" style="background: #f5f5f5; padding: 15px; border-radius: 5px;"></pre>
+            </div>
+            
+            <script>
+                async function setupDatabase() {
+                    document.getElementById('results').style.display = 'block';
+                    document.getElementById('output').textContent = 'Setting up database...';
+                    
+                    try {
+                        const response = await fetch('/setup-database/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': getCookie('csrftoken')
+                            }
+                        });
+                        
+                        const data = await response.json();
+                        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+                    } catch (error) {
+                        document.getElementById('output').textContent = 'Error: ' + error.message;
+                    }
+                }
+                
+                function getCookie(name) {
+                    let cookieValue = null;
+                    if (document.cookie && document.cookie !== '') {
+                        const cookies = document.cookie.split(';');
+                        for (let i = 0; i < cookies.length; i++) {
+                            const cookie = cookies[i].trim();
+                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+            </script>
+        </body>
+        </html>
+        ''')
+    
+    # Handle POST request with actual database setup
     try:
         from django.core.management import call_command
         
