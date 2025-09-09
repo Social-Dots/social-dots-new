@@ -45,4 +45,5 @@ django-ckeditor==6.7.0
 cloudinary==1.38.0
 django-cloudinary-storage==0.3.0
 markdown==3.5.1
+markdownify==0.11.6
 django-markdownify==0.9.3
