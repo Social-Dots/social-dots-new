@@ -204,8 +204,8 @@
                 </div>
                 
                 <!-- Corner Accents with Animation -->
-                <div class="absolute top-0 right-0 w-16 h-16 bg-[#0B32A4]/10 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-6 group-hover:-translate-y-6 transition-all duration-700 animate-float-slow"></div>
-                <div class="absolute bottom-0 left-0 w-16 h-16 bg-[#FFA300]/10 rounded-tr-full transform -translate-x-8 translate-y-8 group-hover:-translate-x-6 group-hover:translate-y-6 transition-all duration-700 animate-float-reverse-slow"></div>
+                <div class="absolute top-0 right-0 w-16 h-16 bg-[#0B32A4]/5 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-6 group-hover:-translate-y-6 transition-all duration-700 animate-float-slow"></div>
+                <div class="absolute bottom-0 left-0 w-16 h-16 bg-[#FFA300]/5 rounded-tr-full transform -translate-x-8 translate-y-8 group-hover:-translate-x-6 group-hover:translate-y-6 transition-all duration-700 animate-float-reverse-slow"></div>
 
                 <!-- Card Content with Enhanced Styling -->
                 <div class="relative p-4 sm:p-6 md:p-8 h-full flex flex-col">
@@ -273,7 +273,7 @@
                     <!-- Action Buttons -->
                     <div class="space-y-3 mt-auto">
                         {% if service.price_type == 'custom' %}
-                            <a href="/contact/?service={{ service.id }}" class="w-full bg-[#0B32A4] text-white justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group/btn text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 shadow-md hover:shadow-lg rounded-lg">
+                            <a href="/contact/?service={{ service.id }}" class="w-full bg-[#0B32A4] text-white flex justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group/btn text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 shadow-md hover:shadow-lg rounded-lg">
                                 <span class="relative z-10 flex items-center justify-center">
                                     <i data-lucide="message-circle" class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover/btn:animate-pulse"></i>
                                     Get Quote
@@ -284,7 +284,7 @@
                             </a>
                         {% endif %}
                         
-                        <a href="/services/{{ service.slug }}/" class="w-full btn-ghost justify-center group/btn relative overflow-hidden text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 border border-[#0B32A4]/20 hover:border-[#0B32A4]/40 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+                        <a href="/services/{{ service.slug }}/" class="w-full btn-ghost flex justify-center group/btn relative overflow-hidden text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 border border-[#0B32A4]/20 hover:border-[#0B32A4]/40 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
                             <span class="relative z-10 flex items-center justify-center text-[#0B32A4] group-hover/btn:text-[#0E42CE] transition-colors duration-300">
                                 <i data-lucide="info" class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover/btn:rotate-12 transition-transform duration-300"></i>
                                 Learn More
