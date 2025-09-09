@@ -11,9 +11,17 @@
       {
         "src": "staticfiles/**",
         "use": "@vercel/static"
+      },
+      {
+        "src": "assets/**",
+        "use": "@vercel/static"
       }
     ],
     "routes": [
+      {
+        "src": "/assets/(.*)",
+        "dest": "/staticfiles/assets/$1"
+      },
       {
         "src": "/static/(.*)",
         "dest": "/static/$1"
