@@ -658,19 +658,23 @@ function initPortfolioFilters() {
     
     // Event listener for search input
     let searchTimeout;
-    searchInput.addEventListener('input', function() {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            searchTerm = this.value.trim();
-            filterPortfolioItems();
-        }, 300); // Debounce search for better performance
-    });
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchTerm = this.value.trim();
+                filterPortfolioItems();
+            }, 300); // Debounce search for better performance
+        });
+    }
     
     // Event listener for sort select
-    sortSelect.addEventListener('change', function() {
-        currentSort = this.value;
-        sortPortfolioItems();
-    });
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            currentSort = this.value;
+            sortPortfolioItems();
+        });
+    }
     
     // Initialize filters and sorting
     updateCategoryPills();
