@@ -1,0 +1,1668 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 4,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 4,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 4,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 4,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 5,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 5,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 5,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 5,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 6,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 6,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 6,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 6,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add ai agent log",
+    "content_type": 7,
+    "codename": "add_aiagentlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change ai agent log",
+    "content_type": 7,
+    "codename": "change_aiagentlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete ai agent log",
+    "content_type": 7,
+    "codename": "delete_aiagentlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view ai agent log",
+    "content_type": 7,
+    "codename": "view_aiagentlog"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add calendar event",
+    "content_type": 8,
+    "codename": "add_calendarevent"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change calendar event",
+    "content_type": 8,
+    "codename": "change_calendarevent"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete calendar event",
+    "content_type": 8,
+    "codename": "delete_calendarevent"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view calendar event",
+    "content_type": 8,
+    "codename": "view_calendarevent"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add Portfolio Category",
+    "content_type": 9,
+    "codename": "add_portfoliocategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change Portfolio Category",
+    "content_type": 9,
+    "codename": "change_portfoliocategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete Portfolio Category",
+    "content_type": 9,
+    "codename": "delete_portfoliocategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view Portfolio Category",
+    "content_type": 9,
+    "codename": "view_portfoliocategory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add pricing plan",
+    "content_type": 10,
+    "codename": "add_pricingplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change pricing plan",
+    "content_type": 10,
+    "codename": "change_pricingplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete pricing plan",
+    "content_type": 10,
+    "codename": "delete_pricingplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view pricing plan",
+    "content_type": 10,
+    "codename": "view_pricingplan"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add project",
+    "content_type": 11,
+    "codename": "add_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change project",
+    "content_type": 11,
+    "codename": "change_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete project",
+    "content_type": 11,
+    "codename": "delete_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view project",
+    "content_type": 11,
+    "codename": "view_project"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add service",
+    "content_type": 12,
+    "codename": "add_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change service",
+    "content_type": 12,
+    "codename": "change_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete service",
+    "content_type": 12,
+    "codename": "delete_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view service",
+    "content_type": 12,
+    "codename": "view_service"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Site Configuration",
+    "content_type": 13,
+    "codename": "add_siteconfiguration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Site Configuration",
+    "content_type": 13,
+    "codename": "change_siteconfiguration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Site Configuration",
+    "content_type": 13,
+    "codename": "delete_siteconfiguration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Site Configuration",
+    "content_type": 13,
+    "codename": "view_siteconfiguration"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add team member",
+    "content_type": 14,
+    "codename": "add_teammember"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change team member",
+    "content_type": 14,
+    "codename": "change_teammember"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete team member",
+    "content_type": 14,
+    "codename": "delete_teammember"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view team member",
+    "content_type": 14,
+    "codename": "view_teammember"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add testimonial",
+    "content_type": 15,
+    "codename": "add_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change testimonial",
+    "content_type": 15,
+    "codename": "change_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete testimonial",
+    "content_type": 15,
+    "codename": "delete_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view testimonial",
+    "content_type": 15,
+    "codename": "view_testimonial"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add service pricing option",
+    "content_type": 16,
+    "codename": "add_servicepricingoption"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change service pricing option",
+    "content_type": 16,
+    "codename": "change_servicepricingoption"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete service pricing option",
+    "content_type": 16,
+    "codename": "delete_servicepricingoption"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view service pricing option",
+    "content_type": 16,
+    "codename": "view_servicepricingoption"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add Portfolio",
+    "content_type": 17,
+    "codename": "add_portfolio"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change Portfolio",
+    "content_type": 17,
+    "codename": "change_portfolio"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete Portfolio",
+    "content_type": 17,
+    "codename": "delete_portfolio"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view Portfolio",
+    "content_type": 17,
+    "codename": "view_portfolio"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add order",
+    "content_type": 18,
+    "codename": "add_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change order",
+    "content_type": 18,
+    "codename": "change_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete order",
+    "content_type": 18,
+    "codename": "delete_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view order",
+    "content_type": 18,
+    "codename": "view_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add lead",
+    "content_type": 19,
+    "codename": "add_lead"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change lead",
+    "content_type": 19,
+    "codename": "change_lead"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete lead",
+    "content_type": 19,
+    "codename": "delete_lead"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view lead",
+    "content_type": 19,
+    "codename": "view_lead"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add blog post",
+    "content_type": 20,
+    "codename": "add_blogpost"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change blog post",
+    "content_type": 20,
+    "codename": "change_blogpost"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete blog post",
+    "content_type": 20,
+    "codename": "delete_blogpost"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view blog post",
+    "content_type": 20,
+    "codename": "view_blogpost"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$1XEeddjWJ6jSgdZiOZUdgJ$xj+DHrexFQHxZcj9RGeKUsbUjB/0HqBRiKJQQD7Lx/Q=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "alishafique",
+    "first_name": "Ali",
+    "last_name": "Shafique",
+    "email": "ali@socialdots.ca",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-09-04T17:09:20.227Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "core",
+    "model": "aiagentlog"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "core",
+    "model": "calendarevent"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "core",
+    "model": "portfoliocategory"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "core",
+    "model": "pricingplan"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "core",
+    "model": "project"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "core",
+    "model": "service"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "core",
+    "model": "siteconfiguration"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "core",
+    "model": "teammember"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "core",
+    "model": "testimonial"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "core",
+    "model": "servicepricingoption"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "core",
+    "model": "portfolio"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "core",
+    "model": "order"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "core",
+    "model": "lead"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "core",
+    "model": "blogpost"
+  }
+},
+{
+  "model": "core.siteconfiguration",
+  "pk": 1,
+  "fields": {
+    "site_name": "Social Dots Inc.",
+    "tagline": "Empowering Canadian businesses to thrive in a constantly evolving digital world",
+    "logo": null,
+    "logo_dark": null,
+    "favicon": null,
+    "phone": "416-556-6961",
+    "email": "hello@socialdots.ca",
+    "contact_email": "ali@socialdots.ca",
+    "address": "Toronto, Ontario, Canada",
+    "website_url": "https://socialdots.ca",
+    "primary_color": "#2563EB",
+    "secondary_color": "#1E40AF",
+    "accent_color": "#3B82F6",
+    "social_facebook": "",
+    "social_twitter": "",
+    "social_linkedin": "",
+    "social_instagram": "",
+    "google_analytics_id": "",
+    "meta_description": "Strategic AI integration and digital solutions for Canadian businesses. 15+ years of Salesforce and marketing automation expertise.",
+    "legal_name": "Social Dots Inc.",
+    "business_number": "",
+    "created_at": "2025-09-04T17:09:22.372Z",
+    "updated_at": "2025-09-04T17:09:22.372Z"
+  }
+},
+{
+  "model": "core.teammember",
+  "pk": 1,
+  "fields": {
+    "name": "Ali Shafique",
+    "position": "Founder & CEO",
+    "bio": "15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach and spiritual guide for purpose-driven entrepreneurs.",
+    "image": null,
+    "email": "ali@socialdots.ca",
+    "phone": "416-556-6961",
+    "linkedin": "https://linkedin.com/in/alishafique",
+    "twitter": "",
+    "is_active": true,
+    "order": 1,
+    "created_at": "2025-09-04T17:09:22.382Z",
+    "updated_at": "2025-09-04T17:09:22.382Z"
+  }
+},
+{
+  "model": "core.teammember",
+  "pk": 2,
+  "fields": {
+    "name": "Hooria Amiri",
+    "position": "Video Editor & Content Creator",
+    "bio": "Skilled video editor and content creator specializing in creating engaging visual content that aligns with brand messaging and strategic goals.",
+    "image": null,
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "twitter": "",
+    "is_active": true,
+    "order": 2,
+    "created_at": "2025-09-04T17:09:22.390Z",
+    "updated_at": "2025-09-04T17:09:22.390Z"
+  }
+},
+{
+  "model": "core.teammember",
+  "pk": 3,
+  "fields": {
+    "name": "Ali Hayyan",
+    "position": "Content & SEO Specialist",
+    "bio": "Expert in content strategy and SEO optimization, focused on creating compelling content that drives organic growth and engagement.",
+    "image": null,
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "twitter": "",
+    "is_active": true,
+    "order": 3,
+    "created_at": "2025-09-04T17:09:22.399Z",
+    "updated_at": "2025-09-04T17:09:22.399Z"
+  }
+},
+{
+  "model": "core.teammember",
+  "pk": 4,
+  "fields": {
+    "name": "The Ghana",
+    "position": "Digital Strategist & Social Media Manager",
+    "bio": "Digital strategist specializing in social media management and comprehensive digital marketing strategies for business growth.",
+    "image": null,
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "twitter": "",
+    "is_active": true,
+    "order": 4,
+    "created_at": "2025-09-04T17:09:22.406Z",
+    "updated_at": "2025-09-04T17:09:22.407Z"
+  }
+},
+{
+  "model": "core.service",
+  "pk": 1,
+  "fields": {
+    "title": "Digital Strategy & Consulting",
+    "slug": "digital-strategy-consulting",
+    "description": "Comprehensive digital strategy development that connects business goals with smart, technology-enabled execution. We provide strategic planning, technology assessment, and AI integration strategy tailored to your unique business needs.",
+    "short_description": "Strategic planning and technology assessment for sustainable digital growth",
+    "icon": "fas fa-chart-line",
+    "image": "",
+    "price": null,
+    "price_type": "custom",
+    "features": [
+      "Comprehensive digital strategy document",
+      "Technology roadmap and recommendations",
+      "AI integration plan",
+      "Implementation timeline",
+      "ROI projections",
+      "Competitive analysis",
+      "Market research"
+    ],
+    "is_featured": true,
+    "is_active": true,
+    "order": 1,
+    "stripe_price_id": "",
+    "service_type": "other",
+    "created_at": "2025-09-04T17:09:22.423Z",
+    "updated_at": "2025-09-04T17:09:22.423Z"
+  }
+},
+{
+  "model": "core.service",
+  "pk": 2,
+  "fields": {
+    "title": "Salesforce + CRM Optimization",
+    "slug": "salesforce-crm-optimization",
+    "description": "Expert Salesforce configuration, customization, and optimization. We handle system setup, process optimization through workflow automation, lead scoring, pipeline management, and comprehensive training and support.",
+    "short_description": "Expert Salesforce setup, optimization, and automation",
+    "icon": "fas fa-users-cog",
+    "image": "",
+    "price": null,
+    "price_type": "custom",
+    "features": [
+      "Configured Salesforce instance",
+      "Automated workflows",
+      "Lead scoring setup",
+      "Pipeline management",
+      "Training materials",
+      "Documentation",
+      "Performance dashboards"
+    ],
+    "is_featured": true,
+    "is_active": true,
+    "order": 2,
+    "stripe_price_id": "",
+    "service_type": "other",
+    "created_at": "2025-09-04T17:09:22.436Z",
+    "updated_at": "2025-09-04T17:09:22.436Z"
+  }
+},
+{
+  "model": "core.service",
+  "pk": 3,
+  "fields": {
+    "title": "AI-Driven Campaign Optimization",
+    "slug": "ai-driven-campaign-optimization",
+    "description": "Strategic AI integration for campaign optimization using tools like ChatGPT, Jasper, and advanced analytics. We set up automation workflows, performance optimization, AI-powered insights, and predictive analytics for measurable business benefits.",
+    "short_description": "AI integration and automation for campaign optimization",
+    "icon": "fas fa-robot",
+    "image": "",
+    "price": null,
+    "price_type": "custom",
+    "features": [
+      "AI integration strategy",
+      "Automated workflows",
+      "Performance dashboards",
+      "Predictive analytics",
+      "Optimization reports",
+      "ROI tracking",
+      "Tool integration"
+    ],
+    "is_featured": true,
+    "is_active": true,
+    "order": 3,
+    "stripe_price_id": "",
+    "service_type": "other",
+    "created_at": "2025-09-04T17:09:22.446Z",
+    "updated_at": "2025-09-04T17:09:22.446Z"
+  }
+},
+{
+  "model": "core.service",
+  "pk": 4,
+  "fields": {
+    "title": "AI-Powered Marketing Automation",
+    "slug": "ai-marketing-automation",
+    "description": "Strategic AI integration for marketing campaigns, customer segmentation, and personalized content delivery. We implement smart automation that learns from customer behavior and optimizes performance.\n\nPerfect for businesses ready to leverage AI for improved customer engagement, lead scoring, and conversion optimization. Includes setup, training, and performance monitoring.",
+    "short_description": "Strategic AI integration for campaign optimization and measurable business benefits.",
+    "icon": "",
+    "image": "",
+    "price": "200.00",
+    "price_type": "hourly",
+    "features": [
+      "AI Strategy Development",
+      "Marketing Automation Setup",
+      "Customer Segmentation",
+      "Personalized Content Delivery",
+      "Performance Analytics",
+      "Continuous Optimization"
+    ],
+    "is_featured": true,
+    "is_active": true,
+    "order": 3,
+    "stripe_price_id": "",
+    "service_type": "other",
+    "created_at": "2025-09-04T17:10:11.658Z",
+    "updated_at": "2025-09-04T17:10:11.658Z"
+  }
+},
+{
+  "model": "core.service",
+  "pk": 5,
+  "fields": {
+    "title": "Website Development & Design",
+    "slug": "website-development-design",
+    "description": "Modern, responsive website development using the latest technologies. We create websites that not only look great but also drive conversions and support your business goals.\n\nFrom simple business websites to complex web applications, we ensure optimal performance, SEO optimization, and mobile responsiveness. Includes ongoing maintenance and support.",
+    "short_description": "Modern, responsive websites that drive conversions and support business growth.",
+    "icon": "",
+    "image": "",
+    "price": null,
+    "price_type": "custom",
+    "features": [
+      "Responsive Web Design",
+      "Modern Framework Implementation",
+      "SEO Optimization",
+      "Performance Optimization",
+      "Content Management System",
+      "Ongoing Maintenance"
+    ],
+    "is_featured": false,
+    "is_active": true,
+    "order": 4,
+    "stripe_price_id": "",
+    "service_type": "other",
+    "created_at": "2025-09-04T17:10:11.674Z",
+    "updated_at": "2025-09-04T17:10:11.674Z"
+  }
+},
+{
+  "model": "core.service",
+  "pk": 6,
+  "fields": {
+    "title": "Marketing Campaign Management",
+    "slug": "marketing-campaign-management",
+    "description": "End-to-end marketing campaign management across digital channels. We handle strategy, execution, monitoring, and optimization to ensure maximum ROI for your marketing spend.\n\nIncludes social media management, email marketing, paid advertising, content creation, and performance analytics. Perfect for businesses wanting professional marketing management.",
+    "short_description": "Complete marketing campaign management for maximum ROI across all digital channels.",
+    "icon": "",
+    "image": "",
+    "price": "3000.00",
+    "price_type": "monthly",
+    "features": [
+      "Multi-Channel Strategy",
+      "Content Creation & Curation",
+      "Social Media Management",
+      "Email Marketing Campaigns",
+      "Paid Advertising Management",
+      "Performance Analytics & Reporting"
+    ],
+    "is_featured": true,
+    "is_active": true,
+    "order": 5,
+    "stripe_price_id": "",
+    "service_type": "other",
+    "created_at": "2025-09-04T17:10:11.688Z",
+    "updated_at": "2025-09-04T17:10:11.688Z"
+  }
+},
+{
+  "model": "core.service",
+  "pk": 7,
+  "fields": {
+    "title": "Business Process Automation",
+    "slug": "business-process-automation",
+    "description": "Streamline your business operations with intelligent automation solutions. We identify repetitive tasks and implement automated workflows that save time and reduce errors.\n\nFrom simple task automation to complex business process optimization, we help Canadian businesses operate more efficiently while maintaining quality and compliance.",
+    "short_description": "Intelligent automation solutions that streamline operations and reduce manual work.",
+    "icon": "",
+    "image": "",
+    "price": "4500.00",
+    "price_type": "fixed",
+    "features": [
+      "Process Analysis & Mapping",
+      "Automation Strategy Development",
+      "Workflow Implementation",
+      "Integration with Existing Tools",
+      "Quality Assurance Testing",
+      "Training & Documentation"
+    ],
+    "is_featured": false,
+    "is_active": true,
+    "order": 6,
+    "stripe_price_id": "",
+    "service_type": "other",
+    "created_at": "2025-09-04T17:10:11.698Z",
+    "updated_at": "2025-09-04T17:10:11.698Z"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 1,
+  "fields": {
+    "name": "Starter",
+    "description": "Perfect for small businesses getting started with digital transformation. Includes essential tools and support to establish your digital presence.",
+    "price": "500.00",
+    "price_period": "monthly",
+    "features": [
+      "Digital Strategy Consultation (2 hours/month)",
+      "Basic Salesforce Setup",
+      "Email Marketing Automation",
+      "Monthly Performance Reports",
+      "Email Support",
+      "Canadian Business Compliance"
+    ],
+    "is_popular": false,
+    "is_active": true,
+    "order": 1,
+    "stripe_price_id": "",
+    "created_at": "2025-09-04T17:10:11.708Z",
+    "updated_at": "2025-09-04T17:10:11.708Z"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 2,
+  "fields": {
+    "name": "Professional",
+    "description": "Comprehensive digital solutions for growing businesses. Advanced automation, AI integration, and dedicated support for scaling operations.",
+    "price": "1200.00",
+    "price_period": "monthly",
+    "features": [
+      "Digital Strategy Consultation (4 hours/month)",
+      "Advanced Salesforce Optimization",
+      "AI-Powered Marketing Automation",
+      "Custom Workflow Development",
+      "Bi-weekly Performance Reviews",
+      "Priority Phone & Email Support",
+      "Canadian Market Analysis",
+      "Integration with Existing Tools"
+    ],
+    "is_popular": true,
+    "is_active": true,
+    "order": 2,
+    "stripe_price_id": "",
+    "created_at": "2025-09-04T17:10:11.725Z",
+    "updated_at": "2025-09-04T17:10:11.725Z"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 3,
+  "fields": {
+    "name": "Enterprise",
+    "description": "Full-service digital transformation for established businesses. Complete automation, custom development, and strategic partnership.",
+    "price": "2500.00",
+    "price_period": "monthly",
+    "features": [
+      "Dedicated Strategy Consultant (8 hours/month)",
+      "Complete Salesforce Ecosystem Management",
+      "Advanced AI & Machine Learning Integration",
+      "Custom Application Development",
+      "Weekly Strategy Sessions",
+      "24/7 Priority Support",
+      "Canadian Compliance & Privacy Expertise",
+      "Multi-Platform Integration",
+      "Quarterly Business Reviews",
+      "White-Label Solutions Available"
+    ],
+    "is_popular": false,
+    "is_active": true,
+    "order": 3,
+    "stripe_price_id": "",
+    "created_at": "2025-09-04T17:10:11.737Z",
+    "updated_at": "2025-09-04T17:10:11.737Z"
+  }
+},
+{
+  "model": "core.pricingplan",
+  "pk": 4,
+  "fields": {
+    "name": "Digital Transformation Package",
+    "description": "Complete one-time digital overhaul for businesses ready to modernize their entire operation. Includes strategy, implementation, and training.",
+    "price": "15000.00",
+    "price_period": "one_time",
+    "features": [
+      "Complete Digital Audit & Strategy",
+      "Salesforce Implementation & Optimization",
+      "Website Development & Design",
+      "Marketing Automation Setup",
+      "Business Process Automation",
+      "Team Training & Documentation",
+      "Canadian Market Research",
+      "6 Months Post-Launch Support",
+      "Performance Optimization",
+      "ROI Tracking & Analytics"
+    ],
+    "is_popular": false,
+    "is_active": true,
+    "order": 4,
+    "stripe_price_id": "",
+    "created_at": "2025-09-04T17:10:11.747Z",
+    "updated_at": "2025-09-04T17:10:11.747Z"
+  }
+},
+{
+  "model": "core.project",
+  "pk": 1,
+  "fields": {
+    "title": "AI-Powered Customer Service Platform for TechCorp Toronto",
+    "slug": "ai-customer-service-techcorp-toronto",
+    "client_name": "TechCorp Toronto",
+    "description": "Complete transformation of customer service operations using AI chatbots, automated ticket routing, and predictive analytics. Resulted in 60% reduction in response times and 40% improvement in customer satisfaction scores.",
+    "image": "",
+    "cloudinary_image_id": null,
+    "gallery": [],
+    "technologies": [
+      "ChatGPT API",
+      "Salesforce Service Cloud",
+      "Python",
+      "React",
+      "AWS Lambda"
+    ],
+    "portfolio_type": "other",
+    "project_url": "",
+    "github_url": "",
+    "status": "completed",
+    "start_date": "2024-06-01",
+    "end_date": "2024-09-15",
+    "is_featured": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.496Z",
+    "updated_at": "2025-09-04T17:09:48.496Z"
+  }
+},
+{
+  "model": "core.project",
+  "pk": 2,
+  "fields": {
+    "title": "Salesforce CRM Overhaul for MapleTech Inc.",
+    "slug": "salesforce-crm-overhaul-mapletech",
+    "client_name": "MapleTech Inc.",
+    "description": "Complete Salesforce implementation and optimization including custom objects, automated workflows, advanced reporting, and team training. Increased sales productivity by 65% and improved lead conversion rates by 45%.",
+    "image": "",
+    "cloudinary_image_id": null,
+    "gallery": [],
+    "technologies": [
+      "Salesforce Sales Cloud",
+      "Salesforce Service Cloud",
+      "Apex",
+      "Lightning Components",
+      "Pardot"
+    ],
+    "portfolio_type": "other",
+    "project_url": "",
+    "github_url": "",
+    "status": "completed",
+    "start_date": "2024-03-01",
+    "end_date": "2024-07-30",
+    "is_featured": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.506Z",
+    "updated_at": "2025-09-04T17:09:48.506Z"
+  }
+},
+{
+  "model": "core.project",
+  "pk": 3,
+  "fields": {
+    "title": "Digital Marketing Automation for VancouverStart",
+    "slug": "digital-marketing-automation-vancouverstart",
+    "client_name": "VancouverStart",
+    "description": "End-to-end marketing automation implementation including lead nurturing campaigns, social media automation, and analytics dashboard. Achieved 300% increase in qualified leads and 40% reduction in customer acquisition costs.",
+    "image": "",
+    "cloudinary_image_id": null,
+    "gallery": [],
+    "technologies": [
+      "HubSpot",
+      "Google Analytics",
+      "Facebook Ads API",
+      "Zapier",
+      "Custom Integrations"
+    ],
+    "portfolio_type": "other",
+    "project_url": "",
+    "github_url": "",
+    "status": "completed",
+    "start_date": "2024-01-15",
+    "end_date": "2024-05-20",
+    "is_featured": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.515Z",
+    "updated_at": "2025-09-04T17:09:48.515Z"
+  }
+},
+{
+  "model": "core.project",
+  "pk": 4,
+  "fields": {
+    "title": "E-commerce Platform Integration for Ottawa Retail",
+    "slug": "ecommerce-platform-integration-ottawa-retail",
+    "client_name": "Ottawa Retail Solutions",
+    "description": "Comprehensive e-commerce platform development with inventory management, payment processing, and customer analytics. Increased online sales by 250% and improved operational efficiency by 70%.",
+    "image": "",
+    "cloudinary_image_id": null,
+    "gallery": [],
+    "technologies": [
+      "Shopify Plus",
+      "React",
+      "Node.js",
+      "Stripe",
+      "Google Analytics",
+      "Mailchimp"
+    ],
+    "portfolio_type": "other",
+    "project_url": "",
+    "github_url": "",
+    "status": "completed",
+    "start_date": "2024-02-01",
+    "end_date": "2024-06-15",
+    "is_featured": false,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.523Z",
+    "updated_at": "2025-09-04T17:09:48.523Z"
+  }
+},
+{
+  "model": "core.project",
+  "pk": 5,
+  "fields": {
+    "title": "AI Thumbnail Generator (ThumbAI)",
+    "slug": "thumb-ai",
+    "client_name": "Social Dots Inc.",
+    "description": "<h3>AI-Powered Real Estate Thumbnail Generation</h3>\n<p>An innovative AI-powered tool that automatically generates professional marketing thumbnails for real estate listings from a single photo. This cutting-edge application leverages advanced machine learning algorithms to enhance property images with sophisticated layouts, typography, and branding elements.</p>\n\n<h4>Key Features:</h4>\n<ul>\n<li><strong>Intelligent Image Processing:</strong> Advanced AI algorithms analyze property photos and apply optimal enhancements</li>\n<li><strong>Automated Layout Generation:</strong> Creates multiple thumbnail variations with professional layouts</li>\n<li><strong>Brand Consistency:</strong> Maintains consistent branding across all generated thumbnails</li>\n<li><strong>One-Click Generation:</strong> Transform raw property photos into marketing-ready thumbnails instantly</li>\n<li><strong>Multi-Format Support:</strong> Generates thumbnails optimized for various social media platforms</li>\n</ul>\n\n<h4>Technology Stack:</h4>\n<p>Built using React.js, Node.js, Python AI/ML libraries, and integrated with cloud-based image processing services.</p>\n\n<h4>Results:</h4>\n<p>Reduces thumbnail creation time from hours to seconds while maintaining professional quality and brand consistency.</p>",
+    "image": "",
+    "cloudinary_image_id": null,
+    "gallery": [],
+    "technologies": [
+      "AI",
+      "Machine Learning",
+      "React",
+      "Python",
+      "Image Processing",
+      "Automation"
+    ],
+    "portfolio_type": "ai",
+    "project_url": "",
+    "github_url": "",
+    "status": "completed",
+    "start_date": null,
+    "end_date": null,
+    "is_featured": true,
+    "order": 1,
+    "created_at": "2025-09-09T05:15:14.481Z",
+    "updated_at": "2025-09-09T05:42:33.615Z"
+  }
+},
+{
+  "model": "core.project",
+  "pk": 6,
+  "fields": {
+    "title": "AI Real Estate Fraud Detector",
+    "slug": "ai-real-estate-fraud-detector",
+    "client_name": "Property Guard Canada",
+    "description": "<h3>Advanced AI-Powered Fraud Detection System</h3>\n<p>A comprehensive AI-powered platform designed to detect and prevent real estate fraud in the Canadian market. This sophisticated system analyzes property listings, documents, and transaction patterns to identify potential fraudulent activities before they impact buyers and sellers.</p>\n\n<h4>Key Features:</h4>\n<ul>\n<li><strong>Document Verification:</strong> AI-powered analysis of property documents for authenticity</li>\n<li><strong>Listing Analysis:</strong> Automated detection of suspicious property listings and pricing anomalies</li>\n<li><strong>Pattern Recognition:</strong> Advanced algorithms identify fraud patterns across multiple data sources</li>\n<li><strong>Real-time Alerts:</strong> Instant notifications for high-risk transactions and suspicious activities</li>\n<li><strong>Compliance Reporting:</strong> Automated compliance reports for regulatory requirements</li>\n<li><strong>Integration Ready:</strong> Seamlessly integrates with existing real estate management systems</li>\n</ul>\n\n<h4>Technology Stack:</h4>\n<p>Powered by Python, TensorFlow, Natural Language Processing, and integrated with Canadian real estate databases and regulatory systems.</p>\n\n<h4>Impact:</h4>\n<p>Protects Canadian property buyers and sellers from fraud while ensuring compliance with PIPEDA and provincial real estate regulations.</p>",
+    "image": "",
+    "cloudinary_image_id": null,
+    "gallery": [],
+    "technologies": [
+      "AI",
+      "Machine Learning",
+      "Python",
+      "NLP",
+      "TensorFlow",
+      "Fraud Detection",
+      "Data Science"
+    ],
+    "portfolio_type": "ai",
+    "project_url": "",
+    "github_url": "",
+    "status": "completed",
+    "start_date": null,
+    "end_date": null,
+    "is_featured": true,
+    "order": 2,
+    "created_at": "2025-09-09T05:15:14.496Z",
+    "updated_at": "2025-09-09T05:42:33.628Z"
+  }
+},
+{
+  "model": "core.blogpost",
+  "pk": 1,
+  "fields": {
+    "title": "Strategic AI Integration: A Canadian Business Perspective",
+    "slug": "strategic-ai-integration-canadian-business",
+    "author": 1,
+    "excerpt": "Discover how Canadian businesses can strategically integrate AI to drive growth while maintaining compliance and cultural alignment. Learn our proven three-phase approach to successful AI implementation.",
+    "content": "<h1>Strategic AI Integration: A Canadian Business Perspective</h1>\n\n<p>As Canadian businesses navigate an increasingly digital landscape, artificial intelligence (AI) has emerged as a transformative force. However, successful AI integration requires more than just adopting the latest technology—it demands a strategic approach that aligns with your business values and long-term objectives.</p>\n\n<h2>Understanding AI's Role in Canadian Business</h2>\n\n<p>The Canadian market presents unique opportunities and challenges for AI implementation. From privacy regulations like PIPEDA to cultural considerations around data usage, Canadian businesses must approach AI integration thoughtfully.</p>\n\n<h3>Key Considerations for AI Strategy</h3>\n<ul>\n<li><strong>Regulatory Compliance:</strong> Ensuring AI implementations meet Canadian privacy and data protection standards</li>\n<li><strong>Cultural Alignment:</strong> Technology solutions that reflect Canadian values of privacy, transparency, and inclusivity</li>\n<li><strong>Market Specificity:</strong> AI applications tailored to Canadian market conditions and consumer behavior</li>\n</ul>\n\n<h2>Building Your AI Strategy</h2>\n\n<p>Successful AI integration begins with understanding your business objectives. We recommend a phased approach:</p>\n\n<h3>Phase 1: Assessment and Planning</h3>\n<ul>\n<li>Audit current processes and identify automation opportunities</li>\n<li>Evaluate data quality and availability</li>\n<li>Define success metrics and ROI expectations</li>\n</ul>\n\n<h3>Phase 2: Pilot Implementation</h3>\n<ul>\n<li>Start with low-risk, high-impact use cases</li>\n<li>Implement robust testing and validation processes</li>\n<li>Gather feedback and iterate</li>\n</ul>\n\n<h3>Phase 3: Scale and Optimize</h3>\n<ul>\n<li>Expand successful pilots across the organization</li>\n<li>Continuous monitoring and optimization</li>\n<li>Training and change management</li>\n</ul>\n\n<h2>Real-World Applications</h2>\n\n<p>We've helped Canadian businesses implement AI solutions across various sectors:</p>\n<ul>\n<li><strong>Customer Service:</strong> Intelligent chatbots that understand Canadian context and language nuances</li>\n<li><strong>Sales Optimization:</strong> Predictive analytics for Canadian market trends</li>\n<li><strong>Process Automation:</strong> Streamlining compliance with Canadian regulations</li>\n</ul>\n\n<h2>The Social Dots Approach</h2>\n\n<p>At Social Dots, we believe AI should serve your business soul, not the other way around. Our approach ensures that technology implementation aligns with your values while delivering measurable business results.</p>\n\n<p>Ready to explore AI opportunities for your business? Contact us for a free strategic consultation.</p>",
+    "featured_image": null,
+    "status": "published",
+    "tags": [
+      "AI Integration",
+      "Canadian Business",
+      "Digital Strategy",
+      "Technology",
+      "Business Growth"
+    ],
+    "meta_description": "Discover how Canadian businesses can strategically integrate AI to drive growth while maintaining compliance and cultural alignment. Learn our proven three...",
+    "is_featured": true,
+    "published_at": "2024-12-15T15:00:00Z",
+    "created_at": "2025-09-04T17:09:48.466Z",
+    "updated_at": "2025-09-09T05:02:06.659Z"
+  }
+},
+{
+  "model": "core.blogpost",
+  "pk": 2,
+  "fields": {
+    "title": "Salesforce Optimization: Maximizing ROI for Canadian Companies",
+    "slug": "salesforce-optimization-roi-canadian-companies",
+    "author": 1,
+    "excerpt": "Learn how Canadian companies can optimize their Salesforce investment for maximum ROI. Discover our proven framework and real case study results showing 300% productivity improvements.",
+    "content": "<h1>Salesforce Optimization: Maximizing ROI for Canadian Companies</h1>\n\n<p>Salesforce is a powerful platform, but many Canadian businesses aren't maximizing their investment. With proper optimization, companies can see ROI improvements of 300% or more within the first year.</p>\n\n<h2>Common Salesforce Challenges in Canada</h2>\n\n<p>We've identified several patterns among Canadian Salesforce implementations:</p>\n\n<h3>Data Quality Issues</h3>\n<ul>\n<li>Inconsistent data entry standards</li>\n<li>Duplicate records and incomplete information</li>\n<li>Lack of data validation rules</li>\n</ul>\n\n<h3>Underutilized Features</h3>\n<ul>\n<li>Basic lead scoring or none at all</li>\n<li>Manual processes that could be automated</li>\n<li>Limited reporting and analytics usage</li>\n</ul>\n\n<h3>Integration Gaps</h3>\n<ul>\n<li>Disconnected marketing and sales tools</li>\n<li>Poor email marketing integration</li>\n<li>Limited customer service connectivity</li>\n</ul>\n\n<h2>Our Optimization Framework</h2>\n\n<h3>1. Data Audit and Cleanup</h3>\n<p>We start every optimization project with a comprehensive data audit:</p>\n<ul>\n<li>Identify and merge duplicate records</li>\n<li>Standardize data entry formats</li>\n<li>Implement validation rules for future data quality</li>\n</ul>\n\n<h3>2. Process Automation</h3>\n<p>Streamline your sales processes with smart automation:</p>\n<ul>\n<li>Lead assignment and routing</li>\n<li>Follow-up task creation</li>\n<li>Opportunity progression tracking</li>\n</ul>\n\n<h3>3. Advanced Analytics Setup</h3>\n<p>Unlock insights with proper reporting:</p>\n<ul>\n<li>Sales pipeline analytics</li>\n<li>Lead source performance tracking</li>\n<li>Revenue forecasting dashboards</li>\n</ul>\n\n<h3>4. Integration Strategy</h3>\n<p>Connect Salesforce with your existing tools:</p>\n<ul>\n<li>Marketing automation platforms</li>\n<li>Customer service systems</li>\n<li>Financial and ERP systems</li>\n</ul>\n\n<h2>Case Study: Toronto Manufacturing Company</h2>\n\n<p>A Toronto-based manufacturing company approached us with a stagnant Salesforce implementation. Their challenges included:</p>\n<ul>\n<li>40% duplicate lead records</li>\n<li>Manual lead assignment causing delays</li>\n<li>No visibility into sales pipeline health</li>\n</ul>\n\n<p><strong>Results after 6 months:</strong></p>\n<ul>\n<li>65% increase in lead conversion rates</li>\n<li>50% reduction in sales cycle length</li>\n<li>300% improvement in sales team productivity</li>\n</ul>\n\n<h2>Canadian Compliance Considerations</h2>\n\n<p>Salesforce optimization in Canada requires attention to:</p>\n<ul>\n<li>PIPEDA compliance for data handling</li>\n<li>Provincial privacy regulations</li>\n<li>Industry-specific requirements (healthcare, finance, etc.)</li>\n</ul>\n\n<h2>Getting Started</h2>\n\n<p>Ready to optimize your Salesforce investment? Our team offers:</p>\n<ul>\n<li>Free Salesforce health assessments</li>\n<li>Custom optimization roadmaps</li>\n<li>Implementation and training support</li>\n</ul>\n\n<p>Schedule your free assessment today and discover your Salesforce potential.</p>",
+    "featured_image": null,
+    "status": "published",
+    "tags": [
+      "Salesforce",
+      "CRM Optimization",
+      "Sales Productivity",
+      "Canadian Business",
+      "ROI"
+    ],
+    "meta_description": "Learn how Canadian companies can optimize their Salesforce investment for maximum ROI. Discover our proven framework and real case study results showing 30...",
+    "is_featured": true,
+    "published_at": "2024-12-10T14:00:00Z",
+    "created_at": "2025-09-04T17:09:48.476Z",
+    "updated_at": "2025-09-09T04:58:41.057Z"
+  }
+},
+{
+  "model": "core.blogpost",
+  "pk": 3,
+  "fields": {
+    "title": "Digital Marketing Automation: A Guide for Toronto Businesses",
+    "slug": "digital-marketing-automation-toronto-businesses",
+    "author": 1,
+    "excerpt": "Discover how Toronto businesses can leverage marketing automation to compete effectively in the diverse local market. Learn our proven implementation strategy and platform recommendations.",
+    "content": "<h1>Digital Marketing Automation: A Guide for Toronto Businesses</h1>\n\n<p>Toronto's competitive business landscape demands efficient marketing strategies that deliver results while maximizing resources. Marketing automation has emerged as a game-changer for businesses looking to scale their marketing efforts without proportionally increasing their workforce.</p>\n\n<h2>What is Marketing Automation?</h2>\n\n<p>Marketing automation uses software and technology to automate repetitive marketing tasks, nurture leads, and deliver personalized experiences at scale. For Toronto businesses, this means being able to compete with larger companies while maintaining the personal touch that customers value.</p>\n\n<h2>Key Benefits for Toronto Businesses</h2>\n\n<h3>1. Cost Efficiency</h3>\n<p>Toronto's high operating costs make efficiency crucial. Marketing automation can reduce manual work by up to 80%, allowing your team to focus on strategy and creativity.</p>\n\n<h3>2. Better Lead Qualification</h3>\n<p>Automated lead scoring helps identify prospects most likely to convert, improving sales team efficiency and closing rates.</p>\n\n<h3>3. Personalized Customer Journeys</h3>\n<p>Deliver tailored content based on customer behavior, preferences, and stage in the buying process.</p>\n\n<h2>Essential Automation Workflows</h2>\n\n<h3>Welcome Series</h3>\n<p>Automatically nurture new subscribers with a series of educational emails that introduce your brand and build trust.</p>\n\n<h3>Lead Nurturing Campaigns</h3>\n<p>Guide prospects through your sales funnel with targeted content that addresses their specific needs and concerns.</p>\n\n<h3>Customer Onboarding</h3>\n<p>Ensure new customers get maximum value from your product or service with automated onboarding sequences.</p>\n\n<h3>Re-engagement Campaigns</h3>\n<p>Win back inactive customers with targeted offers and content designed to reignite their interest.</p>\n\n<h2>Choosing the Right Tools</h2>\n\n<p>For Toronto businesses, we recommend platforms that offer:</p>\n<ul>\n<li>Integration with popular Canadian business tools</li>\n<li>Compliance with Canadian privacy regulations</li>\n<li>Scalable pricing that grows with your business</li>\n<li>Strong customer support in compatible time zones</li>\n</ul>\n\n<h2>Implementation Best Practices</h2>\n\n<h3>Start Small</h3>\n<p>Begin with one or two simple workflows before expanding to more complex automation sequences.</p>\n\n<h3>Focus on Data Quality</h3>\n<p>Clean, organized data is essential for effective automation. Invest time in data hygiene from the start.</p>\n\n<h3>Test and Optimize</h3>\n<p>Continuously monitor performance and optimize your workflows based on real results.</p>\n\n<h2>Measuring Success</h2>\n\n<p>Key metrics to track include:</p>\n<ul>\n<li>Email open and click-through rates</li>\n<li>Lead conversion rates</li>\n<li>Customer acquisition cost</li>\n<li>Return on investment</li>\n<li>Customer lifetime value</li>\n</ul>\n\n<h2>Getting Started</h2>\n\n<p>Ready to implement marketing automation for your Toronto business? Our team specializes in helping Canadian companies build effective, compliant automation systems that drive real results.</p>\n\n<p>Contact us today for a free consultation and automation assessment.</p>",
+    "featured_image": null,
+    "status": "published",
+    "tags": [
+      "Marketing Automation",
+      "Toronto Business",
+      "Digital Marketing",
+      "Lead Generation",
+      "Customer Journey"
+    ],
+    "meta_description": "Discover how Toronto businesses can leverage marketing automation to compete effectively in the diverse local market. Learn our proven implementation strat...",
+    "is_featured": false,
+    "published_at": "2024-12-05T16:00:00Z",
+    "created_at": "2025-09-04T17:09:48.486Z",
+    "updated_at": "2025-09-09T05:02:06.670Z"
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 1,
+  "fields": {
+    "client_name": "Sarah Johnson",
+    "client_position": "CTO",
+    "client_company": "TechCorp Toronto",
+    "client_image": null,
+    "content": "Social Dots transformed our customer service operations completely. The AI integration they designed feels natural to our customers while dramatically improving our efficiency. Our response times improved by 60% and customer satisfaction scores increased by 40%.",
+    "rating": 5,
+    "is_featured": true,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.532Z"
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 2,
+  "fields": {
+    "client_name": "Mike Chen",
+    "client_position": "VP of Sales",
+    "client_company": "MapleTech Inc.",
+    "client_image": null,
+    "content": "The Salesforce optimization Ali's team delivered exceeded our expectations. Our sales process is now streamlined and our visibility into the pipeline is incredible. We've seen a 65% increase in productivity and 45% better conversion rates.",
+    "rating": 5,
+    "is_featured": true,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.539Z"
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 3,
+  "fields": {
+    "client_name": "David Lee",
+    "client_position": "Founder",
+    "client_company": "VancouverStart",
+    "client_image": null,
+    "content": "Social Dots' marketing automation strategy transformed our startup from struggling with lead generation to having a consistent pipeline of qualified prospects. We achieved a 300% increase in qualified leads and reduced acquisition costs by 40%.",
+    "rating": 5,
+    "is_featured": true,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.548Z"
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 4,
+  "fields": {
+    "client_name": "Jennifer Walsh",
+    "client_position": "CEO",
+    "client_company": "Ottawa Retail Solutions",
+    "client_image": null,
+    "content": "The e-commerce platform Social Dots built for us is exactly what we needed to compete in today's digital marketplace. The results speak for themselves - 250% increase in online sales and much better operational efficiency.",
+    "rating": 5,
+    "is_featured": false,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.555Z"
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 5,
+  "fields": {
+    "client_name": "Robert Kim",
+    "client_position": "Marketing Director",
+    "client_company": "Calgary Innovations",
+    "client_image": null,
+    "content": "Working with Social Dots was a game-changer for our digital strategy. Their strategic approach and deep understanding of the Canadian market helped us achieve results we didn't think were possible. Highly recommended for any Canadian business looking to scale.",
+    "rating": 5,
+    "is_featured": true,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.564Z"
+  }
+},
+{
+  "model": "core.testimonial",
+  "pk": 6,
+  "fields": {
+    "client_name": "Lisa Thompson",
+    "client_position": "Operations Manager",
+    "client_company": "Montreal Manufacturing",
+    "client_image": null,
+    "content": "The team at Social Dots doesn't just implement technology - they ensure it aligns with your business values and long-term vision. Their holistic approach made all the difference in our digital transformation journey.",
+    "rating": 5,
+    "is_featured": true,
+    "is_active": true,
+    "order": 0,
+    "created_at": "2025-09-04T17:09:48.571Z"
+  }
+}
+]

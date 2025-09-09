@@ -1061,27 +1061,32 @@ def setup_database(request):
         except Exception as e:
             results['operations'].append(f'site_config_error: {str(e)}')
         
-        # Load production data (localhost content) if needed
-        if initial_blogs == 0 and initial_projects == 0 and initial_portfolio == 0:
-            # Try production data first
+        # Force complete localhost sync regardless of existing content
+        try:
+            call_command('complete_localhost_sync', '--force', verbosity=1)
+            results['operations'].append('complete_localhost_sync_successful')
+        except Exception as e:
+            results['operations'].append(f'complete_sync_error: {str(e)}')
+            
+            # Try partial production data as backup
             try:
                 call_command('load_production_data', verbosity=1)
-                results['operations'].append('production_data_loaded')
-            except Exception as e:
-                results['operations'].append(f'production_data_error: {str(e)}')
+                results['operations'].append('partial_production_data_loaded')
+            except Exception as e2:
+                results['operations'].append(f'production_data_error: {str(e2)}')
                 
-                # Fallback to demo content
+                # Final fallback to demo content
                 try:
                     call_command('load_demo_content', verbosity=1)
                     results['operations'].append('demo_content_loaded')
-                except Exception as e2:
-                    results['operations'].append(f'demo_content_error: {str(e2)}')
+                except Exception as e3:
+                    results['operations'].append(f'demo_content_error: {str(e3)}')
                 
                 try:
                     call_command('load_demo_pricing', verbosity=1)
                     results['operations'].append('demo_pricing_loaded')
-                except Exception as e3:
-                    results['operations'].append(f'demo_pricing_error: {str(e3)}')
+                except Exception as e4:
+                    results['operations'].append(f'demo_pricing_error: {str(e4)}')
         else:
             results['operations'].append('content_already_exists')
         

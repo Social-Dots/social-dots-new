@@ -58,27 +58,35 @@ def setup_vercel_database():
             call_command('migrate', verbosity=1)
             print("✅ Migrations complete")
             
-            # Try to load production data first (your actual localhost content)
-            print("📦 Attempting to load production data from localhost...")
+            # Try complete localhost sync first (your actual working localhost)
+            print("🔄 Attempting COMPLETE localhost database sync...")
             try:
-                call_command('load_production_data', verbosity=1)
-                print("✅ Production data loaded from localhost")
-            except Exception as prod_error:
-                print(f"⚠️ Production data loading failed: {prod_error}")
-                print("🔄 Falling back to demo content setup...")
+                call_command('complete_localhost_sync', '--force', verbosity=1)
+                print("✅ Complete localhost database sync successful")
+            except Exception as sync_error:
+                print(f"⚠️ Complete sync failed: {sync_error}")
                 
-                # Fallback to demo content
-                print("⚙️ Setting up site configuration...")
-                call_command('setup_socialdots', verbosity=1)
-                print("✅ Site configuration and services created")
-                
-                print("📝 Loading demo content...")
-                call_command('load_demo_content', verbosity=1) 
-                print("✅ Demo blog posts and portfolio loaded")
-                
-                print("💰 Loading demo pricing...")
-                call_command('load_demo_pricing', verbosity=1)
-                print("✅ Demo pricing plans loaded")
+                # Try partial production data as backup
+                print("🔄 Trying partial production data loading...")
+                try:
+                    call_command('load_production_data', verbosity=1)
+                    print("✅ Partial production data loaded")
+                except Exception as prod_error:
+                    print(f"⚠️ Production data loading failed: {prod_error}")
+                    print("🔄 Falling back to demo content setup...")
+                    
+                    # Final fallback to demo content
+                    print("⚙️ Setting up site configuration...")
+                    call_command('setup_socialdots', verbosity=1)
+                    print("✅ Site configuration and services created")
+                    
+                    print("📝 Loading demo content...")
+                    call_command('load_demo_content', verbosity=1) 
+                    print("✅ Demo blog posts and portfolio loaded")
+                    
+                    print("💰 Loading demo pricing...")
+                    call_command('load_demo_pricing', verbosity=1)
+                    print("✅ Demo pricing plans loaded")
             
             # Final count check
             from core.models import BlogPost, Project, Portfolio
