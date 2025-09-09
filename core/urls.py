@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from . import views
 from . import admin_views
 
@@ -46,6 +47,9 @@ urlpatterns = [
     
     # Health check
     path('health/', views.health_check, name='health_check'),
+    
+    # AI Thumbnail Generator React App
+    path('ai-thumbnail-generator/', TemplateView.as_view(template_name='index.html'), name='ai_thumbnail_generator'),
     
     # SEO
     path('robots.txt', views.robots_txt, name='robots_txt'),

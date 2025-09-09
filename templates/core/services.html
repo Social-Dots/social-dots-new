@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Pricing & Services - {{ site_config.site_name }}{% endblock %}
+{% block title %}Services - {{ site_config.site_name }}{% endblock %}
 
 {% block meta_description %}Explore Social Dots' AI-powered marketing solutions and web development services in Canada. Affordable digital marketing packages for startups and small businesses. Toronto-based full-service marketing agency.{% endblock %}
 
@@ -43,14 +43,8 @@
 
             <!-- Hero Subheading with Enhanced Typography -->
             <p class="mx-auto max-w-3xl text-lg text-[#0B32A4] leading-relaxed fade-in" style="--delay: 0.4s;">
-                <span class="font-semibold text-[#FFA300]">Invest in comprehensive digital strategies</span> that drive sustainable business growth with transparent pricing for transformative results.
+                <span class="font-semibold text-[#FFA300]">Invest in comprehensive digital strategies</span> that drive sustainable business growth and deliver transformative results.
             </p>
-            
-            <!-- Monthly/Yearly Toggle with enhanced styling -->
-            <div class="relative max-w-md mx-auto mt-8 group card-3d transform hover:scale-[1.02] transition-all duration-300 fade-in" style="--delay: 0.5s;">
-                <div class="absolute inset-0 bg-[#0B32A4]/10 rounded-xl blur opacity-70 group-hover:opacity-100 transition-opacity"></div>
-                
-            </div>
         </div>
     </div>
     
@@ -142,56 +136,9 @@
                </div>
                {% endif %}
 
-               <!-- Package Price -->
-               <div class="text-center mt-auto">
-                   {% if service.pricing_options_list %}
-                   <div class="space-y-2 sm:space-y-3">
-                       <div class="text-center price-glow" id="service-price-display-{{ service.id }}">
-                           <div class="flex items-baseline justify-center space-x-1">
-                               {% if service.pricing_options_list.0.id %}
-                               <span class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B32A4]">${{ service.pricing_options_list.0.price|floatformat:0 }}</span>
-                               {% else %}
-                               <span class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B32A4]">${{ service.pricing_options_list.0.price|floatformat:0 }}</span>
-                               {% endif %}
-                               <span class="text-gray-500 text-sm sm:text-base">CAD</span>
-                           </div>
-                           <p class="text-gray-500 text-xs sm:text-sm mt-1">
-                               {% if service.pricing_options_list.0.period == 'monthly' %}
-                                   per month
-                               {% elif service.pricing_options_list.0.period == 'yearly' %}
-                                   per year
-                               {% else %}
-                                   one-time
-                               {% endif %}
-                           </p>
-                       </div>
-                   </div>
-                   {% else %}
-                   <div class="flex items-baseline justify-center space-x-1 price-glow">
-                       <span class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0B32A4]">${{ service.price|floatformat:0 }}</span>
-                       <span class="text-gray-500 text-sm sm:text-base">CAD</span>
-                   </div>
-                   <p class="text-gray-500 text-xs sm:text-sm mt-1">
-                       {% if service.price_type == 'monthly' %}
-                           per month
-                       {% elif service.price_type == 'yearly' %}
-                           per year
-                       {% else %}
-                           one-time
-                       {% endif %}
-                   </p>
-                   {% endif %}
-               </div>
 
-               <!-- Buy Button and Learn More -->
-               <div class="pt-3 sm:pt-4 space-y-3">
-                   <button 
-                       onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '{{ service.price }}')" 
-                       class="w-full bg-[#0B32A4] text-white justify-center transition-all duration-300 hover:scale-105 text-base sm:text-lg py-3 sm:py-4 px-4 sm:px-6 rounded-lg flex items-center hover:bg-[#0E42CE]"
-                   >
-                       <i data-lucide="shopping-cart" class="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3"></i>
-                       Add to Cart
-                   </button>
+               <!-- Learn More Button -->
+               <div class="pt-3 sm:pt-4">
                    <a href="/services/{{ service.slug }}/" class="w-full btn-ghost justify-center group/btn relative overflow-hidden text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 border border-[#0B32A4]/20 hover:border-[#0B32A4]/40 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex items-center">
                        <span class="relative z-10 flex items-center justify-center text-[#0B32A4] group-hover/btn:text-[#0E42CE] transition-colors duration-300">
                            <i data-lucide="info" class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover/btn:rotate-12 transition-transform duration-300"></i>
@@ -323,58 +270,7 @@
                     </div>
                     {% endif %}
 
-                    <!-- Enhanced Service Pricing -->
-                    <div class="mb-4 sm:mb-6">
-                        {% if service.price_type == 'custom' %}
-                            <div class="text-center bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-[#0B32A4]/20 shadow-sm group-hover:shadow-md transition-all duration-500 backdrop-blur-sm">
-                                <span class="text-xl sm:text-2xl font-bold text-[#0B32A4] group-hover:text-[#0E42CE] transition-all duration-500">Custom Quote</span>
-                                <p class="text-[#0B32A4]/70 text-xs sm:text-sm mt-1">Tailored to your needs</p>
-                            </div>
-                        {% else %}
-                            {% if service.servicepricingoption_set.all %}
-                            <div class="space-y-2 sm:space-y-3">
-                                <div class="relative">
-                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-2 sm:py-3 px-3 sm:px-4 border-2 border-[#0B32A4]/30 rounded-lg sm:rounded-xl bg-white/90 text-[#0B32A4] text-sm sm:text-base font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-[#0B32A4] focus:border-[#0B32A4] transition-all duration-300 backdrop-blur-sm shadow-sm group-hover:shadow-md">
-                                        {% for option in service.servicepricingoption_set.all %}
-                                        <option value="{{ option.id }}" data-price="{{ option.price }}" data-period="{{ option.period }}" data-name="{{ option.name }}">
-                                            {{ option.name }} - ${{ option.price|floatformat:0 }} CAD {% if option.period == 'monthly' %}/ month{% elif option.period == 'yearly' %}/ year{% elif option.period == 'hourly' %}/ hour{% elif option.period == 'one-time' %}one-time{% endif %}
-                                        </option>
-                                        {% endfor %}
-                                    </select>
-                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 sm:px-3 pointer-events-none">
-                                        <i data-lucide="chevron-down" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-gray-700 transition-colors duration-300 animate-bounce-subtle"></i>
-                                    </div>
-                                </div>
-                                <div class="text-center bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm group-hover:shadow-md transition-all duration-500 backdrop-blur-sm" id="service-price-display-{{ service.id }}">
-                                    <div class="flex items-baseline justify-center space-x-1">
-                                        <span class="text-xl sm:text-2xl font-bold text-[#0B32A4] group-hover:text-[#0E42CE] transition-all duration-500">${{ service.servicepricingoption_set.first.price|floatformat:0 }}</span>
-                                        <span class="text-[#0B32A4]/70 text-sm sm:text-base group-hover:text-[#0B32A4] transition-colors duration-300">CAD</span>
-                                    </div>
-                                    <p class="text-[#0B32A4]/70 text-xs sm:text-sm group-hover:text-[#0B32A4] transition-colors duration-300">
-                                        {% if service.servicepricingoption_set.first.period == 'monthly' %}<span class="period-text">per month</span>
-                                        {% elif service.servicepricingoption_set.first.period == 'yearly' %}<span class="period-text">per year</span>
-                                        {% elif service.servicepricingoption_set.first.period == 'hourly' %}<span class="period-text">per hour</span>
-                                        {% else %}<span class="period-text">one-time</span>{% endif %}
-                                    </p>
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="text-center bg-gray-100 rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm group-hover:shadow-md transition-all duration-500 backdrop-blur-sm">
-                                <div class="flex items-baseline justify-center space-x-1">
-                                    <span class="text-base sm:text-lg font-bold text-gray-700 group-hover:text-gray-800 transition-all duration-500">Starting From ${{ service.price|floatformat:0 }}</span>
-                                    <span class="text-gray-500 text-sm sm:text-base group-hover:text-gray-600 transition-colors duration-300">CAD</span>
-                                    {% if service.price_type != 'fixed' %}
-                                    <span class="text-gray-500 text-xs sm:text-sm group-hover:text-gray-600 transition-colors duration-300">
-                                        {% if service.price_type == 'hourly' %}<span class="period-text">/hour</span>{% elif service.price_type == 'monthly' %}<span class="period-text">/month</span>{% endif %}
-                                    </span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-
-                    <!-- Enhanced Action Buttons -->
+                    <!-- Action Buttons -->
                     <div class="space-y-3 mt-auto">
                         {% if service.price_type == 'custom' %}
                             <a href="/contact/?service={{ service.id }}" class="w-full bg-[#0B32A4] text-white justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group/btn text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 shadow-md hover:shadow-lg rounded-lg">
@@ -386,47 +282,6 @@
                                 <!-- Pulse Effect -->
                                 <div class="absolute inset-0 bg-[#0B32A4] opacity-0 group-hover/btn:opacity-30 rounded-lg animate-pulse-subtle"></div>
                             </a>
-                        {% else %}
-                            <div class="space-y-3">
-                                <!-- Pricing Options Dropdown -->
-                                <div class="relative group/dropdown">
-                                    <select id="service-pricing-option-{{ service.id }}" class="w-full py-2 sm:py-3 px-3 sm:px-4 border-2 border-gray-300 rounded-lg sm:rounded-xl bg-white/95 text-gray-700 text-sm sm:text-base font-semibold appearance-none cursor-pointer focus:ring-2 focus:ring-gray-400 focus:border-gray-400  transition-all duration-300 backdrop-blur-sm shadow-sm">
-                                        {% for option in service.pricing_options_list %}
-                                            {% if option.id %}
-                                                <!-- For database ServicePricingOption objects -->
-                                                <option value="{{ service.id }}_{{ option.id }}" data-price="{{ option.price }}" data-period="{{ option.period }}" data-name="{{ option.name }}">
-                                                    {{ option.name }} - ${{ option.price|floatformat:0 }} CAD {% if option.period == 'one_time' %}one-time{% elif option.period == 'monthly' %}monthly{% elif option.period == 'yearly' %}yearly{% endif %}
-                                                </option>
-                                            {% else %}
-                                                <!-- For dictionary pricing options -->
-                                                <option value="{{ service.id }}_{{ option.name|lower }}" data-price="{{ option.price }}" data-period="{{ option.period }}" data-name="{{ option.name }}">
-                                                    {{ option.name }} - ${{ option.price|floatformat:0 }} CAD {% if option.period == 'one_time' %}one-time{% elif option.period == 'monthly' %}monthly{% elif option.period == 'yearly' %}yearly{% endif %}
-                                                </option>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </select>
-                                    <div class="absolute inset-y-0 right-0 flex items-center px-2 sm:px-3 pointer-events-none">
-                                        <div class="bg-gray-200 rounded-full p-1 sm:p-1.5 group-hover/dropdown:bg-gray-300 transform group-hover/dropdown:scale-110 group-focus-within/dropdown:scale-110 group-focus-within/dropdown:bg-gray-300 transition-all duration-300 shadow-sm">
-                                        <i data-lucide="chevron-down" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover/dropdown:text-gray-700 group-focus-within/dropdown:text-gray-700 transition-all duration-300"></i>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                
-                                <!-- Add to Cart Button -->
-                                <button 
-                                    onclick="purchaseService('{{ service.id }}', '{{ service.title }}', '{{ service.price|default:0 }}')" 
-                                    class="w-full bg-[#0B32A4] text-white justify-center transition-all duration-300 hover:scale-105 relative overflow-hidden group/btn text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 shadow-md hover:shadow-lg rounded-lg"
-                                >
-                                    <span class="relative z-10 flex items-center justify-center">
-                                        <i data-lucide="shopping-cart" class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 group-hover/btn:animate-pulse"></i>
-                                        Add to Cart
-                                    </span>
-                                    <div class="absolute inset-0 bg-[#0E42CE] opacity-0 group-hover/btn:opacity-100 transition-all duration-500"></div>
-                                    <!-- Pulse Effect -->
-                                    <div class="absolute inset-0 bg-[#0B32A4] opacity-0 group-hover/btn:opacity-30 rounded-lg animate-pulse-subtle"></div>
-                                </button>
-                            </div>
                         {% endif %}
                         
                         <a href="/services/{{ service.slug }}/" class="w-full btn-ghost justify-center group/btn relative overflow-hidden text-sm sm:text-base py-2 sm:py-3 px-3 sm:px-4 border border-[#0B32A4]/20 hover:border-[#0B32A4]/40 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
@@ -493,37 +348,11 @@
             </div>
             
             <p class="text-lg text-[#0B32A4]/70 max-w-2xl mx-auto relative">
-                <span class="relative z-10 inline-block animate-fadeInUp" style="--delay: 0.2s;">Everything you need to know about our services and pricing</span>
+                <span class="relative z-10 inline-block animate-fadeInUp" style="--delay: 0.2s;">Everything you need to know about our services</span>
             </p>
         </div>
 
         <div class="space-y-4 sm:space-y-6">
-            <!-- FAQ Cards with Modern Design -->
-            <div class="group glass-card p-4 sm:p-6 rounded-xl border border-[#0B32A4]/10 hover:border-[#0B32A4]/30 shadow-md hover:shadow-lg transition-all duration-500 scroll-fade-in relative overflow-hidden h-full flex flex-col" style="--delay: 0.2s;">
-                <!-- Card Background with White -->
-                <div class="absolute inset-0 bg-white opacity-90"></div>
-                
-                <!-- Hover Glow Effect -->
-                <div class="absolute inset-0 bg-[#0B32A4]/5 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                
-                <!-- Content -->
-                <div class="relative z-10">
-                    <div class="flex items-center mb-3 sm:mb-4">
-                        <div class="flex-shrink-0 mr-3 sm:mr-4">
-                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#0B32A4]/10 flex items-center justify-center group-hover:bg-[#0B32A4]/20 transition-all duration-300">
-                                <i data-lucide="credit-card" class="w-4 h-4 sm:w-5 sm:h-5 text-[#0B32A4] group-hover:text-[#FFA300] transition-colors duration-300"></i>
-                            </div>
-                        </div>
-                        <h3 class="text-base sm:text-lg md:text-xl font-semibold text-[#0B32A4] group-hover:text-gradient-blue transition-all duration-300">What payment methods do you accept?</h3>
-                    </div>
-                    <div class="pl-11 sm:pl-14">
-                        <p class="text-sm sm:text-base text-gray-600 group-hover:text-gray-800 transition-colors duration-300">We accept all major credit cards (Visa, MasterCard, American Express) and electronic payments through our secure Stripe integration. All prices are in Canadian dollars (CAD).</p>
-                    </div>
-                </div>
-                
-                <!-- Decorative Corner Element -->
-                <div class="absolute bottom-0 right-0 w-16 h-16 bg-[#0B32A4]/5 rounded-tl-full transform translate-x-8 translate-y-8 group-hover:translate-x-6 group-hover:translate-y-6 transition-all duration-700"></div>
-            </div>
 
             <div class="group glass-card p-4 sm:p-6 rounded-xl border border-[#0B32A4]/10 hover:border-[#0B32A4]/30 shadow-md hover:shadow-lg transition-all duration-500 scroll-fade-in relative overflow-hidden h-full flex flex-col" style="--delay: 0.3s;">
                 <!-- Card Background with Gradient -->
@@ -756,9 +585,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add debugging to check if cart is available
     console.log('Services page loaded, Cart object:', cart);
 
-    // Make purchase functions globally available
+    // Purchase functions removed - pricing functionality disabled
+    // The following purchase functions have been disabled to remove pricing functionality
     window.purchaseService = function(serviceId, serviceName, defaultPrice) {
-        console.log('purchaseService called with:', { serviceId, serviceName, defaultPrice });
+        console.log('Purchase functionality has been disabled');
+        alert('Purchase functionality is currently disabled. Please contact us for more information.');
+        return false;
         
         // Get the latest cart reference - create one if it doesn't exist
         if (!window.cart) {

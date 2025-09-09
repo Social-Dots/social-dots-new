@@ -24,7 +24,7 @@ from .models import (
 from .payment_service import StripePaymentService
 from .frappe_services import process_order_to_frappe
 from .ai_agent_service import AIAgentService
-from .calendar_service import GoogleCalendarService, book_appointment
+# from .calendar_service import GoogleCalendarService, book_appointment
 
 logger = logging.getLogger(__name__)
 
@@ -292,6 +292,13 @@ def portfolio(request):
 
 
 def project_detail(request, slug):
+    # Check if this is a React app project first, before hitting the database
+    if slug == 'thumb-ai':
+        return render(request, 'thumb_ai_app.html')
+    elif slug == 'ai-real-estate-fraud-detector':
+        return render(request, 'real_estate_app.html')
+    
+    # Default behavior for regular project detail pages
     project = get_object_or_404(Project, slug=slug)
     related_projects = Project.objects.filter(status='completed').exclude(id=project.id)[:3]
     

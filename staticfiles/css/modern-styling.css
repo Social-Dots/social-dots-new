@@ -278,3 +278,74 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
+
+/* Blog Post Styling - Force proper formatting */
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+  display: block !important; /* Ensures headings are on their own line */
+  font-weight: bold !important;
+  margin-top: 24px !important;
+  margin-bottom: 16px !important;
+  line-height: 1.3 !important;
+  width: 100% !important;
+  clear: both !important;
+}
+
+.blog-content h1 {
+  font-size: 2rem !important;
+  font-weight: 900 !important;
+}
+
+.blog-content h2 {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+}
+
+.blog-content h3 {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+}
+
+.blog-content p {
+  display: block !important; /* Ensures paragraphs are on their own line */
+  margin-bottom: 16px !important;
+  line-height: 1.6 !important;
+  width: 100% !important;
+  clear: both !important;
+}
+
+.blog-content ul,
+.blog-content ol {
+  display: block !important;
+  margin-left: 20px !important;
+  margin-bottom: 16px !important;
+  width: 100% !important;
+  clear: both !important;
+}
+
+.blog-content li {
+  margin-bottom: 8px !important;
+  display: list-item !important;
+}
+
+.blog-content br {
+  display: block !important;
+  margin: 8px 0 !important;
+}
+
+/* Force line breaks after headings */
+.blog-content h1:after,
+.blog-content h2:after,
+.blog-content h3:after,
+.blog-content h4:after,
+.blog-content h5:after,
+.blog-content h6:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0;
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Thumbnail Generator</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script type="module" crossorigin src="/static/assets/index-qcXgeFX2.js"></script>
+    <link rel="stylesheet" crossorigin href="/static/assets/index-BrIodH8K.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      console.log('HTML loaded, checking for root element:', document.getElementById('root'));
+      
+      // Simple fallback if React doesn't load
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.innerHTML.trim() === '') {
+          console.log('React app did not mount, showing fallback message');
+          root.innerHTML = '<div style="color: white; text-align: center; padding: 50px; font-family: Arial;">Loading React App...</div>';
+        }
+      }, 2000);
+    </script>
+  </body>
+</html>

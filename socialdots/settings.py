@@ -12,8 +12,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-DEBUG = False # Set to True for development, False for production
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+# DEBUG = False # Set to True for development, False for production
 
 # DEBUG = False
 print("DEBUG:", DEBUG)
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'import_export',
     'cloudinary',
     'cloudinary_storage',
+    'markdownify',
 ]
 
 MIDDLEWARE = [
@@ -95,25 +96,26 @@ load_dotenv()
 database_url = os.getenv("DATABASE_URL", "")
 tmpPostgres = urlparse(database_url)
 
-# Use SQLite for local development (DISABLED - Using NeonDB for all environments)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# PostgreSQL configuration (NeonDB for all environments)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': tmpPostgres.path.lstrip('/') if tmpPostgres.path else '',
-        'USER': tmpPostgres.username,
-        'PASSWORD': tmpPostgres.password,
-        'HOST': tmpPostgres.hostname,
-        'PORT': 5432,
+# Use SQLite for local development when DATABASE_URL is not properly configured
+if not database_url or not tmpPostgres.hostname:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}    
+else:
+    # PostgreSQL configuration (NeonDB for production environments)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': tmpPostgres.path.lstrip('/') if tmpPostgres.path else '',
+            'USER': tmpPostgres.username,
+            'PASSWORD': tmpPostgres.password,
+            'HOST': tmpPostgres.hostname,
+            'PORT': 5432,
+        }
+    }    
 
 
 
@@ -163,7 +165,11 @@ FIRST_DAY_OF_WEEK = 1  # Monday
 # ]
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    BASE_DIR / 'frontend/ThumbAI/dist',
+    BASE_DIR / 'frontend/Realestate-Fraud-Detection-main/dist',
+]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'

@@ -539,8 +539,9 @@
         {% if projects %}
         <!-- Projects Grid with Enhanced Cards and 3D Effects -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-16">
+
             {% for project in projects %}
-            <div class="portfolio-item group rounded-xl shadow-md hover:shadow-lg transition-all duration-500 fade-in bg-white border border-gray-100 hover:border-[#0B32A4]/20 overflow-hidden transform hover:-translate-y-1 relative" style="--delay: calc(0.1s * {{ forloop.counter }});" data-tilt data-tilt-max="10" data-tilt-scale="1.03" data-tilt-speed="400" data-tilt-perspective="1000" data-category="{% if 'web' in project.title.lower %}website{% elif 'mobile' in project.title.lower %}mobile{% elif 'ai' in project.title.lower %}ai{% elif 'social' in project.title.lower %}social{% else %}all{% endif %}" data-date="{{ project.created_at|date:'Y-m-d' }}">
+            <div class="portfolio-item group rounded-xl shadow-md hover:shadow-lg transition-all duration-500 fade-in bg-white border border-gray-100 hover:border-[#0B32A4]/20 overflow-hidden transform hover:-translate-y-1 relative" style="--delay: calc(0.3s + 0.1s * {{ forloop.counter }});" data-tilt data-tilt-max="10" data-tilt-scale="1.03" data-tilt-speed="400" data-tilt-perspective="1000" data-category="{{ project.portfolio_type|default:'all' }}" data-date="{{ project.created_at|date:'Y-m-d' }}">
                 <!-- 3D Card Effect Elements -->
                 <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none transform translate-x-4 translate-y-4"></div>
