@@ -1,0 +1,20 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$1XEeddjWJ6jSgdZiOZUdgJ$xj+DHrexFQHxZcj9RGeKUsbUjB/0HqBRiKJQQD7Lx/Q=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "alishafique",
+    "first_name": "Ali",
+    "last_name": "Shafique",
+    "email": "ali@socialdots.ca",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-09-04T17:09:20.227Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
