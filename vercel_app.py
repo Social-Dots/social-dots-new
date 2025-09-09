@@ -24,7 +24,7 @@ def setup_vercel_database():
         from django.db import connection
         from core.models import SiteConfiguration
         
-        # Check if database is empty (needs setup)
+        # Check if database has localhost content (not demo content)
         try:
             site_config = SiteConfiguration.objects.first()
             if not site_config:
@@ -33,18 +33,24 @@ def setup_vercel_database():
             else:
                 print(f"✅ Site configuration found: {site_config.site_name}")
                 
-                # Check for content
-                from core.models import BlogPost, Project, Portfolio
+                # Check for content and verify it matches localhost expectations
+                from core.models import BlogPost, Project, Portfolio, Service
                 blog_count = BlogPost.objects.count()
                 project_count = Project.objects.count() 
                 portfolio_count = Portfolio.objects.count()
+                service_count = Service.objects.count()
                 
-                print(f"📊 Content count - Blogs: {blog_count}, Projects: {project_count}, Portfolio: {portfolio_count}")
+                print(f"📊 Current content - Blogs: {blog_count}, Projects: {project_count}, Portfolio: {portfolio_count}, Services: {service_count}")
                 
-                if blog_count == 0 and project_count == 0 and portfolio_count == 0:
-                    print("📋 Configuration exists but no content found - loading content...")
+                # Expected localhost content: 3 blogs, 6 projects, 0 portfolio, 7 services
+                expected_localhost_content = (blog_count == 3 and project_count == 6 and portfolio_count == 0 and service_count == 7)
+                
+                if not expected_localhost_content:
+                    print(f"❌ Content doesn't match localhost (expected: 3 blogs, 6 projects, 0 portfolio, 7 services)")
+                    print("🔄 Loading correct localhost content...")
                     needs_setup = True
                 else:
+                    print("✅ Content matches localhost expectations")
                     needs_setup = False
         except Exception as db_error:
             print(f"🔍 Database check error: {db_error}")
@@ -122,9 +128,20 @@ is_vercel = (
     os.environ.get('VERCEL') or 
     os.environ.get('VERCEL_URL') or
     os.environ.get('LAMBDA_TASK_ROOT') or  # Vercel serverless functions
+    os.environ.get('VERCEL_ENV') or  # Vercel environment
+    os.environ.get('VERCEL_DEPLOYMENT_ID') or  # Vercel deployment
     'vercel' in os.environ.get('HOSTNAME', '').lower() or
-    '/var/task' in str(Path(__file__).resolve())  # Vercel lambda path
+    '/var/task' in str(Path(__file__).resolve()) or  # Vercel lambda path
+    'social-dots-new.vercel.app' in os.environ.get('VERCEL_URL', '')  # Your specific Vercel URL
 )
+
+# FORCE VERCEL DETECTION - if we detect this is likely Vercel, run setup regardless
+if not is_vercel:
+    # Additional heuristics for Vercel detection
+    current_path = str(Path(__file__).resolve())
+    if any(indicator in current_path.lower() for indicator in ['/tmp', 'lambda', 'serverless']):
+        print("🔍 HEURISTIC: Detected serverless environment - assuming Vercel")
+        is_vercel = True
 
 print(f"🎯 IS_VERCEL DETECTED: {is_vercel}")
 
