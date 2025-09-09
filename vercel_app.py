@@ -58,29 +58,29 @@ def setup_vercel_database():
             call_command('migrate', verbosity=1)
             print("✅ Migrations complete")
             
-            # Try fresh localhost data first (your actual working localhost)
-            print("📦 Attempting fresh localhost data import...")
+            # Deploy complete localhost (your actual working website)
+            print("🚀 Deploying complete localhost to Vercel...")
             try:
-                from pathlib import Path
-                fresh_data_file = Path(__file__).resolve().parent / 'fresh_localhost_data.json'
-                if fresh_data_file.exists():
-                    call_command('loaddata', str(fresh_data_file), verbosity=1)
-                    print("✅ Fresh localhost data loaded successfully")
-                else:
-                    raise Exception("Fresh localhost data file not found")
-            except Exception as sync_error:
-                print(f"⚠️ Fresh data loading failed: {sync_error}")
+                call_command('deploy_complete_localhost', verbosity=1)
+                print("✅ Complete localhost deployment successful")
+            except Exception as deploy_error:
+                print(f"⚠️ Complete localhost deployment failed: {deploy_error}")
                 
-                # Try partial production data as backup
-                print("🔄 Trying partial production data loading...")
+                # Try fresh data as backup
+                print("🔄 Trying fresh localhost data...")
                 try:
-                    call_command('load_production_data', verbosity=1)
-                    print("✅ Partial production data loaded")
-                except Exception as prod_error:
-                    print(f"⚠️ Production data loading failed: {prod_error}")
-                    print("🔄 Falling back to demo content setup...")
+                    from pathlib import Path
+                    fresh_data_file = Path(__file__).resolve().parent / 'fresh_localhost_data.json'
+                    if fresh_data_file.exists():
+                        call_command('loaddata', str(fresh_data_file), verbosity=1)
+                        print("✅ Fresh localhost data loaded")
+                    else:
+                        raise Exception("Fresh localhost data file not found")
+                except Exception as fresh_error:
+                    print(f"⚠️ Fresh data loading failed: {fresh_error}")
                     
-                    # Final fallback to demo content
+                    # Final fallback to demo content setup
+                    print("🔄 Falling back to demo content setup...")
                     print("⚙️ Setting up site configuration...")
                     call_command('setup_socialdots', verbosity=1)
                     print("✅ Site configuration and services created")

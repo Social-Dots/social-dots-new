@@ -446,6 +446,12 @@ function initPortfolioFilters() {
     const sortSelect = document.querySelector('#portfolio-sort');
     const activeFiltersContainer = document.querySelector('.active-filters');
     
+    // Exit early if no portfolio grid exists (not on portfolio page)
+    if (!portfolioGrid) {
+        console.log('Portfolio grid not found - skipping portfolio initialization');
+        return;
+    }
+    
     let activeCategory = 'all';
     let searchTerm = '';
     let currentSort = 'newest';
@@ -574,7 +580,9 @@ function initPortfolioFilters() {
                         </button>
                     </div>
                 `;
-                portfolioGrid.appendChild(message);
+                if (portfolioGrid) {
+                    portfolioGrid.appendChild(message);
+                }
                 
                 // Add event listener to reset button
                 document.getElementById('reset-filters').addEventListener('click', resetAllFilters);
@@ -626,8 +634,10 @@ function initPortfolioFilters() {
             fragment.appendChild(item);
         });
         
-        portfolioGrid.innerHTML = '';
-        portfolioGrid.appendChild(fragment);
+        if (portfolioGrid) {
+            portfolioGrid.innerHTML = '';
+            portfolioGrid.appendChild(fragment);
+        }
         
         // Re-initialize 3D effects for the reordered items
         init3DCardEffects();
@@ -684,10 +694,12 @@ function initPortfolioFilters() {
         });
     }
     
-    // Initialize filters and sorting
-    updateCategoryPills();
-    filterPortfolioItems();
-    sortPortfolioItems();
+    // Initialize filters and sorting only if portfolio elements exist
+    if (portfolioGrid && portfolioItems.length > 0) {
+        updateCategoryPills();
+        filterPortfolioItems();
+        sortPortfolioItems();
+    }
 }
 
 /**

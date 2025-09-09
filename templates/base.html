@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}{{ site_config.site_name|default:"Social Dots Inc." }}{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{{ site_config.meta_description|default:'Strategic AI integration and digital solutions for Canadian businesses' }}{% endblock %}">
-    <link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dsmgydskc/image/upload/v1751910798/Screenshot_7-7-2025_224732_-removebg-preview_ylrwdx.png">
+    {% if site_config.favicon %}
+        <link rel="icon" type="image/png" href="{% static site_config.favicon %}">
+    {% else %}
+        <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    {% endif %}
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

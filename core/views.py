@@ -1061,24 +1061,24 @@ def setup_database(request):
         except Exception as e:
             results['operations'].append(f'site_config_error: {str(e)}')
         
-        # Force fresh localhost data load regardless of existing content
+        # Deploy complete localhost regardless of existing content
         try:
-            from pathlib import Path
-            fresh_data_file = Path(__file__).resolve().parent.parent / 'fresh_localhost_data.json'
-            if fresh_data_file.exists():
-                call_command('loaddata', str(fresh_data_file), verbosity=1)
-                results['operations'].append('fresh_localhost_data_loaded')
-            else:
-                raise Exception("Fresh localhost data file not found")
+            call_command('deploy_complete_localhost', verbosity=1)
+            results['operations'].append('complete_localhost_deployed')
         except Exception as e:
-            results['operations'].append(f'fresh_data_error: {str(e)}')
+            results['operations'].append(f'complete_deployment_error: {str(e)}')
             
-            # Try partial production data as backup
+            # Try fresh data as backup
             try:
-                call_command('load_production_data', verbosity=1)
-                results['operations'].append('partial_production_data_loaded')
+                from pathlib import Path
+                fresh_data_file = Path(__file__).resolve().parent.parent / 'fresh_localhost_data.json'
+                if fresh_data_file.exists():
+                    call_command('loaddata', str(fresh_data_file), verbosity=1)
+                    results['operations'].append('fresh_localhost_data_loaded')
+                else:
+                    raise Exception("Fresh localhost data file not found")
             except Exception as e2:
-                results['operations'].append(f'production_data_error: {str(e2)}')
+                results['operations'].append(f'fresh_data_error: {str(e2)}')
                 
                 # Final fallback to demo content
                 try:
