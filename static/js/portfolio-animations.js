@@ -526,9 +526,13 @@ function initPortfolioFilters() {
         
         portfolioItems.forEach(item => {
             const itemCategory = item.dataset.category;
-            const itemTitle = item.querySelector('.project-title').textContent.toLowerCase();
-            const itemDescription = item.querySelector('.project-description').textContent.toLowerCase();
-            const itemTechnologies = item.querySelector('.project-technologies').textContent.toLowerCase();
+            const titleElement = item.querySelector('.project-title');
+            const descriptionElement = item.querySelector('.project-description');
+            const technologiesElement = item.querySelector('.project-technologies');
+            
+            const itemTitle = titleElement ? titleElement.textContent.toLowerCase() : '';
+            const itemDescription = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
+            const itemTechnologies = technologiesElement ? technologiesElement.textContent.toLowerCase() : '';
             
             // Check if item matches category filter
             const matchesCategory = activeCategory === 'all' || itemCategory === activeCategory;
@@ -600,13 +604,17 @@ function initPortfolioFilters() {
                 return dateA - dateB;
             } else if (currentSort === 'name-asc') {
                 // Sort alphabetically (A-Z)
-                const titleA = a.querySelector('.project-title').textContent;
-                const titleB = b.querySelector('.project-title').textContent;
+                const titleElementA = a.querySelector('.project-title');
+                const titleElementB = b.querySelector('.project-title');
+                const titleA = titleElementA ? titleElementA.textContent : '';
+                const titleB = titleElementB ? titleElementB.textContent : '';
                 return titleA.localeCompare(titleB);
             } else if (currentSort === 'name-desc') {
                 // Sort alphabetically (Z-A)
-                const titleA = a.querySelector('.project-title').textContent;
-                const titleB = b.querySelector('.project-title').textContent;
+                const titleElementA = a.querySelector('.project-title');
+                const titleElementB = b.querySelector('.project-title');
+                const titleA = titleElementA ? titleElementA.textContent : '';
+                const titleB = titleElementB ? titleElementB.textContent : '';
                 return titleB.localeCompare(titleA);
             }
             return 0;
