@@ -1,8 +1,9 @@
 {
     "version": 2,
+    "name": "social-dots-django-deployment",
     "builds": [
       {
-        "src": "vercel_app.py",
+        "src": "wsgi_handler.py",
         "use": "@vercel/python",
         "config": { 
           "maxLambdaSize": "50mb", 
@@ -21,18 +22,20 @@
       },
       {
         "src": "/(.*)",
-        "dest": "vercel_app.py"
+        "dest": "wsgi_handler.py"
       }
     ],
     "env": {
       "DEBUG": "False",
       "DJANGO_SETTINGS_MODULE": "socialdots.settings",
       "PYTHONPATH": "/var/task",
-      "VERCEL_FORCE_REBUILD": "2025-09-09"
+      "VERCEL_REBUILD_TRIGGER": "20250909-153000",
+      "DEPLOYMENT_VERSION": "v2.0"
     },
     "functions": {
-      "vercel_app.py": {
+      "wsgi_handler.py": {
         "maxDuration": 30
       }
-    }
+    },
+    "regions": ["iad1"]
 }
