@@ -109,11 +109,13 @@ def setup_vercel_database():
         # Continue anyway - don't break the app
 
 # Run database setup on cold start
-print("🔍 Environment check:")
+print("🔍 FORCE DEPLOY - Environment check:")
 print(f"VERCEL env var: {os.environ.get('VERCEL')}")
 print(f"VERCEL_URL env var: {os.environ.get('VERCEL_URL')}")
+print(f"VERCEL_GIT_COMMIT_SHA: {os.environ.get('VERCEL_GIT_COMMIT_SHA')}")
 print(f"LAMBDA_TASK_ROOT: {os.environ.get('LAMBDA_TASK_ROOT')}")
 print(f"AWS_LAMBDA_FUNCTION_NAME: {os.environ.get('AWS_LAMBDA_FUNCTION_NAME')}")
+print(f"DEPLOYMENT TIMESTAMP: {os.environ.get('VERCEL_DEPLOYMENT_ID', 'Unknown')}")
 
 # Check multiple ways Vercel might be detected
 is_vercel = (
@@ -124,19 +126,29 @@ is_vercel = (
     '/var/task' in str(Path(__file__).resolve())  # Vercel lambda path
 )
 
+print(f"🎯 IS_VERCEL DETECTED: {is_vercel}")
+
 if is_vercel:
-    print("📦 Detected Vercel/serverless environment - setting up database...")
+    print("📦 CONFIRMED: Vercel/serverless environment detected")
+    print("🚀 Starting database setup process...")
     setup_vercel_database()
+    print("✅ Database setup process completed")
 else:
-    print("🏠 Running in local environment")
+    print("🏠 NOT VERCEL: Running in local environment")
     # Even in local, check if we need content for development
     try:
         from core.models import BlogPost
-        if BlogPost.objects.count() == 0:
+        blog_count = BlogPost.objects.count()
+        print(f"📊 Local blog count: {blog_count}")
+        if blog_count == 0:
             print("🔧 No content found in local development - running setup...")
             setup_vercel_database()
+        else:
+            print(f"✅ Content exists locally - {blog_count} blog posts found")
     except Exception as e:
         print(f"🔍 Local content check failed: {e}")
+        print("🔧 Running setup anyway due to error...")
+        setup_vercel_database()
 
 # Get the WSGI application
 application = get_wsgi_application()
