@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'import_export',
     'cloudinary',
     'cloudinary_storage',
-    'markdownify',
 ]
 
 MIDDLEWARE = [
