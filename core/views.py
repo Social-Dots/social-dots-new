@@ -1061,12 +1061,17 @@ def setup_database(request):
         except Exception as e:
             results['operations'].append(f'site_config_error: {str(e)}')
         
-        # Force complete localhost sync regardless of existing content
+        # Force fresh localhost data load regardless of existing content
         try:
-            call_command('complete_localhost_sync', '--force', verbosity=1)
-            results['operations'].append('complete_localhost_sync_successful')
+            from pathlib import Path
+            fresh_data_file = Path(__file__).resolve().parent.parent / 'fresh_localhost_data.json'
+            if fresh_data_file.exists():
+                call_command('loaddata', str(fresh_data_file), verbosity=1)
+                results['operations'].append('fresh_localhost_data_loaded')
+            else:
+                raise Exception("Fresh localhost data file not found")
         except Exception as e:
-            results['operations'].append(f'complete_sync_error: {str(e)}')
+            results['operations'].append(f'fresh_data_error: {str(e)}')
             
             # Try partial production data as backup
             try:
@@ -1087,8 +1092,6 @@ def setup_database(request):
                     results['operations'].append('demo_pricing_loaded')
                 except Exception as e4:
                     results['operations'].append(f'demo_pricing_error: {str(e4)}')
-        else:
-            results['operations'].append('content_already_exists')
         
         # Final content counts
         final_blogs = BlogPost.objects.count()

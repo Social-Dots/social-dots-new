@@ -642,8 +642,14 @@
                             <span class="text-white font-bold text-xl relative z-10">SD</span>
                         </div> {% endcomment %}
                         <div class="flex flex-col">
-                            <img src="https://res.cloudinary.com/dsmgydskc/image/upload/v1751909635/svg_zacw0e.svg" class="h-8" alt="Logo" />
-                            <span class="text-[10px] sm:text-xs text-navy/70 font-medium tracking-wider"></span>
+                            {% if site_config.logo %}
+                                <img src="{{ site_config.logo.url }}" class="h-8" alt="{{ site_config.site_name }}" />
+                            {% else %}
+                                <div class="text-2xl font-bold text-navy">
+                                    {{ site_config.site_name|default:"Social Dots" }}
+                                </div>
+                            {% endif %}
+                            <span class="text-[10px] sm:text-xs text-navy/70 font-medium tracking-wider">{{ site_config.tagline|truncatewords:4 }}</span>
                         </div>
                     </a>
                 </div>

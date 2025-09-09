@@ -58,13 +58,18 @@ def setup_vercel_database():
             call_command('migrate', verbosity=1)
             print("✅ Migrations complete")
             
-            # Try complete localhost sync first (your actual working localhost)
-            print("🔄 Attempting COMPLETE localhost database sync...")
+            # Try fresh localhost data first (your actual working localhost)
+            print("📦 Attempting fresh localhost data import...")
             try:
-                call_command('complete_localhost_sync', '--force', verbosity=1)
-                print("✅ Complete localhost database sync successful")
+                from pathlib import Path
+                fresh_data_file = Path(__file__).resolve().parent / 'fresh_localhost_data.json'
+                if fresh_data_file.exists():
+                    call_command('loaddata', str(fresh_data_file), verbosity=1)
+                    print("✅ Fresh localhost data loaded successfully")
+                else:
+                    raise Exception("Fresh localhost data file not found")
             except Exception as sync_error:
-                print(f"⚠️ Complete sync failed: {sync_error}")
+                print(f"⚠️ Fresh data loading failed: {sync_error}")
                 
                 # Try partial production data as backup
                 print("🔄 Trying partial production data loading...")
