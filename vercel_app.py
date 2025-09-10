@@ -85,10 +85,10 @@ def setup_vercel_database():
                 except Exception as fresh_error:
                     print(f"⚠️ Fresh data loading failed: {fresh_error}")
                     
-                    # Try complete localhost data directly  
-                    print("🔄 Loading complete localhost data directly...")
+                    # Try fresh localhost data first
+                    print("🔄 Loading fresh localhost data...")
                     try:
-                        localhost_data_file = Path(__file__).resolve().parent / 'complete_working_localhost.json'
+                        fresh_data_file = Path(__file__).resolve().parent / 'complete_fresh_localhost_data.json'
                         users_data_file = Path(__file__).resolve().parent / 'complete_working_users.json'
                         
                         if users_data_file.exists():
@@ -96,13 +96,23 @@ def setup_vercel_database():
                             call_command('loaddata', str(users_data_file), verbosity=1)
                             print("✅ Users loaded successfully")
                         
-                        if localhost_data_file.exists():
-                            print("📁 Loading complete localhost data...")
-                            call_command('loaddata', str(localhost_data_file), verbosity=1)
-                            print("✅ Complete localhost data loaded successfully")
-                            print("🎯 Your actual website content (blogs, AI projects, services) is now live!")
+                        if fresh_data_file.exists():
+                            print("📁 Loading fresh localhost data...")
+                            call_command('loaddata', str(fresh_data_file), verbosity=1)
+                            print("✅ Fresh localhost data loaded successfully")
+                            print("🎯 Latest content (blogs, projects, services, portfolio) is now live!")
                         else:
-                            raise Exception("Complete localhost data file not found")
+                            # Fallback to older complete localhost data
+                            print("🔄 Fresh data not found, trying complete localhost data...")
+                            localhost_data_file = Path(__file__).resolve().parent / 'complete_working_localhost.json'
+                            
+                            if localhost_data_file.exists():
+                                print("📁 Loading complete localhost data...")
+                                call_command('loaddata', str(localhost_data_file), verbosity=1)
+                                print("✅ Complete localhost data loaded successfully")
+                                print("🎯 Your website content (blogs, AI projects, services) is now live!")
+                            else:
+                                raise Exception("No localhost data files found")
                     except Exception as localhost_error:
                         print(f"⚠️ Complete localhost data loading failed: {localhost_error}")
                         
