@@ -85,19 +85,40 @@ def setup_vercel_database():
                 except Exception as fresh_error:
                     print(f"⚠️ Fresh data loading failed: {fresh_error}")
                     
-                    # Final fallback to demo content setup
-                    print("🔄 Falling back to demo content setup...")
-                    print("⚙️ Setting up site configuration...")
-                    call_command('setup_socialdots', verbosity=1)
-                    print("✅ Site configuration and services created")
-                    
-                    print("📝 Loading demo content...")
-                    call_command('load_demo_content', verbosity=1) 
-                    print("✅ Demo blog posts and portfolio loaded")
-                    
-                    print("💰 Loading demo pricing...")
-                    call_command('load_demo_pricing', verbosity=1)
-                    print("✅ Demo pricing plans loaded")
+                    # Try complete localhost data directly  
+                    print("🔄 Loading complete localhost data directly...")
+                    try:
+                        localhost_data_file = Path(__file__).resolve().parent / 'complete_working_localhost.json'
+                        users_data_file = Path(__file__).resolve().parent / 'complete_working_users.json'
+                        
+                        if users_data_file.exists():
+                            print("📁 Loading users data...")
+                            call_command('loaddata', str(users_data_file), verbosity=1)
+                            print("✅ Users loaded successfully")
+                        
+                        if localhost_data_file.exists():
+                            print("📁 Loading complete localhost data...")
+                            call_command('loaddata', str(localhost_data_file), verbosity=1)
+                            print("✅ Complete localhost data loaded successfully")
+                            print("🎯 Your actual website content (blogs, AI projects, services) is now live!")
+                        else:
+                            raise Exception("Complete localhost data file not found")
+                    except Exception as localhost_error:
+                        print(f"⚠️ Complete localhost data loading failed: {localhost_error}")
+                        
+                        # Final fallback to demo content setup
+                        print("🔄 Falling back to demo content setup...")
+                        print("⚙️ Setting up site configuration...")
+                        call_command('setup_socialdots', verbosity=1)
+                        print("✅ Site configuration and services created")
+                        
+                        print("📝 Loading demo content...")
+                        call_command('load_demo_content', verbosity=1) 
+                        print("✅ Demo blog posts and portfolio loaded")
+                        
+                        print("💰 Loading demo pricing...")
+                        call_command('load_demo_pricing', verbosity=1)
+                        print("✅ Demo pricing plans loaded")
             
             # Final count check
             from core.models import BlogPost, Project, Portfolio
