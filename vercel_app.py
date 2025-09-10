@@ -85,50 +85,27 @@ def setup_vercel_database():
                 except Exception as fresh_error:
                     print(f"⚠️ Fresh data loading failed: {fresh_error}")
                     
-                    # Try fresh localhost data first
-                    print("🔄 Loading fresh localhost data...")
-                    try:
-                        fresh_data_file = Path(__file__).resolve().parent / 'complete_fresh_localhost_data.json'
-                        users_data_file = Path(__file__).resolve().parent / 'complete_working_users.json'
-                        
-                        if users_data_file.exists():
-                            print("📁 Loading users data...")
-                            call_command('loaddata', str(users_data_file), verbosity=1)
-                            print("✅ Users loaded successfully")
-                        
-                        if fresh_data_file.exists():
-                            print("📁 Loading fresh localhost data...")
-                            call_command('loaddata', str(fresh_data_file), verbosity=1)
-                            print("✅ Fresh localhost data loaded successfully")
-                            print("🎯 Latest content (blogs, projects, services, portfolio) is now live!")
-                        else:
-                            # Fallback to older complete localhost data
-                            print("🔄 Fresh data not found, trying complete localhost data...")
-                            localhost_data_file = Path(__file__).resolve().parent / 'complete_working_localhost.json'
-                            
-                            if localhost_data_file.exists():
-                                print("📁 Loading complete localhost data...")
-                                call_command('loaddata', str(localhost_data_file), verbosity=1)
-                                print("✅ Complete localhost data loaded successfully")
-                                print("🎯 Your website content (blogs, AI projects, services) is now live!")
-                            else:
-                                raise Exception("No localhost data files found")
-                    except Exception as localhost_error:
-                        print(f"⚠️ Complete localhost data loading failed: {localhost_error}")
-                        
-                        # Final fallback to demo content setup
-                        print("🔄 Falling back to demo content setup...")
-                        print("⚙️ Setting up site configuration...")
-                        call_command('setup_socialdots', verbosity=1)
-                        print("✅ Site configuration and services created")
-                        
-                        print("📝 Loading demo content...")
-                        call_command('load_demo_content', verbosity=1) 
-                        print("✅ Demo blog posts and portfolio loaded")
-                        
-                        print("💰 Loading demo pricing...")
-                        call_command('load_demo_pricing', verbosity=1)
-                        print("✅ Demo pricing plans loaded")
+                    # ONLY load fresh localhost data - NO FALLBACKS
+                    print("🎯 Loading FRESH localhost data (ONLY)")
+                    fresh_data_file = Path(__file__).resolve().parent / 'complete_fresh_localhost_data.json'
+                    users_data_file = Path(__file__).resolve().parent / 'complete_working_users.json'
+                    
+                    # Load users first
+                    if users_data_file.exists():
+                        print("📁 Loading users data...")
+                        call_command('loaddata', str(users_data_file), verbosity=1)
+                        print("✅ Users loaded successfully")
+                    
+                    # Load ONLY fresh data - this is the complete current localhost content
+                    if fresh_data_file.exists():
+                        print("📁 Loading FRESH localhost data (all current content)...")
+                        call_command('loaddata', str(fresh_data_file), verbosity=1)
+                        print("✅ FRESH data loaded successfully!")
+                        print("🎯 Latest content now live: 11 projects, 10 blogs, 18 services, proper styling!")
+                    else:
+                        print("❌ CRITICAL ERROR: Fresh data file not found!")
+                        print("🚨 Deployment will fail without fresh data file")
+                        raise Exception("Fresh data file missing - deployment cannot continue")
             
             # Final count check
             from core.models import BlogPost, Project, Portfolio
