@@ -1,4 +1,4 @@
 This file forces Vercel to rebuild the deployment.
-Timestamp: 2025-09-09 15:35
-Commit: 500730e
-Issue: Markdownify deployment fix
+Timestamp: 2025-09-10 01:55
+Commit: f3472f1
+Issue: Services page fix - ensure all 18 services display with proper styling
