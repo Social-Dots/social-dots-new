@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}About Us - {{ site_config.site_name }} - Our Story and Mission{% endblock %}
 
@@ -203,48 +204,9 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #f59e0b, #2563eb);
-            padding: 4px;
-            animation: pulse 2s infinite;
-        }
-
-        .avatar-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-            font-size: 1.2rem;
-            position: relative;
             overflow: hidden;
         }
 
-        .avatar-inner::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 80px;
-            height: 80px;
-            background: #cbd5e1;
-            border-radius: 50%;
-            transform: translate(-50%, -60%);
-        }
-
-        .avatar-inner::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 120px;
-            height: 100px;
-            background: #cbd5e1;
-            border-radius: 50%;
-            transform: translateX(-50%);
-        }
 
         .ceo-btn {
             display: inline-block;
@@ -261,6 +223,65 @@
             background: #1d4ed8;
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .button-social-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link.linkedin {
+            background: linear-gradient(45deg, #0077b5, #005885);
+        }
+
+        .social-link.instagram {
+            background: linear-gradient(45deg, #e4405f, #f093fb);
+        }
+
+        .social-link.facebook {
+            background: linear-gradient(45deg, #1877f2, #42a5f5);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
         }
 
         /* Stats Section */
@@ -344,90 +365,6 @@
             line-height: 1.6;
         }
 
-        /* Team Section */
-        .team-section {
-            padding: 100px 0;
-            background: #f8fafc;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .team-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .team-avatar {
-            height: 200px;
-            background: linear-gradient(45deg, #2563eb, #f59e0b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: 700;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team-avatar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="30" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: sparkle 3s ease-in-out infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.05); }
-        }
-
-        .team-card:nth-child(2) .team-avatar,
-        .team-card:nth-child(3) .team-avatar {
-            background: #e2e8f0;
-            color: #64748b;
-            font-size: 4rem;
-        }
-
-        .team-info {
-            padding: 30px;
-        }
-
-        .team-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 5px;
-        }
-
-        .team-role {
-            color: #f59e0b;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .team-description {
-            color: #64748b;
-            line-height: 1.6;
-        }
 
         /* CTA Section */
         .cta-section {
@@ -550,9 +487,6 @@
                 gap: 20px;
             }
 
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
 
             .cta-buttons {
                 flex-direction: column;
@@ -610,11 +544,31 @@
                 <p class="ceo-description">
                     15+ years of Canadian IT industry experience with deep Salesforce ecosystem expertise. AI Strategy & Marketing Coach and spiritual guide for purpose-driven entrepreneurs. Integrates strategic clarity with learning design, having worked with business and technical teams across top Canadian and US companies.
                 </p>
-                <a href="#" class="ceo-btn">Ali Shafique →</a>
+                
+                <div class="button-social-container">
+                    <a href="#" class="ceo-btn">Ali Shafique →</a>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/alishafique?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-link linkedin" title="LinkedIn">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/ali.shafique?igsh=MTQzYWY3OWQxczFncQ==" target="_blank" class="social-link instagram" title="Instagram">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.40s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/share/1DCEGfu8iH/" target="_blank" class="social-link facebook" title="Facebook">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="ceo-avatar">
                 <div class="avatar-container">
-                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFnKUOtxRp7BA/profile-displayphoto-shrink_800_800/B56Zb2LMVYGgAc-/0/1747886851794?e=1757548800&v=beta&t=tEcmZQhzJVamv9zVnUFOgh0h5eLkSDvrR2oK7JSJVpU" alt="Ali Shafique" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover;">
+                    <img src="{% static 'images/image.jpeg' %}" alt="Ali Shafique" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: center;">
                 </div>
             </div>
         </div>
@@ -672,31 +626,6 @@
     </div>
 </section>
 
-<!-- Team Section -->
-<section class="team-section">
-    <div class="container">
-        <div class="section-header animate-on-scroll">
-            <div class="section-badge">👥 Our Amazing Team</div>
-            <h2 class="section-title">Meet Our Team</h2>
-            <p style="color: #64748b; max-width: 600px; margin: 0 auto;">
-                Our diverse team combines deep Canadian market knowledge with international expertise and cutting-edge technical skills.
-            </p>
-        </div>
-
-        <div class="team-grid">
-            {% for member in team_members %}
-            <div class="team-card animate-on-scroll">
-                <div class="team-avatar">{{ member.name|slice:":1"|upper }}</div>
-                <div class="team-info">
-                    <h3 class="team-name">{{ member.name }}</h3>
-                    <div class="team-role">{{ member.position }}</div>
-                    <p class="team-description">{{ member.bio|default:"No bio available." }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
 
 <!-- CTA Section -->
 <section class="cta-section">
@@ -793,7 +722,7 @@
         });
 
         // Add mouse movement effect to cards
-        document.querySelectorAll('.team-card, .ceo-card, .stat-card').forEach(card => {
+        document.querySelectorAll('.ceo-card, .stat-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -802,8 +731,8 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
+                const rotateX = (y - centerY) / 30;
+                const rotateY = (centerX - x) / 30;
                 
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
             });

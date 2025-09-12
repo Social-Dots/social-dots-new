@@ -1958,8 +1958,14 @@
                             
                             <!-- Enhanced image container with parallax effect -->
                             <div class="w-full h-full overflow-hidden relative">
+                              {% if portfolio.image %}
                               <img src="{{ portfolio.image.url }}" alt="{{ portfolio.title }}"
                                    class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-110 group-hover:brightness-110 group-hover:contrast-105" />
+                              {% else %}
+                              <div class="w-full h-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                                <span class="text-white text-lg font-semibold">{{ portfolio.title }}</span>
+                              </div>
+                              {% endif %}
                               
                               <!-- Animated shimmer overlay -->
                               <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 delay-300"></div>
