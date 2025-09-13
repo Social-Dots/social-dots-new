@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load markdownify %}
+{% load markdown_extras %}
 
 {% comment %}
 Blog Detail Template
@@ -651,7 +651,7 @@ Displays individual blog post with proper HTML structure and styling
                         margin-bottom: 8px !important;
                     }
                 </style>
-                {{ post.content|safe }}
+                {{ post.content|html_content_format|safe }}
             </div>
         </div>
     </div>

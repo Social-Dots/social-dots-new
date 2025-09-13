@@ -93,3 +93,24 @@ def blog_content_format(text):
 
 # Also provide a shorter alias
 register.filter('markdown', markdown_format)
+
+@register.filter
+def html_content_format(html_content):
+    """
+    Add CSS classes to existing HTML content for proper styling
+    Usage: {{ content|html_content_format|safe }}
+    """
+    if not html_content:
+        return ""
+    
+    # Add classes to HTML elements for better styling
+    html = html_content
+    html = re.sub(r'<h1([^>]*)>', r'<h1\1 class="section-heading">', html)
+    html = re.sub(r'<h2([^>]*)>', r'<h2\1 class="section-heading">', html)
+    html = re.sub(r'<h3([^>]*)>', r'<h3\1 class="subsection-heading">', html)
+    html = re.sub(r'<h4([^>]*)>', r'<h4\1 class="subsection-heading">', html)
+    html = re.sub(r'<p([^>]*)>', r'<p\1 class="content-paragraph">', html)
+    html = re.sub(r'<ul([^>]*)>', r'<ul\1 class="content-list">', html)
+    html = re.sub(r'<ol([^>]*)>', r'<ol\1 class="content-list numbered">', html)
+    
+    return mark_safe(html)
