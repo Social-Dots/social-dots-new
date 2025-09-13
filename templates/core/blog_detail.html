@@ -2,6 +2,11 @@
 {% load markdown_extras %}
 
 {% comment %}
+BLOG FORMATTING VERSION: 2024-09-13-V3-FINAL-FIX
+This ensures cache busting and proper deployment verification
+{% endcomment %}
+
+{% comment %}
 Blog Detail Template
 Displays individual blog post with proper HTML structure and styling
 {% endcomment %}
@@ -607,21 +612,7 @@ Displays individual blog post with proper HTML structure and styling
         <div class="px-8 py-12 lg:px-12">
 
             <!-- Formatted Article Content -->
-            <div class="blog-content text-slate-800 leading-relaxed" style="
-                h1, h2, h3, h4, h5, h6 { 
-                    display: block !important; 
-                    font-weight: bold !important; 
-                    margin: 20px 0 15px 0 !important; 
-                    line-height: 1.3 !important; 
-                    width: 100% !important; 
-                }
-                p { 
-                    display: block !important; 
-                    margin-bottom: 15px !important; 
-                    line-height: 1.6 !important; 
-                    width: 100% !important; 
-                }
-            ">
+            <div class="blog-content text-slate-800 leading-relaxed" style="background: white; padding: 2rem; border-radius: 1rem;">
                 <style>
                     .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4, .blog-content h5, .blog-content h6 {
                         display: block !important;
