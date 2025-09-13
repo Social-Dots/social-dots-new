@@ -612,269 +612,122 @@ Displays individual blog post with proper HTML structure and styling
         <div class="px-8 py-12 lg:px-12">
 
             <!-- Formatted Article Content -->
-            <div class="blog-content text-slate-800 leading-relaxed" style="background: white; padding: 2rem; border-radius: 1rem;">
-                <style>
-                    .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4, .blog-content h5, .blog-content h6 {
-                        display: block !important;
-                        font-weight: bold !important;
-                        margin: 20px 0 15px 0 !important;
-                        line-height: 1.3 !important;
-                        width: 100% !important;
-                        clear: both !important;
-                    }
-                    .blog-content h1 { font-size: 2rem !important; font-weight: 900 !important; }
-                    .blog-content h2 { font-size: 1.5rem !important; font-weight: 800 !important; }
-                    .blog-content h3 { font-size: 1.25rem !important; font-weight: 700 !important; }
-                    .blog-content p {
-                        display: block !important;
-                        margin-bottom: 15px !important;
-                        line-height: 1.6 !important;
-                        width: 100% !important;
-                        clear: both !important;
-                    }
-                    .blog-content ul, .blog-content ol {
-                        display: block !important;
-                        margin: 15px 0 15px 20px !important;
-                        width: calc(100% - 20px) !important;
-                    }
-                    .blog-content li {
-                        display: list-item !important;
-                        margin-bottom: 8px !important;
-                    }
-                    
-                    /* Direct element styling - NO CLASS DEPENDENCIES */
-                    .blog-content h1 {
-                        font-size: 3rem !important;
-                        font-weight: 900 !important;
-                        margin: 3rem 0 2rem 0 !important;
-                        color: #1e40af !important;
-                        line-height: 1.2 !important;
-                        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
-                        border: 3px solid #1e40af !important;
-                        border-left: 8px solid #1e40af !important;
-                        padding: 1.5rem 2rem 1.25rem 2rem !important;
-                        border-radius: 0.75rem !important;
-                        box-shadow: 0 8px 16px rgba(30, 64, 175, 0.2) !important;
-                        text-transform: uppercase !important;
-                        letter-spacing: 0.05em !important;
-                    }
-                    
-                    .blog-content h2 {
-                        font-size: 2.5rem !important;
-                        font-weight: 900 !important;
-                        margin: 4rem 0 2rem 0 !important;
-                        color: #1e40af !important;
-                        line-height: 1.2 !important;
-                        background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
-                        border: 3px solid #1e40af !important;
-                        border-left: 8px solid #1e40af !important;
-                        padding: 1.5rem 2rem 1.25rem 2rem !important;
-                        border-radius: 0.75rem !important;
-                        box-shadow: 0 8px 16px rgba(30, 64, 175, 0.2) !important;
-                        text-transform: uppercase !important;
-                        letter-spacing: 0.05em !important;
-                    }
-                    
-                    .blog-content h3 {
-                        font-size: 2rem !important;
-                        font-weight: 800 !important;
-                        margin: 3rem 0 1.5rem 0 !important;
-                        color: #1e40af !important;
-                        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
-                        border: 2px solid #f59e0b !important;
-                        border-left: 6px solid #f59e0b !important;
-                        padding: 1rem 1.5rem 1rem 2rem !important;
-                        border-radius: 0.5rem !important;
-                        box-shadow: 0 6px 12px rgba(245, 158, 11, 0.15) !important;
-                        text-transform: capitalize !important;
-                        letter-spacing: 0.025em !important;
-                    }
-                    
-                    .blog-content h4 {
-                        font-size: 1.5rem !important;
-                        font-weight: 700 !important;
-                        margin: 2.5rem 0 1rem 0 !important;
-                        color: #1e40af !important;
-                        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
-                        border: 2px solid #f59e0b !important;
-                        border-left: 6px solid #f59e0b !important;
-                        padding: 1rem 1.5rem 1rem 2rem !important;
-                        border-radius: 0.5rem !important;
-                        box-shadow: 0 6px 12px rgba(245, 158, 11, 0.15) !important;
-                    }
-                    
-                    .blog-content p {
-                        margin-bottom: 1.5rem !important;
-                        line-height: 1.8 !important;
-                        font-size: 1.125rem !important;
-                        color: #334155 !important;
-                        text-align: justify !important;
-                        background: rgba(245, 158, 11, 0.05) !important;
-                        padding: 1.5rem !important;
-                        border-radius: 0.75rem !important;
-                        margin-bottom: 3rem !important;
-                        box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1) !important;
-                    }
-                    
-                    .blog-content ul {
-                        background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(30, 64, 175, 0.02) 100%) !important;
-                        padding: 1.5rem 2rem 1.5rem 3rem !important;
-                        border-radius: 0.75rem !important;
-                        border: 2px solid rgba(30, 64, 175, 0.15) !important;
-                        margin: 2rem 0 !important;
-                        box-shadow: 0 2px 4px rgba(30, 64, 175, 0.05) !important;
-                    }
-                    
-                    .blog-content ol {
-                        background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.02) 100%) !important;
-                        padding: 1.5rem 2rem 1.5rem 3rem !important;
-                        border-radius: 0.75rem !important;
-                        border: 2px solid rgba(245, 158, 11, 0.15) !important;
-                        margin: 2rem 0 !important;
-                        box-shadow: 0 2px 4px rgba(245, 158, 11, 0.05) !important;
-                    }
-                    
-                    .blog-content li {
-                        margin-bottom: 0.75rem !important;
-                        line-height: 1.6 !important;
-                        color: #334155 !important;
-                    }
-                    
-                    .blog-content strong {
-                        font-weight: 700 !important;
-                        color: #1e40af !important;
-                    }
-                    
-                    .blog-content em {
-                        font-style: italic !important;
-                        color: #64748b !important;
-                    }
-                </style>
-                <div style="font-family: 'Inter', sans-serif; line-height: 1.6;">
+            <div style="background: white; padding: 2rem; border-radius: 1rem; font-family: Arial, sans-serif;">
+                <div id="formatted-content">
                     {{ post.content|safe }}
                 </div>
                 
                 <script>
-                    // Apply styles immediately after content loads
-                    document.addEventListener('DOMContentLoaded', function() {
-                        console.log('Blog formatting script running...');
+                    // BULLETPROOF formatting script - works everywhere!
+                    function formatBlogContent() {
+                        console.log('=== FORMATTING BLOG CONTENT ===');
                         
-                        // Get the blog content container
-                        const blogContent = document.querySelector('.blog-content');
-                        if (!blogContent) {
-                            console.log('Blog content container not found');
+                        const container = document.getElementById('formatted-content');
+                        if (!container) {
+                            console.log('ERROR: No formatted-content container found');
                             return;
                         }
                         
-                        console.log('Found blog content container, applying styles...');
+                        console.log('Container found, applying direct inline styles...');
                         
-                        // Style all H1 elements
-                        const h1Elements = blogContent.querySelectorAll('h1');
-                        h1Elements.forEach((h1, index) => {
-                            console.log('Styling H1 element', index);
-                            h1.style.cssText = `
-                                font-size: 2.5rem !important;
+                        // Format ALL headings with blue gradient backgrounds
+                        const headings = container.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                        headings.forEach((heading, index) => {
+                            console.log(`Formatting heading ${heading.tagName} #${index}:`, heading.textContent.substring(0, 50));
+                            
+                            // Common heading styles
+                            const baseStyles = `
+                                display: block !important;
+                                width: 100% !important;
                                 font-weight: 900 !important;
-                                margin: 3rem 0 2rem 0 !important;
                                 color: #1e40af !important;
+                                margin: 30px 0 20px 0 !important;
+                                padding: 20px 25px !important;
                                 background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
                                 border: 3px solid #1e40af !important;
                                 border-left: 8px solid #1e40af !important;
-                                padding: 1.5rem 2rem !important;
-                                border-radius: 0.75rem !important;
-                                box-shadow: 0 8px 16px rgba(30, 64, 175, 0.2) !important;
-                                text-transform: uppercase !important;
-                                letter-spacing: 0.05em !important;
+                                border-radius: 10px !important;
+                                box-shadow: 0 8px 20px rgba(30, 64, 175, 0.15) !important;
+                                font-family: Arial, sans-serif !important;
+                                line-height: 1.3 !important;
                             `;
+                            
+                            // Size-specific styles
+                            let sizeStyles = '';
+                            if (heading.tagName === 'H1') {
+                                sizeStyles = 'font-size: 28px !important;';
+                            } else if (heading.tagName === 'H2') {
+                                sizeStyles = 'font-size: 24px !important;';
+                            } else if (heading.tagName === 'H3') {
+                                sizeStyles = 'font-size: 20px !important; background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%) !important; border-color: #ea580c !important;';
+                            } else {
+                                sizeStyles = 'font-size: 18px !important;';
+                            }
+                            
+                            heading.style.cssText = baseStyles + sizeStyles;
                         });
                         
-                        // Style all H2 elements
-                        const h2Elements = blogContent.querySelectorAll('h2');
-                        h2Elements.forEach((h2, index) => {
-                            console.log('Styling H2 element', index);
-                            h2.style.cssText = `
-                                font-size: 2rem !important;
-                                font-weight: 800 !important;
-                                margin: 4rem 0 2rem 0 !important;
-                                color: #1e40af !important;
-                                background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
-                                border: 3px solid #1e40af !important;
-                                border-left: 8px solid #1e40af !important;
-                                padding: 1.5rem 2rem !important;
-                                border-radius: 0.75rem !important;
-                                box-shadow: 0 8px 16px rgba(30, 64, 175, 0.2) !important;
-                                text-transform: uppercase !important;
-                                letter-spacing: 0.05em !important;
-                            `;
-                        });
-                        
-                        // Style all H3 elements
-                        const h3Elements = blogContent.querySelectorAll('h3');
-                        h3Elements.forEach((h3, index) => {
-                            console.log('Styling H3 element', index);
-                            h3.style.cssText = `
-                                font-size: 1.5rem !important;
-                                font-weight: 700 !important;
-                                margin: 3rem 0 1.5rem 0 !important;
-                                color: #1e40af !important;
-                                background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
-                                border: 2px solid #f59e0b !important;
-                                border-left: 6px solid #f59e0b !important;
-                                padding: 1rem 1.5rem !important;
-                                border-radius: 0.5rem !important;
-                                box-shadow: 0 6px 12px rgba(245, 158, 11, 0.15) !important;
-                                text-transform: capitalize !important;
-                                letter-spacing: 0.025em !important;
-                            `;
-                        });
-                        
-                        // Style all P elements
-                        const pElements = blogContent.querySelectorAll('p');
-                        pElements.forEach((p, index) => {
-                            console.log('Styling P element', index);
+                        // Format ALL paragraphs with light orange backgrounds
+                        const paragraphs = container.querySelectorAll('p');
+                        paragraphs.forEach((p, index) => {
+                            console.log(`Formatting paragraph #${index}:`, p.textContent.substring(0, 50));
                             p.style.cssText = `
-                                margin-bottom: 1.5rem !important;
-                                line-height: 1.8 !important;
-                                font-size: 1.125rem !important;
-                                color: #334155 !important;
-                                background: rgba(245, 158, 11, 0.05) !important;
-                                padding: 1.5rem !important;
-                                border-radius: 0.75rem !important;
-                                box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1) !important;
-                                text-align: justify !important;
+                                display: block !important;
+                                width: 100% !important;
+                                margin: 20px 0 !important;
+                                padding: 20px !important;
+                                background: rgba(254, 215, 170, 0.1) !important;
+                                border-left: 4px solid #f97316 !important;
+                                border-radius: 8px !important;
+                                box-shadow: 0 2px 8px rgba(249, 115, 22, 0.05) !important;
+                                line-height: 1.7 !important;
+                                font-size: 16px !important;
+                                color: #374151 !important;
+                                font-family: Arial, sans-serif !important;
                             `;
                         });
                         
-                        // Style all UL elements
-                        const ulElements = blogContent.querySelectorAll('ul');
-                        ulElements.forEach((ul, index) => {
-                            console.log('Styling UL element', index);
-                            ul.style.cssText = `
-                                background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(30, 64, 175, 0.02) 100%) !important;
-                                padding: 1.5rem 2rem !important;
-                                border-radius: 0.75rem !important;
-                                border: 2px solid rgba(30, 64, 175, 0.15) !important;
-                                margin: 2rem 0 !important;
-                                box-shadow: 0 2px 4px rgba(30, 64, 175, 0.05) !important;
+                        // Format ALL lists with green backgrounds
+                        const lists = container.querySelectorAll('ul, ol');
+                        lists.forEach((list, index) => {
+                            console.log(`Formatting list #${index}:`, list.tagName);
+                            list.style.cssText = `
+                                display: block !important;
+                                width: 100% !important;
+                                margin: 20px 0 !important;
+                                padding: 20px 20px 20px 40px !important;
+                                background: rgba(220, 252, 231, 0.3) !important;
+                                border: 2px solid #10b981 !important;
+                                border-radius: 8px !important;
+                                box-shadow: 0 3px 12px rgba(16, 185, 129, 0.08) !important;
+                                font-family: Arial, sans-serif !important;
                             `;
                         });
                         
-                        // Style all OL elements
-                        const olElements = blogContent.querySelectorAll('ol');
-                        olElements.forEach((ol, index) => {
-                            console.log('Styling OL element', index);
-                            ol.style.cssText = `
-                                background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.02) 100%) !important;
-                                padding: 1.5rem 2rem !important;
-                                border-radius: 0.75rem !important;
-                                border: 2px solid rgba(245, 158, 11, 0.15) !important;
-                                margin: 2rem 0 !important;
-                                box-shadow: 0 2px 4px rgba(245, 158, 11, 0.05) !important;
+                        // Format ALL list items
+                        const listItems = container.querySelectorAll('li');
+                        listItems.forEach((li, index) => {
+                            li.style.cssText = `
+                                margin-bottom: 10px !important;
+                                line-height: 1.6 !important;
+                                color: #374151 !important;
+                                font-family: Arial, sans-serif !important;
                             `;
                         });
                         
-                        console.log('Blog formatting completed!');
-                    });
+                        console.log(`=== FORMATTING COMPLETED ===`);
+                        console.log(`Formatted ${headings.length} headings, ${paragraphs.length} paragraphs, ${lists.length} lists`);
+                    }
+                    
+                    // Run formatting immediately when DOM is ready
+                    if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', formatBlogContent);
+                    } else {
+                        formatBlogContent();
+                    }
+                    
+                    // Also run after a small delay to catch any late-loading content
+                    setTimeout(formatBlogContent, 1000);
                 </script>
             </div>
         </div>
