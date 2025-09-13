@@ -750,7 +750,132 @@ Displays individual blog post with proper HTML structure and styling
                         color: #64748b !important;
                     }
                 </style>
-                {{ post.content|safe }}
+                <div style="font-family: 'Inter', sans-serif; line-height: 1.6;">
+                    {{ post.content|safe }}
+                </div>
+                
+                <script>
+                    // Apply styles immediately after content loads
+                    document.addEventListener('DOMContentLoaded', function() {
+                        console.log('Blog formatting script running...');
+                        
+                        // Get the blog content container
+                        const blogContent = document.querySelector('.blog-content');
+                        if (!blogContent) {
+                            console.log('Blog content container not found');
+                            return;
+                        }
+                        
+                        console.log('Found blog content container, applying styles...');
+                        
+                        // Style all H1 elements
+                        const h1Elements = blogContent.querySelectorAll('h1');
+                        h1Elements.forEach((h1, index) => {
+                            console.log('Styling H1 element', index);
+                            h1.style.cssText = `
+                                font-size: 2.5rem !important;
+                                font-weight: 900 !important;
+                                margin: 3rem 0 2rem 0 !important;
+                                color: #1e40af !important;
+                                background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+                                border: 3px solid #1e40af !important;
+                                border-left: 8px solid #1e40af !important;
+                                padding: 1.5rem 2rem !important;
+                                border-radius: 0.75rem !important;
+                                box-shadow: 0 8px 16px rgba(30, 64, 175, 0.2) !important;
+                                text-transform: uppercase !important;
+                                letter-spacing: 0.05em !important;
+                            `;
+                        });
+                        
+                        // Style all H2 elements
+                        const h2Elements = blogContent.querySelectorAll('h2');
+                        h2Elements.forEach((h2, index) => {
+                            console.log('Styling H2 element', index);
+                            h2.style.cssText = `
+                                font-size: 2rem !important;
+                                font-weight: 800 !important;
+                                margin: 4rem 0 2rem 0 !important;
+                                color: #1e40af !important;
+                                background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+                                border: 3px solid #1e40af !important;
+                                border-left: 8px solid #1e40af !important;
+                                padding: 1.5rem 2rem !important;
+                                border-radius: 0.75rem !important;
+                                box-shadow: 0 8px 16px rgba(30, 64, 175, 0.2) !important;
+                                text-transform: uppercase !important;
+                                letter-spacing: 0.05em !important;
+                            `;
+                        });
+                        
+                        // Style all H3 elements
+                        const h3Elements = blogContent.querySelectorAll('h3');
+                        h3Elements.forEach((h3, index) => {
+                            console.log('Styling H3 element', index);
+                            h3.style.cssText = `
+                                font-size: 1.5rem !important;
+                                font-weight: 700 !important;
+                                margin: 3rem 0 1.5rem 0 !important;
+                                color: #1e40af !important;
+                                background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+                                border: 2px solid #f59e0b !important;
+                                border-left: 6px solid #f59e0b !important;
+                                padding: 1rem 1.5rem !important;
+                                border-radius: 0.5rem !important;
+                                box-shadow: 0 6px 12px rgba(245, 158, 11, 0.15) !important;
+                                text-transform: capitalize !important;
+                                letter-spacing: 0.025em !important;
+                            `;
+                        });
+                        
+                        // Style all P elements
+                        const pElements = blogContent.querySelectorAll('p');
+                        pElements.forEach((p, index) => {
+                            console.log('Styling P element', index);
+                            p.style.cssText = `
+                                margin-bottom: 1.5rem !important;
+                                line-height: 1.8 !important;
+                                font-size: 1.125rem !important;
+                                color: #334155 !important;
+                                background: rgba(245, 158, 11, 0.05) !important;
+                                padding: 1.5rem !important;
+                                border-radius: 0.75rem !important;
+                                box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1) !important;
+                                text-align: justify !important;
+                            `;
+                        });
+                        
+                        // Style all UL elements
+                        const ulElements = blogContent.querySelectorAll('ul');
+                        ulElements.forEach((ul, index) => {
+                            console.log('Styling UL element', index);
+                            ul.style.cssText = `
+                                background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(30, 64, 175, 0.02) 100%) !important;
+                                padding: 1.5rem 2rem !important;
+                                border-radius: 0.75rem !important;
+                                border: 2px solid rgba(30, 64, 175, 0.15) !important;
+                                margin: 2rem 0 !important;
+                                box-shadow: 0 2px 4px rgba(30, 64, 175, 0.05) !important;
+                            `;
+                        });
+                        
+                        // Style all OL elements
+                        const olElements = blogContent.querySelectorAll('ol');
+                        olElements.forEach((ol, index) => {
+                            console.log('Styling OL element', index);
+                            ol.style.cssText = `
+                                background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(245, 158, 11, 0.02) 100%) !important;
+                                padding: 1.5rem 2rem !important;
+                                border-radius: 0.75rem !important;
+                                border: 2px solid rgba(245, 158, 11, 0.15) !important;
+                                margin: 2rem 0 !important;
+                                box-shadow: 0 2px 4px rgba(245, 158, 11, 0.05) !important;
+                            `;
+                        });
+                        
+                        console.log('Blog formatting completed!');
+                    });
+                </script>
             </div>
         </div>
     </div>

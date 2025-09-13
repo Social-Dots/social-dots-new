@@ -49,3 +49,8 @@ django-markdownify==0.9.3
 django-ckeditor==6.7.0
 cloudinary==1.38.0
 django-cloudinary-storage==0.3.0
+
+# Additional HTML/Text Processing
+beautifulsoup4==4.12.2
+bleach==6.1.0
+html5lib==1.1
