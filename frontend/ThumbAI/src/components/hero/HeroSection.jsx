@@ -9,6 +9,29 @@ export default function HeroSection() {
         }
     };
 
+    const scrollToSection = (sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            // Enhanced scrolling that works better in iframes
+            element.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start',
+                inline: 'nearest' 
+            });
+            
+            // Fallback for iframe environments
+            setTimeout(() => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < 0 || rect.top > window.innerHeight) {
+                    window.scrollTo({
+                        top: window.scrollY + rect.top - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
+        }
+    };
+
     return (
         <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 overflow-hidden">
             {/* Animated background elements */}
@@ -31,9 +54,9 @@ export default function HeroSection() {
                         <span className="text-2xl font-bold text-white">ThumbAI</span>
                     </div>
                     <div className="hidden md:flex items-center gap-8 text-slate-300">
-                        <a href="#features" className="hover:text-white transition-colors">Features</a>
-                        <a href="#examples" className="hover:text-white transition-colors">Examples</a>
-                        <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+                        <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Features</button>
+                        <button onClick={() => scrollToSection('examples')} className="hover:text-white transition-colors">Examples</button>
+                        <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Pricing</button>
                     </div>
                 </nav>
 

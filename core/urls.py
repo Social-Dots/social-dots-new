@@ -16,6 +16,7 @@ urlpatterns = [
     path('services/<slug:slug>/', views.service_detail, name='service_detail'),
     path('portfolio/', views.portfolio, name='portfolio'),
     path('portfolio/<int:portfolio_id>/', views.portfolio_detail_api, name='portfolio_detail_api'),
+    # Generic portfolio slug pattern
     path('portfolio/<slug:slug>/', views.portfolio_detail, name='portfolio_detail'),
     path('projects/<slug:slug>/', views.project_detail, name='project_detail'),
     path('blog/', views.blog, name='blog'),
@@ -48,9 +49,6 @@ urlpatterns = [
     # Health check and database setup
     path('health/', views.health_check, name='health_check'),
     path('setup-database/', views.setup_database, name='setup_database'),
-    
-    # AI Thumbnail Generator React App
-    path('ai-thumbnail-generator/', TemplateView.as_view(template_name='index.html'), name='ai_thumbnail_generator'),
     
     # SEO
     path('robots.txt', views.robots_txt, name='robots_txt'),

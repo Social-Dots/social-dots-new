@@ -44,7 +44,7 @@ function PagesContent() {
 
 export default function Pages() {
     return (
-        <Router basename="/projects/thumb-ai">
+        <Router basename="/portfolio/thumbai">
             <PagesContent />
         </Router>
     );

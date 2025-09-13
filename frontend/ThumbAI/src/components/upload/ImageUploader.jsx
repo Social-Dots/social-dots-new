@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { User } from "@/api/entities";
 
 export default function ImageUploader({ onImageUpload, isProcessing, user, isLimitReached }) {
     const [image, setImage] = useState(null);
@@ -310,12 +311,17 @@ export default function ImageUploader({ onImageUpload, isProcessing, user, isLim
                                 <p className="text-blue-700 font-medium">
                                     🔐 Login required to generate professional thumbnails
                                 </p>
-                                {/* Assuming User.login() is provided via context or global scope */}
                                 <button 
-                                    onClick={() => { /* Implement actual login logic here, e.g., redirect to auth provider */ console.log("Login button clicked"); }}
-                                    className="mt-2 text-blue-600 underline hover:no-underline font-semibold"
+                                    onClick={() => {
+                                        console.log('Navigating to Django login endpoint...');
+                                        // Navigate to the Django server login endpoint (not Vite dev server)
+                                        const loginUrl = `http://127.0.0.1:8000/portfolio/thumbai/login?from_url=${encodeURIComponent(window.location.href)}`;
+                                        console.log('Login URL:', loginUrl);
+                                        window.location.href = loginUrl;
+                                    }}
+                                    className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold transition-colors"
                                 >
-                                    Click here to login with Google
+                                    🔗 Click here to login with Google
                                 </button>
                             </div>
                         )}

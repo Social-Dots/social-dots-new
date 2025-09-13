@@ -1020,3 +1020,64 @@ def setup_database(request):
             'error': str(e),
             'timestamp': timezone.now().isoformat()
         }, status=500)
+
+# ThumbAI React App View
+def thumb_ai(request, path=''):
+    """Serve the ThumbAI React application"""
+    import os
+    from django.conf import settings
+    from django.http import FileResponse, HttpResponse
+    from django.shortcuts import redirect
+    
+    # In development, redirect directly to Vite dev server
+    if settings.DEBUG and os.environ.get('DJANGO_ENV') != 'production':
+        vite_dev_url = f'http://localhost:5178/portfolio/thumbai/'
+        if path:
+            vite_dev_url += path
+        return redirect(vite_dev_url)
+    
+    # Production: Serve built files
+    # Path to the React app's build files
+    static_path = os.path.join(settings.STATIC_ROOT or settings.STATICFILES_DIRS[0], 'portfolio', 'thumbai')
+    
+    if path and path != '/':
+        # Serve specific files (CSS, JS, etc.)
+        file_path = os.path.join(static_path, path)
+        if os.path.exists(file_path):
+            return FileResponse(open(file_path, 'rb'))
+    
+    # Serve the index.html for all routes (SPA routing)
+    index_path = os.path.join(static_path, 'index.html')
+    if os.path.exists(index_path):
+        return FileResponse(open(index_path, 'rb'), content_type='text/html')
+    
+    # Fallback if files not found
+    raise Http404("ThumbAI app not found")
+
+
+def thumb_ai_login(request):
+    """Handle Base44 authentication for ThumbAI"""
+    from django.shortcuts import redirect
+    from urllib.parse import urlparse, parse_qs
+    
+    # Get the from_url parameter to redirect back after login
+    from_url = request.GET.get('from_url', '/portfolio/thumbai/')
+    
+    # Check if we're in development (localhost/127.0.0.1)
+    parsed_url = urlparse(from_url)
+    is_development = parsed_url.hostname in ['localhost', '127.0.0.1']
+    
+    if is_development:
+        # For development, create a mock authentication token and redirect back
+        # This simulates what Base44 would do after successful authentication
+        mock_token = "dev_mock_token_12345"
+        
+        # Add the mock token as a URL parameter (Base44 typically adds this)
+        separator = '&' if '?' in from_url else '?'
+        redirect_url = f"{from_url}{separator}access_token={mock_token}"
+        
+        return redirect(redirect_url)
+    else:
+        # For production, redirect to the actual Base44 login page
+        base44_login_url = f"https://base44.app/login?next={from_url}&app_id=6883d8876847402fc656950d"
+        return redirect(base44_login_url)

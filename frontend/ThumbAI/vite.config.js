@@ -4,7 +4,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/static/',
+  base: '/portfolio/thumbai/',
   plugins: [react()],
   server: {
     allowedHosts: true
