@@ -651,7 +651,7 @@ Displays individual blog post with proper HTML structure and styling
                         margin-bottom: 8px !important;
                     }
                 </style>
-                {{ post.content|html_content_format|safe }}
+                {{ post.content|safe }}
             </div>
         </div>
     </div>
@@ -772,8 +772,8 @@ Displays individual blog post with proper HTML structure and styling
      ========================================================================== -->
 <script>
     /**
-     * Initialize Lucide Icons
-     * Creates all icon elements used throughout the blog post template
+     * Initialize Lucide Icons and Blog Content Formatting
+     * Creates all icon elements and applies CSS classes to blog content
      */
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize Lucide icons if library is available
@@ -781,6 +781,36 @@ Displays individual blog post with proper HTML structure and styling
             lucide.createIcons();
         }
         
+        // Apply CSS classes to blog content for proper styling
+        const blogContent = document.querySelector('.blog-content');
+        if (blogContent) {
+            // Add classes to headings
+            const h1Elements = blogContent.querySelectorAll('h1');
+            h1Elements.forEach(el => el.classList.add('section-heading'));
+            
+            const h2Elements = blogContent.querySelectorAll('h2');
+            h2Elements.forEach(el => el.classList.add('section-heading'));
+            
+            const h3Elements = blogContent.querySelectorAll('h3');
+            h3Elements.forEach(el => el.classList.add('subsection-heading'));
+            
+            const h4Elements = blogContent.querySelectorAll('h4');
+            h4Elements.forEach(el => el.classList.add('subsection-heading'));
+            
+            // Add classes to paragraphs
+            const pElements = blogContent.querySelectorAll('p');
+            pElements.forEach(el => el.classList.add('content-paragraph'));
+            
+            // Add classes to lists
+            const ulElements = blogContent.querySelectorAll('ul');
+            ulElements.forEach(el => el.classList.add('content-list'));
+            
+            const olElements = blogContent.querySelectorAll('ol');
+            olElements.forEach(el => {
+                el.classList.add('content-list');
+                el.classList.add('numbered');
+            });
+        }
     });
     
 </script>
