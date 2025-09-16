@@ -33,6 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'rest_framework',
+    # Missing apps that were causing crashes
+    'cloudinary_storage',
+    'cloudinary',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -181,11 +186,22 @@ GOOGLE_CALENDAR_CLIENT_SECRET = os.environ.get('GOOGLE_CALENDAR_CLIENT_SECRET')
 GOOGLE_CALENDAR_REDIRECT_URI = os.environ.get('GOOGLE_CALENDAR_REDIRECT_URI')
 
 # Cloudinary Configuration
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'dsmgydskc'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '616489924851549'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'scAYejOSgGs8W8H0QY6LSQ3DjYk'),
 }
+
+# Configure cloudinary with the storage settings
+cloudinary.config(
+    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
+    api_key=CLOUDINARY_STORAGE['API_KEY'],
+    api_secret=CLOUDINARY_STORAGE['API_SECRET']
+)
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
