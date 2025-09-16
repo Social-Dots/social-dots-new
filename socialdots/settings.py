@@ -41,16 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'ckeditor',
-    'ckeditor_uploader',
     'core',
-    'whitenoise',
     'rest_framework',
-    'import_export',
     'cloudinary',
     'cloudinary_storage',
-    'markdownify',
-    # Re-added markdownify to fix Vercel deployment issue 2025-09-09
 ]
 
 MIDDLEWARE = [

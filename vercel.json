@@ -1,19 +1,11 @@
 {
-    "version": 2,
     "builds": [
       {
         "src": "vercel_app.py",
-        "use": "@vercel/python",
-        "config": {
-          "maxLambdaSize": "50mb"
-        }
+        "use": "@vercel/python"
       }
     ],
     "routes": [
-      {
-        "src": "/static/(.*)",
-        "dest": "/static/$1"
-      },
       {
         "src": "/(.*)",
         "dest": "/vercel_app.py"
@@ -23,13 +15,6 @@
       "DEBUG": "False",
       "DJANGO_SETTINGS_MODULE": "socialdots.settings",
       "DATABASE_URL": "sqlite:///:memory:",
-      "VERCEL": "1",
-      "PYTHONPATH": ".",
-      "SECRET_KEY": "django-vercel-deployment-key-change-in-production"
-    },
-    "functions": {
-      "vercel_app.py": {
-        "maxDuration": 30
-      }
+      "SECRET_KEY": "django-vercel-secure-key-2024"
     }
 }
