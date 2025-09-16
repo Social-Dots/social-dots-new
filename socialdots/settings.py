@@ -1,20 +1,11 @@
 from pathlib import Path
 import os
-import sys
 from dotenv import load_dotenv
-from urllib.parse import urlparse
 
 load_dotenv()
 
-# Set environment encoding for Windows compatibility
+# Environment setup
 os.environ['PYTHONIOENCODING'] = 'utf-8'
-if sys.platform.startswith('win'):
-    # Handle Windows console encoding issues
-    try:
-        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
-        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
-    except (AttributeError, OSError):
-        pass
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,12 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sitemaps',
-    'ckeditor',
     'core',
     'rest_framework',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -88,39 +75,12 @@ WSGI_APPLICATION = 'socialdots.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Replace the DATABASES section of your settings.py with this
-database_url = os.getenv("DATABASE_URL", "")
-tmpPostgres = urlparse(database_url)
-
-# Use SQLite for local development when DATABASE_URL is not properly configured
-if not database_url or database_url == "sqlite:///:memory:" or not tmpPostgres.hostname:
-    # For Vercel deployment or local development
-    if database_url == "sqlite:///:memory:":
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': ':memory:',
-            }
-        }
-    else:
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': BASE_DIR / 'db.sqlite3',
-            }
-        }
-else:
-    # PostgreSQL configuration (NeonDB for production environments)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': tmpPostgres.path.lstrip('/') if tmpPostgres.path else '',
-            'USER': tmpPostgres.username,
-            'PASSWORD': tmpPostgres.password,
-            'HOST': tmpPostgres.hostname,
-            'PORT': 5432,
-        }
-    }    
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
+}    
 
 
 
