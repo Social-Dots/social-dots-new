@@ -1,19 +1,38 @@
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'socialdots.settings')
+# Ultra-minimal test WSGI app for debugging
+def application(environ, start_response):
+    status = '200 OK'
+    headers = [('Content-type', 'text/html')]
+    start_response(status, headers)
 
-import django
-django.setup()
+    # Try to import Django and show any errors
+    try:
+        import django
+        django_version = django.VERSION
 
-# Run migrations for in-memory database
-from django.core.management import call_command
-from django.conf import settings
+        import os
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'socialdots.settings')
+        django.setup()
 
-if settings.DATABASES['default']['NAME'] == ':memory:':
-    call_command('migrate', verbosity=0, interactive=False)
-    call_command('setup_socialdots', verbosity=0)
+        from django.conf import settings
+        db_name = settings.DATABASES['default']['NAME']
 
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+        content = f"""
+        <h1>Social Dots - Debug Test</h1>
+        <p>OK Python import works</p>
+        <p>OK Django version: {django_version}</p>
+        <p>OK Django setup successful</p>
+        <p>OK Database: {db_name}</p>
+        <p>If you see this, basic Django setup is working!</p>
+        """
+
+    except Exception as e:
+        content = f"""
+        <h1>Social Dots - Debug Test</h1>
+        <p>ERROR Error occurred: {str(e)}</p>
+        <p>Error type: {type(e).__name__}</p>
+        """
+
+    return [content.encode('utf-8')]
 
 # Vercel expects 'app'
 app = application
