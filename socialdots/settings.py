@@ -98,13 +98,22 @@ database_url = os.getenv("DATABASE_URL", "")
 tmpPostgres = urlparse(database_url)
 
 # Use SQLite for local development when DATABASE_URL is not properly configured
-if not database_url or not tmpPostgres.hostname:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+if not database_url or database_url == "sqlite:///:memory:" or not tmpPostgres.hostname:
+    # For Vercel deployment or local development
+    if database_url == "sqlite:///:memory:":
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': ':memory:',
+            }
         }
-    }
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 else:
     # PostgreSQL configuration (NeonDB for production environments)
     DATABASES = {
