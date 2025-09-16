@@ -4,24 +4,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-# Emergency views for minimal deployment
-try:
-    from emergency_views import emergency_health, emergency_home, emergency_test
-    EMERGENCY_MODE = True
-except ImportError:
-    EMERGENCY_MODE = False
+# Emergency views disabled for production
+EMERGENCY_MODE = False
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-# Add emergency routes as backup (lower priority)
-if EMERGENCY_MODE:
-    urlpatterns += [
-        path('emergency/health/', emergency_health, name='emergency_health'),
-        path('emergency/test/', emergency_test, name='emergency_test'), 
-        path('emergency/', emergency_home, name='emergency_home'),
-    ]
+# Emergency routes disabled
 
 # Main website URLs
 try:
@@ -44,11 +34,14 @@ try:
     ]
     
 except Exception as e:
-    # If core URLs fail, provide emergency fallback
-    if EMERGENCY_MODE:
-        urlpatterns += [
-            path('', emergency_home, name='emergency_fallback'),
-        ]
+    # If core URLs fail, add a simple fallback
+    from django.http import HttpResponse
+    def simple_fallback(request):
+        return HttpResponse("Social Dots Inc. - Site temporarily unavailable")
+
+    urlpatterns += [
+        path('', simple_fallback, name='emergency_fallback'),
+    ]
 
 # Serve media files in both development and production
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
