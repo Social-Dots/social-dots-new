@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}{{ site_config.site_name|default:"Social Dots Inc." }}{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{{ site_config.meta_description|default:'Strategic AI integration and digital solutions for Canadian businesses' }}{% endblock %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
     {% if site_config.favicon %}
         <link rel="icon" type="image/png" href="{% static site_config.favicon %}">
     {% else %}
