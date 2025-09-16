@@ -52,4 +52,5 @@ urlpatterns = [
     
     # SEO
     path('robots.txt', views.robots_txt, name='robots_txt'),
+    path('favicon.ico', views.favicon_view, name='favicon'),
 ]

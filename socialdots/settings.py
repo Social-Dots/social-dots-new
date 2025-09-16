@@ -168,8 +168,6 @@ FIRST_DAY_OF_WEEK = 1  # Monday
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'frontend/ThumbAI/dist',
-    BASE_DIR / 'frontend/Realestate-Fraud-Detection-main/dist',
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 

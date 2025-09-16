@@ -1081,3 +1081,20 @@ def thumb_ai_login(request):
         # For production, redirect to the actual Base44 login page
         base44_login_url = f"https://base44.app/login?next={from_url}&app_id=6883d8876847402fc656950d"
         return redirect(base44_login_url)
+
+
+@require_GET
+def favicon_view(request):
+    """Serve favicon.ico from static files"""
+    from django.conf import settings
+    from django.contrib.staticfiles import finders
+    import os
+
+    # Find favicon in static files
+    favicon_path = finders.find('images/favicon.ico')
+    if favicon_path and os.path.exists(favicon_path):
+        with open(favicon_path, 'rb') as f:
+            return HttpResponse(f.read(), content_type='image/x-icon')
+
+    # Return 404 if favicon not found
+    raise Http404("Favicon not found")
