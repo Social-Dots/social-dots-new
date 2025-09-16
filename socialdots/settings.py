@@ -23,19 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-change-me-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-# DEBUG = False # Set to True for development, False for production
-
-# DEBUG = False
-# print("DEBUG:", DEBUG)  # Commented out to avoid encoding issues
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 ALLOWED_HOSTS = ['*']
 
-# CSRF settings for Vercel deployment
+# CSRF settings for Vercel deployment  
 CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app', 'https://*.now.sh', 'https://socialdots.ca', 'https://*.socialdots.ca']
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
