@@ -93,13 +93,6 @@ WSGI_APPLICATION = 'socialdots.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Add these at the top of your settings.py
-import os
-from dotenv import load_dotenv
-from urllib.parse import urlparse
-
-load_dotenv()
-
 # Replace the DATABASES section of your settings.py with this
 database_url = os.getenv("DATABASE_URL", "")
 tmpPostgres = urlparse(database_url)
