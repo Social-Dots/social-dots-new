@@ -1,72 +1,18 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from import_export import resources
-from import_export.admin import ImportExportModelAdmin
+# Import/export removed for Vercel compatibility
+# from import_export import resources
+# from import_export.admin import admin.ModelAdmin
 from .models import (
     SiteConfiguration, TeamMember, Service, ServicePricingOption, PricingPlan, Project, 
     BlogPost, Testimonial, Lead, Order, CalendarEvent, AIAgentLog, PortfolioCategory, Portfolio
 )
 
-# Resource classes for import/export
-class SiteConfigurationResource(resources.ModelResource):
-    class Meta:
-        model = SiteConfiguration
-
-class TeamMemberResource(resources.ModelResource):
-    class Meta:
-        model = TeamMember
-
-class ServiceResource(resources.ModelResource):
-    class Meta:
-        model = Service
-
-class ServicePricingOptionResource(resources.ModelResource):
-    class Meta:
-        model = ServicePricingOption
-
-class PricingPlanResource(resources.ModelResource):
-    class Meta:
-        model = PricingPlan
-
-class ProjectResource(resources.ModelResource):
-    class Meta:
-        model = Project
-
-class BlogPostResource(resources.ModelResource):
-    class Meta:
-        model = BlogPost
-
-class TestimonialResource(resources.ModelResource):
-    class Meta:
-        model = Testimonial
-
-class LeadResource(resources.ModelResource):
-    class Meta:
-        model = Lead
-
-class OrderResource(resources.ModelResource):
-    class Meta:
-        model = Order
-
-class CalendarEventResource(resources.ModelResource):
-    class Meta:
-        model = CalendarEvent
-
-class AIAgentLogResource(resources.ModelResource):
-    class Meta:
-        model = AIAgentLog
-
-class PortfolioCategoryResource(resources.ModelResource):
-    class Meta:
-        model = PortfolioCategory
-
-class PortfolioResource(resources.ModelResource):
-    class Meta:
-        model = Portfolio
+# Resource classes removed for Vercel compatibility
 
 @admin.register(SiteConfiguration)
-class SiteConfigurationAdmin(ImportExportModelAdmin):
-    resource_class = SiteConfigurationResource
+class SiteConfigurationAdmin(admin.ModelAdmin):
+    # resource_class removed for Vercel compatibility
     list_display = ['site_name', 'email', 'contact_email', 'phone', 'updated_at']
     fieldsets = (
         ('Basic Information', {
@@ -82,13 +28,13 @@ class SiteConfigurationAdmin(ImportExportModelAdmin):
     )
 
 @admin.register(ServicePricingOption)
-class ServicePricingOptionAdmin(ImportExportModelAdmin):
-    resource_class = ServicePricingOptionResource
+class ServicePricingOptionAdmin(admin.ModelAdmin):
+    # resource_class = ServicePricingOptionResource
     list_display = ['name', 'service', 'price', 'period', 'is_popular', 'order']
 
 @admin.register(PricingPlan)
-class PricingPlanAdmin(ImportExportModelAdmin):
-    resource_class = PricingPlanResource
+class PricingPlanAdmin(admin.ModelAdmin):
+    # resource_class = PricingPlanResource
     list_display = ['name', 'price', 'price_period', 'is_popular', 'is_active', 'order']
     list_filter = ['price_period', 'is_popular', 'is_active']
     search_fields = ['name', 'description']
@@ -96,8 +42,8 @@ class PricingPlanAdmin(ImportExportModelAdmin):
     ordering = ['order', 'price']
 
 @admin.register(Project)
-class ProjectAdmin(ImportExportModelAdmin):
-    resource_class = ProjectResource
+class ProjectAdmin(admin.ModelAdmin):
+    # resource_class = ProjectResource
     list_display = ['title', 'client_name', 'status', 'is_featured', 'start_date', 'end_date']
     list_filter = ['status', 'is_featured', 'start_date']
     search_fields = ['title', 'client_name', 'description']
@@ -120,8 +66,8 @@ class ProjectAdmin(ImportExportModelAdmin):
     )
 
 @admin.register(BlogPost)
-class BlogPostAdmin(ImportExportModelAdmin):
-    resource_class = BlogPostResource
+class BlogPostAdmin(admin.ModelAdmin):
+    # resource_class = BlogPostResource
     list_display = ['title', 'author', 'status', 'is_featured', 'published_at', 'created_at']
     list_filter = ['status', 'is_featured', 'author', 'published_at']
     search_fields = ['title', 'content', 'tags']
@@ -136,8 +82,8 @@ class BlogPostAdmin(ImportExportModelAdmin):
         super().save_model(request, obj, form, change)
 
 @admin.register(Testimonial)
-class TestimonialAdmin(ImportExportModelAdmin):
-    resource_class = TestimonialResource
+class TestimonialAdmin(admin.ModelAdmin):
+    # resource_class = TestimonialResource
     list_display = ['client_name', 'client_company', 'rating', 'is_featured', 'is_active', 'order']
     list_filter = ['rating', 'is_featured', 'is_active']
     search_fields = ['client_name', 'client_company', 'content']
@@ -145,8 +91,8 @@ class TestimonialAdmin(ImportExportModelAdmin):
     ordering = ['order', '-created_at']
 
 @admin.register(Lead)
-class LeadAdmin(ImportExportModelAdmin):
-    resource_class = LeadResource
+class LeadAdmin(admin.ModelAdmin):
+    # resource_class = LeadResource
     list_display = ['name', 'email', 'company', 'service_interest', 'status', 'created_at']
     list_filter = ['status', 'service_interest', 'source', 'created_at']
     search_fields = ['name', 'email', 'company', 'message']
@@ -164,8 +110,8 @@ class LeadAdmin(ImportExportModelAdmin):
     )
 
 @admin.register(AIAgentLog)
-class AIAgentLogAdmin(ImportExportModelAdmin):
-    resource_class = AIAgentLogResource
+class AIAgentLogAdmin(admin.ModelAdmin):
+    # resource_class = AIAgentLogResource
     list_display = ['log_type', 'user_identifier', 'status', 'created_at']
     list_filter = ['log_type', 'status', 'created_at']
     search_fields = ['user_identifier', 'message_content', 'response_content']
@@ -186,8 +132,8 @@ class AIAgentLogAdmin(ImportExportModelAdmin):
     )
 
 @admin.register(PortfolioCategory)
-class PortfolioCategoryAdmin(ImportExportModelAdmin):
-    resource_class = PortfolioCategoryResource
+class PortfolioCategoryAdmin(admin.ModelAdmin):
+    # resource_class = PortfolioCategoryResource
     list_display = ['name', 'slug', 'order', 'is_active', 'created_at']
     list_filter = ['is_active']
     search_fields = ['name', 'description']
@@ -197,8 +143,8 @@ class PortfolioCategoryAdmin(ImportExportModelAdmin):
 
 
 @admin.register(TeamMember)
-class TeamMemberAdmin(ImportExportModelAdmin):
-    resource_class = TeamMemberResource
+class TeamMemberAdmin(admin.ModelAdmin):
+    # resource_class = TeamMemberResource
     list_display = ['name', 'position', 'email', 'is_active', 'order']
     list_filter = ['is_active', 'position']
     search_fields = ['name', 'position', 'email']
@@ -211,8 +157,8 @@ class ServicePricingOptionInline(admin.TabularInline):
     fields = ('name', 'description', 'price', 'period', 'features', 'is_popular', 'order')
 
 @admin.register(Service)
-class ServiceAdmin(ImportExportModelAdmin):
-    resource_class = ServiceResource
+class ServiceAdmin(admin.ModelAdmin):
+    # resource_class = ServiceResource
     list_display = ['title', 'price', 'price_type', 'is_featured', 'is_active', 'order']
     list_filter = ['price_type', 'is_featured', 'is_active', 'service_type']
     search_fields = ['title', 'description']
@@ -240,8 +186,8 @@ class ServiceAdmin(ImportExportModelAdmin):
         return form
 
 @admin.register(Order)
-class OrderAdmin(ImportExportModelAdmin):
-    resource_class = OrderResource
+class OrderAdmin(admin.ModelAdmin):
+    # resource_class = OrderResource
     list_display = ['order_id', 'customer_name', 'customer_email', 'service', 'amount', 'status', 'created_at']
     list_filter = ['status', 'currency', 'service', 'created_at']
     search_fields = ['order_id', 'customer_name', 'customer_email', 'stripe_payment_intent_id']
@@ -271,8 +217,8 @@ class OrderAdmin(ImportExportModelAdmin):
         return False
 
 @admin.register(CalendarEvent)
-class CalendarEventAdmin(ImportExportModelAdmin):
-    resource_class = CalendarEventResource
+class CalendarEventAdmin(admin.ModelAdmin):
+    # resource_class = CalendarEventResource
     list_display = ['title', 'attendee_name', 'start_time', 'end_time', 'is_confirmed']
     list_filter = ['is_confirmed', 'start_time']
     search_fields = ['title', 'attendee_name', 'attendee_email']
@@ -293,8 +239,8 @@ class CalendarEventAdmin(ImportExportModelAdmin):
     )
 
 @admin.register(Portfolio)
-class PortfolioAdmin(ImportExportModelAdmin):
-    resource_class = PortfolioResource
+class PortfolioAdmin(admin.ModelAdmin):
+    # resource_class = PortfolioResource
     list_display = ['title', 'category', 'is_active', 'created_at']
     list_filter = ['category', 'is_active']
     search_fields = ['title', 'description']

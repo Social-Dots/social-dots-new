@@ -5,7 +5,8 @@ from django.utils.text import slugify
 from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from decimal import Decimal
-from ckeditor_uploader.fields import RichTextUploadingField
+# CKEditor removed for Vercel compatibility
+# from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class SiteConfiguration(models.Model):
@@ -127,7 +128,7 @@ class ServicePricingOption(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
-    description = RichTextUploadingField()
+    description = models.TextField()
     short_description = models.CharField(max_length=300, blank=True)
     icon = models.CharField(max_length=50, blank=True, help_text="Font Awesome icon class")
     image = models.ImageField(upload_to='service_images/', blank=True, null=True)
@@ -226,7 +227,7 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     client_name = models.CharField(max_length=100, blank=True)
-    description = RichTextUploadingField()
+    description = models.TextField()
     image = models.ImageField(upload_to='project_images/', blank=True, null=True)
     cloudinary_image_id = models.CharField(max_length=255, blank=True, null=True)
     gallery = models.JSONField(default=list, blank=True, help_text="List of image URLs")
@@ -324,7 +325,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     excerpt = models.TextField(max_length=300, blank=True)
-    content = RichTextUploadingField()
+    content = models.TextField()
     featured_image = models.CharField(max_length=200, blank=True, null=True, help_text="Blog post featured image path")
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     tags = models.JSONField(default=list, blank=True)
