@@ -1,3 +1,4 @@
+# Alternative Vercel API route approach
 from http.server import BaseHTTPRequestHandler
 
 class handler(BaseHTTPRequestHandler):
@@ -5,5 +6,5 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        self.wfile.write(b'<h1>Social Dots Inc.</h1><p>Python handler working on Vercel!</p>')
+        self.wfile.write(b'<h1>Social Dots</h1><p>Alternative API route working!</p>')
         return

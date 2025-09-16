@@ -1,20 +1,7 @@
 {
-    "builds": [
-      {
-        "src": "vercel_app.py",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/vercel_app.py"
-      }
-    ],
-    "env": {
-      "DEBUG": "False",
-      "DJANGO_SETTINGS_MODULE": "socialdots.settings",
-      "DATABASE_URL": "sqlite:///:memory:",
-      "SECRET_KEY": "django-vercel-secure-key-2024"
+    "functions": {
+        "index.py": {
+            "runtime": "python3.9"
+        }
     }
 }
